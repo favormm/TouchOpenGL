@@ -10,9 +10,12 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "CRenderer.h"
+#import "OpenGLTypes.h"
 
 @class EAGLContext;
 @class CAEAGLLayer;
+@class CFrameBuffer;
+@class CRenderBuffer;
 
 @interface CRendererView : UIView {    
     NSInteger animationFrameInterval;
@@ -22,21 +25,25 @@
     EAGLContext *context;
 
     // The pixel dimensions of the CAEAGLLayer
-    GLint backingWidth;
-    GLint backingHeight;
+    
     GLfloat aspectRatio;
 
     // The OpenGL ES names for the framebuffer and renderbuffer used to render to this view
-    GLuint viewFramebuffer, viewRenderbuffer, depthRenderbuffer;
+//    GLuint viewFramebuffer, viewRenderbuffer, depthRenderbuffer;
+
 }
 
-@property (readwrite, nonatomic, assign) GLint backingWidth;
-@property (readwrite, nonatomic, assign) GLint backingHeight;
+@property (readwrite, nonatomic, assign) SIntSize backingSize;
 @property (readwrite, nonatomic, assign) GLfloat aspectRatio;
 @property (readwrite, nonatomic, retain) EAGLContext *context;
 @property (readwrite, nonatomic, assign) NSInteger animationFrameInterval;
 @property (readwrite, nonatomic, retain) CRenderer *renderer;
 @property (readonly, nonatomic, assign) BOOL animating;
+
+@property (readwrite, nonatomic, retain) CFrameBuffer *frameBuffer;
+@property (readwrite, nonatomic, retain) CRenderBuffer *colorRenderBuffer;
+@property (readwrite, nonatomic, retain) CRenderBuffer *depthRenderBuffer;
+
 
 - (void)startAnimation;
 - (void)stopAnimation;

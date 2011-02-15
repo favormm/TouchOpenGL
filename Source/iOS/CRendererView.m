@@ -9,6 +9,8 @@
 #import "CRendererView.h"
 
 #import "CRenderer.h"
+#import "CFrameBuffer.h"
+#import "CRenderBuffer.h"
 
 @interface CRendererView ()
 @property (readwrite, nonatomic, assign) BOOL animating;
@@ -23,13 +25,15 @@
 
 @implementation CRendererView
 
-@synthesize backingWidth;
-@synthesize backingHeight;
+@synthesize backingSize;
 @synthesize aspectRatio;
 @synthesize context;
 @synthesize animationFrameInterval;
 @synthesize renderer;
 @synthesize animating;
+@synthesize frameBuffer;
+@synthesize colorRenderBuffer;
+@synthesize depthRenderBuffer;
 
 + (Class)layerClass
     {
@@ -122,7 +126,7 @@
 	[self destroyFramebuffer];
 	[self createFramebuffer];
 
-    self.aspectRatio = (GLfloat)backingWidth / (GLfloat)backingHeight;
+    self.aspectRatio = (GLfloat)self.backingSize.width / (GLfloat)self.backingSize.height;
     [self drawView:NULL];
     }
 
@@ -179,8 +183,8 @@
         // This application only creates a single context which is already set current at this point. This call is redundant, but needed if dealing with multiple contexts.
         [EAGLContext setCurrentContext:self.context];
         // This application only creates a single default framebuffer which is already bound at this point. This call is redundant, but needed if dealing with multiple framebuffers.
-        glBindFramebuffer(GL_FRAMEBUFFER, viewFramebuffer);
-        glViewport(0, 0, backingWidth, backingHeight);
+        glBindFramebuffer(GL_FRAMEBUFFER, self.frameBuffer.name);
+        glViewport(0, 0, self.backingSize.width, self.backingSize.height);
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -194,7 +198,7 @@
         [self.renderer render];
         
         // This application only creates a single color renderbuffer which is already bound at this point. This call is redundant, but needed if dealing with multiple renderbuffers.
-        glBindRenderbuffer(GL_RENDERBUFFER, viewRenderbuffer);
+        glBindRenderbuffer(GL_RENDERBUFFER, self.colorRenderBuffer.name);
         [self.context presentRenderbuffer:GL_RENDERBUFFER];
         }
     }
@@ -202,39 +206,40 @@
 #pragma mark -
 
 - (void)createFramebuffer
-{
-	glGenFramebuffers(1, &viewFramebuffer);
-	glGenRenderbuffers(1, &viewRenderbuffer);
+    {
+    // Create frame buffer
+    self.frameBuffer = [[[CFrameBuffer alloc] init] autorelease];
     
-	glBindFramebuffer(GL_FRAMEBUFFER, viewFramebuffer);
-	glBindRenderbuffer(GL_RENDERBUFFER, viewRenderbuffer);
-	[self.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer*)self.layer];
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, viewRenderbuffer);
+    // Create a color render buffer - and configure it with current context & drawable
+    self.colorRenderBuffer = [[[CRenderBuffer alloc] init] autorelease];
+    [self.colorRenderBuffer storageFromContext:self.context drawable:(CAEAGLLayer *)self.layer];
+
+    // Attach color buffer to frame buffer
+    [self.frameBuffer attachRenderBuffer:self.colorRenderBuffer attachment:GL_COLOR_ATTACHMENT0];
     
-	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &backingWidth);
-	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &backingHeight);
+    // Get the size of the color buffer (we'll be using this a lot)
+    self.backingSize = self.colorRenderBuffer.size;
   
-	glGenRenderbuffers(1, &depthRenderbuffer);
-	glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, backingWidth, backingHeight);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderbuffer);
-    
-	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+    // Create a depth buffer - and configure it to the size of the color buffer.
+    self.depthRenderBuffer = [[[CRenderBuffer alloc] init] autorelease];
+    [self.depthRenderBuffer storage:GL_DEPTH_COMPONENT16 size:self.backingSize];
+
+    // Attach depth buffer to the frame buffer
+    [self.frameBuffer attachRenderBuffer:self.depthRenderBuffer attachment:GL_DEPTH_ATTACHMENT];
+
+    // Make sure the frame buffer has a complete set of render buffers.
+	if (self.frameBuffer.complete == NO)
+        {
 		NSLog(@"createFramebuffer failed %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
-	} else {
-		NSLog(@"Created framebuffer with backing width, height = (%d, %d)", backingWidth, backingHeight);
-	}
-}
+        }
+    }
 
 
 - (void)destroyFramebuffer
 {
-	glDeleteFramebuffers(1, &viewFramebuffer);
-	viewFramebuffer = 0;
-	glDeleteRenderbuffers(1, &viewRenderbuffer);
-	viewRenderbuffer = 0;
-	glDeleteRenderbuffers(1, &depthRenderbuffer);
-	depthRenderbuffer = 0;
+    self.frameBuffer = NULL;
+    self.colorRenderBuffer = NULL;
+    self.depthRenderBuffer = NULL;
 }
 
 @end
