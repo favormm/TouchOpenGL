@@ -111,7 +111,7 @@
         NSLog(@"Framebuffer Error?: %x", theError);
         }
         
-    self.animating = YES;
+    [self startAnimation];
     }
 
 #pragma mark -
@@ -208,7 +208,7 @@
     
 	glBindFramebuffer(GL_FRAMEBUFFER, viewFramebuffer);
 	glBindRenderbuffer(GL_RENDERBUFFER, viewRenderbuffer);
-	[context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer*)self.layer];
+	[self.context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer*)self.layer];
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, viewRenderbuffer);
     
 	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &backingWidth);
