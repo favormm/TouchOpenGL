@@ -83,7 +83,7 @@
     CVertexBuffer *theColors = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:[NSData dataWithBytes:squareColors length:sizeof(squareColors)]] autorelease];;
 
     CImageTextureLoader *theLoader = [[[CImageTextureLoader alloc] init] autorelease];
-    CTexture *theTexture = [theLoader textureWithImage:[NSImage imageNamed:@"Brick"] error:NULL];
+    CTexture *theTexture = [theLoader textureWithImageNamed:@"Brick" error:NULL];
 
     GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"vertex"];
     GLuint theColorAttributeIndex = [theProgram attributeIndexForName:@"color"];

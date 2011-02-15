@@ -111,7 +111,11 @@
         }
     else if ([theMemberTypes characterAtIndex:0] == 'd')
         {
+        #if TARGET_OS_IPHONE == 1
+        NSAssert(NO, @"No GL_DOUBLE");
+        #else
         self.type = GL_DOUBLE;
+        #endif
         }
     else if ([theMemberTypes characterAtIndex:0] == 'c')
         {

@@ -9,7 +9,11 @@
 #import "CVertexBuffer_FactoryExtensions.h"
 
 #import "OpenGLTypes.h"
+#if TARGET_OS_IPHONE == 1
+#import "UIColor_OpenGLExtensions.h"
+#else
 #import "NSColor_OpenGLExtensions.h"
+#endif
 
 @implementation CVertexBuffer (CVertexBuffer_FactoryExtensions)
 
@@ -41,7 +45,7 @@
     
     Color4ub *V = theData.mutableBytes;
     
-    for (NSColor *theColor in inColors)
+    for (id theColor in inColors)
         {
         *V++ = [theColor color4ub];
         }
