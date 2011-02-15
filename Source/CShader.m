@@ -34,7 +34,7 @@
 - (id)initWithName:(NSString *)inName
     {
     NSString *thePath = [[NSBundle mainBundle] pathForResource:[inName stringByDeletingPathExtension] ofType:[inName pathExtension]];
-    NSAssert(thePath, @"Nothing at path.");
+    NSAssert1(thePath, @"Nothing at path: %@", thePath);
     
 
     if ((self = [self initWithPath:thePath]) != NULL)

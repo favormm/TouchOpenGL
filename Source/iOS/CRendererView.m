@@ -110,6 +110,8 @@
         {
         NSLog(@"Framebuffer Error?: %x", theError);
         }
+        
+    self.animating = YES;
     }
 
 #pragma mark -
