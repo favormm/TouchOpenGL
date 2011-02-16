@@ -10,6 +10,8 @@
 
 #import "OpenGLIncludes.h"
 
+@class CFrameBuffer;
+
 @interface CRenderer : NSObject {
     }
 
@@ -21,6 +23,8 @@
 - (void)prerender;
 - (void)render;
 - (void)postrender;
+
+- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer;
 
 @end
 

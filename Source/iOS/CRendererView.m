@@ -182,23 +182,12 @@
         {
         // This application only creates a single context which is already set current at this point. This call is redundant, but needed if dealing with multiple contexts.
         [EAGLContext setCurrentContext:self.context];
-        // This application only creates a single default framebuffer which is already bound at this point. This call is redundant, but needed if dealing with multiple framebuffers.
-        glBindFramebuffer(GL_FRAMEBUFFER, self.frameBuffer.name);
+
         glViewport(0, 0, self.backingSize.width, self.backingSize.height);
 
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        [self.renderer renderIntoFrameBuffer:self.frameBuffer];
 
-        glEnable(GL_DEPTH_TEST);
-        
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClearDepthf(1.0f);
-        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-
-        [self.renderer render];
-        
-        // This application only creates a single color renderbuffer which is already bound at this point. This call is redundant, but needed if dealing with multiple renderbuffers.
-        glBindRenderbuffer(GL_RENDERBUFFER, self.colorRenderBuffer.name);
+        [self.colorRenderBuffer bind];
         [self.context presentRenderbuffer:GL_RENDERBUFFER];
         }
     }

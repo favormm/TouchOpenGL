@@ -10,6 +10,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#import "CFrameBuffer.h"
+
 @interface CRenderer ()
 @property (readwrite, nonatomic, assign) BOOL prepared;
 @end
@@ -80,6 +82,24 @@
         {
         self.postrenderBlock();
         }
+    }
+
+- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer
+    {
+    [inFramebuffer bind];
+    
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glEnable(GL_DEPTH_TEST);
+
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearDepthf(1.0f);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
+    [self prerender];
+    [self render];
+    [self postrender];
     }
 
 @end

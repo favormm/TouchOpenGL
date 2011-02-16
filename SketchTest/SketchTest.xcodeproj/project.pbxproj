@@ -1,0 +1,473 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		45271738130B200F00529A0C /* CMutableVertexBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716D6130B200F00529A0C /* CMutableVertexBuffer.m */; };
+		45271739130B200F00529A0C /* CProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716D8130B200F00529A0C /* CProgram.m */; };
+		4527173A130B200F00529A0C /* CProgram_ConvenienceExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716DA130B200F00529A0C /* CProgram_ConvenienceExtensions.m */; };
+		4527173B130B200F00529A0C /* CRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716DC130B200F00529A0C /* CRenderer.m */; };
+		4527173C130B200F00529A0C /* CShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716DE130B200F00529A0C /* CShader.m */; };
+		4527173E130B200F00529A0C /* CTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716E2130B200F00529A0C /* CTexture.m */; };
+		4527173F130B200F00529A0C /* CTexture_TilingExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716E4130B200F00529A0C /* CTexture_TilingExtension.m */; };
+		45271740130B200F00529A0C /* CTextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716E6130B200F00529A0C /* CTextureLoader.m */; };
+		45271741130B200F00529A0C /* CVertexBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716E8130B200F00529A0C /* CVertexBuffer.m */; };
+		45271742130B200F00529A0C /* CVertexBuffer_FactoryExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716EA130B200F00529A0C /* CVertexBuffer_FactoryExtensions.m */; };
+		45271743130B200F00529A0C /* CVertexBufferReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716EC130B200F00529A0C /* CVertexBufferReference.m */; };
+		45271745130B200F00529A0C /* OpenGLTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716F1130B200F00529A0C /* OpenGLTypes.m */; };
+		4527174A130B202F00529A0C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45271749130B202F00529A0C /* OpenGLES.framework */; };
+		4527174C130B203700529A0C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4527174B130B203700529A0C /* QuartzCore.framework */; };
+		45271754130B20CD00529A0C /* CImageTextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4527174F130B20CD00529A0C /* CImageTextureLoader.m */; };
+		45271755130B20CD00529A0C /* CPVRTextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 45271751130B20CD00529A0C /* CPVRTextureLoader.m */; };
+		45271756130B20CD00529A0C /* CRendererView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45271753130B20CD00529A0C /* CRendererView.m */; };
+		45271759130B21A600529A0C /* UIColor_OpenGLExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45271758130B21A600529A0C /* UIColor_OpenGLExtensions.m */; };
+		4527175F130B27D700529A0C /* Brick.png in Resources */ = {isa = PBXBuildFile; fileRef = 4527175B130B27D600529A0C /* Brick.png */; };
+		45271760130B27D700529A0C /* Flat.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4527175D130B27D600529A0C /* Flat.fsh */; };
+		45271761130B27D700529A0C /* Flat.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4527175E130B27D600529A0C /* Flat.vsh */; };
+		45271764130B281400529A0C /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 45271762130B281400529A0C /* Shader.fsh */; };
+		45271765130B281400529A0C /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 45271763130B281400529A0C /* Shader.vsh */; };
+		45271769130B28F300529A0C /* CTestRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45271768130B28F300529A0C /* CTestRenderer.m */; };
+		4527176C130B292300529A0C /* Texture.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4527176A130B292300529A0C /* Texture.fsh */; };
+		4527176D130B292300529A0C /* Texture.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4527176B130B292300529A0C /* Texture.vsh */; };
+		45271770130B34A800529A0C /* CFrameBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4527176F130B34A000529A0C /* CFrameBuffer.m */; };
+		45271773130B35F300529A0C /* CRenderBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45271772130B35E900529A0C /* CRenderBuffer.m */; };
+		45781C59130AFE1E00B57285 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C58130AFE1E00B57285 /* UIKit.framework */; };
+		45781C5B130AFE1E00B57285 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5A130AFE1E00B57285 /* Foundation.framework */; };
+		45781C5D130AFE1E00B57285 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5C130AFE1E00B57285 /* CoreGraphics.framework */; };
+		45781C63130AFE1E00B57285 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45781C61130AFE1E00B57285 /* InfoPlist.strings */; };
+		45781C66130AFE1E00B57285 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45781C65130AFE1E00B57285 /* main.m */; };
+		45781C6C130AFE1E00B57285 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45781C6A130AFE1E00B57285 /* MainWindow.xib */; };
+		45781C6F130AFE1E00B57285 /* SketchTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45781C6E130AFE1E00B57285 /* SketchTestViewController.m */; };
+		45781C72130AFE1E00B57285 /* SketchTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45781C70130AFE1E00B57285 /* SketchTestViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		452716D5130B200F00529A0C /* CMutableVertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMutableVertexBuffer.h; sourceTree = "<group>"; };
+		452716D6130B200F00529A0C /* CMutableVertexBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMutableVertexBuffer.m; sourceTree = "<group>"; };
+		452716D7130B200F00529A0C /* CProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CProgram.h; sourceTree = "<group>"; };
+		452716D8130B200F00529A0C /* CProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CProgram.m; sourceTree = "<group>"; };
+		452716D9130B200F00529A0C /* CProgram_ConvenienceExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CProgram_ConvenienceExtensions.h; sourceTree = "<group>"; };
+		452716DA130B200F00529A0C /* CProgram_ConvenienceExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CProgram_ConvenienceExtensions.m; sourceTree = "<group>"; };
+		452716DB130B200F00529A0C /* CRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRenderer.h; sourceTree = "<group>"; };
+		452716DC130B200F00529A0C /* CRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRenderer.m; sourceTree = "<group>"; };
+		452716DD130B200F00529A0C /* CShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CShader.h; sourceTree = "<group>"; };
+		452716DE130B200F00529A0C /* CShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CShader.m; sourceTree = "<group>"; };
+		452716E1130B200F00529A0C /* CTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTexture.h; sourceTree = "<group>"; };
+		452716E2130B200F00529A0C /* CTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTexture.m; sourceTree = "<group>"; };
+		452716E3130B200F00529A0C /* CTexture_TilingExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTexture_TilingExtension.h; sourceTree = "<group>"; };
+		452716E4130B200F00529A0C /* CTexture_TilingExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTexture_TilingExtension.m; sourceTree = "<group>"; };
+		452716E5130B200F00529A0C /* CTextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTextureLoader.h; sourceTree = "<group>"; };
+		452716E6130B200F00529A0C /* CTextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTextureLoader.m; sourceTree = "<group>"; };
+		452716E7130B200F00529A0C /* CVertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVertexBuffer.h; sourceTree = "<group>"; };
+		452716E8130B200F00529A0C /* CVertexBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVertexBuffer.m; sourceTree = "<group>"; };
+		452716E9130B200F00529A0C /* CVertexBuffer_FactoryExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVertexBuffer_FactoryExtensions.h; sourceTree = "<group>"; };
+		452716EA130B200F00529A0C /* CVertexBuffer_FactoryExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVertexBuffer_FactoryExtensions.m; sourceTree = "<group>"; };
+		452716EB130B200F00529A0C /* CVertexBufferReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVertexBufferReference.h; sourceTree = "<group>"; };
+		452716EC130B200F00529A0C /* CVertexBufferReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVertexBufferReference.m; sourceTree = "<group>"; };
+		452716EF130B200F00529A0C /* OpenGLIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLIncludes.h; sourceTree = "<group>"; };
+		452716F0130B200F00529A0C /* OpenGLTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLTypes.h; sourceTree = "<group>"; };
+		452716F1130B200F00529A0C /* OpenGLTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLTypes.m; sourceTree = "<group>"; };
+		45271749130B202F00529A0C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		4527174B130B203700529A0C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4527174E130B20CD00529A0C /* CImageTextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CImageTextureLoader.h; sourceTree = "<group>"; };
+		4527174F130B20CD00529A0C /* CImageTextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CImageTextureLoader.m; sourceTree = "<group>"; };
+		45271750130B20CD00529A0C /* CPVRTextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPVRTextureLoader.h; sourceTree = "<group>"; };
+		45271751130B20CD00529A0C /* CPVRTextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPVRTextureLoader.m; sourceTree = "<group>"; };
+		45271752130B20CD00529A0C /* CRendererView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRendererView.h; sourceTree = "<group>"; };
+		45271753130B20CD00529A0C /* CRendererView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRendererView.m; sourceTree = "<group>"; };
+		45271757130B21A600529A0C /* UIColor_OpenGLExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColor_OpenGLExtensions.h; sourceTree = "<group>"; };
+		45271758130B21A600529A0C /* UIColor_OpenGLExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColor_OpenGLExtensions.m; sourceTree = "<group>"; };
+		4527175A130B247700529A0C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4527175B130B27D600529A0C /* Brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Brick.png; path = ../Brick.png; sourceTree = "<group>"; };
+		4527175D130B27D600529A0C /* Flat.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Flat.fsh; sourceTree = "<group>"; };
+		4527175E130B27D600529A0C /* Flat.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Flat.vsh; sourceTree = "<group>"; };
+		45271762130B281400529A0C /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		45271763130B281400529A0C /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		45271767130B28F300529A0C /* CTestRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTestRenderer.h; sourceTree = "<group>"; };
+		45271768130B28F300529A0C /* CTestRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTestRenderer.m; sourceTree = "<group>"; };
+		4527176A130B292300529A0C /* Texture.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Texture.fsh; sourceTree = "<group>"; };
+		4527176B130B292300529A0C /* Texture.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Texture.vsh; sourceTree = "<group>"; };
+		4527176E130B349D00529A0C /* CFrameBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFrameBuffer.h; sourceTree = "<group>"; };
+		4527176F130B34A000529A0C /* CFrameBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFrameBuffer.m; sourceTree = "<group>"; };
+		45271771130B35E500529A0C /* CRenderBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRenderBuffer.h; sourceTree = "<group>"; };
+		45271772130B35E900529A0C /* CRenderBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRenderBuffer.m; sourceTree = "<group>"; };
+		45781C54130AFE1E00B57285 /* SketchTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SketchTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45781C58130AFE1E00B57285 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		45781C5A130AFE1E00B57285 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		45781C5C130AFE1E00B57285 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		45781C60130AFE1E00B57285 /* SketchTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SketchTest-Info.plist"; sourceTree = "<group>"; };
+		45781C62130AFE1E00B57285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		45781C64130AFE1E00B57285 /* SketchTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SketchTest-Prefix.pch"; sourceTree = "<group>"; };
+		45781C65130AFE1E00B57285 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		45781C6B130AFE1E00B57285 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		45781C6D130AFE1E00B57285 /* SketchTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SketchTestViewController.h; sourceTree = "<group>"; };
+		45781C6E130AFE1E00B57285 /* SketchTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SketchTestViewController.m; sourceTree = "<group>"; };
+		45781C71130AFE1E00B57285 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SketchTestViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		45781C51130AFE1E00B57285 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45781C5D130AFE1E00B57285 /* CoreGraphics.framework in Frameworks */,
+				4527174C130B203700529A0C /* QuartzCore.framework in Frameworks */,
+				4527174A130B202F00529A0C /* OpenGLES.framework in Frameworks */,
+				45781C59130AFE1E00B57285 /* UIKit.framework in Frameworks */,
+				45781C5B130AFE1E00B57285 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4527165E130B200F00529A0C /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				452716D5130B200F00529A0C /* CMutableVertexBuffer.h */,
+				452716D6130B200F00529A0C /* CMutableVertexBuffer.m */,
+				452716D7130B200F00529A0C /* CProgram.h */,
+				452716D8130B200F00529A0C /* CProgram.m */,
+				452716D9130B200F00529A0C /* CProgram_ConvenienceExtensions.h */,
+				452716DA130B200F00529A0C /* CProgram_ConvenienceExtensions.m */,
+				452716DB130B200F00529A0C /* CRenderer.h */,
+				452716DC130B200F00529A0C /* CRenderer.m */,
+				452716DD130B200F00529A0C /* CShader.h */,
+				452716DE130B200F00529A0C /* CShader.m */,
+				452716E1130B200F00529A0C /* CTexture.h */,
+				452716E2130B200F00529A0C /* CTexture.m */,
+				452716E3130B200F00529A0C /* CTexture_TilingExtension.h */,
+				452716E4130B200F00529A0C /* CTexture_TilingExtension.m */,
+				452716E5130B200F00529A0C /* CTextureLoader.h */,
+				452716E6130B200F00529A0C /* CTextureLoader.m */,
+				452716E7130B200F00529A0C /* CVertexBuffer.h */,
+				452716E8130B200F00529A0C /* CVertexBuffer.m */,
+				452716E9130B200F00529A0C /* CVertexBuffer_FactoryExtensions.h */,
+				452716EA130B200F00529A0C /* CVertexBuffer_FactoryExtensions.m */,
+				452716EB130B200F00529A0C /* CVertexBufferReference.h */,
+				452716EC130B200F00529A0C /* CVertexBufferReference.m */,
+				452716EF130B200F00529A0C /* OpenGLIncludes.h */,
+				452716F0130B200F00529A0C /* OpenGLTypes.h */,
+				452716F1130B200F00529A0C /* OpenGLTypes.m */,
+				4527176E130B349D00529A0C /* CFrameBuffer.h */,
+				4527176F130B34A000529A0C /* CFrameBuffer.m */,
+				45271771130B35E500529A0C /* CRenderBuffer.h */,
+				45271772130B35E900529A0C /* CRenderBuffer.m */,
+				4527174D130B20CD00529A0C /* iOS */,
+			);
+			name = OpenGL;
+			path = ../Source;
+			sourceTree = "<group>";
+		};
+		4527174D130B20CD00529A0C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4527174E130B20CD00529A0C /* CImageTextureLoader.h */,
+				4527174F130B20CD00529A0C /* CImageTextureLoader.m */,
+				45271750130B20CD00529A0C /* CPVRTextureLoader.h */,
+				45271751130B20CD00529A0C /* CPVRTextureLoader.m */,
+				45271752130B20CD00529A0C /* CRendererView.h */,
+				45271753130B20CD00529A0C /* CRendererView.m */,
+				45271757130B21A600529A0C /* UIColor_OpenGLExtensions.h */,
+				45271758130B21A600529A0C /* UIColor_OpenGLExtensions.m */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		4527175C130B27D600529A0C /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				4527175D130B27D600529A0C /* Flat.fsh */,
+				4527175E130B27D600529A0C /* Flat.vsh */,
+				45271762130B281400529A0C /* Shader.fsh */,
+				45271763130B281400529A0C /* Shader.vsh */,
+				4527176A130B292300529A0C /* Texture.fsh */,
+				4527176B130B292300529A0C /* Texture.vsh */,
+			);
+			name = Shaders;
+			path = ../Shaders;
+			sourceTree = "<group>";
+		};
+		45271766130B28F300529A0C /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				45271767130B28F300529A0C /* CTestRenderer.h */,
+				45271768130B28F300529A0C /* CTestRenderer.m */,
+			);
+			name = Test;
+			path = ../Test;
+			sourceTree = "<group>";
+		};
+		45781C49130AFE1E00B57285 = {
+			isa = PBXGroup;
+			children = (
+				45781C5E130AFE1E00B57285 /* SketchTest */,
+				4527175B130B27D600529A0C /* Brick.png */,
+				4527175C130B27D600529A0C /* Shaders */,
+				45271766130B28F300529A0C /* Test */,
+				4527165E130B200F00529A0C /* OpenGL */,
+				45781C57130AFE1E00B57285 /* Frameworks */,
+				45781C55130AFE1E00B57285 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		45781C55130AFE1E00B57285 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45781C54130AFE1E00B57285 /* SketchTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45781C57130AFE1E00B57285 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4527175A130B247700529A0C /* CoreGraphics.framework */,
+				4527174B130B203700529A0C /* QuartzCore.framework */,
+				45271749130B202F00529A0C /* OpenGLES.framework */,
+				45781C58130AFE1E00B57285 /* UIKit.framework */,
+				45781C5A130AFE1E00B57285 /* Foundation.framework */,
+				45781C5C130AFE1E00B57285 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		45781C5E130AFE1E00B57285 /* SketchTest */ = {
+			isa = PBXGroup;
+			children = (
+				45781C6A130AFE1E00B57285 /* MainWindow.xib */,
+				45781C6D130AFE1E00B57285 /* SketchTestViewController.h */,
+				45781C6E130AFE1E00B57285 /* SketchTestViewController.m */,
+				45781C70130AFE1E00B57285 /* SketchTestViewController.xib */,
+				45781C5F130AFE1E00B57285 /* Supporting Files */,
+			);
+			path = SketchTest;
+			sourceTree = "<group>";
+		};
+		45781C5F130AFE1E00B57285 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				45781C60130AFE1E00B57285 /* SketchTest-Info.plist */,
+				45781C61130AFE1E00B57285 /* InfoPlist.strings */,
+				45781C64130AFE1E00B57285 /* SketchTest-Prefix.pch */,
+				45781C65130AFE1E00B57285 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		45781C53130AFE1E00B57285 /* SketchTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45781C75130AFE1E00B57285 /* Build configuration list for PBXNativeTarget "SketchTest" */;
+			buildPhases = (
+				45781C50130AFE1E00B57285 /* Sources */,
+				45781C51130AFE1E00B57285 /* Frameworks */,
+				45781C52130AFE1E00B57285 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SketchTest;
+			productName = SketchTest;
+			productReference = 45781C54130AFE1E00B57285 /* SketchTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		45781C4B130AFE1E00B57285 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = toxicsoftware.com;
+			};
+			buildConfigurationList = 45781C4E130AFE1E00B57285 /* Build configuration list for PBXProject "SketchTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 45781C49130AFE1E00B57285;
+			productRefGroup = 45781C55130AFE1E00B57285 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				45781C53130AFE1E00B57285 /* SketchTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		45781C52130AFE1E00B57285 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4527176C130B292300529A0C /* Texture.fsh in Resources */,
+				4527176D130B292300529A0C /* Texture.vsh in Resources */,
+				45271760130B27D700529A0C /* Flat.fsh in Resources */,
+				45271761130B27D700529A0C /* Flat.vsh in Resources */,
+				45271764130B281400529A0C /* Shader.fsh in Resources */,
+				45271765130B281400529A0C /* Shader.vsh in Resources */,
+				45781C63130AFE1E00B57285 /* InfoPlist.strings in Resources */,
+				45781C6C130AFE1E00B57285 /* MainWindow.xib in Resources */,
+				45781C72130AFE1E00B57285 /* SketchTestViewController.xib in Resources */,
+				4527175F130B27D700529A0C /* Brick.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		45781C50130AFE1E00B57285 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45781C66130AFE1E00B57285 /* main.m in Sources */,
+				45781C6F130AFE1E00B57285 /* SketchTestViewController.m in Sources */,
+				45271738130B200F00529A0C /* CMutableVertexBuffer.m in Sources */,
+				45271739130B200F00529A0C /* CProgram.m in Sources */,
+				4527173A130B200F00529A0C /* CProgram_ConvenienceExtensions.m in Sources */,
+				4527173B130B200F00529A0C /* CRenderer.m in Sources */,
+				4527173C130B200F00529A0C /* CShader.m in Sources */,
+				4527173E130B200F00529A0C /* CTexture.m in Sources */,
+				4527173F130B200F00529A0C /* CTexture_TilingExtension.m in Sources */,
+				45271740130B200F00529A0C /* CTextureLoader.m in Sources */,
+				45271741130B200F00529A0C /* CVertexBuffer.m in Sources */,
+				45271742130B200F00529A0C /* CVertexBuffer_FactoryExtensions.m in Sources */,
+				45271743130B200F00529A0C /* CVertexBufferReference.m in Sources */,
+				45271745130B200F00529A0C /* OpenGLTypes.m in Sources */,
+				45271754130B20CD00529A0C /* CImageTextureLoader.m in Sources */,
+				45271755130B20CD00529A0C /* CPVRTextureLoader.m in Sources */,
+				45271756130B20CD00529A0C /* CRendererView.m in Sources */,
+				45271759130B21A600529A0C /* UIColor_OpenGLExtensions.m in Sources */,
+				45271769130B28F300529A0C /* CTestRenderer.m in Sources */,
+				45271770130B34A800529A0C /* CFrameBuffer.m in Sources */,
+				45271773130B35F300529A0C /* CRenderBuffer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		45781C61130AFE1E00B57285 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45781C62130AFE1E00B57285 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		45781C6A130AFE1E00B57285 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45781C6B130AFE1E00B57285 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		45781C70130AFE1E00B57285 /* SketchTestViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45781C71130AFE1E00B57285 /* en */,
+			);
+			name = SketchTestViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		45781C73130AFE1E00B57285 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		45781C74130AFE1E00B57285 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		45781C76130AFE1E00B57285 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SketchTest/SketchTest-Prefix.pch";
+				INFOPLIST_FILE = "SketchTest/SketchTest-Info.plist";
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		45781C77130AFE1E00B57285 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SketchTest/SketchTest-Prefix.pch";
+				INFOPLIST_FILE = "SketchTest/SketchTest-Info.plist";
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		45781C4E130AFE1E00B57285 /* Build configuration list for PBXProject "SketchTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45781C73130AFE1E00B57285 /* Debug */,
+				45781C74130AFE1E00B57285 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45781C75130AFE1E00B57285 /* Build configuration list for PBXNativeTarget "SketchTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45781C76130AFE1E00B57285 /* Debug */,
+				45781C77130AFE1E00B57285 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 45781C4B130AFE1E00B57285 /* Project object */;
+}
