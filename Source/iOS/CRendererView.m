@@ -90,8 +90,6 @@
 
 - (void)setup
     {
-    NSLog(@"RENDER VIEW SETUP");
-    
     // Get the layer
     self.EAGLLayer.opaque = TRUE;
     self.EAGLLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -157,8 +155,6 @@
         {
         self.animating = TRUE;
 
-        NSLog(@"START ANIMATION");
-
         displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawView:)];
         [displayLink setFrameInterval:self.animationFrameInterval];
         [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -171,8 +167,6 @@
         {
         self.animating = FALSE;
 
-        NSLog(@"STOP ANIMATION");
-        
         [displayLink invalidate];
         displayLink = nil;
         }

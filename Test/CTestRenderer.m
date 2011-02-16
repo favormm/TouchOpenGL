@@ -67,8 +67,6 @@
         [UIColor greenColor],
         [UIColor blueColor],
         NULL]];
-        
-    
     
     CImageTextureLoader *theLoader = [[[CImageTextureLoader alloc] init] autorelease];
     CTexture *theTexture = [theLoader textureWithImageNamed:@"Brick" error:NULL];
@@ -78,7 +76,6 @@
     GLuint theColorAttributeIndex = [theProgram attributeIndexForName:@"color"];
     
     GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"transform"];
-    
     
     self.renderBlock = ^(Matrix4 inTransform) {
 
