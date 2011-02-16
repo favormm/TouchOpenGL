@@ -6,13 +6,13 @@
 //  Copyright 2010 toxicsoftware.com. All rights reserved.
 //
 
-varying mediump vec2 textureCoordinate;
-varying mediump vec4 colorVarying;
+varying mediump vec2 v_texture0;
+varying mediump vec4 v_color;
 
 uniform sampler2D s_texture;
 
 void main()
     {
-    gl_FragColor = texture2D(s_texture, textureCoordinate);
+    gl_FragColor = texture2D(s_texture, v_texture0);
 //    gl_FragColor = colorVarying;
     }

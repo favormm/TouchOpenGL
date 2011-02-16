@@ -13,9 +13,8 @@
     
 }
 
-@property (readwrite, nonatomic, copy) void (^prepareBlock)(void);
 @property (readwrite, nonatomic, copy) void (^prerenderBlock)(void);
-@property (readwrite, nonatomic, copy) void (^renderBlock)(void);
+@property (readwrite, nonatomic, copy) void (^renderBlock)(Matrix4 inTransform);
 @property (readwrite, nonatomic, copy) void (^postrenderBlock)(void);
 
 @end

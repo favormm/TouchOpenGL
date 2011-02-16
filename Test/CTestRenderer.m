@@ -36,7 +36,7 @@
     return(self);
     }
     
-- (void)render
+- (void)render:(Matrix4)inTransform
     {
     if (self.setupDone == NO)
         {
@@ -44,7 +44,7 @@
         self.setupDone = YES;
         }
         
-    [super render];
+    [super render:inTransform];
     }
 
 - (void)setup
@@ -80,7 +80,7 @@
     GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"transform"];
     
     
-    self.renderBlock = ^(void) {
+    self.renderBlock = ^(Matrix4 inTransform) {
 
         NSLog(@"RENDER");
 
@@ -105,8 +105,7 @@
         glBindTexture(GL_TEXTURE_2D, theTexture.name);
 
         // Update uniform values
-        Matrix4 theMatrix = Matrix4MakeScale(1, 1, 1);
-        glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &theMatrix.m00);
+        glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &inTransform.m00);
 
         // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.
     #if defined(DEBUG)

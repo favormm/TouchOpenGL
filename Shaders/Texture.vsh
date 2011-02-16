@@ -12,14 +12,14 @@ attribute vec4 color;
 
 uniform mat4 transform;
 
-varying vec2 textureCoordinate;
-varying vec4 colorVarying;
+varying vec2 v_texture0;
+varying vec4 v_color;
 
 void main()
     {
     vec4 thePosition = transform * vertex;
     gl_Position = thePosition;
 
-    textureCoordinate = texture;
-    colorVarying = color;
+    v_texture0 = texture;
+    v_color = color;
     }

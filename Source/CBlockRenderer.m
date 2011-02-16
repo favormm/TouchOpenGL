@@ -39,11 +39,11 @@
 
     }
 
-- (void)render
+- (void)render:(Matrix4)inTransform
     {
     if (self.renderBlock)
         {
-        self.renderBlock();
+        self.renderBlock(inTransform);
         }
     }
 

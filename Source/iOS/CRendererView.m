@@ -187,7 +187,11 @@
 
         glViewport(0, 0, self.backingSize.width, self.backingSize.height);
 
-        [self.renderer renderIntoFrameBuffer:self.frameBuffer];
+        Matrix4 theTransform = Matrix4MakeScale(1, (GLfloat)self.backingSize.width / (GLfloat)self.backingSize.height, 1);
+
+        
+
+        [self.renderer renderIntoFrameBuffer:self.frameBuffer transform:theTransform];
 
         [self.colorRenderBuffer bind];
         [self.context presentRenderbuffer:GL_RENDERBUFFER];

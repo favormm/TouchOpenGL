@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "OpenGLIncludes.h"
+#import "OpenGLTypes.h"
 
 @class CFrameBuffer;
 
@@ -16,10 +17,10 @@
     }
 
 - (void)prerender;
-- (void)render;
+- (void)render:(Matrix4)inTransform;
 - (void)postrender;
 
-- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer;
+- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer transform:(Matrix4)inTransform;
 
 @end
 

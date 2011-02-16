@@ -40,7 +40,7 @@
     {
     }
 
-- (void)render
+- (void)render:(Matrix4)inTransform
     {
     }
 
@@ -48,7 +48,7 @@
     {
     }
 
-- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer
+- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer transform:(Matrix4)inTransform
     {
     [inFramebuffer bind];
     
@@ -62,7 +62,7 @@
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
     [self prerender];
-    [self render];
+    [self render:inTransform];
     [self postrender];
     }
 
