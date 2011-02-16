@@ -12,16 +12,31 @@
 
 @implementation UIColor (UIColor_OpenGLExtensions)
 
-//- (Color4f)color4f
-//	{
-//	}
+- (Color4f)color4f
+	{
+    Color4f theColor;
+    CGColorRef theCGColor = self.CGColor;
+    
+    CGColorSpaceRef theColorSpace = CGColorGetColorSpace(theCGColor);
+    CGColorSpaceModel theModel = CGColorSpaceGetModel(theColorSpace);
+    if (theModel == kCGColorSpaceModelRGB)
+        {
+        const CGFloat *theComponents = CGColorGetComponents(theCGColor);
+        theColor = (Color4f){ theComponents[0], theComponents[1], theComponents[2], CGColorGetAlpha(theCGColor)  };
+        }
+    else if (theModel == kCGColorSpaceModelMonochrome)
+        {
+        const CGFloat *theComponents = CGColorGetComponents(theCGColor);
+        theColor = (Color4f){ theComponents[0], theComponents[0], theComponents[0], CGColorGetAlpha(theCGColor)  };
+        }
+    return(theColor);
+	}
 	
 - (Color4ub)color4ub
 	{
-    // TODO we assume RGB. This is dodgy.
-    CGColorRef theCGColor = self.CGColor;
-    const CGFloat *theComponents = CGColorGetComponents(theCGColor);
-	Color4ub theColor = { theComponents[0] / 255.0, theComponents[1] / 255.0, theComponents[2] / 255.0, CGColorGetAlpha(theCGColor) / 255.0  };
+    Color4f theColor4f = self.color4f;
+	Color4ub theColor = { theColor4f.r * 255.0, theColor4f.g * 255.0, theColor4f.b * 255.0, theColor4f.a * 255.0 };
+    NSLog(@"%d %d %d %d", theColor.r, theColor.g, theColor.b, theColor.a );
 	return(theColor);
 	}
 

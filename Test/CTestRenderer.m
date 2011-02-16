@@ -62,10 +62,10 @@
 
     // Colors
     CVertexBuffer *theColors = [CVertexBuffer vertexBufferWithColors:[NSArray arrayWithObjects:
+        [UIColor whiteColor],
         [UIColor redColor],
-        [UIColor redColor],
-        [UIColor redColor],
-        [UIColor redColor],
+        [UIColor greenColor],
+        [UIColor blueColor],
         NULL]];
         
     
