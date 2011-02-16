@@ -179,11 +179,22 @@
         // This application only creates a single context which is already set current at this point. This call is redundant, but needed if dealing with multiple contexts.
         [EAGLContext setCurrentContext:self.context];
 
-        glViewport(0, 0, self.backingSize.width, self.backingSize.height);
+        const CGSize theSize = self.bounds.size;
+        const CGFloat theAspectRatio = theSize.width / theSize.height;
+        Matrix4 theTransform = Matrix4MakeScale(1, theAspectRatio, 1);
 
-        Matrix4 theTransform = Matrix4MakeScale(1, (GLfloat)self.backingSize.width / (GLfloat)self.backingSize.height, 1);
-
-        
+        glViewport(0, 0, theSize.width, theSize.height);
+//
+//        CGFloat theAspectRatio = theSize.width / theSize.height;
+//
+//        Matrix4 theTransform = Matrix4MakeScale(1, theAspectRatio, 1);
+//
+//        CGFloat D = MIN(theSize.width, theSize.height) * 0.5;
+//        NSLog(@"%g", D);
+//        
+//
+//        theTransform = Matrix4Translate(theTransform, -D, -D, 0);
+//        theTransform = Matrix4Scale(theTransform, 1 / D, 1 / D, 1);
 
         [self.renderer renderIntoFrameBuffer:self.frameBuffer transform:theTransform];
 
