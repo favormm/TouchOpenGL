@@ -1,14 +1,16 @@
 //
 //  Shader.fsh
-//  Racing Genes
+//  Dwarfs
 //
 //  Created by Jonathan Wight on 09/05/10.
 //  Copyright 2010 toxicsoftware.com. All rights reserved.
 //
 
-varying lowp vec4 v_color;
+varying mediump vec2 v_texture0;
+
+uniform sampler2D s_texture;
 
 void main()
     {
-    gl_FragColor = v_color;
+    gl_FragColor = texture2D(s_texture, v_texture0);
     }

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4522A37B130B6373008E0790 /* CSketchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4522A37A130B6373008E0790 /* CSketchView.m */; };
+		4522A37F130B64B8008E0790 /* CSketchRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4522A37E130B64B7008E0790 /* CSketchRenderer.m */; };
+		4522A382130B659A008E0790 /* CImageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4522A381130B6599008E0790 /* CImageRenderer.m */; };
+		4522A385130B6BA3008E0790 /* SimpleTexture.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4522A383130B6BA3008E0790 /* SimpleTexture.fsh */; };
+		4522A386130B6BA3008E0790 /* SimpleTexture.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4522A384130B6BA3008E0790 /* SimpleTexture.vsh */; };
+		4522A389130B7931008E0790 /* CSketchCanvas.m in Sources */ = {isa = PBXBuildFile; fileRef = 4522A388130B792F008E0790 /* CSketchCanvas.m */; };
 		45271738130B200F00529A0C /* CMutableVertexBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716D6130B200F00529A0C /* CMutableVertexBuffer.m */; };
 		45271739130B200F00529A0C /* CProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716D8130B200F00529A0C /* CProgram.m */; };
 		4527173A130B200F00529A0C /* CProgram_ConvenienceExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 452716DA130B200F00529A0C /* CProgram_ConvenienceExtensions.m */; };
@@ -47,6 +53,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4522A379130B6373008E0790 /* CSketchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSketchView.h; sourceTree = "<group>"; };
+		4522A37A130B6373008E0790 /* CSketchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSketchView.m; sourceTree = "<group>"; };
+		4522A37D130B64B7008E0790 /* CSketchRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSketchRenderer.h; sourceTree = "<group>"; };
+		4522A37E130B64B7008E0790 /* CSketchRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSketchRenderer.m; sourceTree = "<group>"; };
+		4522A380130B6599008E0790 /* CImageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CImageRenderer.h; sourceTree = "<group>"; };
+		4522A381130B6599008E0790 /* CImageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CImageRenderer.m; sourceTree = "<group>"; };
+		4522A383130B6BA3008E0790 /* SimpleTexture.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SimpleTexture.fsh; sourceTree = "<group>"; };
+		4522A384130B6BA3008E0790 /* SimpleTexture.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SimpleTexture.vsh; sourceTree = "<group>"; };
+		4522A387130B792F008E0790 /* CSketchCanvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSketchCanvas.h; sourceTree = "<group>"; };
+		4522A388130B792F008E0790 /* CSketchCanvas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSketchCanvas.m; sourceTree = "<group>"; };
 		452716D5130B200F00529A0C /* CMutableVertexBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMutableVertexBuffer.h; sourceTree = "<group>"; };
 		452716D6130B200F00529A0C /* CMutableVertexBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMutableVertexBuffer.m; sourceTree = "<group>"; };
 		452716D7130B200F00529A0C /* CProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CProgram.h; sourceTree = "<group>"; };
@@ -190,6 +206,8 @@
 				4527175E130B27D600529A0C /* Flat.vsh */,
 				45271762130B281400529A0C /* Shader.fsh */,
 				45271763130B281400529A0C /* Shader.vsh */,
+				4522A383130B6BA3008E0790 /* SimpleTexture.fsh */,
+				4522A384130B6BA3008E0790 /* SimpleTexture.vsh */,
 				4527176A130B292300529A0C /* Texture.fsh */,
 				4527176B130B292300529A0C /* Texture.vsh */,
 			);
@@ -244,11 +262,19 @@
 		45781C5E130AFE1E00B57285 /* SketchTest */ = {
 			isa = PBXGroup;
 			children = (
+				45781C5F130AFE1E00B57285 /* Supporting Files */,
 				45781C6A130AFE1E00B57285 /* MainWindow.xib */,
 				45781C6D130AFE1E00B57285 /* SketchTestViewController.h */,
 				45781C6E130AFE1E00B57285 /* SketchTestViewController.m */,
 				45781C70130AFE1E00B57285 /* SketchTestViewController.xib */,
-				45781C5F130AFE1E00B57285 /* Supporting Files */,
+				4522A37D130B64B7008E0790 /* CSketchRenderer.h */,
+				4522A37E130B64B7008E0790 /* CSketchRenderer.m */,
+				4522A379130B6373008E0790 /* CSketchView.h */,
+				4522A37A130B6373008E0790 /* CSketchView.m */,
+				4522A380130B6599008E0790 /* CImageRenderer.h */,
+				4522A381130B6599008E0790 /* CImageRenderer.m */,
+				4522A387130B792F008E0790 /* CSketchCanvas.h */,
+				4522A388130B792F008E0790 /* CSketchCanvas.m */,
 			);
 			path = SketchTest;
 			sourceTree = "<group>";
@@ -314,6 +340,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4522A385130B6BA3008E0790 /* SimpleTexture.fsh in Resources */,
+				4522A386130B6BA3008E0790 /* SimpleTexture.vsh in Resources */,
 				4527176C130B292300529A0C /* Texture.fsh in Resources */,
 				4527176D130B292300529A0C /* Texture.vsh in Resources */,
 				45271760130B27D700529A0C /* Flat.fsh in Resources */,
@@ -356,6 +384,10 @@
 				45271770130B34A800529A0C /* CFrameBuffer.m in Sources */,
 				45271773130B35F300529A0C /* CRenderBuffer.m in Sources */,
 				45FDD816130B579B00EC48EA /* CBlockRenderer.m in Sources */,
+				4522A37B130B6373008E0790 /* CSketchView.m in Sources */,
+				4522A37F130B64B8008E0790 /* CSketchRenderer.m in Sources */,
+				4522A382130B659A008E0790 /* CImageRenderer.m in Sources */,
+				4522A389130B7931008E0790 /* CSketchCanvas.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

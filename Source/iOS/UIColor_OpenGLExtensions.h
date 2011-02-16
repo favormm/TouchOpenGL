@@ -12,6 +12,7 @@
 
 @interface UIColor (UIColor_OpenGLExtensions)
 
+@property (readonly, nonatomic, assign) Color4f color4f;
 @property (readonly, nonatomic, assign) Color4ub color4ub;
 
 @end

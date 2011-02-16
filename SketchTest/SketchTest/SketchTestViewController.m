@@ -8,26 +8,19 @@
 
 #import "SketchTestViewController.h"
 
-#import "CRendererView.h"
-#import "CTestRenderer.h"
+#import "CSketchView.h"
+#import "CSketchRenderer.h"
 
 @implementation SketchTestViewController
 
-- (CRendererView *)rendererView
+- (CSketchView *)sketchView
     {
-    return((CRendererView *)self.view);
+    return((CSketchView *)self.view);
     }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
     {
-    return YES;
-    }
-    
-- (void)viewDidLoad
-    {
-    [super viewDidLoad];
-    //
-    self.rendererView.renderer = [[[CTestRenderer alloc] init] autorelease];
+    return(YES);
     }
 
 @end

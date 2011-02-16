@@ -29,6 +29,10 @@
         const CGFloat *theComponents = CGColorGetComponents(theCGColor);
         theColor = (Color4f){ theComponents[0], theComponents[0], theComponents[0], CGColorGetAlpha(theCGColor)  };
         }
+    else
+        {
+        NSAssert(NO, @"Unknown color model");
+        }
     return(theColor);
 	}
 	
@@ -36,7 +40,6 @@
 	{
     Color4f theColor4f = self.color4f;
 	Color4ub theColor = { theColor4f.r * 255.0, theColor4f.g * 255.0, theColor4f.b * 255.0, theColor4f.a * 255.0 };
-    NSLog(@"%d %d %d %d", theColor.r, theColor.g, theColor.b, theColor.a );
 	return(theColor);
 	}
 
