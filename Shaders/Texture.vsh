@@ -17,9 +17,8 @@ varying vec4 colorVarying;
 
 void main()
     {
-//    vec4 thePosition = transform * vertex;
-//    gl_Position = thePosition;
-    gl_Position = vertex;
+    vec4 thePosition = transform * vertex;
+    gl_Position = thePosition;
 
     textureCoordinate = texture;
     colorVarying = color;

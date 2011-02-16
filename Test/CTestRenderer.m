@@ -12,6 +12,7 @@
 #import "CProgram.h"
 #import "CShader.h"
 #import "CVertexBuffer.h"
+#import "CVertexBuffer_FactoryExtensions.h"
 #import "CImageTextureLoader.h"
 #import "CTexture.h"
 
@@ -56,38 +57,28 @@
     CProgram *theProgram = [[[CProgram alloc] initWithFiles:theShaders] autorelease];
 
     // Geometry Vertices
-    const GLfloat squareVertices[] = {
-        -1.0f, -1.0f,
-         1.0f, -1.0f,
-        -1.0f,  1.0f,
-         1.0f,  1.0f,
-        };
-    CVertexBuffer *theVertices = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:[NSData dataWithBytes:squareVertices length:sizeof(squareVertices)]] autorelease];
-
-    const GLfloat theTextureVertices[] = {
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-        };
-    CVertexBuffer *theTextureVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:[NSData dataWithBytes:theTextureVertices length:sizeof(theTextureVertices)]] autorelease];
+    CVertexBuffer *theVertices = [CVertexBuffer vertexBufferWithRect:(CGRect){ -1, -1, 2, 2 }];
+    CVertexBuffer *theTextureVertexBuffer = [CVertexBuffer vertexBufferWithRect:(CGRect){ 0, 0, 1, 1 }];
 
     // Colors
-    const GLubyte squareColors[] = {
-        255, 255, 255, 255,
-        255, 0, 255, 255,
-        255, 255, 255, 255,
-        255, 255, 255, 255,
-        };
-
-    CVertexBuffer *theColors = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:[NSData dataWithBytes:squareColors length:sizeof(squareColors)]] autorelease];;
-
+    CVertexBuffer *theColors = [CVertexBuffer vertexBufferWithColors:[NSArray arrayWithObjects:
+        [UIColor redColor],
+        [UIColor redColor],
+        [UIColor redColor],
+        [UIColor redColor],
+        NULL]];
+        
+    
+    
     CImageTextureLoader *theLoader = [[[CImageTextureLoader alloc] init] autorelease];
     CTexture *theTexture = [theLoader textureWithImageNamed:@"Brick" error:NULL];
 
     GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"vertex"];
     GLuint theTextureAttributeIndex = [theProgram attributeIndexForName:@"texture"];
     GLuint theColorAttributeIndex = [theProgram attributeIndexForName:@"color"];
+    
+    GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"transform"];
+    
     
     self.renderBlock = ^(void) {
 
@@ -112,6 +103,10 @@
         glEnableVertexAttribArray(theTextureAttributeIndex);
 
         glBindTexture(GL_TEXTURE_2D, theTexture.name);
+
+        // Update uniform values
+        Matrix4 theMatrix = Matrix4MakeScale(1, 1, 1);
+        glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &theMatrix.m00);
 
         // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.
     #if defined(DEBUG)

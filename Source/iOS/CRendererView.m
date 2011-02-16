@@ -13,20 +13,21 @@
 #import "CRenderBuffer.h"
 
 @interface CRendererView ()
+@property (readonly, nonatomic, assign) CADisplayLink *displayLink;
+
 @property (readwrite, nonatomic, assign) BOOL animating;
 @property (readonly, nonatomic, retain) CAEAGLLayer *EAGLLayer;
 
 - (void)setup;
-- (void)createFramebuffer;
-- (void)destroyFramebuffer;
+- (void)setupFramebuffers;
 @end
 
 #pragma mark -
 
 @implementation CRendererView
 
+@synthesize displayLink;
 @synthesize backingSize;
-@synthesize aspectRatio;
 @synthesize context;
 @synthesize animationFrameInterval;
 @synthesize renderer;
@@ -62,22 +63,25 @@
     
 - (void)dealloc
     {
-    NSLog(@"%@ dealloc", self);
-    // Tear down GL
-    [self destroyFramebuffer];
-
-    // Tear down context
     if ([EAGLContext currentContext] == context)
         {
         [EAGLContext setCurrentContext:nil];
         }
-
-    [context release];
-    context = NULL;
     
-
     [renderer release];
     renderer = NULL;
+
+    [frameBuffer release];
+    frameBuffer = NULL;
+    
+    [colorRenderBuffer release];
+    colorRenderBuffer = NULL;
+    
+    [depthRenderBuffer release];
+    depthRenderBuffer = NULL;
+    
+    [context release];
+    context = NULL;
 
     [super dealloc];
     }
@@ -123,10 +127,8 @@
 - (void)layoutSubviews
     {
 	[EAGLContext setCurrentContext:context];
-	[self destroyFramebuffer];
-	[self createFramebuffer];
+	[self setupFramebuffers];
 
-    self.aspectRatio = (GLfloat)self.backingSize.width / (GLfloat)self.backingSize.height;
     [self drawView:NULL];
     }
 
@@ -194,14 +196,14 @@
     
 #pragma mark -
 
-- (void)createFramebuffer
+- (void)setupFramebuffers
     {
     // Create frame buffer
     self.frameBuffer = [[[CFrameBuffer alloc] init] autorelease];
     
     // Create a color render buffer - and configure it with current context & drawable
     self.colorRenderBuffer = [[[CRenderBuffer alloc] init] autorelease];
-    [self.colorRenderBuffer storageFromContext:self.context drawable:(CAEAGLLayer *)self.layer];
+    [self.colorRenderBuffer storageFromContext:self.context drawable:self.EAGLLayer];
 
     // Attach color buffer to frame buffer
     [self.frameBuffer attachRenderBuffer:self.colorRenderBuffer attachment:GL_COLOR_ATTACHMENT0];
@@ -223,12 +225,5 @@
         }
     }
 
-
-- (void)destroyFramebuffer
-{
-    self.frameBuffer = NULL;
-    self.colorRenderBuffer = NULL;
-    self.depthRenderBuffer = NULL;
-}
 
 @end
