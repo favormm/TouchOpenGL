@@ -33,7 +33,6 @@
 	return(self);
 	}
 
-
 - (void)dealloc
     {
  	[prerenderBlock release];
@@ -47,7 +46,6 @@
 
     [super dealloc];
     }
-
 
 - (void)prerender
     {
