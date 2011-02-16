@@ -6,9 +6,9 @@
 //  Copyright 2011 toxicsoftware.com. All rights reserved.
 //
 
-#import "CRenderer.h"
+#import "CBlockRenderer.h"
 
-@interface CTestRenderer : CRenderer {
+@interface CTestRenderer : CBlockRenderer {
 
 }
 

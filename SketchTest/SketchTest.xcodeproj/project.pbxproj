@@ -43,6 +43,7 @@
 		45781C6C130AFE1E00B57285 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45781C6A130AFE1E00B57285 /* MainWindow.xib */; };
 		45781C6F130AFE1E00B57285 /* SketchTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45781C6E130AFE1E00B57285 /* SketchTestViewController.m */; };
 		45781C72130AFE1E00B57285 /* SketchTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45781C70130AFE1E00B57285 /* SketchTestViewController.xib */; };
+		45FDD816130B579B00EC48EA /* CBlockRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FDD815130B579900EC48EA /* CBlockRenderer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +108,8 @@
 		45781C6D130AFE1E00B57285 /* SketchTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SketchTestViewController.h; sourceTree = "<group>"; };
 		45781C6E130AFE1E00B57285 /* SketchTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SketchTestViewController.m; sourceTree = "<group>"; };
 		45781C71130AFE1E00B57285 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SketchTestViewController.xib; sourceTree = "<group>"; };
+		45FDD814130B579900EC48EA /* CBlockRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBlockRenderer.h; sourceTree = "<group>"; };
+		45FDD815130B579900EC48EA /* CBlockRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBlockRenderer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +160,8 @@
 				4527176F130B34A000529A0C /* CFrameBuffer.m */,
 				45271771130B35E500529A0C /* CRenderBuffer.h */,
 				45271772130B35E900529A0C /* CRenderBuffer.m */,
+				45FDD814130B579900EC48EA /* CBlockRenderer.h */,
+				45FDD815130B579900EC48EA /* CBlockRenderer.m */,
 				4527174D130B20CD00529A0C /* iOS */,
 			);
 			name = OpenGL;
@@ -350,6 +355,7 @@
 				45271769130B28F300529A0C /* CTestRenderer.m in Sources */,
 				45271770130B34A800529A0C /* CFrameBuffer.m in Sources */,
 				45271773130B35F300529A0C /* CRenderBuffer.m in Sources */,
+				45FDD816130B579B00EC48EA /* CBlockRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

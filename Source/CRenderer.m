@@ -13,19 +13,11 @@
 #import "CFrameBuffer.h"
 
 @interface CRenderer ()
-@property (readwrite, nonatomic, assign) BOOL prepared;
 @end
 
 #pragma mark -
 
 @implementation CRenderer
-
-@synthesize prepareBlock;
-@synthesize prerenderBlock;
-@synthesize renderBlock;
-@synthesize postrenderBlock;
-
-@synthesize prepared;
 
 - (id)init
     {
@@ -38,15 +30,7 @@
 
 - (void)dealloc
     {
- 	[prerenderBlock release];
-	prerenderBlock = NULL;
-
-    [renderBlock release];
-    renderBlock = NULL;
-
-    [postrenderBlock release];
-    postrenderBlock = NULL;
-
+    //
     [super dealloc];
     }
 
@@ -54,34 +38,14 @@
 
 - (void)prerender
     {
-    if (self.prepared == NO && self.prepareBlock)
-        {
-        self.prepareBlock();
-
-        self.prepared = YES;
-        }
-    
-    if (self.prerenderBlock)
-        {
-        self.prerenderBlock();
-        }
-
     }
 
 - (void)render
     {
-    if (self.renderBlock)
-        {
-        self.renderBlock();
-        }
     }
 
 - (void)postrender
     {
-    if (self.postrenderBlock)
-        {
-        self.postrenderBlock();
-        }
     }
 
 - (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer
