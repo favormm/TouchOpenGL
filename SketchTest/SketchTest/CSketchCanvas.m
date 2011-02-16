@@ -63,7 +63,7 @@
             }
         
         // Geometry Vertices
-        self.geometryCoordinates = [CVertexBuffer vertexBufferWithRect:(CGRect){ -0.5, -0.5, 1, 1 }];
+        self.geometryCoordinates = [CVertexBuffer vertexBufferWithRect:(CGRect){ -1, -1, 2, 2 }];
 		}
 	return(self);
 	}
@@ -89,8 +89,12 @@
         // Update uniform values
         
         Color4f theColor = [UIColor greenColor].color4f;
-        
         glUniform4fv(theColorUniformIndex, 1, &theColor.r);
+
+        
+        inTransform = Matrix4Translate(inTransform, inPoint.x / 512.0, -inPoint.y / 512.0, 0);
+        inTransform = Matrix4Scale(inTransform, 0.1, 0.1, 1.0);
+
         glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &inTransform.m00);
 
         // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.

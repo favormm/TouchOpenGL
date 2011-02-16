@@ -34,8 +34,7 @@
 
         CSketchRenderer *theRenderer = [[[CSketchRenderer alloc] init] autorelease];
         theRenderer.texture = canvas.imageRenderer.texture;
-        
-        
+                
         self.renderer = theRenderer;
 		}
 	return(self);
@@ -44,6 +43,9 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
     {
+    UITouch *theTouch = [touches anyObject];
+
+    [self.canvas drawAtPoint:[theTouch locationInView:self]];
     }
     
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

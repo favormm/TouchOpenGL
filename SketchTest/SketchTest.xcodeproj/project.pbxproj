@@ -49,6 +49,8 @@
 		45781C6C130AFE1E00B57285 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45781C6A130AFE1E00B57285 /* MainWindow.xib */; };
 		45781C6F130AFE1E00B57285 /* SketchTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45781C6E130AFE1E00B57285 /* SketchTestViewController.m */; };
 		45781C72130AFE1E00B57285 /* SketchTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45781C70130AFE1E00B57285 /* SketchTestViewController.xib */; };
+		45E221EA130B851D00B5CC2C /* Brush.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 45E221E8130B851D00B5CC2C /* Brush.fsh */; };
+		45E221EB130B851D00B5CC2C /* Brush.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 45E221E9130B851D00B5CC2C /* Brush.vsh */; };
 		45FDD816130B579B00EC48EA /* CBlockRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45FDD815130B579900EC48EA /* CBlockRenderer.m */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +126,8 @@
 		45781C6D130AFE1E00B57285 /* SketchTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SketchTestViewController.h; sourceTree = "<group>"; };
 		45781C6E130AFE1E00B57285 /* SketchTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SketchTestViewController.m; sourceTree = "<group>"; };
 		45781C71130AFE1E00B57285 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SketchTestViewController.xib; sourceTree = "<group>"; };
+		45E221E8130B851D00B5CC2C /* Brush.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Brush.fsh; sourceTree = "<group>"; };
+		45E221E9130B851D00B5CC2C /* Brush.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Brush.vsh; sourceTree = "<group>"; };
 		45FDD814130B579900EC48EA /* CBlockRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBlockRenderer.h; sourceTree = "<group>"; };
 		45FDD815130B579900EC48EA /* CBlockRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBlockRenderer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,6 +206,8 @@
 		4527175C130B27D600529A0C /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				45E221E8130B851D00B5CC2C /* Brush.fsh */,
+				45E221E9130B851D00B5CC2C /* Brush.vsh */,
 				4527175D130B27D600529A0C /* Flat.fsh */,
 				4527175E130B27D600529A0C /* Flat.vsh */,
 				45271762130B281400529A0C /* Shader.fsh */,
@@ -340,6 +346,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45E221EA130B851D00B5CC2C /* Brush.fsh in Resources */,
+				45E221EB130B851D00B5CC2C /* Brush.vsh in Resources */,
 				4522A385130B6BA3008E0790 /* SimpleTexture.fsh in Resources */,
 				4522A386130B6BA3008E0790 /* SimpleTexture.vsh in Resources */,
 				4527176C130B292300529A0C /* Texture.fsh in Resources */,
