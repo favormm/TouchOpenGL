@@ -15,6 +15,7 @@
 
 @implementation CImageRenderer
 
+@synthesize size;
 @synthesize frameBuffer;
 @synthesize depthBuffer;
 @synthesize texture;
@@ -23,6 +24,8 @@
 	{
 	if ((self = [super init]) != NULL)
 		{
+        size = inSize;
+        
         frameBuffer = [[CFrameBuffer alloc] init];
 
         depthBuffer = [[CRenderBuffer alloc] init];
@@ -31,15 +34,12 @@
 
         self.texture = [[CImageTextureLoader textureLoader] textureWithImageNamed:@"Brick" error:NULL];
         [frameBuffer attachTexture:texture attachment:GL_COLOR_ATTACHMENT0];
-        
-        NSLog(@"COMPLETE: %d", frameBuffer.complete);
 		}
 	return(self);
 	}
 
 - (void)render
     {
-    NSLog(@"%@ render", self);
     [self renderIntoFrameBuffer:self.frameBuffer transform:Matrix4Identity];
     }
 

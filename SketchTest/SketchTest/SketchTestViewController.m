@@ -13,10 +13,7 @@
 
 @implementation SketchTestViewController
 
-- (CSketchView *)sketchView
-    {
-    return((CSketchView *)self.view);
-    }
+@synthesize sketchView;
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
     {

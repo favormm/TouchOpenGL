@@ -14,6 +14,7 @@
     
 }
 
+@property (readwrite, nonatomic, assign) CGSize size;
 @property (readwrite, nonatomic, retain) CImageRenderer *imageRenderer;
 
 - (void)drawAtPoint:(CGPoint)inPoint;

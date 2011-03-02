@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class CSketchView;
+
 @interface SketchTestViewController : UIViewController {
     
 }
+
+@property (readwrite, nonatomic, retain) IBOutlet CSketchView *sketchView;
+
 
 @end

@@ -16,6 +16,7 @@
     
 }
 
+@property (readwrite, nonatomic, assign) SIntSize size;
 @property (readwrite, nonatomic, retain) CFrameBuffer *frameBuffer;
 @property (readwrite, nonatomic, retain) CRenderBuffer *depthBuffer;
 @property (readwrite, nonatomic, retain) CTexture *texture;

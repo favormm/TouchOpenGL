@@ -72,8 +72,6 @@
     
     self.renderBlock = ^(Matrix4 inTransform) {
 
-        NSLog(@"Render");
-
         AssertOpenGLNoError_();
 
         // Use shader program

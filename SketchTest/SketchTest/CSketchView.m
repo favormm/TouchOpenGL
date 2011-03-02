@@ -43,16 +43,22 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
     {
-    UITouch *theTouch = [touches anyObject];
+    for (UITouch *theTouch in touches)
+        {
+        self.canvas.size = self.bounds.size;
 
-    [self.canvas drawAtPoint:[theTouch locationInView:self]];
+        [self.canvas drawAtPoint:[theTouch locationInView:self]];
+        }
     }
     
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
     {
-    UITouch *theTouch = [touches anyObject];
+    for (UITouch *theTouch in touches)
+        {
+        self.canvas.size = self.bounds.size;
 
-    [self.canvas drawAtPoint:[theTouch locationInView:self]];
+        [self.canvas drawAtPoint:[theTouch locationInView:self]];
+        }
     }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
