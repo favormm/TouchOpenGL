@@ -22,7 +22,7 @@
     if ((self = [super init]) != NULL)
         {
         __block __typeof__(self) _self = self;
-        self.renderBlock = ^(void) {
+        self.renderBlock = ^(Matrix4 inTransform) {
             [_self.sceneGraph prerender:_self];
             [_self.sceneGraph render:_self];
             [_self.sceneGraph postrender:_self];

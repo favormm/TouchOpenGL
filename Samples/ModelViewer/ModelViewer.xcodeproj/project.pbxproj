@@ -13,6 +13,13 @@
 		4529966C130B8D6A009FD0A3 /* CTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45299664130B8D6A009FD0A3 /* CTestViewController.m */; };
 		4529966E130B8D6A009FD0A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45299666130B8D6A009FD0A3 /* main.m */; };
 		4529966F130B8D6A009FD0A3 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45299667130B8D6A009FD0A3 /* MainWindow.xib */; };
+		45434BAB1328142700A353EC /* CScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434B9E1328142700A353EC /* CScene.m */; };
+		45434BAC1328142700A353EC /* CSceneGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA01328142700A353EC /* CSceneGeometry.m */; };
+		45434BAD1328142700A353EC /* CSceneGeometry_ConvenienceExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA21328142700A353EC /* CSceneGeometry_ConvenienceExtensions.m */; };
+		45434BAE1328142700A353EC /* CSceneGeometryBrush.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA41328142700A353EC /* CSceneGeometryBrush.m */; };
+		45434BAF1328142700A353EC /* CSceneGraphRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA61328142700A353EC /* CSceneGraphRenderer.m */; };
+		45434BB01328142700A353EC /* CSceneNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA81328142700A353EC /* CSceneNode.m */; };
+		45434BB11328142700A353EC /* CSceneStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BAA1328142700A353EC /* CSceneStyle.m */; };
 		45781C59130AFE1E00B57285 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C58130AFE1E00B57285 /* UIKit.framework */; };
 		45781C5B130AFE1E00B57285 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5A130AFE1E00B57285 /* Foundation.framework */; };
 		45781C5D130AFE1E00B57285 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5C130AFE1E00B57285 /* CoreGraphics.framework */; };
@@ -59,6 +66,20 @@
 		45299666130B8D6A009FD0A3 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		45299667130B8D6A009FD0A3 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		45299668130B8D6A009FD0A3 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		45434B9D1328142700A353EC /* CScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CScene.h; sourceTree = "<group>"; };
+		45434B9E1328142700A353EC /* CScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CScene.m; sourceTree = "<group>"; };
+		45434B9F1328142700A353EC /* CSceneGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneGeometry.h; sourceTree = "<group>"; };
+		45434BA01328142700A353EC /* CSceneGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSceneGeometry.m; sourceTree = "<group>"; };
+		45434BA11328142700A353EC /* CSceneGeometry_ConvenienceExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneGeometry_ConvenienceExtensions.h; sourceTree = "<group>"; };
+		45434BA21328142700A353EC /* CSceneGeometry_ConvenienceExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSceneGeometry_ConvenienceExtensions.m; sourceTree = "<group>"; };
+		45434BA31328142700A353EC /* CSceneGeometryBrush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneGeometryBrush.h; sourceTree = "<group>"; };
+		45434BA41328142700A353EC /* CSceneGeometryBrush.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSceneGeometryBrush.m; sourceTree = "<group>"; };
+		45434BA51328142700A353EC /* CSceneGraphRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneGraphRenderer.h; sourceTree = "<group>"; };
+		45434BA61328142700A353EC /* CSceneGraphRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSceneGraphRenderer.m; sourceTree = "<group>"; };
+		45434BA71328142700A353EC /* CSceneNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneNode.h; sourceTree = "<group>"; };
+		45434BA81328142700A353EC /* CSceneNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSceneNode.m; sourceTree = "<group>"; };
+		45434BA91328142700A353EC /* CSceneStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneStyle.h; sourceTree = "<group>"; };
+		45434BAA1328142700A353EC /* CSceneStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSceneStyle.m; sourceTree = "<group>"; };
 		45781C54130AFE1E00B57285 /* ModelViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModelViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45781C58130AFE1E00B57285 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		45781C5A130AFE1E00B57285 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -146,6 +167,27 @@
 			name = SimpleTest;
 			sourceTree = "<group>";
 		};
+		45434B9C1328142700A353EC /* SceneGraph */ = {
+			isa = PBXGroup;
+			children = (
+				45434B9D1328142700A353EC /* CScene.h */,
+				45434B9E1328142700A353EC /* CScene.m */,
+				45434B9F1328142700A353EC /* CSceneGeometry.h */,
+				45434BA01328142700A353EC /* CSceneGeometry.m */,
+				45434BA11328142700A353EC /* CSceneGeometry_ConvenienceExtensions.h */,
+				45434BA21328142700A353EC /* CSceneGeometry_ConvenienceExtensions.m */,
+				45434BA31328142700A353EC /* CSceneGeometryBrush.h */,
+				45434BA41328142700A353EC /* CSceneGeometryBrush.m */,
+				45434BA51328142700A353EC /* CSceneGraphRenderer.h */,
+				45434BA61328142700A353EC /* CSceneGraphRenderer.m */,
+				45434BA71328142700A353EC /* CSceneNode.h */,
+				45434BA81328142700A353EC /* CSceneNode.m */,
+				45434BA91328142700A353EC /* CSceneStyle.h */,
+				45434BAA1328142700A353EC /* CSceneStyle.m */,
+			);
+			path = SceneGraph;
+			sourceTree = "<group>";
+		};
 		45781C49130AFE1E00B57285 = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				459207F513280E2400B561F4 /* OpenGL */,
+				45434B9C1328142700A353EC /* SceneGraph */,
 				4592083613280E2400B561F4 /* Shaders */,
 			);
 			name = Source;
@@ -363,6 +406,13 @@
 				4592085313280E2400B561F4 /* UIColor_OpenGLExtensions.m in Sources */,
 				4592085413280E2400B561F4 /* OpenGLTypes.m in Sources */,
 				4592086D13280E6A00B561F4 /* CTestRenderer.m in Sources */,
+				45434BAB1328142700A353EC /* CScene.m in Sources */,
+				45434BAC1328142700A353EC /* CSceneGeometry.m in Sources */,
+				45434BAD1328142700A353EC /* CSceneGeometry_ConvenienceExtensions.m in Sources */,
+				45434BAE1328142700A353EC /* CSceneGeometryBrush.m in Sources */,
+				45434BAF1328142700A353EC /* CSceneGraphRenderer.m in Sources */,
+				45434BB01328142700A353EC /* CSceneNode.m in Sources */,
+				45434BB11328142700A353EC /* CSceneStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
