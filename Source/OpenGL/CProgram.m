@@ -54,6 +54,19 @@
     return(self);
     }
 
+- (id)initWithName:(NSString *)inName
+    {
+    NSArray *theShaders = [NSArray arrayWithObjects:
+        [[[CShader alloc] initWithName:[NSString stringWithFormat:@"%@.fsh", inName]] autorelease],
+        [[[CShader alloc] initWithName:[NSString stringWithFormat:@"%@.vsh", inName]] autorelease],
+        NULL];
+    
+    if ((self = [self initWithFiles:theShaders]) != NULL)
+        {
+        }
+    return(self);
+    }
+
 - (void)dealloc
     {
     [shaders release];

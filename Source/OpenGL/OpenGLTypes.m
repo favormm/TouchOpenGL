@@ -170,7 +170,7 @@ Matrix4 Matrix4Invert(Matrix4 t)
     
 NSString *NSStringFromMatrix4(Matrix4 t)
     {
-    return([NSString stringWithFormat:@"{ %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f }",
+    return([NSString stringWithFormat:@"{ %g, %g, %g, %g, %g, %g, %g, %g, %g, %g, %g, %g, %g, %g, %g, %g }",
         t.m00, t.m01, t.m02, t.m03, 
         t.m10, t.m11, t.m12, t.m13, 
         t.m20, t.m21, t.m22, t.m23, 

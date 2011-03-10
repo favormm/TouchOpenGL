@@ -82,6 +82,23 @@
         [inRenderer.styleStack removeLastObject];
         }
     }
+    
+- (void)dump
+    {
+    __block void (^theBlock)(CSceneNode *, NSInteger) = NULL;
+    static char theBuffer[256];
+    memset(theBuffer, ' ', sizeof(theBuffer));
+    theBlock = ^(CSceneNode *inNode, NSInteger inDepth){
+        fprintf(stdout, "%.*s%s\n", inDepth * 2, theBuffer, [[inNode description] UTF8String]);
+        
+        for (CSceneNode *theNode in inNode.subnodes)
+            {
+            theBlock(theNode, inDepth + 1);
+            }
+        };
+    
+    theBlock(self, 0);
+    }
 
 
 

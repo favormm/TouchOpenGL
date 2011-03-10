@@ -11,7 +11,7 @@
 #import "CVertexBuffer.h"
 
 @interface CVertexBufferReference ()
-@property (readwrite, nonatomic, assign) CVertexBuffer *vertexBuffer;
+@property (readwrite, nonatomic, retain) CVertexBuffer *vertexBuffer;
 
 @property (readwrite, nonatomic, retain) NSString *cellEncodingString;
 
@@ -41,8 +41,7 @@
     {
     if ((self = [super init]) != NULL)
         {
-        vertexBuffer = inVertexBuffer;
-        vertexBuffer.references = [vertexBuffer.references arrayByAddingObject:self];
+        vertexBuffer = [inVertexBuffer retain];
 
         cellEncodingString = [[NSString alloc] initWithUTF8String:inEncoding];
         normalized = inNormalized;
@@ -82,28 +81,41 @@
     cellCount = [vertexBuffer.data length] / cellSize;
 
 //  {CGPoint=dd}
+//  i
 
     NSScanner *theScanner = [NSScanner scannerWithString:self.cellEncodingString];
     theScanner.charactersToBeSkipped = NULL;
     theScanner.caseSensitive = YES;
-    
-    BOOL theResult = [theScanner scanString:@"{" intoString:NULL];
-    NSAssert(theResult == YES, @"Scan failed");
-    NSString *theTypeName = NULL;
-    theResult = [theScanner scanCharactersFromSet:[NSCharacterSet alphanumericCharacterSet] intoString:&theTypeName];
-    NSAssert(theResult == YES, @"Scan failed");
-    theResult = [theScanner scanString:@"=" intoString:NULL];
-    NSAssert(theResult == YES, @"Scan failed");
 
     NSString *theMemberTypes = NULL;
-    theResult = [theScanner scanCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"fdcCsSiI"] intoString:&theMemberTypes];
-    NSAssert(theResult == YES, @"Scan failed");
+    
+    BOOL theResult = [theScanner scanString:@"{" intoString:NULL];
+    if (theResult == YES)
+        {
+        NSAssert(theResult == YES, @"Scan failed");
+        NSString *theTypeName = NULL;
+        theResult = [theScanner scanCharactersFromSet:[NSCharacterSet alphanumericCharacterSet] intoString:&theTypeName];
+        NSAssert(theResult == YES, @"Scan failed");
+        theResult = [theScanner scanString:@"=" intoString:NULL];
+        NSAssert(theResult == YES, @"Scan failed");
 
-    theResult = [theScanner scanString:@"}" intoString:NULL];
-    NSAssert(theResult == YES, @"Scan failed");
+        theResult = [theScanner scanCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"fdcCsSiI"] intoString:&theMemberTypes];
+        NSAssert(theResult == YES, @"Scan failed");
+
+        theResult = [theScanner scanString:@"}" intoString:NULL];
+        NSAssert(theResult == YES, @"Scan failed");
+
+        self.size = [theMemberTypes length];
+        }
+    else
+        {
+        theResult = [theScanner scanCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"fdcCsSiI"] intoString:&theMemberTypes];
+        NSAssert(theResult == YES, @"Scan failed");
+
+        self.size = 1;
+        }
 
 
-    self.size = [theMemberTypes length];
     // TODO we're assuming all types are the same (e.g. ffff vs fdfd). This is probably a safe assumption but we should assert on bad data anyways.
     if ([theMemberTypes characterAtIndex:0] == 'f')
         {
@@ -145,11 +157,6 @@
         {
         NSAssert(NO, @"Scan failed");
         }
-    }
-
-- (void)bufferInvalidated;
-    {
-    self.vertexBuffer = NULL;
     }
 
 @end

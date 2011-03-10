@@ -10,7 +10,7 @@
 		4527174A130B202F00529A0C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45271749130B202F00529A0C /* OpenGLES.framework */; };
 		4527174C130B203700529A0C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4527174B130B203700529A0C /* QuartzCore.framework */; };
 		4527175F130B27D700529A0C /* Brick.png in Resources */ = {isa = PBXBuildFile; fileRef = 4527175B130B27D600529A0C /* Brick.png */; };
-		4529966C130B8D6A009FD0A3 /* CTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45299664130B8D6A009FD0A3 /* CTestViewController.m */; };
+		4529966C130B8D6A009FD0A3 /* CModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45299664130B8D6A009FD0A3 /* CModelViewController.m */; };
 		4529966E130B8D6A009FD0A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45299666130B8D6A009FD0A3 /* main.m */; };
 		4529966F130B8D6A009FD0A3 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45299667130B8D6A009FD0A3 /* MainWindow.xib */; };
 		45434BAB1328142700A353EC /* CScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434B9E1328142700A353EC /* CScene.m */; };
@@ -20,6 +20,13 @@
 		45434BAF1328142700A353EC /* CSceneGraphRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA61328142700A353EC /* CSceneGraphRenderer.m */; };
 		45434BB01328142700A353EC /* CSceneNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA81328142700A353EC /* CSceneNode.m */; };
 		45434BB11328142700A353EC /* CSceneStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BAA1328142700A353EC /* CSceneStyle.m */; };
+		45434BB71328162600A353EC /* 53aa2218c132fa37d8672571c3ab372a.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 45434BB41328162600A353EC /* 53aa2218c132fa37d8672571c3ab372a.vbo */; };
+		45434BB81328162600A353EC /* d89630626a0e55f12822726cf7ee0244.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 45434BB51328162600A353EC /* d89630626a0e55f12822726cf7ee0244.vbo */; };
+		45434BB91328162600A353EC /* Cylinder.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45434BB61328162600A353EC /* Cylinder.plist */; };
+		45434BBD13281C1A00A353EC /* CModelLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BBC13281C1A00A353EC /* CModelLoader.m */; };
+		45434BBF132834FF00A353EC /* e11d4105b9e88d300558b7ddb1c79e20.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 45434BBE132834FF00A353EC /* e11d4105b9e88d300558b7ddb1c79e20.vbo */; };
+		45434BC313283D1800A353EC /* CTestRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BC213283D1800A353EC /* CTestRenderer.m */; };
+		45434BC61328401500A353EC /* CTestSceneRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BC51328401500A353EC /* CTestSceneRenderer.m */; };
 		45781C59130AFE1E00B57285 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C58130AFE1E00B57285 /* UIKit.framework */; };
 		45781C5B130AFE1E00B57285 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5A130AFE1E00B57285 /* Foundation.framework */; };
 		45781C5D130AFE1E00B57285 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5C130AFE1E00B57285 /* CoreGraphics.framework */; };
@@ -52,7 +59,6 @@
 		4592086713280E2400B561F4 /* SimpleTexture.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4592083E13280E2400B561F4 /* SimpleTexture.vsh */; };
 		4592086813280E2400B561F4 /* Texture.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4592083F13280E2400B561F4 /* Texture.fsh */; };
 		4592086913280E2400B561F4 /* Texture.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4592084013280E2400B561F4 /* Texture.vsh */; };
-		4592086D13280E6A00B561F4 /* CTestRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4592086C13280E6A00B561F4 /* CTestRenderer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,8 +66,8 @@
 		4527174B130B203700529A0C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4527175A130B247700529A0C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4527175B130B27D600529A0C /* Brick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Brick.png; path = ../Brick.png; sourceTree = "<group>"; };
-		45299663130B8D6A009FD0A3 /* CTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTestViewController.h; sourceTree = "<group>"; };
-		45299664130B8D6A009FD0A3 /* CTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTestViewController.m; sourceTree = "<group>"; };
+		45299663130B8D6A009FD0A3 /* CModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CModelViewController.h; sourceTree = "<group>"; };
+		45299664130B8D6A009FD0A3 /* CModelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CModelViewController.m; sourceTree = "<group>"; };
 		45299665130B8D6A009FD0A3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45299666130B8D6A009FD0A3 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		45299667130B8D6A009FD0A3 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -80,6 +86,16 @@
 		45434BA81328142700A353EC /* CSceneNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSceneNode.m; sourceTree = "<group>"; };
 		45434BA91328142700A353EC /* CSceneStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneStyle.h; sourceTree = "<group>"; };
 		45434BAA1328142700A353EC /* CSceneStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSceneStyle.m; sourceTree = "<group>"; };
+		45434BB41328162600A353EC /* 53aa2218c132fa37d8672571c3ab372a.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 53aa2218c132fa37d8672571c3ab372a.vbo; sourceTree = "<group>"; };
+		45434BB51328162600A353EC /* d89630626a0e55f12822726cf7ee0244.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = d89630626a0e55f12822726cf7ee0244.vbo; sourceTree = "<group>"; };
+		45434BB61328162600A353EC /* Cylinder.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Cylinder.plist; sourceTree = "<group>"; };
+		45434BBB13281C1A00A353EC /* CModelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CModelLoader.h; sourceTree = "<group>"; };
+		45434BBC13281C1A00A353EC /* CModelLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CModelLoader.m; sourceTree = "<group>"; };
+		45434BBE132834FF00A353EC /* e11d4105b9e88d300558b7ddb1c79e20.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = e11d4105b9e88d300558b7ddb1c79e20.vbo; sourceTree = "<group>"; };
+		45434BC113283D1800A353EC /* CTestRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTestRenderer.h; sourceTree = "<group>"; };
+		45434BC213283D1800A353EC /* CTestRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTestRenderer.m; sourceTree = "<group>"; };
+		45434BC41328401500A353EC /* CTestSceneRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTestSceneRenderer.h; sourceTree = "<group>"; };
+		45434BC51328401500A353EC /* CTestSceneRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTestSceneRenderer.m; sourceTree = "<group>"; };
 		45781C54130AFE1E00B57285 /* ModelViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModelViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45781C58130AFE1E00B57285 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		45781C5A130AFE1E00B57285 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -133,8 +149,6 @@
 		4592083E13280E2400B561F4 /* SimpleTexture.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SimpleTexture.vsh; sourceTree = "<group>"; };
 		4592083F13280E2400B561F4 /* Texture.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Texture.fsh; sourceTree = "<group>"; };
 		4592084013280E2400B561F4 /* Texture.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Texture.vsh; sourceTree = "<group>"; };
-		4592086B13280E6A00B561F4 /* CTestRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTestRenderer.h; sourceTree = "<group>"; };
-		4592086C13280E6A00B561F4 /* CTestRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTestRenderer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,13 +170,13 @@
 		45299662130B8D6A009FD0A3 /* SimpleTest */ = {
 			isa = PBXGroup;
 			children = (
-				45299663130B8D6A009FD0A3 /* CTestViewController.h */,
-				45299664130B8D6A009FD0A3 /* CTestViewController.m */,
+				45299663130B8D6A009FD0A3 /* CModelViewController.h */,
+				45299664130B8D6A009FD0A3 /* CModelViewController.m */,
 				45299665130B8D6A009FD0A3 /* Info.plist */,
 				45299666130B8D6A009FD0A3 /* main.m */,
 				45299667130B8D6A009FD0A3 /* MainWindow.xib */,
 				45299668130B8D6A009FD0A3 /* Prefix.pch */,
-				4592086A13280E6A00B561F4 /* Common */,
+				45434BC013283D1800A353EC /* Common */,
 			);
 			name = SimpleTest;
 			sourceTree = "<group>";
@@ -188,11 +202,44 @@
 			path = SceneGraph;
 			sourceTree = "<group>";
 		};
+		45434BB31328162600A353EC /* Cylinder */ = {
+			isa = PBXGroup;
+			children = (
+				45434BB41328162600A353EC /* 53aa2218c132fa37d8672571c3ab372a.vbo */,
+				45434BB51328162600A353EC /* d89630626a0e55f12822726cf7ee0244.vbo */,
+				45434BBE132834FF00A353EC /* e11d4105b9e88d300558b7ddb1c79e20.vbo */,
+				45434BB61328162600A353EC /* Cylinder.plist */,
+			);
+			path = Cylinder;
+			sourceTree = "<group>";
+		};
+		45434BBA13281C0500A353EC /* ModelLoader */ = {
+			isa = PBXGroup;
+			children = (
+				45434BBB13281C1A00A353EC /* CModelLoader.h */,
+				45434BBC13281C1A00A353EC /* CModelLoader.m */,
+			);
+			path = ModelLoader;
+			sourceTree = "<group>";
+		};
+		45434BC013283D1800A353EC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				45434BC113283D1800A353EC /* CTestRenderer.h */,
+				45434BC213283D1800A353EC /* CTestRenderer.m */,
+				45434BC41328401500A353EC /* CTestSceneRenderer.h */,
+				45434BC51328401500A353EC /* CTestSceneRenderer.m */,
+			);
+			name = Common;
+			path = ../Common;
+			sourceTree = "<group>";
+		};
 		45781C49130AFE1E00B57285 = {
 			isa = PBXGroup;
 			children = (
 				45299662130B8D6A009FD0A3 /* SimpleTest */,
 				4527175B130B27D600529A0C /* Brick.png */,
+				45434BB31328162600A353EC /* Cylinder */,
 				459207F113280E2400B561F4 /* Source */,
 				45781C57130AFE1E00B57285 /* Frameworks */,
 				45781C55130AFE1E00B57285 /* Products */,
@@ -226,6 +273,7 @@
 				459207F513280E2400B561F4 /* OpenGL */,
 				45434B9C1328142700A353EC /* SceneGraph */,
 				4592083613280E2400B561F4 /* Shaders */,
+				45434BBA13281C0500A353EC /* ModelLoader */,
 			);
 			name = Source;
 			path = ../../Source;
@@ -302,16 +350,6 @@
 			path = Shaders;
 			sourceTree = "<group>";
 		};
-		4592086A13280E6A00B561F4 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				4592086B13280E6A00B561F4 /* CTestRenderer.h */,
-				4592086C13280E6A00B561F4 /* CTestRenderer.m */,
-			);
-			name = Common;
-			path = ../Common;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -374,6 +412,10 @@
 				4592086713280E2400B561F4 /* SimpleTexture.vsh in Resources */,
 				4592086813280E2400B561F4 /* Texture.fsh in Resources */,
 				4592086913280E2400B561F4 /* Texture.vsh in Resources */,
+				45434BB71328162600A353EC /* 53aa2218c132fa37d8672571c3ab372a.vbo in Resources */,
+				45434BB81328162600A353EC /* d89630626a0e55f12822726cf7ee0244.vbo in Resources */,
+				45434BB91328162600A353EC /* Cylinder.plist in Resources */,
+				45434BBF132834FF00A353EC /* e11d4105b9e88d300558b7ddb1c79e20.vbo in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4529966C130B8D6A009FD0A3 /* CTestViewController.m in Sources */,
+				4529966C130B8D6A009FD0A3 /* CModelViewController.m in Sources */,
 				4529966E130B8D6A009FD0A3 /* main.m in Sources */,
 				4592084213280E2400B561F4 /* CBlockRenderer.m in Sources */,
 				4592084313280E2400B561F4 /* CFrameBuffer.m in Sources */,
@@ -405,7 +447,6 @@
 				4592085213280E2400B561F4 /* CRendererView.m in Sources */,
 				4592085313280E2400B561F4 /* UIColor_OpenGLExtensions.m in Sources */,
 				4592085413280E2400B561F4 /* OpenGLTypes.m in Sources */,
-				4592086D13280E6A00B561F4 /* CTestRenderer.m in Sources */,
 				45434BAB1328142700A353EC /* CScene.m in Sources */,
 				45434BAC1328142700A353EC /* CSceneGeometry.m in Sources */,
 				45434BAD1328142700A353EC /* CSceneGeometry_ConvenienceExtensions.m in Sources */,
@@ -413,6 +454,9 @@
 				45434BAF1328142700A353EC /* CSceneGraphRenderer.m in Sources */,
 				45434BB01328142700A353EC /* CSceneNode.m in Sources */,
 				45434BB11328142700A353EC /* CSceneStyle.m in Sources */,
+				45434BBD13281C1A00A353EC /* CModelLoader.m in Sources */,
+				45434BC313283D1800A353EC /* CTestRenderer.m in Sources */,
+				45434BC61328401500A353EC /* CTestSceneRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

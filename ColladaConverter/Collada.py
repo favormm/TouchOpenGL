@@ -386,7 +386,7 @@ class Parser(object):
 		theFloatArray = document.lookupElement(theURL, 'float_array')
 		theObject.positionCount = int(theFloatArray.attrib['count'])
 		theArray = numpy.lib.io.loadtxt(StringIO.StringIO(theFloatArray.text), dtype=numpy.float32)
-		theObject.positions = VBO(theArray)
+		theObject.vbo = VBO(theArray)
 		return theObject
 
 	@factory

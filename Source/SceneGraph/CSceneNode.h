@@ -27,4 +27,6 @@
 
 - (void)addSubnode:(CSceneNode *)inSubnode;
 
+- (void)dump;
+
 @end

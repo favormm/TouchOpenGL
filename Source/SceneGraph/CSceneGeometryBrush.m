@@ -35,6 +35,7 @@
         return;
         }
 #endif
+    AssertOpenGLNoError_();
 
     if (theStyle != NULL)
         {
@@ -48,11 +49,12 @@
         {
         glLineWidth(theStyle.lineWidth);
         }
+    AssertOpenGLNoError_();
 
     if (theGeometry.indicesBufferReference)
         {
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theGeometry.indicesBufferReference.vertexBuffer.name);
-        glDrawElements(self.type, theGeometry.indicesBufferReference.cellCount, theGeometry.indicesBufferReference.type, NULL);
+        CVertexBufferReference *theReference = theGeometry.indicesBufferReference;
+        glDrawElements(self.type, theReference.cellCount, theReference.type, NULL);
         }
     else
         {

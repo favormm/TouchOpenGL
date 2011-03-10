@@ -15,7 +15,8 @@ def main():
 	theInputPath = os.getcwd()
 	theOutputPath = os.path.join(os.getcwd(), 'Output')
 #	theDocumentPath = os.path.join(theInputPath, 'WallE.dae')
-	theDocumentPath = os.path.join(theInputPath, 'Samples/Cylinder.dae')
+#	theDocumentPath = os.path.join(theInputPath, 'Samples/Cylinder.dae')
+	theDocumentPath = os.path.join(theInputPath, 'Samples/Ferrari.dae')
 
 	theTree = etree.parse(theDocumentPath)
 	theRootElement = OneOrThrow(theTree.xpath("/NS:COLLADA", namespaces = Collada.Parser.NS))
@@ -23,11 +24,14 @@ def main():
 	theParser = Collada.Parser()
 
 	doc = theParser.DocumentFactory(None, None, theRootElement)
-#	doc.dump()
+	doc.dump()
 
 	for node in doc.walk():
 		if isinstance(node, Collada.Source):
-			node.positions.write(theOutputPath)
+			node.vbo.write(theOutputPath)
+		elif isinstance(node, Collada.Mesh):
+			if node.indices:
+				node.indices.write(theOutputPath)
 
 	theLibrary = []
 	for l in doc.libraries:

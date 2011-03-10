@@ -21,6 +21,7 @@
 
 - (id)initWithFiles:(NSArray *)inShaders;
 - (id)initWithFiles:(NSArray *)inShaders attributeNames:(NSArray *)inAttributeNames uniformNames:(NSArray *)inUniformNames;
+- (id)initWithName:(NSString *)inName;
 
 - (BOOL)linkProgram:(NSError **)outError;
 - (BOOL)validate:(NSError **)outError;

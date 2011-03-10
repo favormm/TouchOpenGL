@@ -17,7 +17,6 @@
 @synthesize usage;
 @synthesize data;
 @synthesize name;
-@synthesize references;
 
 - (id)initWithTarget:(GLenum)inTarget usage:(GLenum)inUsage data:(NSData *)inData;
     {
@@ -26,7 +25,6 @@
         target = inTarget;
         usage = inUsage;
         data = [inData retain];
-        references = [NSArray array];
         }
     return(self);
     }
@@ -50,19 +48,12 @@
     [data release];
     data = NULL;
     //
-    for (CVertexBufferReference *theReference in references)
-        {
-        [theReference bufferInvalidated];
-        }
-    [references release];
-    references = NULL;
-    //
     [super dealloc];
     }
     
 - (NSString *)description
     {
-    return([NSString stringWithFormat:@"%@ (target: 0x%X, usage: 0x%X, data: %d bytes @ %p, name: %d, references:%d)", [super description], self.target, self.usage, self.data.length, self.data.bytes, self.name, self.references.count]);
+    return([NSString stringWithFormat:@"%@ (target: 0x%X, usage: 0x%X, data: %d bytes @ %p, name: %d)", [super description], self.target, self.usage, self.data.length, self.data.bytes, self.name]);
     }
 
 - (GLuint)name

@@ -17,7 +17,6 @@
 @property (readonly, nonatomic, assign) GLenum usage; // GL_STREAM_DRAW, GL_STATIC_DRAW, GL_DYNAMIC_DRAW
 @property (readonly, nonatomic, retain) NSData *data;
 @property (readonly, nonatomic, assign) GLuint name;
-@property (readwrite, nonatomic, assign) NSArray *references;
 
 - (id)initWithTarget:(GLenum)inTarget usage:(GLenum)inUsage data:(NSData *)inData;
 - (id)initWithTarget:(GLenum)inTarget usage:(GLenum)inUsage bytes:(void *)inBytes length:(size_t)inLength;

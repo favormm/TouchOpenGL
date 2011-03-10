@@ -15,7 +15,7 @@
 @interface CVertexBufferReference : NSObject {
 }
 
-@property (readonly, nonatomic, assign) CVertexBuffer *vertexBuffer;
+@property (readonly, nonatomic, retain) CVertexBuffer *vertexBuffer;
 
 @property (readonly, nonatomic, assign) const char *cellEncoding;
 @property (readonly, nonatomic, assign) GLint cellSize;
@@ -29,6 +29,5 @@
 - (id)initWithVertexBuffer:(CVertexBuffer *)inVertexBuffer cellEncoding:(char *)inEncoding normalized:(GLboolean)inNormalized stride:(GLsizei)inStride;
 
 - (void)bufferUpdated;
-- (void)bufferInvalidated;
 
 @end

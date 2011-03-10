@@ -66,4 +66,5 @@ extern Matrix4 Matrix4Concat(Matrix4 a, Matrix4 b);
 extern Matrix4 Matrix4Invert(Matrix4 t);
 extern NSString *NSStringFromMatrix4(Matrix4 t);
 
-#define AssertOpenGLNoError_() NSAssert(glGetError() == GL_NO_ERROR, @"Code entered with existing OGL error")
+#define AssertOpenGLNoError_() do { GLint theError = glGetError(); NSAssert1(theError == GL_NO_ERROR, @"Code entered with existing OGL error 0x%X", theError); } while(0)
+

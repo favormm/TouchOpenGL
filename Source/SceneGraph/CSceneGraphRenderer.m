@@ -11,6 +11,9 @@
 #import "CScene.h"
 #import "CSceneStyle.h"
 
+@interface CSceneGraphRenderer ()
+@end
+
 @implementation CSceneGraphRenderer
 
 @synthesize sceneGraph;
@@ -21,13 +24,6 @@
     {
     if ((self = [super init]) != NULL)
         {
-        __block __typeof__(self) _self = self;
-        self.renderBlock = ^(Matrix4 inTransform) {
-            [_self.sceneGraph prerender:_self];
-            [_self.sceneGraph render:_self];
-            [_self.sceneGraph postrender:_self];
-            };
-            
         transform = Matrix4Identity;
         }
     return(self);
@@ -47,6 +43,15 @@
     [super prerender];
     //
     self.styleStack = [NSMutableArray array];
+    }
+
+- (void)render:(Matrix4)inTransform
+    {    
+    [super render:inTransform];
+    
+    [self.sceneGraph prerender:self];
+    [self.sceneGraph render:self];
+    [self.sceneGraph postrender:self];
     }
 
 - (void)dealloc

@@ -6,14 +6,14 @@
 //  Copyright 2011 toxicsoftware.com. All rights reserved.
 //
 
-#import "CBlockRenderer.h"
+#import "CRenderer.h"
 
 #import "OpenGLTypes.h"
 
 @class CScene;
 @class CSceneStyle;
 
-@interface CSceneGraphRenderer : CBlockRenderer {
+@interface CSceneGraphRenderer : CRenderer {
 }
 
 @property (readwrite, nonatomic, retain) CScene *sceneGraph;

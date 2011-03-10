@@ -16,10 +16,16 @@ class MyJSONEncoder(json.JSONEncoder):
 
 			if isinstance(o, Collada.Matrix):
 				d['v'] = o.v
+			elif isinstance(o, Collada.Mesh):
+				d['type'] = o.type
+				if o.indices:
+					d['indices'] = '%s.vbo' % (o.indices.signature.hexdigest())
+				if o.positions:
+					d['positions'] = '%s.vbo' % (o.positions.vbo.signature.hexdigest())
+				if o.normals:
+					d['normals'] = '%s.vbo' % (o.normals.vbo.signature.hexdigest())
 			elif isinstance(o, Collada.Instance):
 				d['url'] = o.url
-			elif isinstance(o, Collada.Source):
-				d['href'] = '%s.vbo' % (o.positions.signature.hexdigest())
 			elif o.children != None and len(o.children) > 0:
 				d['children'] = o.children
 		else:

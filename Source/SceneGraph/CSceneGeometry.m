@@ -50,10 +50,13 @@
 
 - (void)render:(CSceneGraphRenderer *)inRenderer;
     {
+    AssertOpenGLNoError_();
+
     CSceneStyle *theStyle = [inRenderer mergedStyle];
     
     // Use shader program
     CProgram *theProgram = theStyle.program;
+    NSAssert(theProgram != NULL, @"No program");
     
     glUseProgram(theProgram.name);
 
@@ -63,8 +66,19 @@
     GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"transform"];
     Matrix4 theTransform = self.transform;
     theTransform = Matrix4Concat(theTransform, inRenderer.transform);
-    theTransform = Matrix4Scale(theTransform, 0.005, 0.005, 1.0);
+    
+    NSLog(@"%@", NSStringFromMatrix4(theTransform));
+    
     glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &theTransform.m00);
+
+    AssertOpenGLNoError_();
+
+    if (self.indicesBufferReference)
+        {
+        CVertexBuffer *theIndicesBuffer = self.indicesBufferReference.vertexBuffer;
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndicesBuffer.name);
+        }
 
     // Update attribute values
     if (self.coordinatesBufferReference)
@@ -80,6 +94,8 @@
         glDisableVertexAttribArray(theVertexAttributeIndex);
         }
 
+    AssertOpenGLNoError_();
+
     if (self.colorsBufferReference)
         {
         const GLuint theColorAttributeIndex = [theProgram attributeIndexForName:@"color"];
@@ -92,6 +108,8 @@
         const GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"color"];
         glDisableVertexAttribArray(theVertexAttributeIndex);
         }
+
+    AssertOpenGLNoError_();
     
     if (theStyle.texture && self.textureCoordinatesBufferReference)
         {

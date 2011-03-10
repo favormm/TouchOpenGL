@@ -11,6 +11,4 @@
 @interface CScene : CSceneNode {
 }
 
-//- (id)initWithPath:(NSString *)inPath;
-
 @end
