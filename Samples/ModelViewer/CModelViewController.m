@@ -8,7 +8,7 @@
 
 #import "CModelViewController.h"
 
-#import "CRendererView.h"
+#import "CInteractiveRendererView.h"
 #import "CTestSceneRenderer.h"
 #import "CSceneGraphRenderer.h"
 #import "CModelLoader.h"
@@ -27,7 +27,7 @@
     
 - (void)loadView
     {
-    self.view = [[[CRendererView alloc] initWithFrame:CGRectZero] autorelease];
+    self.view = [[[CInteractiveRendererView alloc] initWithFrame:CGRectZero] autorelease];
     }
     
 - (void)viewDidLoad

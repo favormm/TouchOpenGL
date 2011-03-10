@@ -66,7 +66,7 @@
     GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"transform"];
     Matrix4 theTransform = inRenderer.transform;
     
-    NSLog(@"%@", NSStringFromMatrix4(theTransform));
+//    NSLog(@"%@", NSStringFromMatrix4(theTransform));
     
     glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &theTransform.m00);
 

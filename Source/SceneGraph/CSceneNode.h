@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "OpenGLTypes.h"
+#import "Matrix.h"
 
 @class CSceneGraphRenderer;
 @class CSceneStyle;

@@ -10,6 +10,7 @@
 
 #import "OpenGLIncludes.h"
 #import "OpenGLTypes.h"
+#import "Matrix.h"
 
 @class CFrameBuffer;
 

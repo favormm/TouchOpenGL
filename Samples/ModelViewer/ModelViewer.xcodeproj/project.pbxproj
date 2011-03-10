@@ -59,6 +59,10 @@
 		4592086713280E2400B561F4 /* SimpleTexture.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4592083E13280E2400B561F4 /* SimpleTexture.vsh */; };
 		4592086813280E2400B561F4 /* Texture.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4592083F13280E2400B561F4 /* Texture.fsh */; };
 		4592086913280E2400B561F4 /* Texture.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4592084013280E2400B561F4 /* Texture.vsh */; };
+		45BF339813285FF80096D2D4 /* CInteractiveRendererView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BF339713285FF80096D2D4 /* CInteractiveRendererView.m */; };
+		45BF339F1328661C0096D2D4 /* CArcBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BF339E132866190096D2D4 /* CArcBall.m */; };
+		45BFEA60132957DB00B6C3D8 /* Quaternion.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA5F132957DB00B6C3D8 /* Quaternion.m */; };
+		45BFEA64132965ED00B6C3D8 /* Matrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA63132965ED00B6C3D8 /* Matrix.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +153,14 @@
 		4592083E13280E2400B561F4 /* SimpleTexture.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SimpleTexture.vsh; sourceTree = "<group>"; };
 		4592083F13280E2400B561F4 /* Texture.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Texture.fsh; sourceTree = "<group>"; };
 		4592084013280E2400B561F4 /* Texture.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Texture.vsh; sourceTree = "<group>"; };
+		45BF339613285FF80096D2D4 /* CInteractiveRendererView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CInteractiveRendererView.h; sourceTree = "<group>"; };
+		45BF339713285FF80096D2D4 /* CInteractiveRendererView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CInteractiveRendererView.m; sourceTree = "<group>"; };
+		45BF339D132866170096D2D4 /* CArcBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CArcBall.h; sourceTree = "<group>"; };
+		45BF339E132866190096D2D4 /* CArcBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CArcBall.m; sourceTree = "<group>"; };
+		45BFEA5E132957DA00B6C3D8 /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
+		45BFEA5F132957DB00B6C3D8 /* Quaternion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quaternion.m; sourceTree = "<group>"; };
+		45BFEA62132965ED00B6C3D8 /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
+		45BFEA63132965ED00B6C3D8 /* Matrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +322,12 @@
 				4592080F13280E2400B561F4 /* CVertexBuffer_FactoryExtensions.m */,
 				4592081013280E2400B561F4 /* CVertexBufferReference.h */,
 				4592081113280E2400B561F4 /* CVertexBufferReference.m */,
+				45BF339D132866170096D2D4 /* CArcBall.h */,
+				45BF339E132866190096D2D4 /* CArcBall.m */,
+				45BFEA62132965ED00B6C3D8 /* Matrix.h */,
+				45BFEA63132965ED00B6C3D8 /* Matrix.m */,
+				45BFEA5E132957DA00B6C3D8 /* Quaternion.h */,
+				45BFEA5F132957DB00B6C3D8 /* Quaternion.m */,
 				4592081213280E2400B561F4 /* iOS */,
 				4592081B13280E2400B561F4 /* OpenGLIncludes.h */,
 				4592081C13280E2400B561F4 /* OpenGLTypes.h */,
@@ -327,6 +345,8 @@
 				4592081613280E2400B561F4 /* CPVRTextureLoader.m */,
 				4592081713280E2400B561F4 /* CRendererView.h */,
 				4592081813280E2400B561F4 /* CRendererView.m */,
+				45BF339613285FF80096D2D4 /* CInteractiveRendererView.h */,
+				45BF339713285FF80096D2D4 /* CInteractiveRendererView.m */,
 				4592081913280E2400B561F4 /* UIColor_OpenGLExtensions.h */,
 				4592081A13280E2400B561F4 /* UIColor_OpenGLExtensions.m */,
 			);
@@ -457,6 +477,10 @@
 				45434BBD13281C1A00A353EC /* CModelLoader.m in Sources */,
 				45434BC313283D1800A353EC /* CTestRenderer.m in Sources */,
 				45434BC61328401500A353EC /* CTestSceneRenderer.m in Sources */,
+				45BF339813285FF80096D2D4 /* CInteractiveRendererView.m in Sources */,
+				45BF339F1328661C0096D2D4 /* CArcBall.m in Sources */,
+				45BFEA60132957DB00B6C3D8 /* Quaternion.m in Sources */,
+				45BFEA64132965ED00B6C3D8 /* Matrix.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

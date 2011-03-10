@@ -35,6 +35,7 @@
 @synthesize frameBuffer;
 @synthesize colorRenderBuffer;
 @synthesize depthRenderBuffer;
+@synthesize transform;
 
 + (Class)layerClass
     {
@@ -43,6 +44,7 @@
 
 - (id)initWithCoder:(NSCoder*)coder
     {    
+    NSLog(@"INIT WITH CODER");
     if ((self = [super initWithCoder:coder]))
         {
         [self setup];
@@ -53,6 +55,7 @@
 
 - (id)initWithFrame:(CGRect)inFrame;
     {    
+    NSLog(@"INIT WITH FRAME");
     if ((self = [super initWithFrame:inFrame]))
         {
         [self setup];
@@ -116,6 +119,8 @@
         {
         NSLog(@"Framebuffer Error?: %x", theError);
         }
+        
+    self.transform = Matrix4Identity;
         
     [self startAnimation];
     }
@@ -195,6 +200,8 @@
 //
 //        theTransform = Matrix4Translate(theTransform, -D, -D, 0);
 //        theTransform = Matrix4Scale(theTransform, 1 / D, 1 / D, 1);
+
+        theTransform = Matrix4Concat(theTransform, self.transform);
 
         [self.renderer renderIntoFrameBuffer:self.frameBuffer transform:theTransform];
 

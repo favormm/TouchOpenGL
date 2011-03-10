@@ -63,9 +63,14 @@
     {    
     [super render:inTransform];
     
+    [self pushTransform:inTransform];
+    
     [self.sceneGraph prerender:self];
     [self.sceneGraph render:self];
     [self.sceneGraph postrender:self];
+
+    [self popTransform:inTransform];
+
     }
 
 #pragma mark -
