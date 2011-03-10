@@ -43,7 +43,7 @@
     
     [theNode dump];
 
-//    theNode.transform = Matrix4MakeScale(0.0005, 0.0005, 0.0005);
+    theNode.transform = Matrix4MakeScale(0.0005, 0.0005, 0.0005);
 
     
     return((CScene *)theNode);
@@ -110,7 +110,7 @@
 
     theGeometryNode.style = theStyle;
 
-    theGeometryNode.transform = Matrix4MakeScale(0.0005, 0.0005, 0.0005);
+//    theGeometryNode.transform = Matrix4MakeScale(0.0005, 0.0005, 0.0005);
 
     
     CSceneGeometryBrush *theBrush = [[[CSceneGeometryBrush alloc] init] autorelease];

@@ -17,12 +17,15 @@
 }
 
 @property (readwrite, nonatomic, retain) CScene *sceneGraph;
-
-@property (readwrite, nonatomic, assign) Matrix4 transform;;
-
-@property (readwrite, nonatomic, retain) NSMutableArray *styleStack;
 @property (readonly, nonatomic, retain) CSceneStyle *mergedStyle;
+@property (readonly, nonatomic, assign) Matrix4 transform;
 
 - (id)initWithSceneGraph:(CScene *)inSceneGraph;
+
+- (void)pushStyle:(CSceneStyle *)inStyle;
+- (void)popStyle:(CSceneStyle *)inStyle;
+
+- (void)pushTransform:(Matrix4)inTransform;
+- (void)popTransform:(Matrix4)inTransform;
 
 @end

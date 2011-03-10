@@ -61,8 +61,10 @@
     {
     if (self.style != NULL)
         {
-        [inRenderer.styleStack addObject:self.style];
+        [inRenderer pushStyle:self.style];
         }
+        
+    [inRenderer pushTransform:self.transform];
     }
 
 - (void)render:(CSceneGraphRenderer *)inRenderer
@@ -77,10 +79,12 @@
 
 - (void)postrender:(CSceneGraphRenderer *)inRenderer;
     {
-    if (self.style != NULL && self.style == [inRenderer.styleStack lastObject])
+    if (self.style != NULL)
         {
-        [inRenderer.styleStack removeLastObject];
+        [inRenderer pushStyle:self.style];
         }
+
+    [inRenderer popTransform:self.transform];
     }
     
 - (void)dump

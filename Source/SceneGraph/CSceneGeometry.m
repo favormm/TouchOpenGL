@@ -64,8 +64,7 @@
 
     // Update uniform value
     GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"transform"];
-    Matrix4 theTransform = self.transform;
-    theTransform = Matrix4Concat(theTransform, inRenderer.transform);
+    Matrix4 theTransform = inRenderer.transform;
     
     NSLog(@"%@", NSStringFromMatrix4(theTransform));
     

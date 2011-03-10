@@ -12,19 +12,22 @@
 #import "CSceneStyle.h"
 
 @interface CSceneGraphRenderer ()
+@property (readwrite, nonatomic, retain) NSMutableArray *styleStack;
+@property (readwrite, nonatomic, retain) NSMutableArray *transformStack;
+
 @end
 
 @implementation CSceneGraphRenderer
 
 @synthesize sceneGraph;
-@synthesize transform;
+
 @synthesize styleStack;
+@synthesize transformStack;
 
 - (id)init
     {
     if ((self = [super init]) != NULL)
         {
-        transform = Matrix4Identity;
         }
     return(self);
     }
@@ -38,11 +41,22 @@
 	return(self);
 	}
 
+- (void)dealloc
+    {
+    [sceneGraph release];
+    sceneGraph = NULL;
+    //
+    [super dealloc];
+    }
+
+#pragma mark -
+
 - (void)prerender
     {
     [super prerender];
     //
     self.styleStack = [NSMutableArray array];
+    self.transformStack = [NSMutableArray array];
     }
 
 - (void)render:(Matrix4)inTransform
@@ -54,13 +68,7 @@
     [self.sceneGraph postrender:self];
     }
 
-- (void)dealloc
-    {
-    [sceneGraph release];
-    sceneGraph = NULL;
-    //
-    [super dealloc];
-    }
+#pragma mark -
 
 - (CSceneStyle *)mergedStyle
     {
@@ -89,6 +97,42 @@
             }
         }
     return(theMergedStyle);
+    }
+
+- (Matrix4)transform
+    {
+    Matrix4 theTransform = Matrix4Identity;
+    for (NSValue *theValue in self.transformStack)
+        {
+        Matrix4 theRHS;
+        [theValue getValue:&theRHS];
+        theTransform = Matrix4Concat(theTransform, theRHS);
+        }
+    return(theTransform);
+    }
+
+#pragma mark -
+
+- (void)pushStyle:(CSceneStyle *)inStyle
+    {
+    [self.styleStack addObject:inStyle];
+    }
+    
+- (void)popStyle:(CSceneStyle *)inStyle
+    {
+    [self.styleStack removeLastObject];
+    }
+
+#pragma mark -
+
+- (void)pushTransform:(Matrix4)inTransform
+    {
+    [self.transformStack addObject:[NSValue valueWithBytes:&inTransform objCType:@encode(Matrix4)]];
+    }
+    
+- (void)popTransform:(Matrix4)inTransform
+    {
+    [self.transformStack removeLastObject];
     }
 
 @end
