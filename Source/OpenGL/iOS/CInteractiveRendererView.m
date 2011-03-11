@@ -42,7 +42,9 @@
 
 - (void)pinch:(UIPinchGestureRecognizer *)inGestureRecognizer
     {
-    self.scale += inGestureRecognizer.scale - 1.0;
+    NSLog(@"PINCH");
+    
+    self.scale += inGestureRecognizer.velocity / 10;
     self.transform = Matrix4MakeScale(self.scale, self.scale, self.scale);
     }
 
@@ -50,18 +52,28 @@
     {
     NSLog(@"PAN: %d", inGestureRecognizer.state);
     
-    if (inGestureRecognizer.state == 1)
+    CGSize theSize = self.bounds.size;
+    CGPoint theLocation = [inGestureRecognizer locationInView:self];
+    
+    CGPoint thePoint = {
+        .x = (theLocation.x / theSize.width - 0.5) * -1.0,
+        .y = theLocation.y / theSize.height - 0.5,
+        };
+
+    if (inGestureRecognizer.state == UIGestureRecognizerStateBegan)
         {
-        [self.arcBall start:CGPointZero];
+        [self.arcBall start:thePoint];
         
 //        self,transgo
         }
-    else if (inGestureRecognizer.state == 1)
+    else if (inGestureRecognizer.state == UIGestureRecognizerStateChanged)
         {
-        [self.arcBall start:CGPointZero];
-        }
+        [self.arcBall dragTo:thePoint];
         
-    
+        Matrix4 theScale = Matrix4MakeScale(self.scale, self.scale, self.scale);
+        
+        self.transform = Matrix4Concat(theScale, self.arcBall.rotationMatrix);
+        }
     }
 
 @end

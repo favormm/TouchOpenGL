@@ -116,7 +116,6 @@
     CSceneGeometryBrush *theBrush = [[[CSceneGeometryBrush alloc] init] autorelease];
     theBrush.type = GL_LINES;
     theBrush.geometry = theGeometryNode;
-    
     [theGeometryNode addSubnode:theBrush];
     
     return(theGeometryNode);

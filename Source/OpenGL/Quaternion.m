@@ -18,10 +18,6 @@
 
 #define NORMALIZATION_TOLERANCE 0.00001f
 
-typedef struct {
-    GLfloat x, y, z, w;
-} Quaternion;
-
 Quaternion QuaternionIdentity = { .x = 0.0, .y = 0.0, .z = 0.0, .w = 1.0 };
 
 Quaternion QuaternionNormalize(Quaternion q);
@@ -126,4 +122,7 @@ Matrix4 Matrix4FromQuaternion(Quaternion q)
     return(theMatrix);
     }
 
-
+extern NSString *NSStringFromQuaternion(Quaternion q)
+    {
+    return([NSString stringWithFormat:@"(%g, %g, %g, %g)", q.x, q.y, q.z, q.w]);
+    }

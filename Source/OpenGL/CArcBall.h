@@ -8,10 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Quaternion.h"
+#import "Matrix.h"
 
 @interface CArcBall : NSObject {
     
 }
+
+@property (readonly, nonatomic, assign) Quaternion rotation;
+@property (readonly, nonatomic, assign) Matrix4 rotationMatrix;
 
 - (void)start:(CGPoint)inPoint;
 - (void)dragTo:(CGPoint)inPoint;
