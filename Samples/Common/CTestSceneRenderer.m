@@ -45,7 +45,7 @@
         theStyle.color = [[UIColor redColor] color4f];
         
         CSceneGeometryBrush *theBrush = [[[CSceneGeometryBrush alloc] init] autorelease];
-        theBrush.type = GL_TRIANGLES;
+        theBrush.type = GL_TRIANGLE_STRIP;
         theBrush.geometry = theGeometry;
         
         [theGeometry addSubnode:theBrush];

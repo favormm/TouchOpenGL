@@ -14,10 +14,13 @@ import Writer
 def main():
 	theInputPath = os.getcwd()
 	theOutputPath = os.path.join(os.getcwd(), 'Output')
+
+	os.makedirs(theOutputPath)
+
 #	theDocumentPath = os.path.join(theInputPath, 'WallE.dae')
 #	theDocumentPath = os.path.join(theInputPath, 'Samples/Cylinder.dae')
 #	theDocumentPath = os.path.join(theInputPath, 'Samples/F1.dae')
-	theDocumentPath = os.path.join(theInputPath, 'Samples/EarthAndMoonTriangulated.dae')
+	theDocumentPath = os.path.join(theInputPath, 'Samples/Cube.dae')
 
 	theTree = etree.parse(theDocumentPath)
 	theRootElement = OneOrThrow(theTree.xpath("/NS:COLLADA", namespaces = Collada.Parser.NS))

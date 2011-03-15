@@ -36,7 +36,7 @@
     if (1)
         {
         CModelLoader *theLoader = [[[CModelLoader alloc] init] autorelease];
-        NSURL *theModelURL = [[NSBundle mainBundle] URLForResource:@"Cylinder" withExtension:@"plist"];
+        NSURL *theModelURL = [[NSBundle mainBundle] URLForResource:@"Cube" withExtension:@"plist"];
         NSError *theError = NULL;
         CScene *theScene = [theLoader load:theModelURL error:&theError];
         CSceneGraphRenderer *theSceneRenderer = [[[CSceneGraphRenderer alloc] init] autorelease];
