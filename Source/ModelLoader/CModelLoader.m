@@ -101,12 +101,19 @@
     CVertexBufferReference *theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer cellEncoding:@encode(GLushort) normalized:NO stride:0] autorelease];
     theGeometryNode.indicesBufferReference = theVertexBufferReference;
 
-    theVBOName = [theTrianglesDictionary objectForKey:@"positions"]; // TODO FIX PLURAL
+    theVBOName = [theTrianglesDictionary objectForKey:@"positions"];
     theVBOURL = [[NSBundle mainBundle] URLForResource:[theVBOName stringByDeletingPathExtension] withExtension:[theVBOName pathExtension]];
     theVBOData = [NSData dataWithContentsOfURL:theVBOURL options:0 error:NULL];
     theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theVBOData] autorelease];
     theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer cellEncoding:@encode(Vector3) normalized:NO stride:0] autorelease];
     theGeometryNode.coordinatesBufferReference = theVertexBufferReference;
+    
+    theVBOName = [theTrianglesDictionary objectForKey:@"normals"];
+    theVBOURL = [[NSBundle mainBundle] URLForResource:[theVBOName stringByDeletingPathExtension] withExtension:[theVBOName pathExtension]];
+    theVBOData = [NSData dataWithContentsOfURL:theVBOURL options:0 error:NULL];
+    theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theVBOData] autorelease];
+    theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer cellEncoding:@encode(Vector3) normalized:NO stride:0] autorelease];
+    theGeometryNode.normalsBufferReference = theVertexBufferReference;
     
     
     CSceneStyle *theStyle = [[[CSceneStyle alloc] init] autorelease];

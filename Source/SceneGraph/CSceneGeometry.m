@@ -23,6 +23,7 @@
 
 @synthesize indicesBufferReference;
 @synthesize coordinatesBufferReference;
+@synthesize normalsBufferReference;
 @synthesize textureCoordinatesBufferReference;
 @synthesize colorsBufferReference;
 @synthesize vertexBuffers;
@@ -34,6 +35,9 @@
 
     [coordinatesBufferReference release];
     coordinatesBufferReference = NULL;
+
+    [normalsBufferReference release];
+    normalsBufferReference = NULL;
 
     [textureCoordinatesBufferReference release];
     textureCoordinatesBufferReference = NULL;
@@ -86,6 +90,19 @@
         glBindBuffer(GL_ARRAY_BUFFER, self.coordinatesBufferReference.vertexBuffer.name);
         glVertexAttribPointer(theVertexAttributeIndex, self.coordinatesBufferReference.size, self.coordinatesBufferReference.type, self.coordinatesBufferReference.normalized, self.coordinatesBufferReference.stride, NULL);
         glEnableVertexAttribArray(theVertexAttributeIndex);
+        }
+    else
+        {
+        const GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"vertex"];
+        glDisableVertexAttribArray(theVertexAttributeIndex);
+        }
+
+    if (self.normalsBufferReference != NULL)
+        {
+        const GLuint theAttributeIndex = [theProgram attributeIndexForName:@"normals"];
+        glBindBuffer(GL_ARRAY_BUFFER, self.coordinatesBufferReference.vertexBuffer.name);
+        glVertexAttribPointer(theAttributeIndex, self.normalsBufferReference.size, self.normalsBufferReference.type, self.normalsBufferReference.normalized, self.normalsBufferReference.stride, NULL);
+        glEnableVertexAttribArray(theAttributeIndex);
         }
     else
         {

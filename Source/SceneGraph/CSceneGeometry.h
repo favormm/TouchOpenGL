@@ -17,6 +17,7 @@
 
 @property (readwrite, nonatomic, retain) CVertexBufferReference *indicesBufferReference;
 @property (readwrite, nonatomic, retain) CVertexBufferReference *coordinatesBufferReference;
+@property (readwrite, nonatomic, retain) CVertexBufferReference *normalsBufferReference;
 @property (readwrite, nonatomic, retain) CVertexBufferReference *textureCoordinatesBufferReference;
 @property (readwrite, nonatomic, retain) CVertexBufferReference *colorsBufferReference;
 @property (readwrite, nonatomic, retain) NSSet *vertexBuffers;
