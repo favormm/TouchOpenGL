@@ -51,9 +51,9 @@
         }
     AssertOpenGLNoError_();
     
-#if DEBUG == 1
-    NSLog(@"> %d %d", theGeometry.indicesBufferReference.cellCount, theGeometry.coordinatesBufferReference.cellCount);
-#endif
+//#if DEBUG == 1
+//    NSLog(@"> %d %d", theGeometry.indicesBufferReference.cellCount, theGeometry.coordinatesBufferReference.cellCount);
+//#endif
 
     if (theGeometry.indicesBufferReference)
         {
