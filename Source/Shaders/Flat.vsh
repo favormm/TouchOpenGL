@@ -9,6 +9,7 @@
 
 attribute vec4 vertex;
 attribute vec4 color;
+attribute vec4 normal;
 
 uniform mat4 transform;
 uniform vec4 u_color;
