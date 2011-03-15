@@ -22,6 +22,8 @@
 @property (readwrite, nonatomic, assign) GLenum type;
 @property (readwrite, nonatomic, assign) GLboolean normalized;
 @property (readwrite, nonatomic, assign) GLsizei stride;
+
+- (void)update;
 @end
 
 #pragma mark -
@@ -46,8 +48,14 @@
         cellEncodingString = [[NSString alloc] initWithUTF8String:inEncoding];
         normalized = inNormalized;
         stride = inStride;
+        
+        cellSize = -1;
+        cellCount = -1;
+        size = -1;
+        type = -1;
+        
         //
-        [self bufferUpdated];
+        [self update];
         }
     return(self);
     }
@@ -64,7 +72,7 @@
 
 - (NSString *)description
     {
-    return([NSString stringWithFormat:@"%@ (VBO:%@, encoding:%@, cellSize:%d, cellCount:%d, size:%d, type:%d, normalized:%d, stride:%d", [super description], self.vertexBuffer, self.cellEncodingString, self.cellSize, self.cellCount, self.size, self.normalized, self.stride]);
+    return([NSString stringWithFormat:@"%@ (VBO:%@, encoding:%@, cellSize:%d, cellCount:%d, size:%d, type:%d, normalized:%d, stride:%d", [super description], self.vertexBuffer, self.cellEncodingString, self.cellSize, self.cellCount, self.size, self.type, self.normalized, self.stride]);
     }
     
 - (const char *)cellEncoding
@@ -72,7 +80,7 @@
     return([self.cellEncodingString UTF8String]);
     }
 
-- (void)bufferUpdated;
+- (void)update
     {
     NSUInteger theCellSize = 0;
     NSGetSizeAndAlignment(self.cellEncoding, &theCellSize, NULL);
@@ -157,6 +165,8 @@
         {
         NSAssert(NO, @"Scan failed");
         }
+        
+    NSAssert(self.type != 0, @"Type shoudl not be zero.");
     }
 
 @end

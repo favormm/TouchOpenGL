@@ -164,12 +164,12 @@ class Node(ColladaObject):
 	def __init__(self, parent, id):
 		super(Node, self).__init__(parent, id)
 		self.nodes = []
-		self.matrix = None
+		self.transform = None
 		self.geometries = []
 
 	@property
 	def children(self):
-		return ([self.matrix] if self.matrix else []) + self.nodes + self.geometries
+		return self.nodes + self.geometries
 
 ########################################################################
 
@@ -315,7 +315,7 @@ class Parser(object):
 
 		theMatrix = OneOrNone(element.xpath('./NS:matrix', namespaces = self.NS))
 		if theMatrix is not None:
-			theNode.matrix = self.MatrixFactory(document, theNode, element)
+			theNode.transform = self.MatrixFactory(document, theNode, theMatrix)
 
 		theElements = element.xpath('./NS:node|./NS:instance_node', namespaces = self.NS)
 		theElements = [document.lookupInstance('node', 'instance_node', theElement) for theElement in theElements]
@@ -384,7 +384,7 @@ class Parser(object):
 		theAccessor = OneOrThrow(theTechnique.xpath('./NS:accessor', namespaces = self.NS))
 		theURL = theAccessor.attrib['source']
 		theFloatArray = document.lookupElement(theURL, 'float_array')
-		theObject.positionCount = int(theFloatArray.attrib['count'])
+		theObject.count = int(theFloatArray.attrib['count'])
 		theArray = numpy.lib.io.loadtxt(StringIO.StringIO(theFloatArray.text), dtype=numpy.float32)
 		theObject.vbo = VBO(theArray)
 		return theObject

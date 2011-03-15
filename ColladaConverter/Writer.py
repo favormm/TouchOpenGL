@@ -14,9 +14,11 @@ class MyJSONEncoder(json.JSONEncoder):
 			if isinstance(o, Collada.VisualScene):
 				d['type'] = 'Scene'
 
-			if isinstance(o, Collada.Matrix):
-				d['v'] = o.v
-			elif isinstance(o, Collada.Mesh):
+			if isinstance(o, Collada.Node):
+				if o.transform:
+					d['transform'] = dict(type = 'matrix', v = o.transform.v)
+
+			if isinstance(o, Collada.Mesh):
 				d['type'] = o.type
 				if o.indices:
 					d['indices'] = '%s.vbo' % (o.indices.signature.hexdigest())
@@ -24,7 +26,8 @@ class MyJSONEncoder(json.JSONEncoder):
 					d['positions'] = '%s.vbo' % (o.positions.vbo.signature.hexdigest())
 				if o.normals:
 					d['normals'] = '%s.vbo' % (o.normals.vbo.signature.hexdigest())
-			elif isinstance(o, Collada.Instance):
+
+			if isinstance(o, Collada.Instance):
 				d['url'] = o.url
 			elif o.children != None and len(o.children) > 0:
 				d['children'] = o.children

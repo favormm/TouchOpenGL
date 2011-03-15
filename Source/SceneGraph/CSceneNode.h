@@ -17,6 +17,7 @@
 @interface CSceneNode : NSObject {
 }
 
+@property (readwrite, nonatomic, retain) NSString *name;
 @property (readonly, nonatomic, assign) CSceneNode *supernode;
 @property (readwrite, nonatomic, assign) Matrix4 transform;
 @property (readwrite, nonatomic, retain) CSceneStyle *style;

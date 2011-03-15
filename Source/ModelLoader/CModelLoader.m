@@ -71,6 +71,11 @@
         theNode = [self geometryForDictionary:inDictionary error:NULL];
         }
 
+    if ([inDictionary objectForKey:@"id"])
+        {
+        theNode.name = [inDictionary objectForKey:@"id"];
+        }
+
     for (NSDictionary *theChildDictionary in [inDictionary objectForKey:@"children"])
         {
         CSceneNode *theChildNode = [self nodeForDictionary:theChildDictionary error:NULL];
@@ -88,6 +93,7 @@
     CSceneGeometry *theGeometryNode = [[[CSceneGeometry alloc] init] autorelease];
     NSDictionary *theTrianglesDictionary = [[[inDictionary objectForKey:@"children"] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"type == 'triangles'"]] lastObject];
     
+    
     NSString *theVBOName = [theTrianglesDictionary objectForKey:@"indices"];
     NSURL *theVBOURL = [[NSBundle mainBundle] URLForResource:[theVBOName stringByDeletingPathExtension] withExtension:[theVBOName pathExtension]];
     NSData *theVBOData = [NSData dataWithContentsOfURL:theVBOURL options:0 error:NULL];
@@ -95,7 +101,7 @@
     CVertexBufferReference *theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer cellEncoding:@encode(GLushort) normalized:NO stride:0] autorelease];
     theGeometryNode.indicesBufferReference = theVertexBufferReference;
 
-    theVBOName = [theTrianglesDictionary objectForKey:@"position"]; // TODO FIX PLURAL
+    theVBOName = [theTrianglesDictionary objectForKey:@"positions"]; // TODO FIX PLURAL
     theVBOURL = [[NSBundle mainBundle] URLForResource:[theVBOName stringByDeletingPathExtension] withExtension:[theVBOName pathExtension]];
     theVBOData = [NSData dataWithContentsOfURL:theVBOURL options:0 error:NULL];
     theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theVBOData] autorelease];
@@ -107,16 +113,17 @@
     theStyle.mask = SceneStyleMask_ProgramFlag | SceneStyleMask_ColorFlag;
     theStyle.program = [[[CProgram alloc] initWithName:@"Flat"] autorelease];
     theStyle.color = [UIColor redColor].color4f;
-
     theGeometryNode.style = theStyle;
+
 
 //    theGeometryNode.transform = Matrix4MakeScale(0.0005, 0.0005, 0.0005);
 
     
     CSceneGeometryBrush *theBrush = [[[CSceneGeometryBrush alloc] init] autorelease];
-    theBrush.type = GL_LINES;
+    theBrush.type = GL_TRIANGLES;
     theBrush.geometry = theGeometryNode;
     [theGeometryNode addSubnode:theBrush];
+
     
     return(theGeometryNode);
     }

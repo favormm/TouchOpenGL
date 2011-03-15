@@ -28,6 +28,4 @@
 
 - (id)initWithVertexBuffer:(CVertexBuffer *)inVertexBuffer cellEncoding:(char *)inEncoding normalized:(GLboolean)inNormalized stride:(GLsizei)inStride;
 
-- (void)bufferUpdated;
-
 @end

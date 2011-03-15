@@ -13,10 +13,12 @@
 
 @interface CSceneNode ()
 @property (readwrite, nonatomic, retain) NSMutableArray *mutableSubnodes;
+@property (readwrite, nonatomic, assign) CSceneNode *supernode;
 @end
 
 @implementation CSceneNode
 
+@synthesize name;
 @synthesize supernode;
 @synthesize transform;
 @synthesize style;
@@ -43,6 +45,12 @@
     [super dealloc];
     }
     
+- (NSString *)description
+    {
+    return([NSString stringWithFormat:@"%@ (%@)", [super description], self.name]);
+    }
+
+    
 - (NSArray *)subnodes
     {
     return(self.mutableSubnodes);
@@ -50,6 +58,8 @@
     
 - (void)addSubnode:(CSceneNode *)inSubnode
     {
+    inSubnode.supernode = self;
+    
     if (self.mutableSubnodes == NULL)
         {
         self.mutableSubnodes = [NSMutableArray array];

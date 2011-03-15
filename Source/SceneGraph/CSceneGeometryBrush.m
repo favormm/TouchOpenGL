@@ -50,10 +50,18 @@
         glLineWidth(theStyle.lineWidth);
         }
     AssertOpenGLNoError_();
+    
+#if DEBUG == 1
+    NSLog(@"> %d %d", theGeometry.indicesBufferReference.cellCount, theGeometry.coordinatesBufferReference.cellCount);
+#endif
 
     if (theGeometry.indicesBufferReference)
         {
         CVertexBufferReference *theReference = theGeometry.indicesBufferReference;
+        //
+        NSAssert(theReference.cellCount != 0, @"Incorrect number of cells");
+        AssertOpenGLNoError_();
+        //
         glDrawElements(self.type, theReference.cellCount, theReference.type, NULL);
         }
     else
