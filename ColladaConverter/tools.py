@@ -8,11 +8,11 @@ def OneOrNone(sequence):
 
 def OneOrThrow(sequence):
 	if len(sequence) != 1:
-		raise Exception('Not one object!')
+		raise Exception('Not one object (got %d instead)!' % len(sequence))
 	return sequence[0]
 
 def OneOrMoreOrThrow(sequence):
-	if len(sequence) >= 1:
+	if len(sequence) < 1:
 		raise Exception('Not one object! %d, %s' % (len(sequence), sequence))
 	return sequence
 

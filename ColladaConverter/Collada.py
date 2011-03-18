@@ -195,19 +195,11 @@ class Mesh(ColladaObject):
 	def __init__(self, parent, id):
 		super(Mesh, self).__init__(parent, id)
 		self.type = None
-		self.positions = None
-		self.normals = None
-		self.indices = None
+		self.primitives = []
 
 	@property
 	def children(self):
-		return [self.positions, self.normals]
-
-########################################################################
-
-class Source(ColladaObject):
-	def __init__(self, parent, id):
-		super(Source, self).__init__(parent, id)
+		return self.primitives
 
 ########################################################################
 
@@ -219,12 +211,31 @@ class Material(ColladaObject):
 class Effect(ColladaObject):
 	pass
 
+########################################################################
+
 class LambertEffect(Effect):
 	def __init__(self, parent, id):
 		super(Effect, self).__init__(parent, id)
 
 		self.diffuseColor = None
 
+########################################################################
+
+class Primitive(ColladaObject):
+	pass
+
+########################################################################
+
+# 	<source id="ID9">
+# 		<float_array id="ID18" count="144">24.0000000 24.0000000 -24.0000000 -24.0000000 -24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 24.0000000 -24.0000000 -24.0000000 -24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 -24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 24.0000000 24.0000000 -24.0000000 24.0000000 -24.0000000 24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 -24.0000000 24.0000000 -24.0000000 24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 24.0000000 -24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 -24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 24.0000000 -24.0000000 24.0000000 -24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 -24.0000000 -24.0000000 24.0000000 24.0000000 -24.0000000 -24.0000000 -24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 24.0000000 -24.0000000 -24.0000000 -24.0000000 -24.0000000 -24.0000000 24.0000000 24.0000000 -24.0000000 24.0000000 -24.0000000 24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 24.0000000 -24.0000000 24.0000000 -24.0000000 24.0000000 24.0000000 -24.0000000 -24.0000000 24.0000000</float_array>
+# 		<technique_common>
+# 			<accessor count="48" source="#ID18" stride="3">
+# 				<param name="X" type="float" />
+# 				<param name="Y" type="float" />
+# 				<param name="Z" type="float" />
+# 			</accessor>
+# 		</technique_common>
+# 	</source>
 
 ########################################################################
 
@@ -233,6 +244,35 @@ class Parser(object):
 
 	namespace = 'http://www.collada.org/2005/11/COLLADASchema'
 	NS = { 'NS': namespace }
+
+	def ArrayForSource(self, document, source):
+		theAccessor = OneOrThrow(source.xpath('./NS:technique_common/NS:accessor', namespaces = self.NS))
+
+		theStride = int(theAccessor.attrib['stride'])
+		theType = float
+
+		theValuesElement = document.lookupElement(theAccessor.attrib['source'])
+		theValues = [theType(x) for x in theValuesElement.text.split(' ')]
+		if len(theValues) != int(theValuesElement.attrib['count']):
+			raise Exception('Number of floats dont match')
+
+		theParamNames = theAccessor.xpath('./NS:param/@name', namespaces = self.NS)
+		assert len(theParamNames) == theStride # TODO does this really have to be equal?
+
+		theObjects = []
+		for M in xrange(0, int(theAccessor.attrib['count'])):
+			o = []
+			for N, theParamName in enumerate(theParamNames):
+				o.append((theParamName, theValues[M * theStride + N]))
+			o = tuple(o)
+			theObjects.append(o)
+
+		print theObjects
+
+
+
+	####################################################################
+
 
 	def factory(x):
 		def inner(self, document, parent, element):
@@ -243,6 +283,8 @@ class Parser(object):
 			return o
 
 		return inner
+
+	####################################################################
 
 	@factory
 	def ObjectFactory(self, document, parent, element):
@@ -257,7 +299,6 @@ class Parser(object):
 		theFactoriesForTag['{%s}%s' % (self.namespace, 'material')] = self.MaterialFactory
 		theFactoriesForTag['{%s}%s' % (self.namespace, 'effect')] = self.EffectFactory
 		theFactoriesForTag['{%s}%s' % (self.namespace, 'mesh')] = self.MeshFactory
-		theFactoriesForTag['{%s}%s' % (self.namespace, 'source')] = self.SourceFactory
 
 		if element.tag in theFactoriesForTag:
 			theFactory = theFactoriesForTag[element.tag]
@@ -266,6 +307,8 @@ class Parser(object):
 			raise Exception('Unknown tag: ', theElement.tag)
 
 		return theObject
+
+	####################################################################
 
 	@factory
 	def DocumentFactory(self, document, parent, element):
@@ -278,12 +321,16 @@ class Parser(object):
 		theDocument.scene = self.SceneFactory(theDocument, theDocument, theSceneElement)
 		return theDocument
 
+	####################################################################
+
 	@factory
 	def SceneFactory(self, document, parent, element):
 		theScene = Scene(parent, element.attrib.get('id'))
 		element = OneOrNone(element.xpath("./NS:instance_visual_scene", namespaces = self.NS))
 		theScene.visualScene = self.InstanceFactory(document, theScene, element)
 		return theScene
+
+	####################################################################
 
 	@factory
 	def LibraryFactory(self, document, parent, element):
@@ -295,6 +342,8 @@ class Parser(object):
 			theLibrary.children.append(theObject)
 		return theLibrary
 
+	####################################################################
+
 	@factory
 	def InstanceFactory(self, document, parent, element):
 		theInstance = Instance(parent, element.attrib.get('id'))
@@ -302,12 +351,16 @@ class Parser(object):
 		theInstance.url = element.attrib['url']
 		return theInstance
 
+	####################################################################
+
 	@factory
 	def VisualSceneFactory(self, document, parent, element):
 		theVisualScene = VisualScene(parent, element.attrib.get('id'))
 		theElements = element.xpath('./NS:node|./NS:instance_node', namespaces = self.NS)
 		theVisualScene.nodes = [self.NodeFactory(document, theVisualScene, element) for element in theElements]
 		return theVisualScene
+
+	####################################################################
 
 	@factory
 	def NodeFactory(self, document, parent, element):
@@ -327,11 +380,15 @@ class Parser(object):
 
 		return theNode
 
+	####################################################################
+
 	@factory
 	def MatrixFactory(self, document, parent, element):
 		theMatrix = Matrix(parent, element.attrib.get('id'))
 		theMatrix.v = [float(N) for N in element.text.split()]
 		return theMatrix
+
+	####################################################################
 
 	@factory
 	def GeometryFactory(self, document, parent, element):
@@ -339,69 +396,110 @@ class Parser(object):
 		theGeometry.mesh = self.MeshFactory(document, parent, OneOrNone(element.xpath('./NS:mesh', namespaces = self.NS)))
 		return theGeometry
 
+	####################################################################
+
 	@factory
 	def MeshFactory(self, document, parent, element):
-		theObject = Mesh(parent, element.attrib.get('id'))
+		theMeshObject = Mesh(parent, element.attrib.get('id'))
 
 		thePrimitives = element.xpath('./NS:triangles|./NS:lines', namespaces = self.NS)
 		for primitive in thePrimitives:
 
-			theTypesByTag = {
-				'{%s}triangles' % (self.namespace): 'triangles',
-				'{%s}lines' % (self.namespace): 'lines',
-				}
-	#
-			theObject.type = theTypesByTag[primitive.tag]
-			theObject.indexCount = int(primitive.attrib['count'])
-	#
-			theIndices = OneOrThrow(primitive.xpath('./NS:p', namespaces = self.NS))
-			theArray = numpy.lib.io.loadtxt(StringIO.StringIO(theIndices.text), dtype=numpy.int16)
-			theObject.indices = VBO(theArray)
-	#
-			theURL = OneOrThrow(primitive.xpath('./NS:input[@semantic="VERTEX"]/@source', namespaces = self.NS))
-			theVertices = document.lookupElement(theURL, 'vertices')
-	#
-			######
-	#
-			theURL = OneOrNone(theVertices.xpath('./NS:input[@semantic="POSITION"]/@source', namespaces = self.NS))
-			if theURL:
-				theSource = document.lookupElement(theURL, 'source')
-				theObject.positions = self.SourceFactory(document, theObject, theSource)
-	#
-			######
-	#
-			theURL = OneOrNone(theVertices.xpath('./NS:input[@semantic="NORMAL"]/@source', namespaces = self.NS))
-			if theURL:
-				theSource = document.lookupElement(theURL, 'source')
-				theObject.normals = self.SourceFactory(document, theObject, theSource)
+			thePrimitiveObject = self.PrimitiveFactory(document, theMeshObject, primitive)
+			theMeshObject.primitives.append(thePrimitiveObject)
+		return theMeshObject
 
-		return theObject
+	####################################################################
 
 	@factory
-	def SourceFactory(self, document, parent, element):
-		theObject = Source(parent, element.attrib.get('id'))
-		theTechnique = OneOrThrow(element.xpath('./NS:technique_common', namespaces = self.NS))
-		theAccessor = OneOrThrow(theTechnique.xpath('./NS:accessor', namespaces = self.NS))
-		theURL = theAccessor.attrib['source']
-		theFloatArray = document.lookupElement(theURL, 'float_array')
-		theObject.count = int(theFloatArray.attrib['count'])
-		theArray = numpy.lib.io.loadtxt(StringIO.StringIO(theFloatArray.text), dtype=numpy.float32)
-		theObject.vbo = VBO(theArray)
+	def PrimitiveFactory(self, document, parent, element):
+
+		# TODO - this isn't very generic
+
+		theObject = Primitive(parent, element.attrib.get('id'))
+
+		theTypesByTag = {
+			'{%s}triangles' % (self.namespace): 'triangles',
+			'{%s}lines' % (self.namespace): 'lines',
+			}
+#
+		theObject.type = theTypesByTag[element.tag]
+		theObject.indexCount = int(element.attrib['count'])
+
+		theIndices = OneOrThrow(element.xpath('./NS:p', namespaces = self.NS))
+		theIndices = numpy.lib.io.loadtxt(StringIO.StringIO(theIndices.text), dtype=numpy.int16)
+
+		### POSITIONS & NORMALS
+		theInput = OneOrThrow(element.xpath('./NS:input[@semantic="VERTEX"]', namespaces = self.NS))
+		theVerticesOffset = theInput.attrib['offset']
+		theInputURL = theInput.attrib['source']
+		theVertices = document.lookupElement(theInputURL)
+
+		theURL = OneOrThrow(theVertices.xpath('./NS:input[@semantic="POSITION"]/@source', namespaces = self.NS))
+		theSource = document.lookupElement(theURL)
+		thePositions = self.ArrayForSource(document, theSource)
+		print thePositions
+
+		theURL = OneOrThrow(theVertices.xpath('./NS:input[@semantic="NORMAL"]/@source', namespaces = self.NS))
+		theSource = document.lookupElement(theURL)
+		theNormals = self.ArrayForSource(document, theSource)
+		print theNormals
+
+		theInput = OneOrThrow(element.xpath('./NS:input[@semantic="TEXCOORD"]', namespaces = self.NS))
+		theTexCoordsOffset = theInput.attrib['offset']
+		theInputURL = theInput.attrib['source']
+		theSource = document.lookupElement(theInputURL)
+		theTexCoords = self.ArrayForSource(document, theSource)
+		print theTexCoords
+
+
+
+
+
 		return theObject
+
+
+
+	####################################################################
 
 	@factory
 	def MaterialFactory(self, document, parent, element):
 		theObject = Material(parent, element.attrib.get('id'))
 		return theObject
 
+	####################################################################
+
 	@factory
 	def EffectFactory(self, document, parent, element):
 		theObject = LambertEffect(parent, element.attrib.get('id'))
 
-# 		theDiffuseColor = OneOrMoreOrThrow(element.xpath('./NS:profile_COMMON/NS:technique/NS:lambert/NS:diffuse/NS:color', namespaces = self.NS))
-# 		theDiffuseColor =  [float(x) for x in theDiffuseColor.text.split(' ')]
-# 		theObject.diffuseColor = RGBAColor(theDiffuseColor)
+#		theDiffuseColor = OneOrMoreOrThrow(element.xpath('./NS:profile_COMMON/NS:technique/NS:lambert/NS:diffuse/NS:color', namespaces = self.NS))
+#		theDiffuseColor =  [float(x) for x in theDiffuseColor.text.split(' ')]
+#		theObject.diffuseColor = RGBAColor(theDiffuseColor)
 
 		return theObject
 
 ########################################################################
+
+def main():
+	theInputPath = os.getcwd()
+	theOutputPath = os.path.join(os.getcwd(), 'Output')
+
+	if not os.path.exists(theOutputPath):
+		os.makedirs(theOutputPath)
+
+#	theDocumentPath = os.path.join(theInputPath, 'WallE.dae')
+#	theDocumentPath = os.path.join(theInputPath, 'Samples/Cylinder.dae')
+#	theDocumentPath = os.path.join(theInputPath, 'Samples/F1.dae')
+	theDocumentPath = os.path.join(theInputPath, 'Samples/Cube2.dae')
+
+	theTree = etree.parse(theDocumentPath)
+	theRootElement = OneOrThrow(theTree.xpath("/NS:COLLADA", namespaces = Parser.NS))
+
+	theParser = Parser()
+
+	doc = theParser.DocumentFactory(None, None, theRootElement)
+	doc.dump()
+
+if __name__ == '__main__':
+	main()

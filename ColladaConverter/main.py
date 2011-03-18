@@ -15,12 +15,13 @@ def main():
 	theInputPath = os.getcwd()
 	theOutputPath = os.path.join(os.getcwd(), 'Output')
 
-	os.makedirs(theOutputPath)
+	if not os.path.exists(theOutputPath):
+		os.makedirs(theOutputPath)
 
 #	theDocumentPath = os.path.join(theInputPath, 'WallE.dae')
 #	theDocumentPath = os.path.join(theInputPath, 'Samples/Cylinder.dae')
 #	theDocumentPath = os.path.join(theInputPath, 'Samples/F1.dae')
-	theDocumentPath = os.path.join(theInputPath, 'Samples/Cube.dae')
+	theDocumentPath = os.path.join(theInputPath, 'Samples/Cube2.dae')
 
 	theTree = etree.parse(theDocumentPath)
 	theRootElement = OneOrThrow(theTree.xpath("/NS:COLLADA", namespaces = Collada.Parser.NS))
@@ -47,15 +48,15 @@ def main():
 	theLibrary = [o for o in theLibrary if o.id is not None]
 
 
-	d = {
-		'root': doc.scene.visualScene.resolve(),
-		'library': dict([(o.id, o) for o in theLibrary]),
-		}
-
-
-	s = Writer.MyJSONEncoder(indent = 2).encode(d)
-	file(os.path.join(theOutputPath, 'Output.json'), 'w').write(s)
-
+# 	d = {
+# 		'root': doc.scene.visualScene.resolve(),
+# 		'library': dict([(o.id, o) for o in theLibrary]),
+# 		}
+#
+#
+# 	s = Writer.MyJSONEncoder(indent = 2).encode(d)
+# 	file(os.path.join(theOutputPath, 'Output.json'), 'w').write(s)
+#
 
 if __name__ == '__main__':
 	main()
