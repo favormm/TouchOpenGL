@@ -9,7 +9,6 @@
 #import "CModelViewController.h"
 
 #import "CInteractiveRendererView.h"
-#import "CTestSceneRenderer.h"
 #import "CSceneGraphRenderer.h"
 #import "CModelLoader.h"
 #import "COBJRenderer.h"
@@ -33,10 +32,7 @@
 - (void)loadView
     {
     self.view = [[[CInteractiveRendererView alloc] initWithFrame:CGRectZero] autorelease];
-    }
-    
-- (void)viewDidLoad
-    {
+
     CRenderer *theRenderer = NULL;
     if (0)
         {
@@ -52,10 +48,10 @@
         {
         theRenderer = [[[COBJRenderer alloc] init] autorelease];
         }
-    else if (0)
-        {
-        theRenderer = [[[CTestSceneRenderer alloc] init] autorelease];
-        }
+//    else if (0)
+//        {
+//        theRenderer = [[[CTestSceneRenderer alloc] init] autorelease];
+//        }
     
     self.rendererView.renderer = theRenderer;
     }

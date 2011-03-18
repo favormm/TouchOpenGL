@@ -43,7 +43,6 @@
         NSURL *theVBOURL = [[NSBundle mainBundle] URLForResource:[inName stringByDeletingPathExtension] withExtension:[inName pathExtension]];
         NSData *theVBOData = [NSData dataWithContentsOfURL:theVBOURL options:0 error:NULL];
         theObject = [[[CVertexBuffer alloc] initWithTarget:inTarget usage:inUsage data:theVBOData] autorelease];
-        NSLog(@"LOADED: %@", theObject);
         
         [self.cache setObject:theObject forKey:inName cost:theVBOData.length];
         }
