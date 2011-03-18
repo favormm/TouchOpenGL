@@ -35,6 +35,7 @@
 
 - (void)startAnimation;
 - (void)stopAnimation;
-- (void)drawView:(id)sender;
+
+- (void)render;
 
 @end

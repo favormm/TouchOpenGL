@@ -39,7 +39,7 @@
 	if ((self = [super init]) != NULL)
 		{
         CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
-        self.meshes = [theLoader loadMeshesFromFile:@"TIE_INTERCEPTOR"];
+        self.meshes = [theLoader loadMeshesFromFile:@"utah_teapot_hires"];
         
         self.flatProgram = [[[CProgram alloc] initWithName:@"Flat2"] autorelease];
         self.textureProgram = [[[CProgram alloc] initWithName:@"SimpleTexture"] autorelease];
@@ -55,7 +55,7 @@
 
     [self drawAxes:Matrix4Scale(inTransform, 0.01, 0.01, 0.01)];
 
-    inTransform = Matrix4Translate(inTransform, -0.11669700000000005, -9.0695499999999996, 1.9563415000000002);
+//    inTransform = Matrix4Translate(inTransform, -0.11669700000000005, -9.0695499999999996, 1.9563415000000002);
     inTransform = Matrix4Scale(inTransform, 0.01, 0.01, 0.01);
 
 

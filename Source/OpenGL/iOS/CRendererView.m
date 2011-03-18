@@ -132,7 +132,7 @@
 	[EAGLContext setCurrentContext:context];
 	[self setupFramebuffers];
 
-    [self drawView:NULL];
+    [self render];
     }
 
 - (CAEAGLLayer *)EAGLLayer
@@ -160,7 +160,7 @@
         {
         self.animating = TRUE;
 
-        displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(drawView:)];
+        displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(tick:)];
         [displayLink setFrameInterval:self.animationFrameInterval];
         [displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         }
@@ -177,7 +177,12 @@
         }
     }
 
-- (void)drawView:(id)sender
+- (void)tick:(id)inSender
+    {
+    [self render];
+    }
+
+- (void)render
     {
     if (self.animating)
         {

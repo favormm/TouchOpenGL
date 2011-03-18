@@ -29,6 +29,8 @@
 		4537C2401332CCA900DE1A0A /* TIE_INTERCEPTOR.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2361332CCA900DE1A0A /* TIE_INTERCEPTOR.plist */; };
 		4537C2431332CCE100DE1A0A /* CMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 4537C2421332CCDD00DE1A0A /* CMaterial.m */; };
 		4537C2451332CF3E00DE1A0A /* _Gainsboro_.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2441332CF3E00DE1A0A /* _Gainsboro_.jpg */; };
+		453FBD9A13331C4F00381AB6 /* 831d02874faef2b89f1083bd5380f240.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 453FBD9813331C4F00381AB6 /* 831d02874faef2b89f1083bd5380f240.vbo */; };
+		453FBD9B13331C4F00381AB6 /* utah_teapot_hires.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453FBD9913331C4F00381AB6 /* utah_teapot_hires.plist */; };
 		45434BAB1328142700A353EC /* CScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434B9E1328142700A353EC /* CScene.m */; };
 		45434BAC1328142700A353EC /* CSceneGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA01328142700A353EC /* CSceneGeometry.m */; };
 		45434BAD1328142700A353EC /* CSceneGeometry_ConvenienceExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA21328142700A353EC /* CSceneGeometry_ConvenienceExtensions.m */; };
@@ -71,6 +73,7 @@
 		45BFEA60132957DB00B6C3D8 /* Quaternion.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA5F132957DB00B6C3D8 /* Quaternion.m */; };
 		45BFEA64132965ED00B6C3D8 /* Matrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA63132965ED00B6C3D8 /* Matrix.m */; };
 		45E1712213318E2000ECA02A /* COBJRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E1712113318E2000ECA02A /* COBJRenderer.m */; };
+		45E9B15A13332764000212E8 /* AccelerometerFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E9B15913332764000212E8 /* AccelerometerFilter.m */; };
 		45F9EE5313301D8B005DF7A8 /* CTestRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F9EE5013301D8B005DF7A8 /* CTestRenderer.m */; };
 		45F9EE5413301D8B005DF7A8 /* CTestSceneRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F9EE5213301D8B005DF7A8 /* CTestSceneRenderer.m */; };
 /* End PBXBuildFile section */
@@ -105,6 +108,8 @@
 		4537C2411332CCD900DE1A0A /* CMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMaterial.h; sourceTree = "<group>"; };
 		4537C2421332CCDD00DE1A0A /* CMaterial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMaterial.m; sourceTree = "<group>"; };
 		4537C2441332CF3E00DE1A0A /* _Gainsboro_.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = _Gainsboro_.jpg; path = ../../Input/TIE_INTERCEPTOR/TIE_INTERCEPTOR/_Gainsboro_.jpg; sourceTree = "<group>"; };
+		453FBD9813331C4F00381AB6 /* 831d02874faef2b89f1083bd5380f240.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 831d02874faef2b89f1083bd5380f240.vbo; sourceTree = "<group>"; };
+		453FBD9913331C4F00381AB6 /* utah_teapot_hires.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = utah_teapot_hires.plist; sourceTree = "<group>"; };
 		45434B9D1328142700A353EC /* CScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CScene.h; sourceTree = "<group>"; };
 		45434B9E1328142700A353EC /* CScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CScene.m; sourceTree = "<group>"; };
 		45434B9F1328142700A353EC /* CSceneGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneGeometry.h; sourceTree = "<group>"; };
@@ -183,6 +188,8 @@
 		45BFEA63132965ED00B6C3D8 /* Matrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix.m; sourceTree = "<group>"; };
 		45E1712013318E2000ECA02A /* COBJRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBJRenderer.h; sourceTree = "<group>"; };
 		45E1712113318E2000ECA02A /* COBJRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBJRenderer.m; sourceTree = "<group>"; };
+		45E9B15813332764000212E8 /* AccelerometerFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerometerFilter.h; sourceTree = "<group>"; };
+		45E9B15913332764000212E8 /* AccelerometerFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccelerometerFilter.m; sourceTree = "<group>"; };
 		45F9EE4F13301D8B005DF7A8 /* CTestRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTestRenderer.h; sourceTree = "<group>"; };
 		45F9EE5013301D8B005DF7A8 /* CTestRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTestRenderer.m; sourceTree = "<group>"; };
 		45F9EE5113301D8B005DF7A8 /* CTestSceneRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTestSceneRenderer.h; sourceTree = "<group>"; };
@@ -225,6 +232,8 @@
 				4537C19F133298C000DE1A0A /* CMeshLoader.m */,
 				459CFBA81332E78F00B16315 /* CRenderer_Extensions.h */,
 				459CFBA91332E78F00B16315 /* CRenderer_Extensions.m */,
+				45E9B15813332764000212E8 /* AccelerometerFilter.h */,
+				45E9B15913332764000212E8 /* AccelerometerFilter.m */,
 				45F9EA2A13301D37005DF7A8 /* Samples */,
 				45F9EE4E13301D8B005DF7A8 /* Common */,
 			);
@@ -247,7 +256,17 @@
 				4537C2361332CCA900DE1A0A /* TIE_INTERCEPTOR.plist */,
 			);
 			name = TIE_INTERCEPTOR;
-			path = ../../../../../Dropbox/OBJ/Output/TIE_INTERCEPTOR;
+			path = ../../../OBJConverter/Output/TIE_INTERCEPTOR;
+			sourceTree = "<group>";
+		};
+		453FBD9713331C4F00381AB6 /* utah_teapot_hires */ = {
+			isa = PBXGroup;
+			children = (
+				453FBD9813331C4F00381AB6 /* 831d02874faef2b89f1083bd5380f240.vbo */,
+				453FBD9913331C4F00381AB6 /* utah_teapot_hires.plist */,
+			);
+			name = utah_teapot_hires;
+			path = ../../../OBJConverter/Output/utah_teapot_hires;
 			sourceTree = "<group>";
 		};
 		45434B9C1328142700A353EC /* SceneGraph */ = {
@@ -283,7 +302,6 @@
 		45781C49130AFE1E00B57285 = {
 			isa = PBXGroup;
 			children = (
-				459CFBA51332E48800B16315 /* CoreMotion.framework */,
 				45299662130B8D6A009FD0A3 /* SimpleTest */,
 				4527175B130B27D600529A0C /* Brick.png */,
 				459207F113280E2400B561F4 /* Source */,
@@ -303,6 +321,7 @@
 		45781C57130AFE1E00B57285 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				459CFBA51332E48800B16315 /* CoreMotion.framework */,
 				4527175A130B247700529A0C /* CoreGraphics.framework */,
 				4527174B130B203700529A0C /* QuartzCore.framework */,
 				45271749130B202F00529A0C /* OpenGLES.framework */,
@@ -405,6 +424,7 @@
 		45F9EA2A13301D37005DF7A8 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
+				453FBD9713331C4F00381AB6 /* utah_teapot_hires */,
 				4537C22C1332CCA800DE1A0A /* TIE_INTERCEPTOR */,
 			);
 			path = Samples;
@@ -491,6 +511,8 @@
 				4537C23F1332CCA900DE1A0A /* f463fb69546ffaf9a1180ec879a06e52.vbo in Resources */,
 				4537C2401332CCA900DE1A0A /* TIE_INTERCEPTOR.plist in Resources */,
 				4537C2451332CF3E00DE1A0A /* _Gainsboro_.jpg in Resources */,
+				453FBD9A13331C4F00381AB6 /* 831d02874faef2b89f1083bd5380f240.vbo in Resources */,
+				453FBD9B13331C4F00381AB6 /* utah_teapot_hires.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +564,7 @@
 				4537C1A0133298C100DE1A0A /* CMeshLoader.m in Sources */,
 				4537C2431332CCE100DE1A0A /* CMaterial.m in Sources */,
 				459CFBAA1332E79000B16315 /* CRenderer_Extensions.m in Sources */,
+				45E9B15A13332764000212E8 /* AccelerometerFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,8 +612,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				OTHER_CFLAGS = "-DDEBUG=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -603,6 +628,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

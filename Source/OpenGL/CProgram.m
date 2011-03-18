@@ -134,6 +134,22 @@
         }
 
     AssertOpenGLNoError_();
+    
+    
+//    glGetProgramiv and the list of active attributes in a program can be queried using glGetActiveAttrib. 
+
+//    GLint theNumberOfAttributes;
+//    glGetProgramiv(theProgramName, GL_ACTIVE_ATTRIBUTES, &theNumberOfAttributes);
+//    
+//    NSLog(@"> %d", theNumberOfAttributes);
+//
+//    for (GLint N = 0; N != theNumberOfAttributes; ++N)
+//        {
+//        char theBuffer[256];
+//        glGetActiveAttrib(theProgramName, N, 256, theBuffer, NULL, NULL, NULL);
+//        NSLog(@"%s", theBuffer);
+//        }
+
 
     // Bind attribute locations this needs to be done prior to linking
     for (NSString *theAttributeName in self.attributesByName)

@@ -12,6 +12,11 @@
 #import "CTestSceneRenderer.h"
 #import "CSceneGraphRenderer.h"
 #import "CModelLoader.h"
+#import "COBJRenderer.h"
+
+@interface CModelViewController ()
+
+@end
 
 @implementation CModelViewController
 
@@ -33,7 +38,7 @@
 - (void)viewDidLoad
     {
     CRenderer *theRenderer = NULL;
-    if (1)
+    if (0)
         {
         CModelLoader *theLoader = [[[CModelLoader alloc] init] autorelease];
         NSURL *theModelURL = [[NSBundle mainBundle] URLForResource:@"Cube" withExtension:@"plist"];
@@ -43,7 +48,11 @@
         theSceneRenderer.sceneGraph = theScene;
         theRenderer = theSceneRenderer;
         }
-    else
+    else if (1)
+        {
+        theRenderer = [[[COBJRenderer alloc] init] autorelease];
+        }
+    else if (0)
         {
         theRenderer = [[[CTestSceneRenderer alloc] init] autorelease];
         }

@@ -8,18 +8,28 @@
 
 #import "CInteractiveRendererView.h"
 
+#import <CoreMotion/CoreMotion.h>
+
 #import "OpenGLTypes.h"
 #import "CArcBall.h"
+#import "AccelerometerFilter.h"
+#import "Quaternion.h"
 
 @interface CInteractiveRendererView ()
+@property (readwrite, nonatomic, assign) Quaternion motionRotation;
+@property (readwrite, nonatomic, assign) Quaternion gestureRotation;
 @property (readwrite, nonatomic, assign) CGFloat scale;
 @property (readwrite, nonatomic, retain) CArcBall *arcBall;
+@property (readwrite, nonatomic, retain) CMMotionManager *motionManager;
 @end
 
 @implementation CInteractiveRendererView
 
+@synthesize motionRotation;
+@synthesize gestureRotation;
 @synthesize scale;
 @synthesize arcBall;
+@synthesize motionManager;
 
 - (id)initWithFrame:(CGRect)inFrame;
     {    
@@ -35,22 +45,45 @@
         UIPanGestureRecognizer *thePanGestureRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)] autorelease];
         [self addGestureRecognizer:thePanGestureRecognizer];
         
+        motionManager = [[CMMotionManager alloc] init];
+        [motionManager startDeviceMotionUpdates];
         }
 
     return self;
     }
 
+- (void)render
+    {
+    CMDeviceMotion *theDeviceMotion = self.motionManager.deviceMotion;		
+
+    CMQuaternion theCMRotation = theDeviceMotion.attitude.quaternion;
+    
+    self.motionRotation = (Quaternion){ theCMRotation.x, theCMRotation.y, theCMRotation.z, theCMRotation.w };
+
+    Matrix4 theTransform = Matrix4MakeScale(self.scale, self.scale, self.scale);
+
+    theTransform = Matrix4Concat(theTransform, Matrix4FromQuaternion(self.motionRotation));
+    theTransform = Matrix4Concat(theTransform, Matrix4FromQuaternion(self.gestureRotation));
+    self.transform = theTransform;
+    
+//    NSLog(@"%@", NSStringFromMatrix4(self.transform));
+    NSLog(@"%@", NSStringFromQuaternion(self.motionRotation));
+
+    [super render];
+    }
+
+
+
 - (void)pinch:(UIPinchGestureRecognizer *)inGestureRecognizer
     {
-    NSLog(@"PINCH");
+//    NSLog(@"PINCH");
     
     self.scale += inGestureRecognizer.velocity / 10;
-    self.transform = Matrix4MakeScale(self.scale, self.scale, self.scale);
     }
 
 - (void)pan:(UIPanGestureRecognizer *)inGestureRecognizer
     {
-    NSLog(@"PAN: %d", inGestureRecognizer.state);
+//    NSLog(@"PAN: %d", inGestureRecognizer.state);
     
     CGSize theSize = self.bounds.size;
     CGPoint theLocation = [inGestureRecognizer locationInView:self];
@@ -70,9 +103,7 @@
         {
         [self.arcBall dragTo:thePoint];
         
-        Matrix4 theScale = Matrix4MakeScale(self.scale, self.scale, self.scale);
-        
-        self.transform = Matrix4Concat(theScale, self.arcBall.rotationMatrix);
+        self.gestureRotation = self.arcBall.rotation;
         }
     }
 

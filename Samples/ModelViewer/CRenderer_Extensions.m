@@ -45,21 +45,33 @@
         };
 
     // Use shader program
-    glUseProgram(theProgram.name);
+
     
     // Update position attribute
     GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"vertex"];        
     glVertexAttribPointer(theVertexAttributeIndex, 3, GL_FLOAT, GL_FALSE, 0, theVertices);
     glEnableVertexAttribArray(theVertexAttributeIndex);
 
+    AssertOpenGLNoError_();
+
     // Update color attribute
     GLuint theColorsAttributeIndex = [theProgram attributeIndexForName:@"color"];        
-    glVertexAttribPointer(theColorsAttributeIndex, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, theColors);
     glEnableVertexAttribArray(theColorsAttributeIndex);
+    glVertexAttribPointer(theColorsAttributeIndex, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, theColors);
+//    glVertexAttrib4f(theColorsAttributeIndex, 1.0, 0.0, 0.0, 1.0);
+
+    AssertOpenGLNoError_();
+
+    glUseProgram(theProgram.name);
+
 
     // Update transform uniform
     GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"transform"];
     glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &inTransform.m00);
+
+    AssertOpenGLNoError_();
+
+
 
 
     // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.
@@ -79,8 +91,6 @@
     glDrawArrays(GL_LINES, 0, 6);
 
     AssertOpenGLNoError_();
-
-    NSLog(@"DONE");
     }
 
 @end
