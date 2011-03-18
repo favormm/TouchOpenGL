@@ -17,20 +17,7 @@
 		4537C1A0133298C100DE1A0A /* CMeshLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4537C19F133298C000DE1A0A /* CMeshLoader.m */; };
 		4537C2171332B6A900DE1A0A /* SimpleTexture.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2151332B6A900DE1A0A /* SimpleTexture.fsh */; };
 		4537C2181332B6A900DE1A0A /* SimpleTexture.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2161332B6A900DE1A0A /* SimpleTexture.vsh */; };
-		4537C2371332CCA900DE1A0A /* 0628d4305ef71de954ca2884014ef582.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4537C22D1332CCA900DE1A0A /* 0628d4305ef71de954ca2884014ef582.vbo */; };
-		4537C2381332CCA900DE1A0A /* 36d303c4c2bcf0f28d45bf2b059db91b.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4537C22E1332CCA900DE1A0A /* 36d303c4c2bcf0f28d45bf2b059db91b.vbo */; };
-		4537C2391332CCA900DE1A0A /* 4c60901c22e234db775ff48e63094985.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4537C22F1332CCA900DE1A0A /* 4c60901c22e234db775ff48e63094985.vbo */; };
-		4537C23A1332CCA900DE1A0A /* 6b47ea2cc9b68d9a102d760f37e895ef.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2301332CCA900DE1A0A /* 6b47ea2cc9b68d9a102d760f37e895ef.vbo */; };
-		4537C23B1332CCA900DE1A0A /* 87465a31d831d5f719e4175a136988c3.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2311332CCA900DE1A0A /* 87465a31d831d5f719e4175a136988c3.vbo */; };
-		4537C23C1332CCA900DE1A0A /* ba6e65e0d0a864d3fff6688dad9f8c10.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2321332CCA900DE1A0A /* ba6e65e0d0a864d3fff6688dad9f8c10.vbo */; };
-		4537C23D1332CCA900DE1A0A /* d8823661598803804bc5cec69a468cda.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2331332CCA900DE1A0A /* d8823661598803804bc5cec69a468cda.vbo */; };
-		4537C23E1332CCA900DE1A0A /* eb55d9a8d75a67d5db2ca0b365a2e51b.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2341332CCA900DE1A0A /* eb55d9a8d75a67d5db2ca0b365a2e51b.vbo */; };
-		4537C23F1332CCA900DE1A0A /* f463fb69546ffaf9a1180ec879a06e52.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2351332CCA900DE1A0A /* f463fb69546ffaf9a1180ec879a06e52.vbo */; };
-		4537C2401332CCA900DE1A0A /* TIE_INTERCEPTOR.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2361332CCA900DE1A0A /* TIE_INTERCEPTOR.plist */; };
 		4537C2431332CCE100DE1A0A /* CMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 4537C2421332CCDD00DE1A0A /* CMaterial.m */; };
-		4537C2451332CF3E00DE1A0A /* _Gainsboro_.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4537C2441332CF3E00DE1A0A /* _Gainsboro_.jpg */; };
-		453FBD9A13331C4F00381AB6 /* 831d02874faef2b89f1083bd5380f240.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 453FBD9813331C4F00381AB6 /* 831d02874faef2b89f1083bd5380f240.vbo */; };
-		453FBD9B13331C4F00381AB6 /* utah_teapot_hires.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453FBD9913331C4F00381AB6 /* utah_teapot_hires.plist */; };
 		45434BAB1328142700A353EC /* CScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434B9E1328142700A353EC /* CScene.m */; };
 		45434BAC1328142700A353EC /* CSceneGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA01328142700A353EC /* CSceneGeometry.m */; };
 		45434BAD1328142700A353EC /* CSceneGeometry_ConvenienceExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45434BA21328142700A353EC /* CSceneGeometry_ConvenienceExtensions.m */; };
@@ -147,21 +134,8 @@
 		4537C19F133298C000DE1A0A /* CMeshLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMeshLoader.m; sourceTree = "<group>"; };
 		4537C2151332B6A900DE1A0A /* SimpleTexture.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SimpleTexture.fsh; sourceTree = "<group>"; };
 		4537C2161332B6A900DE1A0A /* SimpleTexture.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SimpleTexture.vsh; sourceTree = "<group>"; };
-		4537C22D1332CCA900DE1A0A /* 0628d4305ef71de954ca2884014ef582.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 0628d4305ef71de954ca2884014ef582.vbo; sourceTree = "<group>"; };
-		4537C22E1332CCA900DE1A0A /* 36d303c4c2bcf0f28d45bf2b059db91b.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 36d303c4c2bcf0f28d45bf2b059db91b.vbo; sourceTree = "<group>"; };
-		4537C22F1332CCA900DE1A0A /* 4c60901c22e234db775ff48e63094985.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4c60901c22e234db775ff48e63094985.vbo; sourceTree = "<group>"; };
-		4537C2301332CCA900DE1A0A /* 6b47ea2cc9b68d9a102d760f37e895ef.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 6b47ea2cc9b68d9a102d760f37e895ef.vbo; sourceTree = "<group>"; };
-		4537C2311332CCA900DE1A0A /* 87465a31d831d5f719e4175a136988c3.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 87465a31d831d5f719e4175a136988c3.vbo; sourceTree = "<group>"; };
-		4537C2321332CCA900DE1A0A /* ba6e65e0d0a864d3fff6688dad9f8c10.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = ba6e65e0d0a864d3fff6688dad9f8c10.vbo; sourceTree = "<group>"; };
-		4537C2331332CCA900DE1A0A /* d8823661598803804bc5cec69a468cda.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = d8823661598803804bc5cec69a468cda.vbo; sourceTree = "<group>"; };
-		4537C2341332CCA900DE1A0A /* eb55d9a8d75a67d5db2ca0b365a2e51b.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = eb55d9a8d75a67d5db2ca0b365a2e51b.vbo; sourceTree = "<group>"; };
-		4537C2351332CCA900DE1A0A /* f463fb69546ffaf9a1180ec879a06e52.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = f463fb69546ffaf9a1180ec879a06e52.vbo; sourceTree = "<group>"; };
-		4537C2361332CCA900DE1A0A /* TIE_INTERCEPTOR.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TIE_INTERCEPTOR.plist; sourceTree = "<group>"; };
 		4537C2411332CCD900DE1A0A /* CMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMaterial.h; sourceTree = "<group>"; };
 		4537C2421332CCDD00DE1A0A /* CMaterial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMaterial.m; sourceTree = "<group>"; };
-		4537C2441332CF3E00DE1A0A /* _Gainsboro_.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = _Gainsboro_.jpg; path = ../../Input/TIE_INTERCEPTOR/TIE_INTERCEPTOR/_Gainsboro_.jpg; sourceTree = "<group>"; };
-		453FBD9813331C4F00381AB6 /* 831d02874faef2b89f1083bd5380f240.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 831d02874faef2b89f1083bd5380f240.vbo; sourceTree = "<group>"; };
-		453FBD9913331C4F00381AB6 /* utah_teapot_hires.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = utah_teapot_hires.plist; sourceTree = "<group>"; };
 		45434B9D1328142700A353EC /* CScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CScene.h; sourceTree = "<group>"; };
 		45434B9E1328142700A353EC /* CScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CScene.m; sourceTree = "<group>"; };
 		45434B9F1328142700A353EC /* CSceneGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSceneGeometry.h; sourceTree = "<group>"; };
@@ -342,35 +316,6 @@
 				45F9EE4E13301D8B005DF7A8 /* Common */,
 			);
 			name = SimpleTest;
-			sourceTree = "<group>";
-		};
-		4537C22C1332CCA800DE1A0A /* TIE_INTERCEPTOR */ = {
-			isa = PBXGroup;
-			children = (
-				4537C2441332CF3E00DE1A0A /* _Gainsboro_.jpg */,
-				4537C22D1332CCA900DE1A0A /* 0628d4305ef71de954ca2884014ef582.vbo */,
-				4537C22E1332CCA900DE1A0A /* 36d303c4c2bcf0f28d45bf2b059db91b.vbo */,
-				4537C22F1332CCA900DE1A0A /* 4c60901c22e234db775ff48e63094985.vbo */,
-				4537C2301332CCA900DE1A0A /* 6b47ea2cc9b68d9a102d760f37e895ef.vbo */,
-				4537C2311332CCA900DE1A0A /* 87465a31d831d5f719e4175a136988c3.vbo */,
-				4537C2321332CCA900DE1A0A /* ba6e65e0d0a864d3fff6688dad9f8c10.vbo */,
-				4537C2331332CCA900DE1A0A /* d8823661598803804bc5cec69a468cda.vbo */,
-				4537C2341332CCA900DE1A0A /* eb55d9a8d75a67d5db2ca0b365a2e51b.vbo */,
-				4537C2351332CCA900DE1A0A /* f463fb69546ffaf9a1180ec879a06e52.vbo */,
-				4537C2361332CCA900DE1A0A /* TIE_INTERCEPTOR.plist */,
-			);
-			name = TIE_INTERCEPTOR;
-			path = ../../../OBJConverter/Output/TIE_INTERCEPTOR;
-			sourceTree = "<group>";
-		};
-		453FBD9713331C4F00381AB6 /* utah_teapot_hires */ = {
-			isa = PBXGroup;
-			children = (
-				453FBD9813331C4F00381AB6 /* 831d02874faef2b89f1083bd5380f240.vbo */,
-				453FBD9913331C4F00381AB6 /* utah_teapot_hires.plist */,
-			);
-			name = utah_teapot_hires;
-			path = ../../../OBJConverter/Output/utah_teapot_hires;
 			sourceTree = "<group>";
 		};
 		45434B9C1328142700A353EC /* SceneGraph */ = {
@@ -588,8 +533,6 @@
 			isa = PBXGroup;
 			children = (
 				45F259731333308C0017E74D /* Liberty */,
-				453FBD9713331C4F00381AB6 /* utah_teapot_hires */,
-				4537C22C1332CCA800DE1A0A /* TIE_INTERCEPTOR */,
 			);
 			path = Samples;
 			sourceTree = SOURCE_ROOT;
@@ -664,19 +607,6 @@
 				4529966F130B8D6A009FD0A3 /* MainWindow.xib in Resources */,
 				4592086213280E2400B561F4 /* Flat.fsh in Resources */,
 				4592086313280E2400B561F4 /* Flat.vsh in Resources */,
-				4537C2371332CCA900DE1A0A /* 0628d4305ef71de954ca2884014ef582.vbo in Resources */,
-				4537C2381332CCA900DE1A0A /* 36d303c4c2bcf0f28d45bf2b059db91b.vbo in Resources */,
-				4537C2391332CCA900DE1A0A /* 4c60901c22e234db775ff48e63094985.vbo in Resources */,
-				4537C23A1332CCA900DE1A0A /* 6b47ea2cc9b68d9a102d760f37e895ef.vbo in Resources */,
-				4537C23B1332CCA900DE1A0A /* 87465a31d831d5f719e4175a136988c3.vbo in Resources */,
-				4537C23C1332CCA900DE1A0A /* ba6e65e0d0a864d3fff6688dad9f8c10.vbo in Resources */,
-				4537C23D1332CCA900DE1A0A /* d8823661598803804bc5cec69a468cda.vbo in Resources */,
-				4537C23E1332CCA900DE1A0A /* eb55d9a8d75a67d5db2ca0b365a2e51b.vbo in Resources */,
-				4537C23F1332CCA900DE1A0A /* f463fb69546ffaf9a1180ec879a06e52.vbo in Resources */,
-				4537C2401332CCA900DE1A0A /* TIE_INTERCEPTOR.plist in Resources */,
-				4537C2451332CF3E00DE1A0A /* _Gainsboro_.jpg in Resources */,
-				453FBD9A13331C4F00381AB6 /* 831d02874faef2b89f1083bd5380f240.vbo in Resources */,
-				453FBD9B13331C4F00381AB6 /* utah_teapot_hires.plist in Resources */,
 				45F259A81333308C0017E74D /* 0b703a902d943cd5aee65566450fb678.vbo in Resources */,
 				45F259A91333308C0017E74D /* 2c03150febf6b8fc88d1b70ded473087.vbo in Resources */,
 				45F259AA1333308C0017E74D /* 3022a385f4e1ef00290c07af8e524bd3.vbo in Resources */,
