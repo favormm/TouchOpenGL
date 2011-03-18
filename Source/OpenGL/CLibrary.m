@@ -35,14 +35,14 @@
     [super dealloc];
     }
 
-- (CVertexBuffer *)vertexBufferForName:(NSString *)inName
+- (CVertexBuffer *)vertexBufferForName:(NSString *)inName target:(GLenum)inTarget usage:(GLenum)inUsage
     {
     CVertexBuffer *theObject = [self.cache objectForKey:inName];
     if (theObject == NULL)
         {
         NSURL *theVBOURL = [[NSBundle mainBundle] URLForResource:[inName stringByDeletingPathExtension] withExtension:[inName pathExtension]];
         NSData *theVBOData = [NSData dataWithContentsOfURL:theVBOURL options:0 error:NULL];
-        theObject = [[[CVertexBuffer alloc] initWithTarget:GL_ELEMENT_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theVBOData] autorelease];
+        theObject = [[[CVertexBuffer alloc] initWithTarget:inTarget usage:inUsage data:theVBOData] autorelease];
         NSLog(@"LOADED: %@", theObject);
         
         [self.cache setObject:theObject forKey:inName cost:theVBOData.length];

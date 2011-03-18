@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#import "OpenGLIncludes.h"
+
 @class CVertexBuffer;
 
 @interface CLibrary : NSObject {
     
 }
 
-- (CVertexBuffer *)vertexBufferForName:(NSString *)inName;
+- (CVertexBuffer *)vertexBufferForName:(NSString *)inName target:(GLenum)inTarget usage:(GLenum)inUsage;
+
 
 @end
