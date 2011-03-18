@@ -39,7 +39,7 @@
 	if ((self = [super init]) != NULL)
 		{
         CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
-        self.meshes = [theLoader loadMeshesFromFile:@"utah_teapot_hires"];
+        self.meshes = [theLoader loadMeshesFromFile:@"Liberty"];
         
         self.flatProgram = [[[CProgram alloc] initWithName:@"Flat2"] autorelease];
         self.textureProgram = [[[CProgram alloc] initWithName:@"SimpleTexture"] autorelease];

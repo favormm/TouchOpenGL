@@ -166,7 +166,7 @@ theRootDir = os.path.split(sys.argv[0])[0]
 
 theInputDirectoryPath = os.path.join(theRootDir, 'Input')
 
-theInputFilePath = os.path.join(theInputDirectoryPath, 'utah_teapot_hires.obj')
+theInputFilePath = os.path.join(theInputDirectoryPath, 'Liberty/Liberty.obj')
 
 theModelName = os.path.splitext(os.path.split(theInputFilePath)[1])[0]
 
