@@ -18,6 +18,17 @@
 
 @implementation CImageTextureLoader
 
+@synthesize scaleToNextLargestPowerOfTwo;
+
+- (id)init
+	{
+	if ((self = [super init]) != NULL)
+		{
+		scaleToNextLargestPowerOfTwo = YES;
+		}
+	return(self);
+	}
+
 - (CTexture *)textureWithData:(NSData *)inData error:(NSError **)outError
     {
     UIImage *theImage = [UIImage imageWithData:inData];
@@ -43,12 +54,11 @@
     
     CGColorSpaceRef theColorSpace = CGImageGetColorSpace(theImageRef);
     CGColorSpaceModel theModel = CGColorSpaceGetModel(theColorSpace);
-//        NSLog(@"Model: %d", theModel);
     CGImageAlphaInfo theAlphaInfo = CGImageGetAlphaInfo(theImageRef);
-//        NSLog(@"Alpha Info: %d", theAlphaInfo);
     size_t theBitsPerComponent = CGImageGetBitsPerComponent(theImageRef);
-//        NSLog(@"%d", theBitsPerComponent);
+	CGSize theSize = inImage.size;
 
+//	NSLog(@"%g, %g", theSize.width, theSize.height);
 
     GLint theFormat = 0;
     GLint theType = 0;
@@ -66,13 +76,16 @@
         theFormat = GL_RGBA;
         theType = GL_UNSIGNED_BYTE;
 
-        NSLog(@"INFO: Unknown model (%d), alpha (%d) or bits per component (%ld). Converting image.", theModel, theAlphaInfo, theBitsPerComponent);
+		if (0)
+			{
+			NSLog(@"INFO: Unknown model (%d), alpha (%d) or bits per component (%ld). Converting image.", theModel, theAlphaInfo, theBitsPerComponent);
+			}
         
-        NSMutableData *theMutableData = [NSMutableData dataWithLength:inImage.size.width * 4 * inImage.size.height];
+        NSMutableData *theMutableData = [NSMutableData dataWithLength:theSize.width * 4 * theSize.height];
         theData = theMutableData;
-        CGContextRef theImageContext = CGBitmapContextCreate([theMutableData mutableBytes], inImage.size.width, inImage.size.height, 8, inImage.size.width * 4, CGImageGetColorSpace(theImageRef), kCGImageAlphaPremultipliedLast);
+        CGContextRef theImageContext = CGBitmapContextCreate([theMutableData mutableBytes], theSize.width, theSize.height, 8, theSize.width * 4, CGImageGetColorSpace(theImageRef), kCGImageAlphaPremultipliedLast);
 
-        CGContextDrawImage(theImageContext, (CGRect){ .size = inImage.size }, theImageRef);
+        CGContextDrawImage(theImageContext, (CGRect){ .size = theSize }, theImageRef);
         CGContextRelease(theImageContext);
         }
 
@@ -99,7 +112,7 @@
 
         glBindTexture(GL_TEXTURE_2D, 0);
         
-        CTexture *theTexture = [[[CTexture alloc] initWithName:theName width:inImage.size.width height:inImage.size.height] autorelease];
+        CTexture *theTexture = [[[CTexture alloc] initWithName:theName width:theSize.width height:theSize.height] autorelease];
         return(theTexture);
         } 
 

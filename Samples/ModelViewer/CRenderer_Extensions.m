@@ -48,14 +48,14 @@
 
     
     // Update position attribute
-    GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"vertex"];        
+    GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"a_vertex"];        
     glVertexAttribPointer(theVertexAttributeIndex, 3, GL_FLOAT, GL_FALSE, 0, theVertices);
     glEnableVertexAttribArray(theVertexAttributeIndex);
 
     AssertOpenGLNoError_();
 
     // Update color attribute
-    GLuint theColorsAttributeIndex = [theProgram attributeIndexForName:@"color"];        
+    GLuint theColorsAttributeIndex = [theProgram attributeIndexForName:@"a_color"];        
     glEnableVertexAttribArray(theColorsAttributeIndex);
     glVertexAttribPointer(theColorsAttributeIndex, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, theColors);
 //    glVertexAttrib4f(theColorsAttributeIndex, 1.0, 0.0, 0.0, 1.0);
@@ -66,7 +66,7 @@
 
 
     // Update transform uniform
-    GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"transform"];
+    GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"u_transform"];
     glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &inTransform.m00);
 
     AssertOpenGLNoError_();

@@ -6,17 +6,17 @@
 //  Copyright 2010 toxicsoftware.com. All rights reserved.
 //
 
-attribute vec4 vertex;
-attribute vec2 texture;
+attribute vec4 a_vertex;
+attribute vec2 a_texture;
 
-uniform mat4 transform;
+uniform mat4 u_transform;
 
 varying vec2 v_texture0;
 
 void main()
     {
-    vec4 thePosition = transform * vertex;
+    vec4 thePosition = u_transform * a_vertex;
     gl_Position = thePosition;
 
-    v_texture0 = texture;
+    v_texture0 = a_texture;
     }

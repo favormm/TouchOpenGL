@@ -15,7 +15,7 @@
 @synthesize positions;
 @synthesize texCoords;
 @synthesize normals;
-
+@synthesize center;
 
 
 @end

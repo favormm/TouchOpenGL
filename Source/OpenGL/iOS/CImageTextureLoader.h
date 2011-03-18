@@ -12,6 +12,9 @@
 
 }
 
+@property (readwrite, nonatomic, assign) BOOL scaleToNextLargestPowerOfTwo;
+
+
 - (CTexture *)textureWithImage:(UIImage *)inImage error:(NSError **)outError;
 - (CTexture *)textureWithImageNamed:(NSString *)inImageName error:(NSError **)outError;
 

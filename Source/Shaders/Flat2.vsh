@@ -7,10 +7,10 @@
 //
 
 
-attribute vec4 vertex;
-attribute vec4 normal;
+attribute vec4 a_vertex;
+attribute vec4 a_normal;
 
-uniform mat4 transform;
+uniform mat4 u_transform;
 uniform vec4 u_diffuse_color;
 uniform vec4 u_ambient_color;
 
@@ -21,5 +21,5 @@ void main()
     u_ambient_color;
     //
     v_color = u_diffuse_color;
-    gl_Position = transform * vertex;
+    gl_Position = u_transform * a_vertex;
     }

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "OpenGLTypes.h"
+
 @class CMaterial;
 @class CVertexBufferReference;
 
@@ -19,5 +21,6 @@
 @property (readwrite, nonatomic, retain) CVertexBufferReference *positions;
 @property (readwrite, nonatomic, retain) CVertexBufferReference *texCoords;
 @property (readwrite, nonatomic, retain) CVertexBufferReference *normals;
+@property (readwrite, nonatomic, assign) Vector3 center;
 
 @end

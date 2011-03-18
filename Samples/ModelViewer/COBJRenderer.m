@@ -51,15 +51,18 @@
     {
     AssertOpenGLNoError_();
 
-    [self drawAxes:Matrix4Scale(inTransform, 0.01, 0.01, 0.01)];
 
-//    inTransform = Matrix4Translate(inTransform, -0.11669700000000005, -9.0695499999999996, 1.9563415000000002);
-    inTransform = Matrix4Scale(inTransform, 0.01, 0.01, 0.01);
+    const Matrix4 theTransform = Matrix4Scale(inTransform, 0.01, 0.01, 0.01);
 
+    [self drawAxes:theTransform];
 
 
     for (CMesh *theMesh in self.meshes)
         {
+        Vector3 theCenter = theMesh.center;
+        Matrix4 theMeshTransform = Matrix4Concat(Matrix4MakeTranslation(-theCenter.x, -theCenter.y * 1.5, -theCenter.z), theTransform);
+
+
         CProgram *theProgram = self.flatProgram;
         
         if (theMesh.material.texture != NULL)
@@ -71,13 +74,13 @@
         glUseProgram(theProgram.name);
         
         // Update position attribute
-        GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"vertex"];        
+        GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"a_vertex"];        
         [theMesh.positions use:theVertexAttributeIndex];
         glEnableVertexAttribArray(theVertexAttributeIndex);
 
         // Update transform uniform
-        GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"transform"];
-        glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &inTransform.m00);
+        GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"u_transform"];
+        glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &theMeshTransform.m00);
 
         if (theProgram == self.textureProgram)
             {
@@ -85,7 +88,7 @@
             
             glBindTexture(GL_TEXTURE_2D, theTexture.name);
 
-            GLuint theTextureAttributeIndex = [theProgram attributeIndexForName:@"texture"];        
+            GLuint theTextureAttributeIndex = [theProgram attributeIndexForName:@"a_texture"];        
             [theMesh.texCoords use:theTextureAttributeIndex];
             glEnableVertexAttribArray(theTextureAttributeIndex);
             }

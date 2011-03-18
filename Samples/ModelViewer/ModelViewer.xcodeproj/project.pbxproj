@@ -76,6 +76,7 @@
 		45BFEA60132957DB00B6C3D8 /* Quaternion.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA5F132957DB00B6C3D8 /* Quaternion.m */; };
 		45BFEA64132965ED00B6C3D8 /* Matrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA63132965ED00B6C3D8 /* Matrix.m */; };
 		45E1712213318E2000ECA02A /* COBJRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E1712113318E2000ECA02A /* COBJRenderer.m */; };
+		45ED55B41333F62D003AB45E /* Lighting.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 45ED55B31333F62D003AB45E /* Lighting.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +193,7 @@
 		45BFEA63132965ED00B6C3D8 /* Matrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix.m; sourceTree = "<group>"; };
 		45E1712013318E2000ECA02A /* COBJRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBJRenderer.h; sourceTree = "<group>"; };
 		45E1712113318E2000ECA02A /* COBJRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBJRenderer.m; sourceTree = "<group>"; };
+		45ED55B31333F62D003AB45E /* Lighting.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Lighting.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -403,6 +405,7 @@
 				4592083A13280E2400B561F4 /* Flat.vsh */,
 				459CFBAB1332E9AB00B16315 /* Flat2.fsh */,
 				459CFBAC1332E9AB00B16315 /* Flat2.vsh */,
+				45ED55B31333F62D003AB45E /* Lighting.fsh */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45ED55B41333F62D003AB45E /* Lighting.fsh in Resources */,
 				459CFBAD1332E9AB00B16315 /* Flat2.fsh in Resources */,
 				459CFBAE1332E9AB00B16315 /* Flat2.vsh in Resources */,
 				4537C2171332B6A900DE1A0A /* SimpleTexture.fsh in Resources */,

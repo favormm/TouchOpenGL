@@ -7,16 +7,15 @@
 //
 
 
-attribute vec4 vertex;
-attribute vec4 color;
+attribute vec4 a_vertex;
+attribute vec4 a_color;
 
-uniform mat4 transform;
+uniform mat4 u_transform;
 
 varying vec4 v_color;
 
 void main()
     {
-    v_color = color;
-//    v_color = vec4(1, 0, 0, 1);
-    gl_Position = transform * vertex;
+    v_color = a_color;
+    gl_Position = u_transform * a_vertex;
     }

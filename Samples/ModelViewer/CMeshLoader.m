@@ -25,6 +25,14 @@
     NSURL *theURL = [[NSBundle mainBundle] URLForResource:inName withExtension:@"model.plist"];
     NSDictionary *theDictionary = [NSDictionary dictionaryWithContentsOfURL:theURL];
 
+    NSArray *theCenterArray = [theDictionary objectForKey:@"center"];
+
+    Vector3 theCenter = {
+        [[theCenterArray objectAtIndex:0] floatValue],
+        [[theCenterArray objectAtIndex:1] floatValue],
+        [[theCenterArray objectAtIndex:2] floatValue],
+        };
+
     // Load materials.
     NSDictionary *theMaterialsDictionary = [theDictionary objectForKey:@"materials"];
     NSMutableDictionary *theMaterials = [NSMutableDictionary dictionary];
@@ -85,18 +93,17 @@
     for (NSDictionary *theMeshDictionary in theMeshDictionaries)
         {
         NSString *theMaterialName = [theMeshDictionary objectForKey:@"material"];
-        
+              
         NSArray *theVBONames = [theMeshDictionary objectForKey:@"VBOs"];
 		for (NSString *theVBOName in theVBONames)
 			{
 			CMesh *theMesh = [[[CMesh alloc] init] autorelease];
+            theMesh.center = theCenter;
 			theMesh.material = [theMaterials objectForKey:theMaterialName];
 
 			NSURL *theURL = [[NSBundle mainBundle] URLForResource:theVBOName withExtension:@"vbo"];
 			NSData *theData = [NSData dataWithContentsOfURL:theURL];
 			
-			NSLog(@"%d", theData.length);
-
 			size_t theRowSize = sizeof(Vector3) + sizeof(Vector2) + sizeof(Vector3);
 			size_t theRowCount = theData.length / theRowSize;
 
@@ -111,8 +118,6 @@
 			}
 		}
     
-	NSLog(@"%@", theMeshes);
-	
     return(theMeshes); 
     }
 
