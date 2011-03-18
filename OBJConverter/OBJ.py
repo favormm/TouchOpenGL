@@ -1,15 +1,34 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
-import sys
-import re
+import argparse # argparse was added in Python 3.2 - for earlier Pythons just install it manually (easy_install argparse)
+import collections
+import geometries
+import glob
+import logging
+import numpy
 import os
 import plistlib
-import numpy
-import geometries
-import collections
 import pprint
+import re
+import shlex
+import sys
+import types
+
+from itertools import izip_longest
+
+logging.basicConfig(level = logging.DEBUG, format = '%(message)s', stream = sys.stderr)
+logger = logging.getLogger()
 
 ########################################################################
+
+def grouper(n, iterable, padvalue=None):
+    "grouper(3, 'abcdefg', 'x') --> ('a','b','c'), ('d','e','f'), ('g','x','x')"
+    return izip_longest(*[iter(iterable)]*n, fillvalue=padvalue)
+
+def grouper_nopad(n, iterable):
+    "grouper(3, 'abcdefg', 'x') --> ('a','b','c'), ('d','e','f'), ('g','x','x')"
+    return izip_longest(*[iter(iterable)]*n)
+
 
 def iter_flatten(iterable):
 	it = iter(iterable)
@@ -25,9 +44,9 @@ def iter_flatten(iterable):
 class Material(object):
 	def __init__(self, name = None):
 		self.name = name
-		self.Ka = None #(0.2, 0.2, 0.2)
-		self.Kd = None # (0.8, 0.8, 0.8)
-		self.Ks = None #(1.0, 1.0, 1.0)
+		self.ambientColor = None #(0.2, 0.2, 0.2)
+		self.diffuseColor = None # (0.8, 0.8, 0.8)
+		self.specularColor = None #(1.0, 1.0, 1.0)
 		self.d = 1.0
 		self.Ns = 0.0
 		self.illum = 2
@@ -37,12 +56,14 @@ class Material(object):
 	def __repr__(self):
 		return('Material (%s)' % (self.name))
 
+########################################################################
+
 class Polygon(object):
 	def __init__(self):
 		self.material = None
-		self.vertexIndices = []
-		self.normalIndices = []
-		self.texCoordIndices = []
+		self.vertexIndices = [None, None, None]
+		self.normalIndices = [None, None, None]
+		self.texCoordIndices = [None, None]
 
 	def __repr__(self):
 		return('Polygon (%s, %s, %s, %s)' % (self.material, self.vertexIndices, self.normalIndices, self.texCoordIndices))
@@ -57,7 +78,7 @@ class MTLParser(object):
 		theLines = [theLine for theLine in theLines if len(theLine) > 0]
 		theLines = [theLine for theLine in theLines if not re.match('^#.*$', theLine)]
 
-		theCurrentMaterial = None
+		theCurrentMaterial = Material('default')
 
 		theMaterials = dict()
 
@@ -69,14 +90,13 @@ class MTLParser(object):
 			theVerb, theParameters = theMatch.groups()[0], theMatch.groups()[2]
 			if theVerb == 'newmtl':
 				theCurrentMaterial = Material(theParameters)
-
 				theMaterials[theCurrentMaterial.name] = theCurrentMaterial
 			elif theVerb == 'Ka':
-				theCurrentMaterial.Ka = [float(x) for x in theParameters.split(' ')]
+				theCurrentMaterial.ambientColor = [float(x) for x in theParameters.split(' ')]
 			elif theVerb == 'Kd':
-				theCurrentMaterial.Kd = [float(x) for x in theParameters.split(' ')]
+				theCurrentMaterial.diffuseColor = [float(x) for x in theParameters.split(' ')]
 			elif theVerb == 'Ks':
-				theCurrentMaterial.Ks = [float(x) for x in theParameters.split(' ')]
+				theCurrentMaterial.specularColor = [float(x) for x in theParameters.split(' ')]
 			elif theVerb == 'd':
 				theCurrentMaterial.d = float(theParameters)
 			elif theVerb == 'Ns':
@@ -92,7 +112,12 @@ class MTLParser(object):
 
 		self.materials = theMaterials
 
+########################################################################
+
 class OBJParser(object):
+
+	def __init__(self, inputFile):
+		self.inputFile = inputFile
 
 	def main(self):
 
@@ -106,9 +131,7 @@ class OBJParser(object):
 
 		thePolygons = []
 
-		theInputFile = file(theInputFilePath)
-
-		theLines = [theLine for theLine in theInputFile.readlines()]
+		theLines = [theLine for theLine in self.inputFile.readlines()]
 		theLines = [theLine.strip() for theLine in theLines]
 		theLines = [theLine for theLine in theLines if len(theLine) > 0]
 
@@ -122,152 +145,196 @@ class OBJParser(object):
 				print theLine
 				raise Exception('Parse error')
 			theVerb, theParameters = theMatch.groups()
-			if theVerb == 'mtllib':
-				theMaterialFile = file(os.path.join(os.path.split(theInputFilePath)[0], theParameters))
-				theParser = MTLParser(theMaterialFile)
-				theCurrentMaterialLibrary = theParser.materials
-			elif theVerb == 'g':
-				theCurrentGroups = theParameters.split(' ')
-			elif theVerb == 'usemtl':
-				theCurrentMaterial = theCurrentMaterialLibrary[theParameters]
-			elif theVerb == 'v':
-				self.vertices.append(tuple([float(x) for x in theParameters.split(' ')]))
-			elif theVerb == 'vt':
-				self.texCoords.append(tuple([float(x) for x in theParameters.split(' ')]))
-			elif theVerb == 'vn':
-				self.normals.append(tuple([float(x) for x in theParameters.split(' ')]))
-			elif theVerb == 'f':
-				theVertices = []
-				for theVertex in theParameters.split(' '):
-					theIndices = theVertex.split('/')
-					theIndices = [int(theIndex) - 1 for theIndex in theIndices]
-					theVertices.append(theIndices)
 
-				thePolygon = Polygon()
-				thePolygon.material = theCurrentMaterial
-				thePolygon.vertexIndices = [x[0] for x in theVertices]
-				thePolygon.texCoordIndices = [x[1] for x in theVertices]
-				thePolygon.normalIndices = [x[2] for x in theVertices]
+			try:
+				if theVerb == 'mtllib':
+					theMaterialFile = file(os.path.join(os.path.split(self.inputFile.name)[0], theParameters))
+					theParser = MTLParser(theMaterialFile)
+					theCurrentMaterialLibrary = theParser.materials
+				elif theVerb == 'g':
+					theCurrentGroups = theParameters.split(' ')
+				elif theVerb == 'usemtl':
+					theCurrentMaterial = theCurrentMaterialLibrary[theParameters]
+				elif theVerb == 'v':
+					self.vertices.append(tuple([float(x) for x in theParameters.split(' ')]))
+				elif theVerb == 'vt':
+					self.texCoords.append(tuple([float(x) for x in theParameters.split(' ')]))
+				elif theVerb == 'vn':
+					self.normals.append(tuple([float(x) for x in theParameters.split(' ')]))
+				elif theVerb == 'f':
+					theVertices = []
+					for theVertex in theParameters.split(' '):
+						theIndices = theVertex.split('/')
+						theIndices = [int(theIndex) - 1 for theIndex in theIndices]
+						if len(theIndices) == 1:
+							theIndices += [None, None]
+						elif len(theIndices) == 2:
+							theIndices += [None]
 
-				thePolygon.vertices = [self.vertices[i] for i in thePolygon.vertexIndices]
-				thePolygon.texCoords = [self.texCoords[i] for i in thePolygon.texCoordIndices]
-				thePolygon.normals = [self.normals[i] for i in thePolygon.normalIndices]
+						theVertices.append(theIndices)
+
+#					assert(len(theVertices) == 3)
+
+					thePolygon = Polygon()
+					thePolygon.material = theCurrentMaterial
+					thePolygon.vertexIndices = [x[0] for x in theVertices]
+					thePolygon.texCoordIndices = [x[1] for x in theVertices]
+					thePolygon.normalIndices = [x[2] for x in theVertices]
+
+					thePolygon.vertices = [self.vertices[i] for i in thePolygon.vertexIndices]
+					thePolygon.texCoords = [self.texCoords[i] for i in thePolygon.texCoordIndices if i]
+					thePolygon.normals = [self.normals[i] for i in thePolygon.normalIndices if i]
 
 
-				thePolygons.append(thePolygon)
-			else:
-				print 'Unknown verb: ', theVerb
+					thePolygons.append(thePolygon)
+				else:
+					print 'Unknown verb: ', theVerb
+			except:
+				print 'Failed on line:'
+				print theLine
+				raise
 
 		self.polygons = thePolygons
 
 ########################################################################
 
-theRootDir = os.path.split(sys.argv[0])[0]
+class Tool(object):
+	@property
+	def argparser(self):
+		if not hasattr(self, '_argparser'):
+			argparser = argparse.ArgumentParser()
+			argparser.add_argument('-i', '--input', action='store', dest='input', type=argparse.FileType(), default = None, metavar='INPUT',
+				help='The input file (type is inferred by file extension).')
+			argparser.add_argument('--input-type', action='store', dest='input_type', type=str, metavar='INPUT_TYPE',
+				help='The input file type (overides file extension if any).')
+			argparser.add_argument('-o', '--output', action='store', dest='output', type=argparse.FileType('w'), default = None, metavar='OUTPUT',
+				help='Output directory for generated files.')
+			argparser.add_argument('--output-type', action='store', dest='output_type', type=str, metavar='INPUT_TYPE',
+				help='The output file type (overides file extension if any).')
+			argparser.add_argument('--pretty', action='store_const', const=True, default=False, metavar='PRETTY',
+				help='Prettify the output (where possible).')
 
-theInputDirectoryPath = os.path.join(theRootDir, 'Input')
+			argparser.add_argument('-v', '--verbose', action='store_const', dest='loglevel', const=logging.INFO, default=logging.WARNING,
+				help='set the log level to INFO')
+			argparser.add_argument('--loglevel', action='store', dest='loglevel', type=int,
+				help='set the log level, 0 = no log, 10+ = level of logging')
+			argparser.add_argument('--logfile', dest='logstream', type = argparse.FileType('w'), default = sys.stderr, action="store", metavar='LOG_FILE',
+				help='File to log messages to. If - or not provided then stdout is used.')
 
-theInputFilePath = os.path.join(theInputDirectoryPath, 'Liberty/Liberty.obj')
+			argparser.add_argument('args', nargs='*')
+			self._argparser = argparser
+		return self._argparser
 
-theModelName = os.path.splitext(os.path.split(theInputFilePath)[1])[0]
+	def parse(self):
+		pass
 
-theParser = OBJParser()
-theParser.main()
+	def main(self, args):
 
-########################################################################
+		self.options = self.argparser.parse_args(args = args)
 
-########################################################################
+		for theHandler in logger.handlers:
+			logger.removeHandler(theHandler)
 
-theOutputDirectoryPath = os.path.join(theRootDir, 'Output', theModelName)
+	#	logger.setLevel(self.options.loglevel)
+		logger.setLevel(logging.DEBUG)
 
-if not os.path.exists(theOutputDirectoryPath):
-	os.makedirs(theOutputDirectoryPath)
+		theHandler = logging.StreamHandler(self.options.logstream)
+		logger.addHandler(theHandler)
+
+		# TODO this is to get around a strange argparse issue if we have no args.
+# 		if self.options.args == list('transmogrifier'):
+# 			self.options.args = []
+
+		theParser = OBJParser(self.options.input)
+		theParser.main()
+
+		#### Produce min/max vertices and center vertex
+		theMax = [0, 0, 0]
+		theMin = [0, 0, 0]
+		for p in theParser.polygons:
+			for v in p.vertices:
+				for n in xrange(0,3):
+					theMin[n] = min(theMin[n], v[n])
+					theMax[n] = max(theMax[n], v[n])
+		theCenter = [(theMin[N] + theMax[N]) * 0.5 for N in xrange(0, 3)]
+
+		####
+
+		d = {
+			'materials': {},
+			'meshes': [],
+			'center': theCenter,
+			'boundingbox': [theMin, theMax],
+			}
+
+		theParser.polygons.sort(key = lambda X:X.material)
+
+		thePolygonsByMaterial = collections.defaultdict(list)
+
+		for p in theParser.polygons:
+			thePolygonsByMaterial[p.material].append(p)
+
+		#### Process materials
+		for theMaterial in thePolygonsByMaterial:
+			m = dict()
+			if theMaterial:
+				if theMaterial.ambientColor:
+					m['ambientColor'] = theMaterial.ambientColor
+				if theMaterial.diffuseColor:
+					m['diffuseColor'] = theMaterial.diffuseColor
+				if theMaterial.specularColor:
+					m['specularColor'] = theMaterial.specularColor
+				if theMaterial.d or theMaterial.Tr:
+					m['alpha'] = theMaterial.d if theMaterial.d else theMaterial.Tr
+				if theMaterial.map_Kd:
+					m['texture'] = os.path.split(theMaterial.map_Kd)[1]
+				d['materials'][theMaterial.name] = m
+
+		#### Process meshes
+		for theMaterial in thePolygonsByMaterial:
+
+			thePolygons = thePolygonsByMaterial[theMaterial]
+
+			theVBOs = []
+
+			for theSubpolygons in grouper(10000, thePolygons):
+				theBuffer = []
+
+				for thePolygon in theSubpolygons:
+					if thePolygon:
+						# TODO assumes triangles`
+						for N in xrange(0, 3):
+							theVertexBuffer = []
+							theVertexBuffer.append(list(thePolygon.vertices[N]))
+							theVertexBuffer.append(list(thePolygon.texCoords[N] if N < len(thePolygon.texCoords) else (0.0,0.0)))
+							theVertexBuffer.append(list(thePolygon.normals[N] if N < len(thePolygon.normals) else (0.0, 0.0, 0.0)))
+							theBuffer.append(theVertexBuffer)
+
+				theBuffer = list(iter_flatten(theBuffer))
+
+				theBuffer = numpy.array(theBuffer, dtype=numpy.float32)
+				theBuffer = geometries.VBO(theBuffer)
+				theBuffer.write(os.path.split(self.options.output.name)[0])
+
+				theVBOs.append(theBuffer.signature.hexdigest())
+
+			theMesh = dict()
+			theMesh['VBOs'] = theVBOs
 
 
-theMax = [0, 0, 0]
-theMin = [0, 0, 0]
+			if theMaterial:
+				theMesh['material'] = theMaterial.name
 
-for p in theParser.polygons:
-	for v in p.vertices:
-		for n in xrange(0,3):
-			theMin[n] = min(theMin[n], v[n])
-			theMax[n] = max(theMax[n], v[n])
+			d['meshes'].append(theMesh)
 
-print theMax
-print theMin
-print [(theMin[N] + theMax[N] / 2) for N in xrange(0, 3)]
+		plistlib.writePlist(d, self.options.output)
 
-d = {
-	'materials': {},
-	'geometries': [],
-	}
+		########################################################################
 
-theParser.polygons.sort(key = lambda X:X.material)
+if __name__ == '__main__':
 
-thePolygonsByMaterial = collections.defaultdict(list)
+	theRootDir = os.path.split(sys.argv[0])[0]
+	os.chdir(theRootDir)
 
-for p in theParser.polygons:
-	thePolygonsByMaterial[p.material].append(p)
-
-for theMaterial in thePolygonsByMaterial:
-
-	m = dict()
-	if theMaterial.Ka:
-		m['ambientColor'] = theMaterial.Ka
-	if theMaterial.Kd:
-		m['diffuseColor'] = theMaterial.Kd
-	if theMaterial.Ks:
-		m['specularColor'] = theMaterial.Ks
-	if theMaterial.d or theMaterial.Tr:
-		m['alpha'] = theMaterial.d if theMaterial.d else theMaterial.Tr
-	if theMaterial.map_Kd:
-		m['texture'] = os.path.split(theMaterial.map_Kd)[1]
-
-	d['materials'][theMaterial.name] = m
-
-	theBuffer = []
-
-	thePolygons = thePolygonsByMaterial[theMaterial]
-	for thePolygon in thePolygons:
-
-		# TODO assumes triangles`
-
-
-		for N in xrange(0, 3):
-
-			theVertexBuffer = []
-			theVertexBuffer.append(list(thePolygon.vertices[N]))
-			theVertexBuffer.append(list(thePolygon.texCoords[N]))
-			theVertexBuffer.append(list(thePolygon.normals[N]))
-
-			theBuffer.append(theVertexBuffer)
-
-	theBuffer = list(iter_flatten(theBuffer))
-
-	theBuffer = numpy.array(theBuffer, dtype=numpy.float32)
-	theBuffer = geometries.VBO(theBuffer)
-	theBuffer.write(theOutputDirectoryPath)
-
-	d['geometries'].append(dict(material = theMaterial.name, combined = theBuffer.signature.hexdigest()))
-
-plistlib.writePlist(d, os.path.join(theOutputDirectoryPath, '%s.plist' % theModelName))
-
-########################################################################
-
-
-# v = numpy.array(v, dtype=numpy.float32)
-# fp = numpy.array(fp, dtype=numpy.int16)
-#
-# print v
-# print fp
-#
-# v = geometries.VBO(v)
-# v.write(theOutputDirectoryPath)
-#
-#
-# fp = geometries.VBO(fp)
-# fp.write(theOutputDirectoryPath)
-#
-# d = dict(indices = '%s.vbo' % (fp.signature.hexdigest()), vertices = '%s.vbo' % (v.signature.hexdigest()))
-#
-#
-# plistlib.writePlist(d, os.path.join(theOutputDirectoryPath, '%s.plist' % theModelName))
+#	Tool().main(shlex.split('tool --input Input/Skull.obj --output Output/Skull.model.plist'))
+	Tool().main(shlex.split('tool --input Input/utah_teapot_hires.obj --output Output/teapot.model.plist'))
