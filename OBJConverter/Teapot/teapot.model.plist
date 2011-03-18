@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>boundingbox</key>
+	<array>
+		<array>
+			<real>-0.81774199999999997</real>
+			<integer>0</integer>
+			<real>-1.46662</real>
+		</array>
+		<array>
+			<real>0.81773899999999999</real>
+			<real>1.3759220000000001</real>
+			<real>1.289995</real>
+		</array>
+	</array>
+	<key>center</key>
+	<array>
+		<real>-1.4999999999876223e-06</real>
+		<real>0.68796100000000004</real>
+		<real>-0.088312500000000016</real>
+	</array>
+	<key>materials</key>
+	<dict>
+		<key>rampShader1SG</key>
+		<dict>
+			<key>alpha</key>
+			<real>1.0</real>
+			<key>ambientColor</key>
+			<array>
+				<real>0.0</real>
+				<real>0.0</real>
+				<real>0.0</real>
+			</array>
+			<key>diffuseColor</key>
+			<array>
+				<real>0.88235300000000005</real>
+				<real>0.88235300000000005</real>
+				<real>0.78431399999999996</real>
+			</array>
+			<key>specularColor</key>
+			<array>
+				<real>0.33000000000000002</real>
+				<real>0.33000000000000002</real>
+				<real>0.33000000000000002</real>
+			</array>
+		</dict>
+	</dict>
+	<key>meshes</key>
+	<array>
+		<dict>
+			<key>VBOs</key>
+			<array>
+				<string>5eb5309d9801fd2515bfdb757d82fc66</string>
+				<string>9fa39a7ed2e901631e0c0d9f24854096</string>
+			</array>
+			<key>material</key>
+			<string>rampShader1SG</string>
+		</dict>
+	</array>
+</dict>
+</plist>
