@@ -12,7 +12,6 @@
 
 #import "OpenGLTypes.h"
 #import "CArcBall.h"
-#import "AccelerometerFilter.h"
 #import "Quaternion.h"
 
 @interface CInteractiveRendererView ()
@@ -67,7 +66,7 @@
     self.transform = theTransform;
     
 //    NSLog(@"%@", NSStringFromMatrix4(self.transform));
-    NSLog(@"%@", NSStringFromQuaternion(self.motionRotation));
+//    NSLog(@"%@", NSStringFromQuaternion(self.motionRotation));
 
     [super render];
     }

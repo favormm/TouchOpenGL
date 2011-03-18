@@ -39,12 +39,10 @@
 	if ((self = [super init]) != NULL)
 		{
         CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
-        self.meshes = [theLoader loadMeshesFromFile:@"Liberty"];
+        self.meshes = [theLoader loadMeshesFromFile:@"Skull"];
         
         self.flatProgram = [[[CProgram alloc] initWithName:@"Flat2"] autorelease];
         self.textureProgram = [[[CProgram alloc] initWithName:@"SimpleTexture"] autorelease];
-        
-        self.defaultTexture = [[CImageTextureLoader textureLoader] textureWithImageNamed:@"Brick" error:NULL];
 		}
 	return(self);
 	}
@@ -97,7 +95,6 @@
             Color4f theDiffuseColor = theMesh.material.diffuseColor;
             GLuint theDiffuseColorUniformIndex = [theProgram uniformIndexForName:@"u_diffuse_color"];
             glUniform4fv(theDiffuseColorUniformIndex, 1, &theDiffuseColor.r);
-
 
             // Update color uniform
             Color4f theAmbientColor = theMesh.material.ambientColor;

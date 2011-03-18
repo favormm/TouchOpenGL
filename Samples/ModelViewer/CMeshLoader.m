@@ -22,7 +22,7 @@
 
 - (NSArray *)loadMeshesFromFile:(NSString *)inName;
     {
-    NSURL *theURL = [[NSBundle mainBundle] URLForResource:inName withExtension:@"plist"];
+    NSURL *theURL = [[NSBundle mainBundle] URLForResource:inName withExtension:@"model.plist"];
     NSDictionary *theDictionary = [NSDictionary dictionaryWithContentsOfURL:theURL];
 
     // Load materials.
@@ -76,38 +76,43 @@
             }
 
         [theMaterials setObject:theMaterial forKey:theMaterialName];
-
         }
 
     NSMutableArray *theMeshes = [NSMutableArray array];
 
     // Load meshs.
-    NSArray *theMeshDictionaries = [theDictionary objectForKey:@"geometries"];
+    NSArray *theMeshDictionaries = [theDictionary objectForKey:@"meshes"];
     for (NSDictionary *theMeshDictionary in theMeshDictionaries)
         {
         NSString *theMaterialName = [theMeshDictionary objectForKey:@"material"];
         
-        CMesh *theMesh = [[[CMesh alloc] init] autorelease];
-        theMesh.material = [theMaterials objectForKey:theMaterialName];
+        NSArray *theVBONames = [theMeshDictionary objectForKey:@"VBOs"];
+		for (NSString *theVBOName in theVBONames)
+			{
+			CMesh *theMesh = [[[CMesh alloc] init] autorelease];
+			theMesh.material = [theMaterials objectForKey:theMaterialName];
 
-        NSString *theVBOName = [theMeshDictionary objectForKey:@"combined"];
-        
-        NSURL *theURL = [[NSBundle mainBundle] URLForResource:theVBOName withExtension:@"vbo"];
-        NSData *theData = [NSData dataWithContentsOfURL:theURL];
+			NSURL *theURL = [[NSBundle mainBundle] URLForResource:theVBOName withExtension:@"vbo"];
+			NSData *theData = [NSData dataWithContentsOfURL:theURL];
+			
+			NSLog(@"%d", theData.length);
 
-        size_t theRowSize = sizeof(Vector3) + sizeof(Vector2) + sizeof(Vector3);
-        size_t theRowCount = theData.length / theRowSize;
+			size_t theRowSize = sizeof(Vector3) + sizeof(Vector2) + sizeof(Vector3);
+			size_t theRowCount = theData.length / theRowSize;
 
-        CVertexBuffer *theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theData] autorelease];
+			CVertexBuffer *theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theData] autorelease];
 
-        GLint theStride = theRowSize;
+			GLint theStride = theRowSize;
 
-        theMesh.positions = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer rowSize:theRowSize rowCount:theRowCount size:3 type:GL_FLOAT normalized:NO stride:theStride offset:0] autorelease];
-        theMesh.texCoords = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer rowSize:theRowSize rowCount:theRowCount size:2 type:GL_FLOAT normalized:NO stride:theStride offset:sizeof(Vector3)] autorelease];
-        
-        [theMeshes addObject:theMesh];
-        }
+			theMesh.positions = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer rowSize:theRowSize rowCount:theRowCount size:3 type:GL_FLOAT normalized:NO stride:theStride offset:0] autorelease];
+			theMesh.texCoords = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer rowSize:theRowSize rowCount:theRowCount size:2 type:GL_FLOAT normalized:NO stride:theStride offset:sizeof(Vector3)] autorelease];
+			
+			[theMeshes addObject:theMesh];
+			}
+		}
     
+	NSLog(@"%@", theMeshes);
+	
     return(theMeshes); 
     }
 
