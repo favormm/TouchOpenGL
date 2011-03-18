@@ -1,0 +1,159 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2006 Google, Inc.
+
+newmtl Google_Earth_Snapshot1
+Ka 0.000000 0.000000 0.000000
+Kd 0.435294 0.431373 0.403922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/Google_Earth_Snapshot1.jpg
+
+newmtl M_94_20Statue_20of_20Liberty
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty.jpg
+
+newmtl Statue_thumb
+Ka 0.000000 0.000000 0.000000
+Kd 0.352941 0.600000 0.650980
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/Statue_thumb.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 0.882353 0.882353 0.784314
+Ks 0.330000 0.330000 0.330000
+
+newmtl Material2
+Ka 0.000000 0.000000 0.000000
+Kd 0.325490 0.325490 0.325490
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/Material2.jpg
+
+newmtl _Gray6_
+Ka 0.000000 0.000000 0.000000
+Kd 0.498039 0.498039 0.498039
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/_Gray6_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty1_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty1_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty2_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty2_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty3_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty3_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty4_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty4_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty5_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty5_.jpg
+
+newmtl Material1
+Ka 0.000000 0.000000 0.000000
+Kd 0.329412 0.498039 0.486275
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/Material1.jpg
+
+newmtl M_94_20Statue_20of_20Liberty6_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty6_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty7_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty7_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty8_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty8_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty9_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty9_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty10_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty10_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty11_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty11_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty12_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty12_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty13_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty13_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty14_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty14_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty15_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty15_.jpg
+
+newmtl Color_H10
+Ka 0.000000 0.000000 0.000000
+Kd 0.517647 0.768627 0.752941
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/Color_H10.jpg
+
+newmtl M_94_20Statue_20of_20Liberty16_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty16_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty17_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty17_.jpg
+
+newmtl M_94_20Statue_20of_20Liberty18_
+Ka 0.000000 0.000000 0.000000
+Kd 0.396078 0.603922 0.803922
+Ks 0.330000 0.330000 0.330000
+map_Kd Liberty/M_94_20Statue_20of_20Liberty18_.jpg
+
