@@ -16,6 +16,7 @@
 
 @interface CRenderer : NSObject {
     }
+    
 
 - (void)prerender;
 - (void)render:(Matrix4)inTransform;
