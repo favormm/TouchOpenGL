@@ -21,7 +21,7 @@
 + (CSceneGeometry *)flatGeometryNodeWithCoordinatesBuffer:(CVertexBuffer *)inVertexBuffer;
     {
     CSceneGeometry *theGeometry = [[[CSceneGeometry alloc] init] autorelease];
-    theGeometry.coordinatesBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:inVertexBuffer cellEncoding:@encode(Vector2) normalized:GL_FALSE stride:0] autorelease];
+    theGeometry.coordinatesBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:inVertexBuffer cellEncoding:@encode(Vector2) normalized:GL_FALSE] autorelease];
     theGeometry.vertexBuffers = [NSSet setWithObjects:inVertexBuffer, NULL];
 
     CSceneStyle *theStyle = [[[CSceneStyle alloc] init] autorelease];

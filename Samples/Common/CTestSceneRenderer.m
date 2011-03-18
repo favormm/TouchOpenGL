@@ -31,8 +31,8 @@
         CVertexBuffer *theColorsVertexBuffer = [CVertexBuffer vertexBufferWithColors:[NSArray arrayWithObjects:[UIColor redColor], [UIColor redColor], [UIColor redColor], [UIColor redColor], NULL]];
 
         CSceneGeometry *theGeometry = [[[CSceneGeometry alloc] init] autorelease];
-        theGeometry.coordinatesBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theCoordinatesVertexBuffer cellEncoding:@encode(Vector2) normalized:GL_FALSE stride:0] autorelease];
-        theGeometry.colorsBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theColorsVertexBuffer cellEncoding:@encode(Color4f) normalized:GL_TRUE stride:0] autorelease];
+        theGeometry.coordinatesBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theCoordinatesVertexBuffer cellEncoding:@encode(Vector2) normalized:GL_FALSE] autorelease];
+        theGeometry.colorsBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theColorsVertexBuffer cellEncoding:@encode(Color4f) normalized:GL_TRUE] autorelease];
         theGeometry.vertexBuffers = [NSSet setWithObjects:theCoordinatesVertexBuffer, theColorsVertexBuffer, NULL];
 
         CSceneStyle *theStyle = [[[CSceneStyle alloc] init] autorelease];

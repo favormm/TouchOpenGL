@@ -52,21 +52,21 @@
     AssertOpenGLNoError_();
     
 //#if DEBUG == 1
-//    NSLog(@"> %d %d", theGeometry.indicesBufferReference.cellCount, theGeometry.coordinatesBufferReference.cellCount);
+//    NSLog(@"> %d %d", theGeometry.indicesBufferReference.rowCount, theGeometry.coordinatesBufferReference.rowCount);
 //#endif
 
     if (theGeometry.indicesBufferReference)
         {
         CVertexBufferReference *theReference = theGeometry.indicesBufferReference;
         //
-        NSAssert(theReference.cellCount != 0, @"Incorrect number of cells");
+        NSAssert(theReference.rowCount != 0, @"Incorrect number of cells");
         AssertOpenGLNoError_();
         //
-        glDrawElements(self.type, theReference.cellCount, theReference.type, NULL);
+        glDrawElements(self.type, theReference.rowCount, theReference.type, NULL);
         }
     else
         {
-        glDrawArrays(self.type, 0, theGeometry.coordinatesBufferReference.cellCount);
+        glDrawArrays(self.type, 0, theGeometry.coordinatesBufferReference.rowCount);
         }
         
     AssertOpenGLNoError_();

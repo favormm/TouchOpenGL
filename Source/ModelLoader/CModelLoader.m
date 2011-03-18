@@ -98,21 +98,21 @@
     NSURL *theVBOURL = [[NSBundle mainBundle] URLForResource:[theVBOName stringByDeletingPathExtension] withExtension:[theVBOName pathExtension]];
     NSData *theVBOData = [NSData dataWithContentsOfURL:theVBOURL options:0 error:NULL];
     CVertexBuffer *theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ELEMENT_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theVBOData] autorelease];
-    CVertexBufferReference *theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer cellEncoding:@encode(GLushort) normalized:NO stride:0] autorelease];
+    CVertexBufferReference *theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer cellEncoding:@encode(GLushort) normalized:NO] autorelease];
     theGeometryNode.indicesBufferReference = theVertexBufferReference;
 
     theVBOName = [theTrianglesDictionary objectForKey:@"positions"];
     theVBOURL = [[NSBundle mainBundle] URLForResource:[theVBOName stringByDeletingPathExtension] withExtension:[theVBOName pathExtension]];
     theVBOData = [NSData dataWithContentsOfURL:theVBOURL options:0 error:NULL];
     theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theVBOData] autorelease];
-    theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer cellEncoding:@encode(Vector3) normalized:NO stride:0] autorelease];
+    theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer cellEncoding:@encode(Vector3) normalized:NO] autorelease];
     theGeometryNode.coordinatesBufferReference = theVertexBufferReference;
     
     theVBOName = [theTrianglesDictionary objectForKey:@"normals"];
     theVBOURL = [[NSBundle mainBundle] URLForResource:[theVBOName stringByDeletingPathExtension] withExtension:[theVBOName pathExtension]];
     theVBOData = [NSData dataWithContentsOfURL:theVBOURL options:0 error:NULL];
     theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theVBOData] autorelease];
-    theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer cellEncoding:@encode(Vector3) normalized:NO stride:0] autorelease];
+    theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer cellEncoding:@encode(Vector3) normalized:NO] autorelease];
     theGeometryNode.normalsBufferReference = theVertexBufferReference;
     
     
