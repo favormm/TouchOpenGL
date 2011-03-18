@@ -66,7 +66,7 @@
         theFormat = GL_RGBA;
         theType = GL_UNSIGNED_BYTE;
 
-        NSLog(@"Unknown model (%d), alpha (%d) or bits per component (%ld)", theModel, theAlphaInfo, theBitsPerComponent);
+        NSLog(@"INFO: Unknown model (%d), alpha (%d) or bits per component (%ld). Converting image.", theModel, theAlphaInfo, theBitsPerComponent);
         
         NSMutableData *theMutableData = [NSMutableData dataWithLength:inImage.size.width * 4 * inImage.size.height];
         theData = theMutableData;
@@ -81,6 +81,8 @@
         GLuint theName = 0;
         glGenTextures(1, &theName);
         glBindTexture(GL_TEXTURE_2D, theName);
+
+        NSAssert(theData.length == CGImageGetWidth(theImageRef) * 4 * CGImageGetHeight(theImageRef), @"Image data wrong length");
 
         glTexImage2D(GL_TEXTURE_2D, 0, theFormat, CGImageGetWidth(theImageRef), CGImageGetHeight(theImageRef), 0, theFormat, theType, theData.bytes);
 
