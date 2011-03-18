@@ -29,6 +29,14 @@ typedef struct Color4f {
     GLfloat r,g,b,a;
     } Color4f;
 
+typedef struct Color3ub {
+    GLubyte r,g,b;
+    } Color3ub;
+
+typedef struct Color3f {
+    GLfloat r,g,b;
+    } Color3f;
+
 typedef struct SIntPoint {
     GLint x, y;
     } SIntPoint;
