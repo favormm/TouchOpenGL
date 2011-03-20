@@ -41,3 +41,21 @@ GLfloat Vector3DotProduct(Vector3 inLHS, Vector3 inRHS)
     {
     return(inLHS.x * inRHS.x + inLHS.y * inRHS.y + inLHS.z * inRHS.z);
     }
+    
+extern GLenum GLenumFromString(NSString *inString)
+    {
+    #warning TODO obviously this needs to be massively expanded.
+    if ([inString isEqualToString:@"GL_ARRAY_BUFFER"])
+        {
+        return(GL_ARRAY_BUFFER);
+        }
+    else if ([inString isEqualToString:@"GL_STATIC_DRAW"])
+        {
+        return(GL_STATIC_DRAW);
+        }
+    else if ([inString isEqualToString:@"GL_FLOAT"])
+        {
+        return(GL_FLOAT);
+        }
+    return(0);   
+    }

@@ -57,6 +57,7 @@ extern GLfloat Vector3Length(Vector3 inVector);
 extern Vector3 Vector3CrossProduct(Vector3 inLHS, Vector3 inRHS);
 extern GLfloat Vector3DotProduct(Vector3 inLHS, Vector3 inRHS);
 
+extern GLenum GLenumFromString(NSString *inString);
 
 #define AssertOpenGLNoError_() do { GLint theError = glGetError(); NSAssert1(theError == GL_NO_ERROR, @"Code entered with existing OGL error 0x%X", theError); } while(0)
 
