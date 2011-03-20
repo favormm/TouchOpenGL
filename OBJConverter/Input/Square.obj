@@ -1,16 +1,21 @@
-# Alias OBJ Model File
-# Exported from SketchUp, (c) 2000-2006 Google, Inc.
-# File units = meters
+# mtllib untitled.mtl
+v -1.0 -1.0  0.0
+v  1.0 -1.0  0.0
+v  1.0  1.0  0.0
 
-g Mesh1 Model
+v -1.0 -1.0  0.0
+v -1.0  1.0  0.0
+v  1.0 -1.0  0.0
 
-v 0 0 -10
-v -10 0 -0
-v -10 0 -10
-v 0 0 0
+vt  0.0  0.0
+vt  1.0  0.0
+vt  1.0  1.0
 
-f 1 2 3
-f 2 1 4
-f 3 2 1
-f 4 1 2
+vt  0.0  0.0
+vt  0.0  1.0
+vt  1.0  0.0
 
+
+# usemtl Material
+f 1/1 2/2 3/3
+f 4/4 5/5 6/6
