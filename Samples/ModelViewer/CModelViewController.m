@@ -9,8 +9,7 @@
 #import "CModelViewController.h"
 
 #import "CInteractiveRendererView.h"
-#import "CSceneGraphRenderer.h"
-#import "CModelLoader.h"
+//#import "CModelLoader.h"
 #import "COBJRenderer.h"
 
 @interface CModelViewController ()
@@ -36,19 +35,19 @@
     CRenderer *theRenderer = NULL;
     if (0)
         {
-        CModelLoader *theLoader = [[[CModelLoader alloc] init] autorelease];
-        NSURL *theModelURL = [[NSBundle mainBundle] URLForResource:@"Cube" withExtension:@"plist"];
-        NSError *theError = NULL;
-        CScene *theScene = [theLoader load:theModelURL error:&theError];
-        CSceneGraphRenderer *theSceneRenderer = [[[CSceneGraphRenderer alloc] init] autorelease];
-        theSceneRenderer.sceneGraph = theScene;
-        theRenderer = theSceneRenderer;
+//        CModelLoader *theLoader = [[[CModelLoader alloc] init] autorelease];
+//        NSURL *theModelURL = [[NSBundle mainBundle] URLForResource:@"Cube" withExtension:@"plist"];
+//        NSError *theError = NULL;
+//        CScene *theScene = [theLoader load:theModelURL error:&theError];
+//        CSceneGraphRenderer *theSceneRenderer = [[[CSceneGraphRenderer alloc] init] autorelease];
+//        theSceneRenderer.sceneGraph = theScene;
+//        theRenderer = theSceneRenderer;
         }
     else if (1)
         {
         theRenderer = [[[COBJRenderer alloc] init] autorelease];
         }
-//    else if (0)
+//    else if (1)
 //        {
 //        theRenderer = [[[CTestSceneRenderer alloc] init] autorelease];
 //        }
