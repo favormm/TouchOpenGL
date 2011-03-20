@@ -22,7 +22,7 @@
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-    CProgram *theProgram = [[[CProgram alloc] initWithName:@"Flat"] autorelease];
+    CProgram *theProgram = [[[CProgram alloc] initWithName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_mvpMatrix", NULL]] autorelease];
 
     const GLfloat kLength = 10000.0;
 
@@ -48,7 +48,7 @@
 
     
     // Update position attribute
-    GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"a_vertex"];        
+    GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"a_position"];        
     glVertexAttribPointer(theVertexAttributeIndex, 3, GL_FLOAT, GL_FALSE, 0, theVertices);
     glEnableVertexAttribArray(theVertexAttributeIndex);
 
@@ -66,7 +66,7 @@
 
 
     // Update transform uniform
-    GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"u_transform"];
+    GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"u_mvpMatrix"];
     glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &inTransform.m00);
 
     AssertOpenGLNoError_();
