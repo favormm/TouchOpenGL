@@ -24,7 +24,7 @@
 @property (readwrite, nonatomic, assign) GLsizei stride;
 @property (readwrite, nonatomic, assign) GLsizei offset;
 
-//+ (BOOL)computeRowCount:(GLint *)outRowCount rowSize:(GLint *)outRowSize fromEncoding:(const char *)inEncoding;
++ (BOOL)computeRowCount:(GLint *)outRowCount type:(GLenum *)outType size:(GLint *)outSize rowSize:(GLint *)outRowSize vertexBuffer:(CVertexBuffer *)inVertexBuffer fromEncoding:(const char *)inEncoding;
 @end
 
 #pragma mark -
@@ -73,13 +73,14 @@
 
 - (id)initWithVertexBuffer:(CVertexBuffer *)inVertexBuffer cellEncoding:(char *)inEncoding normalized:(GLboolean)inNormalized stride:(GLsizei)inStride offset:(GLsizei)inOffset
     {
-    NSAssert(NO, @"Cannot use encoding right now!");
-
-    GLint theRowSize = 0, theRowCount = 0;
+    GLint theRowSize = 0, theRowCount = 0, theSize;
     
-//    [[self class] computeRowCount:&theRowCount rowSize:&theRowSize fromEncoding:inEncoding];
+    GLenum theType;
     
-    if ((self = [self initWithVertexBuffer:inVertexBuffer rowSize:theRowSize rowCount:theRowCount size:0 type:0 normalized:inNormalized stride:0 offset:0]) != NULL)
+    
+    [[self class] computeRowCount:&theRowCount type:&theType size:&theSize rowSize:&theRowSize vertexBuffer:inVertexBuffer fromEncoding:inEncoding];
+    
+    if ((self = [self initWithVertexBuffer:inVertexBuffer rowSize:theRowSize rowCount:theRowCount size:theSize type:theType normalized:inNormalized stride:0 offset:0]) != NULL)
         {
         }
     return(self);
@@ -113,93 +114,95 @@
     return([self.cellEncodingString UTF8String]);
     }
 
-//+ (BOOL)computeRowCount:(GLint *)outRowCount rowSize:(GLint *)outRowSize vertexBuffer:(CVertexBuffer *)inVertexBuffer fromEncoding:(const char *)inEncoding
-//    {
-//    NSUInteger theRowSize = 0;
-//    NSGetSizeAndAlignment(inEncoding, &theRowSize, NULL);
-//    *outRowSize = theRowSize;
-//    
-//    *outRowCount = [inVertexBuffer.data length] / theRowSize;
-//
-//    NSString *theCellEncodingString = [NSString stringWithUTF8String:inEncoding];
-//
-//    NSScanner *theScanner = [NSScanner scannerWithString:theCellEncodingString];
-//    theScanner.charactersToBeSkipped = NULL;
-//    theScanner.caseSensitive = YES;
-//
-//    NSString *theMemberTypes = NULL;
-//    
-//    BOOL theResult = [theScanner scanString:@"{" intoString:NULL];
-//    if (theResult == YES)
-//        {
-//        NSAssert(theResult == YES, @"Scan failed");
-//        NSString *theTypeName = NULL;
-//        theResult = [theScanner scanCharactersFromSet:[NSCharacterSet alphanumericCharacterSet] intoString:&theTypeName];
-//        NSAssert(theResult == YES, @"Scan failed");
-//        theResult = [theScanner scanString:@"=" intoString:NULL];
-//        NSAssert(theResult == YES, @"Scan failed");
-//
-//        theResult = [theScanner scanCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"fdcCsSiI"] intoString:&theMemberTypes];
-//        NSAssert(theResult == YES, @"Scan failed");
-//
-//        theResult = [theScanner scanString:@"}" intoString:NULL];
-//        NSAssert(theResult == YES, @"Scan failed");
-//
-//        self.size = [theMemberTypes length];
-//        }
-//    else
-//        {
-//        theResult = [theScanner scanCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"fdcCsSiI"] intoString:&theMemberTypes];
-//        NSAssert(theResult == YES, @"Scan failed");
-//
-//        self.size = 1;
-//        }
-//
-//
-//    // TODO we're assuming all types are the same (e.g. ffff vs fdfd). This is probably a safe assumption but we should assert on bad data anyways.
-//    if ([theMemberTypes characterAtIndex:0] == 'f')
-//        {
-//        self.type = GL_FLOAT;
-//        }
-//    else if ([theMemberTypes characterAtIndex:0] == 'd')
-//        {
-//        #if TARGET_OS_IPHONE == 1
-//        NSAssert(NO, @"No GL_DOUBLE");
-//        #else
-//        self.type = GL_DOUBLE;
-//        #endif
-//        }
-//    else if ([theMemberTypes characterAtIndex:0] == 'c')
-//        {
-//        self.type = GL_BYTE;
-//        }
-//    else if ([theMemberTypes characterAtIndex:0] == 'C')
-//        {
-//        self.type = GL_UNSIGNED_BYTE;
-//        }
-//    else if ([theMemberTypes characterAtIndex:0] == 's')
-//        {
-//        self.type = GL_SHORT;
-//        }
-//    else if ([theMemberTypes characterAtIndex:0] == 'S')
-//        {
-//        self.type = GL_UNSIGNED_SHORT;
-//        }
-//    else if ([theMemberTypes characterAtIndex:0] == 'i')
-//        {
-//        self.type = GL_INT;
-//        }
-//    else if ([theMemberTypes characterAtIndex:0] == 'I')
-//        {
-//        self.type = GL_UNSIGNED_INT;
-//        }
-//    else
-//        {
-//        NSAssert(NO, @"Scan failed");
-//        }
-//        
-//    NSAssert(self.type != 0, @"Type shoudl not be zero.");
-//    }
++ (BOOL)computeRowCount:(GLint *)outRowCount type:(GLenum *)outType size:(GLint *)outSize rowSize:(GLint *)outRowSize vertexBuffer:(CVertexBuffer *)inVertexBuffer fromEncoding:(const char *)inEncoding
+    {
+    NSUInteger theRowSize = 0;
+    NSGetSizeAndAlignment(inEncoding, &theRowSize, NULL);
+    *outRowSize = theRowSize;
+    
+    *outRowCount = [inVertexBuffer.data length] / theRowSize;
+
+    NSString *theCellEncodingString = [NSString stringWithUTF8String:inEncoding];
+
+    NSScanner *theScanner = [NSScanner scannerWithString:theCellEncodingString];
+    theScanner.charactersToBeSkipped = NULL;
+    theScanner.caseSensitive = YES;
+
+    NSString *theMemberTypes = NULL;
+    
+    BOOL theResult = [theScanner scanString:@"{" intoString:NULL];
+    if (theResult == YES)
+        {
+        NSAssert(theResult == YES, @"Scan failed");
+        NSString *theTypeName = NULL;
+        theResult = [theScanner scanCharactersFromSet:[NSCharacterSet alphanumericCharacterSet] intoString:&theTypeName];
+        NSAssert(theResult == YES, @"Scan failed");
+        theResult = [theScanner scanString:@"=" intoString:NULL];
+        NSAssert(theResult == YES, @"Scan failed");
+
+        theResult = [theScanner scanCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"fdcCsSiI"] intoString:&theMemberTypes];
+        NSAssert(theResult == YES, @"Scan failed");
+
+        theResult = [theScanner scanString:@"}" intoString:NULL];
+        NSAssert(theResult == YES, @"Scan failed");
+
+        *outSize = [theMemberTypes length];
+        }
+    else
+        {
+        theResult = [theScanner scanCharactersFromSet:[NSCharacterSet characterSetWithCharactersInString:@"fdcCsSiI"] intoString:&theMemberTypes];
+        NSAssert(theResult == YES, @"Scan failed");
+
+        *outSize = 1;
+        }
+
+
+    // TODO we're assuming all types are the same (e.g. ffff vs fdfd). This is probably a safe assumption but we should assert on bad data anyways.
+    if ([theMemberTypes characterAtIndex:0] == 'f')
+        {
+        *outType = GL_FLOAT;
+        }
+    else if ([theMemberTypes characterAtIndex:0] == 'd')
+        {
+        #if TARGET_OS_IPHONE == 1
+        NSAssert(NO, @"No GL_DOUBLE");
+        #else
+        self.type = GL_DOUBLE;
+        #endif
+        }
+    else if ([theMemberTypes characterAtIndex:0] == 'c')
+        {
+        *outType = GL_BYTE;
+        }
+    else if ([theMemberTypes characterAtIndex:0] == 'C')
+        {
+        *outType = GL_UNSIGNED_BYTE;
+        }
+    else if ([theMemberTypes characterAtIndex:0] == 's')
+        {
+        *outType = GL_SHORT;
+        }
+    else if ([theMemberTypes characterAtIndex:0] == 'S')
+        {
+        *outType = GL_UNSIGNED_SHORT;
+        }
+    else if ([theMemberTypes characterAtIndex:0] == 'i')
+        {
+        *outType = GL_INT;
+        }
+    else if ([theMemberTypes characterAtIndex:0] == 'I')
+        {
+        *outType = GL_UNSIGNED_INT;
+        }
+    else
+        {
+        NSAssert(NO, @"Scan failed");
+        }
+        
+    NSAssert(*outType != 0, @"Type shoudl not be zero.");
+    
+    return(YES);
+    }
 
 - (void)use:(GLuint)inAttributeIndex
     {
