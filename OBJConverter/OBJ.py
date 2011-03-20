@@ -92,11 +92,11 @@ class MTLParser(object):
 				theCurrentMaterial = Material(theParameters)
 				theMaterials[theCurrentMaterial.name] = theCurrentMaterial
 			elif theVerb == 'Ka':
-				theCurrentMaterial.ambientColor = [float(x) for x in theParameters.split(' ')]
+				theCurrentMaterial.ambientColor = [float(x) for x in re.split(' +', theParameters)]
 			elif theVerb == 'Kd':
-				theCurrentMaterial.diffuseColor = [float(x) for x in theParameters.split(' ')]
+				theCurrentMaterial.diffuseColor = [float(x) for x in re.split(' +', theParameters)]
 			elif theVerb == 'Ks':
-				theCurrentMaterial.specularColor = [float(x) for x in theParameters.split(' ')]
+				theCurrentMaterial.specularColor = [float(x) for x in re.split(' +', theParameters)]
 			elif theVerb == 'd':
 				theCurrentMaterial.d = float(theParameters)
 			elif theVerb == 'Ns':
@@ -156,14 +156,14 @@ class OBJParser(object):
 				elif theVerb == 'usemtl':
 					theCurrentMaterial = theCurrentMaterialLibrary[theParameters]
 				elif theVerb == 'v':
-					self.vertices.append(tuple([float(x) for x in theParameters.split(' ')]))
+					self.vertices.append(tuple([float(x) for x in re.split(' +', theParameters)]))
 				elif theVerb == 'vt':
-					self.texCoords.append(tuple([float(x) for x in theParameters.split(' ')]))
+					self.texCoords.append(tuple([float(x) for x in re.split(' +', theParameters)]))
 				elif theVerb == 'vn':
-					self.normals.append(tuple([float(x) for x in theParameters.split(' ')]))
+					self.normals.append(tuple([float(x) for x in re.split(' +', theParameters)]))
 				elif theVerb == 'f':
 					theVertices = []
-					for theVertex in theParameters.split(' '):
+					for theVertex in re.split(' +', theParameters):
 						theIndices = theVertex.split('/')
 						theIndices = [int(theIndex) - 1 for theIndex in theIndices]
 						if len(theIndices) == 1:
@@ -337,4 +337,4 @@ if __name__ == '__main__':
 	os.chdir(theRootDir)
 
 #	Tool().main(shlex.split('tool --input Input/Skull.obj --output Output/Skull.model.plist'))
-	Tool().main(shlex.split('tool --input Input/utah_teapot_hires.obj --output Output/teapot.model.plist'))
+	Tool().main(shlex.split('tool --input Input/Square.obj --output Output/Square.model.plist'))
