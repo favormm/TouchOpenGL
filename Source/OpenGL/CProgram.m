@@ -27,41 +27,34 @@
 @synthesize uniformsByName;
 @synthesize name;
 
-- (id)initWithFiles:(NSArray *)inShaders
+- (id)initWithFiles:(NSArray *)inShaders attributeNames:(NSArray *)inAttributeNames uniformNames:(NSArray *)inUniformNames
     {
-    if ((self = [super init]) != NULL)
+    if ((self = [self init]) != NULL)
         {
         shaders = [inShaders copy];
         attributesByName = [[NSMutableDictionary alloc] init];
         uniformsByName = [[NSMutableDictionary alloc] init];
         name = 0;
-        }
-    return(self);
-    }
 
-- (id)initWithFiles:(NSArray *)inShaders attributeNames:(NSArray *)inAttributeNames uniformNames:(NSArray *)inUniformNames
-    {
-    if ((self = [self initWithFiles:inShaders]) != NULL)
-        {
         GLuint theAttributeIndex = 0;
         NSMutableDictionary *theAttributesByName = [NSMutableDictionary dictionary];
         for (NSString *theAttributeName in inAttributeNames)
             {
             [theAttributesByName setObject:[NSNumber numberWithUnsignedInt:theAttributeIndex++] forKey:theAttributeName];
             }
-        attributesByName = [theAttributesByName copy];
+        attributesByName = [theAttributesByName mutableCopy];
         }
     return(self);
     }
 
-- (id)initWithName:(NSString *)inName
+- (id)initWithName:(NSString *)inName attributeNames:(NSArray *)inAttributeNames uniformNames:(NSArray *)inUniformNames
     {
     NSArray *theShaders = [NSArray arrayWithObjects:
         [[[CShader alloc] initWithName:[NSString stringWithFormat:@"%@.fsh", inName]] autorelease],
         [[[CShader alloc] initWithName:[NSString stringWithFormat:@"%@.vsh", inName]] autorelease],
         NULL];
     
-    if ((self = [self initWithFiles:theShaders]) != NULL)
+    if ((self = [self initWithFiles:theShaders attributeNames:inAttributeNames uniformNames:inUniformNames]) != NULL)
         {
         }
     return(self);
@@ -197,6 +190,8 @@
 
 - (BOOL)validate:(NSError **)outError
     {
+    AssertOpenGLNoError_();
+
     glValidateProgram(self.name);
 
     GLint theStatus = GL_FALSE;

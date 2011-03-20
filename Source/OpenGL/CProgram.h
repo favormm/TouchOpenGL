@@ -19,9 +19,7 @@
 
 @property (readonly, nonatomic, assign) GLuint name;
 
-- (id)initWithFiles:(NSArray *)inShaders;
-- (id)initWithFiles:(NSArray *)inShaders attributeNames:(NSArray *)inAttributeNames uniformNames:(NSArray *)inUniformNames;
-- (id)initWithName:(NSString *)inName;
+- (id)initWithName:(NSString *)inName attributeNames:(NSArray *)inAttributeNames uniformNames:(NSArray *)inUniformNames;
 
 - (BOOL)linkProgram:(NSError **)outError;
 - (BOOL)validate:(NSError **)outError;
