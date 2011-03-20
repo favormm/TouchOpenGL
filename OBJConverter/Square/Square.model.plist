@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>boundingbox</key>
+	<array>
+		<array>
+			<real>-1.0</real>
+			<real>-1.0</real>
+			<integer>0</integer>
+		</array>
+		<array>
+			<real>1.0</real>
+			<real>1.0</real>
+			<integer>0</integer>
+		</array>
+	</array>
+	<key>center</key>
+	<array>
+		<real>0.0</real>
+		<real>0.0</real>
+		<real>0.0</real>
+	</array>
+	<key>materials</key>
+	<dict>
+	</dict>
+	<key>meshes</key>
+	<array>
+		<dict>
+			<key>VBOs</key>
+			<array>
+				<string>d04c5e9d6cccf6f764529a45269412d4</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
