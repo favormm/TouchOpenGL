@@ -8,9 +8,9 @@
 
 varying mediump vec2 v_texture0;
 
-uniform sampler2D s_texture;
+uniform sampler2D s_texture0;
 
 void main()
     {
-    gl_FragColor = texture2D(s_texture, v_texture0);
+    gl_FragColor = texture2D(s_texture0, v_texture0);
     }
