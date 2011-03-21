@@ -1,5 +1,5 @@
 //
-//  CLibrary.h
+//  COpenGLAssetLibrary.h
 //  ModelViewer
 //
 //  Created by Jonathan Wight on 03/14/11.
@@ -11,12 +11,14 @@
 #import "OpenGLIncludes.h"
 
 @class CVertexBuffer;
+@class CTexture;
 
-@interface CLibrary : NSObject {
+@interface COpenGLAssetLibrary : NSObject {
     
 }
 
 - (CVertexBuffer *)vertexBufferForName:(NSString *)inName target:(GLenum)inTarget usage:(GLenum)inUsage;
 
+- (CTexture *)textureForName:(NSString *)inName error:(NSError **)outError;
 
 @end

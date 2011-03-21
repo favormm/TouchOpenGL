@@ -1,20 +1,20 @@
 //
-//  CLibrary.m
+//  COpenGLAssetLibrary.m
 //  ModelViewer
 //
 //  Created by Jonathan Wight on 03/14/11.
 //  Copyright 2011 toxicsoftware.com. All rights reserved.
 //
 
-#import "CLibrary.h"
+#import "COpenGLAssetLibrary.h"
 
 #import "CVertexBuffer.h"
 
-@interface CLibrary ()
+@interface COpenGLAssetLibrary ()
 @property (readwrite, nonatomic, retain) NSCache *cache;
 @end
 
-@implementation CLibrary
+@implementation COpenGLAssetLibrary
 
 @synthesize cache;
 
@@ -48,6 +48,11 @@
         }
     
     return(theObject);
+    }
+
+- (CTexture *)textureForName:(NSString *)inName error:(NSError **)outError
+    {
+    return(NULL);
     }
 
 @end

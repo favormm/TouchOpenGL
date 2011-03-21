@@ -36,7 +36,7 @@
 		45781C59130AFE1E00B57285 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C58130AFE1E00B57285 /* UIKit.framework */; };
 		45781C5B130AFE1E00B57285 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5A130AFE1E00B57285 /* Foundation.framework */; };
 		45781C5D130AFE1E00B57285 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5C130AFE1E00B57285 /* CoreGraphics.framework */; };
-		457DA865132ED6F400D321F8 /* CLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 457DA864132ED6F400D321F8 /* CLibrary.m */; };
+		457DA865132ED6F400D321F8 /* COpenGLAssetLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 457DA864132ED6F400D321F8 /* COpenGLAssetLibrary.m */; };
 		4585EF1D1333E6C90050D173 /* 5eb5309d9801fd2515bfdb757d82fc66.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4585EF1A1333E6C90050D173 /* 5eb5309d9801fd2515bfdb757d82fc66.vbo */; };
 		4585EF1E1333E6C90050D173 /* 9fa39a7ed2e901631e0c0d9f24854096.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4585EF1B1333E6C90050D173 /* 9fa39a7ed2e901631e0c0d9f24854096.vbo */; };
 		4585EF1F1333E6C90050D173 /* teapot.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4585EF1C1333E6C90050D173 /* teapot.model.plist */; };
@@ -127,8 +127,8 @@
 		45781C58130AFE1E00B57285 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		45781C5A130AFE1E00B57285 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		45781C5C130AFE1E00B57285 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		457DA863132ED6F400D321F8 /* CLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLibrary.h; sourceTree = "<group>"; };
-		457DA864132ED6F400D321F8 /* CLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLibrary.m; sourceTree = "<group>"; };
+		457DA863132ED6F400D321F8 /* COpenGLAssetLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COpenGLAssetLibrary.h; sourceTree = "<group>"; };
+		457DA864132ED6F400D321F8 /* COpenGLAssetLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COpenGLAssetLibrary.m; sourceTree = "<group>"; };
 		4585EF1A1333E6C90050D173 /* 5eb5309d9801fd2515bfdb757d82fc66.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 5eb5309d9801fd2515bfdb757d82fc66.vbo; sourceTree = "<group>"; };
 		4585EF1B1333E6C90050D173 /* 9fa39a7ed2e901631e0c0d9f24854096.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 9fa39a7ed2e901631e0c0d9f24854096.vbo; sourceTree = "<group>"; };
 		4585EF1C1333E6C90050D173 /* teapot.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = teapot.model.plist; sourceTree = "<group>"; };
@@ -336,8 +336,8 @@
 				4592080913280E2400B561F4 /* CTexture_TilingExtension.m */,
 				4592080A13280E2400B561F4 /* CTextureLoader.h */,
 				4592080B13280E2400B561F4 /* CTextureLoader.m */,
-				457DA863132ED6F400D321F8 /* CLibrary.h */,
-				457DA864132ED6F400D321F8 /* CLibrary.m */,
+				457DA863132ED6F400D321F8 /* COpenGLAssetLibrary.h */,
+				457DA864132ED6F400D321F8 /* COpenGLAssetLibrary.m */,
 				4592080C13280E2400B561F4 /* CVertexBuffer.h */,
 				4592080D13280E2400B561F4 /* CVertexBuffer.m */,
 				4592080E13280E2400B561F4 /* CVertexBuffer_FactoryExtensions.h */,
@@ -576,7 +576,7 @@
 				45BF339F1328661C0096D2D4 /* CArcBall.m in Sources */,
 				45BFEA60132957DB00B6C3D8 /* Quaternion.m in Sources */,
 				45BFEA64132965ED00B6C3D8 /* Matrix.m in Sources */,
-				457DA865132ED6F400D321F8 /* CLibrary.m in Sources */,
+				457DA865132ED6F400D321F8 /* COpenGLAssetLibrary.m in Sources */,
 				45E1712213318E2000ECA02A /* COBJRenderer.m in Sources */,
 				4537C19D1332985900DE1A0A /* CMesh.m in Sources */,
 				4537C1A0133298C100DE1A0A /* CMeshLoader.m in Sources */,
