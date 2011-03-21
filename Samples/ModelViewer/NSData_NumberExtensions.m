@@ -13,6 +13,8 @@
 
 + (NSData *)dataWithNumbersInString:(NSString *)inString type:(CFNumberType)inType error:(NSError **)outError
     {
+    #pragma unused (outError)
+    
     NSMutableData *theData = [ NSMutableData data];
     
     NSScanner *theScanner = [NSScanner scannerWithString:inString];
