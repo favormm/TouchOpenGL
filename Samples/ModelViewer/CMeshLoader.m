@@ -42,48 +42,7 @@
         {
         NSDictionary *theMaterialDictionary = [theMaterialsDictionary objectForKey:theMaterialName];
         
-        CMaterial *theMaterial = [[[CMaterial alloc] init] autorelease];
-        theMaterial.name = theMaterialName;
-        
-        if ([theMaterialDictionary objectForKey:@"ambientColor"] != NULL)
-            {
-            NSArray *theComponents = [theMaterialDictionary objectForKey:@"ambientColor"];
-            theMaterial.ambientColor = (Color4f){
-                [[theComponents objectAtIndex:0] floatValue],
-                [[theComponents objectAtIndex:1] floatValue],
-                [[theComponents objectAtIndex:2] floatValue],
-                1.0};
-            }
-
-        if ([theMaterialDictionary objectForKey:@"diffuseColor"] != NULL)
-            {
-            NSArray *theComponents = [theMaterialDictionary objectForKey:@"diffuseColor"];
-            theMaterial.diffuseColor = (Color4f){
-                [[theComponents objectAtIndex:0] floatValue],
-                [[theComponents objectAtIndex:1] floatValue],
-                [[theComponents objectAtIndex:2] floatValue],
-                1.0};
-            }
-
-        if ([theMaterialDictionary objectForKey:@"specularColor"] != NULL)
-            {
-            NSArray *theComponents = [theMaterialDictionary objectForKey:@"specularColor"];
-            theMaterial.specularColor = (Color4f){
-                [[theComponents objectAtIndex:0] floatValue],
-                [[theComponents objectAtIndex:1] floatValue],
-                [[theComponents objectAtIndex:2] floatValue],
-                1.0};
-            }
-        
-        
-        NSString *theTextureName = [theMaterialDictionary objectForKey:@"texture"];
-        if (theTextureName.length > 0)
-            {        
-            NSError *theError = NULL;
-            CTexture *theTexture = [[CImageTextureLoader textureLoader] textureWithImageNamed:theTextureName error:&theError];
-            theMaterial.texture = theTexture;
-            }
-
+        CMaterial *theMaterial = [[[CMaterial alloc] initWithPropertyListRepresentation:theMaterialDictionary error:NULL] autorelease];
         [theMaterials setObject:theMaterial forKey:theMaterialName];
         }
 
