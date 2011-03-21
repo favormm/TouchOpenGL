@@ -10,7 +10,7 @@
 
 #import "CVertexBuffer.h"
 #import "CVertexBufferReference.h"
-#import "CLibrary.h"
+#import "COpenGLAssetLibrary.h"
 #import "CProgram.h"
 #import "UIColor_OpenGLExtensions.h"
 #import "CMeshLoader.h"
