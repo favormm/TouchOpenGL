@@ -22,6 +22,7 @@
 		450A07051333E4DA0052D583 /* f40f866a2f776d3b40cb698d3d31349b.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 450A06F61333E4DA0052D583 /* f40f866a2f776d3b40cb698d3d31349b.vbo */; };
 		450A07061333E4DA0052D583 /* f89978f22d22dbd1ba39bfc39d155518.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 450A06F71333E4DA0052D583 /* f89978f22d22dbd1ba39bfc39d155518.vbo */; };
 		450A07071333E4DA0052D583 /* Skull.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 450A06F81333E4DA0052D583 /* Skull.model.plist */; };
+		450BF9411335227300C41187 /* NSData_NumberExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 450BF9401335227300C41187 /* NSData_NumberExtensions.m */; };
 		4527174A130B202F00529A0C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45271749130B202F00529A0C /* OpenGLES.framework */; };
 		4527174C130B203700529A0C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4527174B130B203700529A0C /* QuartzCore.framework */; };
 		4529966C130B8D6A009FD0A3 /* CModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45299664130B8D6A009FD0A3 /* CModelViewController.m */; };
@@ -103,6 +104,8 @@
 		450A06F61333E4DA0052D583 /* f40f866a2f776d3b40cb698d3d31349b.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = f40f866a2f776d3b40cb698d3d31349b.vbo; sourceTree = "<group>"; };
 		450A06F71333E4DA0052D583 /* f89978f22d22dbd1ba39bfc39d155518.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = f89978f22d22dbd1ba39bfc39d155518.vbo; sourceTree = "<group>"; };
 		450A06F81333E4DA0052D583 /* Skull.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Skull.model.plist; sourceTree = "<group>"; };
+		450BF93F1335227300C41187 /* NSData_NumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSData_NumberExtensions.h; sourceTree = "<group>"; };
+		450BF9401335227300C41187 /* NSData_NumberExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSData_NumberExtensions.m; sourceTree = "<group>"; };
 		45271749130B202F00529A0C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		4527174B130B203700529A0C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4527175A130B247700529A0C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -442,6 +445,8 @@
 				45BF339713285FF80096D2D4 /* CInteractiveRendererView.m */,
 				45ED55EB13342728003AB45E /* CVertexBuffer_StringExtensions.h */,
 				45ED55EC13342728003AB45E /* CVertexBuffer_StringExtensions.m */,
+				450BF93F1335227300C41187 /* NSData_NumberExtensions.h */,
+				450BF9401335227300C41187 /* NSData_NumberExtensions.m */,
 			);
 			name = "To Be Moved";
 			sourceTree = "<group>";
@@ -578,6 +583,7 @@
 				4537C2431332CCE100DE1A0A /* CMaterial.m in Sources */,
 				459CFBAA1332E79000B16315 /* CRenderer_Extensions.m in Sources */,
 				45ED55ED13342729003AB45E /* CVertexBuffer_StringExtensions.m in Sources */,
+				450BF9411335227300C41187 /* NSData_NumberExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
