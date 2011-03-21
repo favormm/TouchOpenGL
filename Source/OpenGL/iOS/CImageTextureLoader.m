@@ -50,6 +50,8 @@
 
 - (CTexture *)textureWithImage:(UIImage *)inImage error:(NSError **)outError;
     {
+    #pragma unused (outError)
+    
     CGImageRef theImageRef = [inImage CGImage];
     
     CGColorSpaceRef theColorSpace = CGImageGetColorSpace(theImageRef);

@@ -56,6 +56,8 @@ typedef struct _PVRTexHeader
 
 - (CTexture *)textureWithPath:(NSString *)inPath error:(NSError **)outError
     {
+    #pragma unused (outError)
+
     NSData *data = [NSData dataWithContentsOfFile:inPath];
     
     _imageData = [[NSMutableArray alloc] initWithCapacity:10];
@@ -159,8 +161,8 @@ typedef struct _PVRTexHeader
 			
 			dataOffset += dataSize;
 			
-			width = MAX(width >> 1, 1);
-			height = MAX(height >> 1, 1);
+			width = MAX(width >> 1, 1U);
+			height = MAX(height >> 1, 1U);
 		}
 				  
 		success = TRUE;

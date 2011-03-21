@@ -20,6 +20,7 @@
 
 - (void)setup;
 - (void)setupFramebuffers;
+- (void)tick:(id)inSender;
 @end
 
 #pragma mark -
@@ -179,6 +180,8 @@
 
 - (void)tick:(id)inSender
     {
+    #pragma unused (inSender)
+    
     [self render];
     }
 

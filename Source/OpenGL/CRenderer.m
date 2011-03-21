@@ -50,6 +50,7 @@
 
 - (void)render:(Matrix4)inTransform
     {
+    #pragma unused (inTransform)
     }
 
 - (void)postrender

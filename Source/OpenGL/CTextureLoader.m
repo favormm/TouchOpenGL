@@ -17,6 +17,7 @@
 
 - (CTexture *)textureWithData:(NSData *)inData error:(NSError **)outError
     {
+    #pragma unused (inData, outError)
     return(NULL);
     }
 

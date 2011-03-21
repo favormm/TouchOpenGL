@@ -20,6 +20,9 @@
 @property (readwrite, nonatomic, assign) CGFloat scale;
 @property (readwrite, nonatomic, retain) CArcBall *arcBall;
 @property (readwrite, nonatomic, retain) CMMotionManager *motionManager;
+
+- (void)pinch:(UIPinchGestureRecognizer *)inGestureRecognizer;
+- (void)pan:(UIPanGestureRecognizer *)inGestureRecognizer;
 @end
 
 @implementation CInteractiveRendererView

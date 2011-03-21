@@ -46,7 +46,7 @@
     if ((self = [super init]) != NULL)
         {
         NSAssert(inSize >= 1 && inSize <= 4, @"Size needs to be between 1 & 4");
-        NSAssert(inRowCount * inRowSize == inVertexBuffer.data.length, @"Row size * roww count != vertex buffer length");
+        NSAssert((size_t)(inRowCount * inRowSize) == inVertexBuffer.data.length, @"Row size * roww count != vertex buffer length");
         NSAssert(inStride == 0 || inStride <= inRowSize, @"Stride should be either 0 or row size");
         NSAssert(inOffset == 0 || inOffset < inStride, @"Offset should be 0 or less then stride");
 
@@ -80,7 +80,7 @@
     
     [[self class] computeRowCount:&theRowCount type:&theType size:&theSize rowSize:&theRowSize vertexBuffer:inVertexBuffer fromEncoding:inEncoding];
     
-    if ((self = [self initWithVertexBuffer:inVertexBuffer rowSize:theRowSize rowCount:theRowCount size:theSize type:theType normalized:inNormalized stride:0 offset:0]) != NULL)
+    if ((self = [self initWithVertexBuffer:inVertexBuffer rowSize:theRowSize rowCount:theRowCount size:theSize type:theType normalized:inNormalized stride:inStride offset:inOffset]) != NULL)
         {
         }
     return(self);

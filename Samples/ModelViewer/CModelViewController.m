@@ -25,6 +25,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
     {
+    #pragma unused (interfaceOrientation)
     return(YES);
     }
     

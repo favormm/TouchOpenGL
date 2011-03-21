@@ -69,6 +69,8 @@
 
 - (BOOL)compileShader:(NSError **)outError
     {
+    #pragma unused (outError)
+    
     AssertOpenGLNoError_();
     
     GLint theStatus;

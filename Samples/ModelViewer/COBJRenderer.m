@@ -68,6 +68,11 @@ struct material_properties {
 	return(self);
 	}
 
+- (void)dealloc
+    {
+    [super dealloc];
+    }
+
 - (void)render:(Matrix4)inTransform
     {
     AssertOpenGLNoError_();
