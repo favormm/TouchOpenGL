@@ -24,7 +24,8 @@
 
 - (void)storage:(GLenum)inIntermalFormat size:(SIntSize)inSize;
 
+#if TARGET_OS_IPHONE == 1
 - (void)storageFromContext:(EAGLContext *)inContext drawable:(id <EAGLDrawable>)inDrawable;
-
+#endif
 
 @end
