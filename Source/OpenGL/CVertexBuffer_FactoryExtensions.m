@@ -17,13 +17,6 @@
 
 @implementation CVertexBuffer (CVertexBuffer_FactoryExtensions)
 
-//+ (CVertexBuffer *)vertexBufferWithIndices:(NSArray *)inIndices;
-//    {
-//    GLint 
-//    
-//    
-//    }
-
 + (CVertexBuffer *)vertexBufferWithRect:(CGRect)inRect
     {
     const Vector2 theVertices[] = {
