@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "CPropertyListRepresentation.h"
 #import "OpenGLTypes.h"
 
 @class CTexture;
 
-@interface CMaterial : NSObject {
+@interface CMaterial : NSObject <CPropertyListRepresentation> {
     
 }
 
@@ -23,3 +24,4 @@
 @property (readwrite, nonatomic, retain) CTexture *texture;
 
 @end
+

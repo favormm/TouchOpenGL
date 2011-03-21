@@ -67,6 +67,7 @@
 		45BF339F1328661C0096D2D4 /* CArcBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BF339E132866190096D2D4 /* CArcBall.m */; };
 		45BFEA60132957DB00B6C3D8 /* Quaternion.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA5F132957DB00B6C3D8 /* Quaternion.m */; };
 		45BFEA64132965ED00B6C3D8 /* Matrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA63132965ED00B6C3D8 /* Matrix.m */; };
+		45C4426A133803D800CA27C7 /* UIColor_PropertyListRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 45C44269133803D800CA27C7 /* UIColor_PropertyListRepresentation.m */; };
 		45E1712213318E2000ECA02A /* COBJRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E1712113318E2000ECA02A /* COBJRenderer.m */; };
 		45ED55B41333F62D003AB45E /* Lighting.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 45ED55B31333F62D003AB45E /* Lighting.fsh */; };
 		45ED55C513340180003AB45E /* 3a69aea33f17ef0794e1d1fac7423588.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 45ED55B713340180003AB45E /* 3a69aea33f17ef0794e1d1fac7423588.vbo */; };
@@ -184,6 +185,9 @@
 		45BFEA5F132957DB00B6C3D8 /* Quaternion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quaternion.m; sourceTree = "<group>"; };
 		45BFEA62132965ED00B6C3D8 /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
 		45BFEA63132965ED00B6C3D8 /* Matrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix.m; sourceTree = "<group>"; };
+		45C44268133803D800CA27C7 /* UIColor_PropertyListRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIColor_PropertyListRepresentation.h; sourceTree = "<group>"; };
+		45C44269133803D800CA27C7 /* UIColor_PropertyListRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIColor_PropertyListRepresentation.m; sourceTree = "<group>"; };
+		45D750881337FD0200C26591 /* CPropertyListRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPropertyListRepresentation.h; sourceTree = "<group>"; };
 		45E1712013318E2000ECA02A /* COBJRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBJRenderer.h; sourceTree = "<group>"; };
 		45E1712113318E2000ECA02A /* COBJRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBJRenderer.m; sourceTree = "<group>"; };
 		45ED55B31333F62D003AB45E /* Lighting.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Lighting.fsh; sourceTree = "<group>"; };
@@ -447,6 +451,9 @@
 				45ED55EC13342728003AB45E /* CVertexBuffer_StringExtensions.m */,
 				450BF93F1335227300C41187 /* NSData_NumberExtensions.h */,
 				450BF9401335227300C41187 /* NSData_NumberExtensions.m */,
+				45D750881337FD0200C26591 /* CPropertyListRepresentation.h */,
+				45C44268133803D800CA27C7 /* UIColor_PropertyListRepresentation.h */,
+				45C44269133803D800CA27C7 /* UIColor_PropertyListRepresentation.m */,
 			);
 			name = "To Be Moved";
 			sourceTree = "<group>";
@@ -584,6 +591,7 @@
 				459CFBAA1332E79000B16315 /* CRenderer_Extensions.m in Sources */,
 				45ED55ED13342729003AB45E /* CVertexBuffer_StringExtensions.m in Sources */,
 				450BF9411335227300C41187 /* NSData_NumberExtensions.m in Sources */,
+				45C4426A133803D800CA27C7 /* UIColor_PropertyListRepresentation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,7 +645,7 @@
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -667,7 +675,7 @@
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
