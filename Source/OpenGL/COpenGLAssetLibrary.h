@@ -17,6 +17,8 @@
     
 }
 
++ (COpenGLAssetLibrary *)sharedInstance;
+
 - (CVertexBuffer *)vertexBufferForName:(NSString *)inName target:(GLenum)inTarget usage:(GLenum)inUsage;
 
 - (CTexture *)textureForName:(NSString *)inName error:(NSError **)outError;

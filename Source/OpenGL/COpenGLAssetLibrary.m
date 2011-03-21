@@ -9,6 +9,8 @@
 #import "COpenGLAssetLibrary.h"
 
 #import "CVertexBuffer.h"
+#import "CImageTextureLoader.h"
+
 
 @interface COpenGLAssetLibrary ()
 @property (readwrite, nonatomic, retain) NSCache *cache;
@@ -17,6 +19,13 @@
 @implementation COpenGLAssetLibrary
 
 @synthesize cache;
+
++ (COpenGLAssetLibrary *)sharedInstance;
+    {
+    // TODO at some point this will be a singleton - maybe - but not today.
+    // (We really need one per OGL context anyway singleton = bad here)
+    return([[[self alloc] init] autorelease]);
+    }
 
 - (id)init
 	{
@@ -52,7 +61,9 @@
 
 - (CTexture *)textureForName:(NSString *)inName error:(NSError **)outError
     {
-    return(NULL);
+    // TODO roll CImageTextureLoader code into this class perhaps?
+    CImageTextureLoader *theLoader = [[[CImageTextureLoader alloc] init] autorelease];
+    return([theLoader textureWithImageNamed:inName error:outError]);
     }
 
 @end
