@@ -53,6 +53,17 @@
 
     return self;
     }
+    
+- (void)dealloc
+    {
+    [arcBall release];
+    arcBall = NULL;
+    
+    [motionManager release];
+    motionManager = NULL;
+    //
+    [super dealloc];
+    }
 
 - (void)render
     {

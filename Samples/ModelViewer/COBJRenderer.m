@@ -40,7 +40,6 @@ struct material_properties {
 @property (readwrite, nonatomic, retain) CProgram *flatProgram;
 @property (readwrite, nonatomic, retain) CProgram *textureProgram;
 @property (readwrite, nonatomic, retain) CProgram *lightingProgram;
-@property (readwrite, nonatomic, retain) CTexture *defaultTexture;
 @end
 
 @implementation COBJRenderer
@@ -49,7 +48,6 @@ struct material_properties {
 @synthesize flatProgram;
 @synthesize textureProgram;
 @synthesize lightingProgram;
-@synthesize defaultTexture;
 
 - (id)init
 	{
@@ -70,6 +68,19 @@ struct material_properties {
 
 - (void)dealloc
     {
+    [meshes release];
+    meshes = NULL;
+    
+    [flatProgram release];
+    flatProgram = NULL;
+    
+    [textureProgram release];
+    textureProgram = NULL;
+    
+    [lightingProgram release];
+    lightingProgram = NULL;
+    
+    //
     [super dealloc];
     }
 

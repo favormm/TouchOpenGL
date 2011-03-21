@@ -17,5 +17,21 @@
 @synthesize normals;
 @synthesize center;
 
+- (void)dealloc
+    {
+    [material release];
+    material = NULL;
+    
+    [positions release];
+    positions = NULL;
+    
+    [texCoords release];
+    texCoords = NULL;
+    
+    [normals release];
+    normals = NULL;
+    //
+    [super dealloc];
+    }
 
 @end

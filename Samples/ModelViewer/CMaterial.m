@@ -17,4 +17,15 @@
 @synthesize specularColor;
 @synthesize texture;
 
+- (void)dealloc
+    {
+    [name release];
+    name = NULL;
+    
+    [texture release];
+    texture = NULL;
+    //
+    [super dealloc];
+    }
+
 @end
