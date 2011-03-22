@@ -54,7 +54,7 @@ struct material_properties {
 	if ((self = [super init]) != NULL)
 		{
         CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
-        self.meshes = [theLoader loadMeshesFromFile:@"Square"];
+        self.meshes = [theLoader loadMeshesFromFile:@"Skull2"];
                 
         
         self.flatProgram = [[[CProgram alloc] initWithName:@"Flat2" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_color", NULL]] autorelease];
@@ -104,7 +104,7 @@ struct material_properties {
         Matrix4 theMeshTransform = Matrix4Concat(Matrix4MakeTranslation(-theCenter.x, -theCenter.y * 1.5, -theCenter.z), theTransform);
 
 
-        CProgram *theProgram = self.flatProgram;
+        CProgram *theProgram = self.lightingProgram;
         
         if (theMesh.material.texture != NULL)
             {
@@ -115,10 +115,13 @@ struct material_properties {
         glUseProgram(theProgram.name);
         
         // Update position attribute
+        NSAssert(theMesh.positions != NULL, @"No positions.");
         GLuint thePositionsAttributeIndex = [theProgram attributeIndexForName:@"a_position"];        
         [theMesh.positions use:thePositionsAttributeIndex];
         glEnableVertexAttribArray(thePositionsAttributeIndex);
 
+
+        NSAssert(theMesh.normals != NULL, @"No normals.");
         GLuint theNormalsAttributeIndex = [theProgram attributeIndexForName:@"a_normal"];        
         [theMesh.normals use:theNormalsAttributeIndex];
         glEnableVertexAttribArray(theNormalsAttributeIndex);
