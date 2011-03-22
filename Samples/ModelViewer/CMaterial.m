@@ -41,25 +41,34 @@
 		{
         name = [[(NSDictionary *)inRepresentation objectForKey:@"name"] retain];
         
-        NSString *theString = NULL;
+        id theObject = NULL;
         UIColor *theColor = NULL;
         
-        theString = [(NSDictionary *)inRepresentation objectForKey:@"ambientColor"];
-        theColor = [[[UIColor alloc] initWithPropertyListRepresentation:theString error:outError] autorelease];
-        ambientColor = theColor.color4f;
-        
-        theString = [(NSDictionary *)inRepresentation objectForKey:@"diffuseColor"];
-        theColor = [[[UIColor alloc] initWithPropertyListRepresentation:theString error:outError] autorelease];
-        diffuseColor = theColor.color4f;
-        
-        theString = [(NSDictionary *)inRepresentation objectForKey:@"specularColor"];
-        theColor = [[[UIColor alloc] initWithPropertyListRepresentation:theString error:outError] autorelease];
-        specularColor = theColor.color4f;
-            
-        theString = [(NSDictionary *)inRepresentation objectForKey:@"texture"];
-        if (theString.length > 0)
+        theObject = [(NSDictionary *)inRepresentation objectForKey:@"ambientColor"];
+        if (theObject != NULL)
             {
-            texture = [[[COpenGLAssetLibrary sharedInstance] textureForName:theString error:outError] retain];
+            theColor = [[[UIColor alloc] initWithPropertyListRepresentation:theObject error:outError] autorelease];
+            ambientColor = theColor.color4f;
+            }
+        
+        theObject = [(NSDictionary *)inRepresentation objectForKey:@"diffuseColor"];
+        if (theObject != NULL)
+            {
+            theColor = [[[UIColor alloc] initWithPropertyListRepresentation:theObject error:outError] autorelease];
+            diffuseColor = theColor.color4f;
+            }
+        
+        theObject = [(NSDictionary *)inRepresentation objectForKey:@"specularColor"];
+        if (theObject != NULL)
+            {
+            theColor = [[[UIColor alloc] initWithPropertyListRepresentation:theObject error:outError] autorelease];
+            specularColor = theColor.color4f;
+            }
+            
+        theObject = [(NSDictionary *)inRepresentation objectForKey:@"texture"];
+        if (theObject != NULL)
+            {
+            texture = [[[COpenGLAssetLibrary sharedInstance] textureForName:theObject error:outError] retain];
             }
         
 		}
