@@ -22,7 +22,7 @@
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-    CProgram *theProgram = [[[CProgram alloc] initWithName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_mvpMatrix", NULL]] autorelease];
+    CProgram *theProgram = [[[CProgram alloc] initWithName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL]] autorelease];
 
     const GLfloat kLength = 10000.0;
 
@@ -64,14 +64,12 @@
 
     glUseProgram(theProgram.name);
 
-
     // Update transform uniform
-    GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"u_mvpMatrix"];
-    glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &inTransform.m00);
+    GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
+    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &inTransform.m00);
 
-    AssertOpenGLNoError_();
-
-
+    GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
+    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m00);
 
 
     // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.

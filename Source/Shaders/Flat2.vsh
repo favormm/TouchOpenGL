@@ -10,8 +10,8 @@
 attribute vec4 a_position;
 attribute vec4 a_normal;
 
-uniform mat4 u_mvpMatrix;
 uniform mat4 u_modelViewMatrix;
+uniform mat4 u_projectionMatrix;
 uniform vec4 u_color;
 
 varying vec4 v_color;
@@ -19,5 +19,5 @@ varying vec4 v_color;
 void main()
     {
     v_color = u_color;
-    gl_Position = u_mvpMatrix * a_position;
+    gl_Position = u_modelViewMatrix * u_projectionMatrix * a_position;
     }
