@@ -54,14 +54,14 @@ struct material_properties {
 	if ((self = [super init]) != NULL)
 		{
         CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
-        self.meshes = [theLoader loadMeshesFromFile:@"Skull"];
+        self.meshes = [theLoader loadMeshesFromFile:@"Square"];
                 
         
-        self.flatProgram = [[[CProgram alloc] initWithName:@"Flat2" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_mvpMatrix", @"u_diffuse_color", @"u_color", NULL]] autorelease];
+        self.flatProgram = [[[CProgram alloc] initWithName:@"Flat2" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_color", NULL]] autorelease];
 
-        self.textureProgram = [[[CProgram alloc] initWithName:@"SimpleTexture" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_texCoord", NULL] uniformNames:[NSArray arrayWithObjects:@"u_mvpMatrix", NULL]] autorelease];
+        self.textureProgram = [[[CProgram alloc] initWithName:@"SimpleTexture" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_texCoord", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix",  @"u_projectionMatrix", NULL]] autorelease];
 
-        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_mvpMatrix", @"u_modelViewMatrix" /*, @"u_material", @"u_light"*/, NULL]] autorelease];
+        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix"/*, @"u_material", @"u_light"*/, NULL]] autorelease];
 		}
 	return(self);
 	}
@@ -124,8 +124,11 @@ struct material_properties {
         glEnableVertexAttribArray(theNormalsAttributeIndex);
 
         // Update transform uniform
-        GLuint theTransformUniformIndex = [theProgram uniformIndexForName:@"u_mvpMatrix"];
-        glUniformMatrix4fv(theTransformUniformIndex, 1, NO, &theMeshTransform.m00);
+        GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
+        glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &theMeshTransform.m00);
+
+        GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
+        glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m00);
 
         if (theProgram == self.textureProgram)
             {
@@ -146,14 +149,6 @@ struct material_properties {
         else if (theProgram == self.lightingProgram)
             {
             AssertOpenGLNoError_();
-            
-            GLfloat theMat3[] = { 1, 0, 0, 0, 1, 0, 0, 0, 1 };
-            
-            GLuint theModelMatrixUniformIndex = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
-            glUniformMatrix3fv(theModelMatrixUniformIndex, 1, NO, theMat3);
-
-            AssertOpenGLNoError_();
-
             
 //            Color4f theColor = [UIColor redColor].color4f;
 //            GLuint theColorUniformIndex = [theProgram uniformIndexForName:@"u_color"];
