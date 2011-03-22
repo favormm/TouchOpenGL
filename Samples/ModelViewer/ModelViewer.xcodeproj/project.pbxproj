@@ -85,7 +85,6 @@
 		45ED55D113340180003AB45E /* Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 45ED55C313340180003AB45E /* Right.png */; };
 		45ED55D213340180003AB45E /* Top.png in Resources */ = {isa = PBXBuildFile; fileRef = 45ED55C413340180003AB45E /* Top.png */; };
 		45ED55E513342552003AB45E /* Square.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45ED55E313342552003AB45E /* Square.model.plist */; };
-		45ED55ED13342729003AB45E /* CVertexBuffer_StringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 45ED55EC13342728003AB45E /* CVertexBuffer_StringExtensions.m */; };
 		45ED55EF1334314C003AB45E /* Lighting.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 45ED55EE1334314C003AB45E /* Lighting.vsh */; };
 /* End PBXBuildFile section */
 
@@ -206,8 +205,6 @@
 		45ED55C313340180003AB45E /* Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Right.png; sourceTree = "<group>"; };
 		45ED55C413340180003AB45E /* Top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Top.png; sourceTree = "<group>"; };
 		45ED55E313342552003AB45E /* Square.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Square.model.plist; sourceTree = "<group>"; };
-		45ED55EB13342728003AB45E /* CVertexBuffer_StringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVertexBuffer_StringExtensions.h; sourceTree = "<group>"; };
-		45ED55EC13342728003AB45E /* CVertexBuffer_StringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVertexBuffer_StringExtensions.m; sourceTree = "<group>"; };
 		45ED55EE1334314C003AB45E /* Lighting.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Lighting.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -447,8 +444,6 @@
 				459CFBA91332E78F00B16315 /* CRenderer_Extensions.m */,
 				45BF339613285FF80096D2D4 /* CInteractiveRendererView.h */,
 				45BF339713285FF80096D2D4 /* CInteractiveRendererView.m */,
-				45ED55EB13342728003AB45E /* CVertexBuffer_StringExtensions.h */,
-				45ED55EC13342728003AB45E /* CVertexBuffer_StringExtensions.m */,
 				450BF93F1335227300C41187 /* NSData_NumberExtensions.h */,
 				450BF9401335227300C41187 /* NSData_NumberExtensions.m */,
 				45D750881337FD0200C26591 /* CPropertyListRepresentation.h */,
@@ -589,7 +584,6 @@
 				4537C1A0133298C100DE1A0A /* CMeshLoader.m in Sources */,
 				4537C2431332CCE100DE1A0A /* CMaterial.m in Sources */,
 				459CFBAA1332E79000B16315 /* CRenderer_Extensions.m in Sources */,
-				45ED55ED13342729003AB45E /* CVertexBuffer_StringExtensions.m in Sources */,
 				450BF9411335227300C41187 /* NSData_NumberExtensions.m in Sources */,
 				45C4426A133803D800CA27C7 /* UIColor_PropertyListRepresentation.m in Sources */,
 			);
