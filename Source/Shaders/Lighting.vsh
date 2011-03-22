@@ -1,70 +1,51 @@
-//
-//  Shader.vsh
-//  Dwarfs
-//
-//  Created by Jonathan Wight on 09/05/10.
-//  Copyright 2010 toxicsoftware.com. All rights reserved.
-//
+struct LightSourceParameters {
+    vec4 ambient;
+    vec4 diffuse;
+    vec4 specular;
+    vec4 position;
+    vec4 halfVector;
+    vec3 spotDirection;
+    float spotExponent;
+    float spotCutoff; // (range: [0.0,90.0], 180.0)
+    float spotCosCutoff; // (range: [1.0,0.0],-1.0)
+    float constantAttenuation;
+    float linearAttenuation;
+    float quadraticAttenuation;
+    };
 
-struct directional_light {
-	vec3 direction;
-	vec3 halfplane;
-	vec4 ambient_color;
-	vec4 diffuse_color;
-	vec4 specular_color;
-};
-
-struct material_properties {
-	vec4 ambient_color;
-	vec4 diffuse_color;
-	vec4 specular_color;
-	float specular_exponent;
-};
-
-uniform mat4 u_mvpMatrix;
-uniform mat3 u_modelViewMatrix;
-//uniform material_properties u_material;
-//uniform directional_light u_light;
-
-attribute vec4 a_position;
-attribute vec3 a_normal;
+uniform LightSourceParameters u_LightSource[1];
+    struct LightModelParameters {
+    vec4 diffuse;
+    vec4 ambient;
+    };
+uniform LightModelParameters u_LightModel;
 
 varying vec4 v_color;
 
-const directional_light k_light = directional_light(
-    vec3(0.7, 0.7, 0.0),      // direction;
-    vec3(0.7, 0.7, 0.0),      // halfplane;
-    vec4(1.0, 0.0, 0.0, 1.0), // ambient_color;
-    vec4(1.0, 0.0, 0.0, 1.0), // diffuse_color
-    vec4(1.0, 0.0, 0.0, 1.0)  // specular_color
-    );
-const material_properties k_material = material_properties(
-    vec4(1.0, 1.0, 1.0, 1.0), // ambient_color
-    vec4(1.0, 1.0, 1.0, 1.0), // diffuse_color
-    vec4(1.0, 1.0, 1.0, 1.0), // specular_color
-    10.0 // specular_exponent
-    );
+void main() {
 
+vec3 normal, lightDir;
+vec4 diffuse;
+float NdotL;
 
-vec4 compute_color(vec3 normal)
-{
-	vec4 computed_color = vec4(0.0, 0.0, 0.0, 0.0);
-	float ndotl = max(0.0, dot(normal, k_light.direction));
-	float ndoth = max(0.0, dot(normal, k_light.halfplane));
-	
-	computed_color += k_light.ambient_color * k_material.ambient_color;
-	computed_color += ndotl * k_light.diffuse_color * k_material.diffuse_color;
-	
-	if (ndoth > 0.0)
-        {
-		computed_color += pow(ndoth, k_material.specular_exponent) * k_material.specular_color * k_light.specular_color;
-        }
-	return computed_color;
-}
+/* first transform the normal into eye space and normalize the result */
+normal = normalize(gl_NormalMatrix * gl_Normal);
 
-void main()
-{
-	gl_Position = u_mvpMatrix * a_position;
-	v_color = compute_color(normalize(u_modelViewMatrix * a_normal));
-    v_color.a = 1.0;
+/* now normalize the light's direction. Note that according to the
+OpenGL specification, the light is stored in eye space. Also since
+we're talking about a directional light, the position field is actually
+direction */
+lightDir = normalize(vec3(u_LightSource[0].position));
+
+/* compute the cos of the angle between the normal and lights direction.
+The light is directional so the direction is constant for every vertex.
+Since these two are normalized the cosine is the dot product. We also
+need to clamp the result to the [0,1] range. */
+NdotL = max(dot(normal, lightDir), 0.0);
+
+/* Compute the diffuse term */
+diffuse = u_LightModel.diffuse * u_LightSource[0].diffuse;
+v_color =  NdotL * diffuse;
+
+gl_Position = ftransform();
 }
