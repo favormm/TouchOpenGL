@@ -48,6 +48,8 @@
                 break;
             }
 
+        // TODO support more data types
+
 //    kCFNumberSInt8Type = 1,
 //    kCFNumberSInt16Type = 2,
 //    kCFNumberSInt32Type = 3,
