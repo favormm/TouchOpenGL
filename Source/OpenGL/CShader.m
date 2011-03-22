@@ -114,6 +114,7 @@
         {
         GLchar *theLogBuffer = (GLchar *)malloc(logLength);
         glGetShaderInfoLog(theName, logLength, &logLength, theLogBuffer);
+        NSLog(@"Shader failed:\n%@", self.path);
         NSLog(@"Shader compile log:\n%s", theLogBuffer);
         free(theLogBuffer);
         }
