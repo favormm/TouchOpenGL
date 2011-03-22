@@ -17,7 +17,6 @@
 #import "CVertexBufferReference.h"
 #import "OpenGLTypes.h"
 #import "CMaterial.h"
-#import "CVertexBuffer_StringExtensions.h"
 
 @implementation CMeshLoader
 
