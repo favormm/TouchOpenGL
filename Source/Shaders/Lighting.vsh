@@ -26,18 +26,22 @@ struct LightModelParameters {
 varying vec4 v_color;
 
 attribute vec4 a_position;
-attribute vec4 a_normal; // gl_Normal
+attribute vec3 a_normal; // gl_Normal
 
 uniform mat4 u_modelViewMatrix;
 uniform mat4 u_projectionMatrix;
+//uniform mat3 u_normalMatrix; // gl_NormalMatrix
 
 void main()
     {
     LightSourceParameters u_LightSource = LightSourceParameters(vec4(1, 1, 1, 1), vec4(1, 1, 1, 1));
     LightModelParameters u_LightModel = LightModelParameters(vec4(1, 1, 1, 1));
+    mat3 u_normalMatrix = mat3(1, 0, 0,
+                               0, 1, 0,
+                               0, 0, 1);
 
     /* first transform the normal into eye space and normalize the result */
-    vec3 normal = normalize(gl_NormalMatrix * a_normal);
+    vec3 normal = normalize(u_normalMatrix * a_normal);
 
     /* now normalize the light's direction. Note that according to the
     OpenGL specification, the light is stored in eye space. Also since
@@ -54,6 +58,8 @@ void main()
     /* Compute the diffuse term */
     vec4 diffuse = u_LightModel.diffuse * u_LightSource.diffuse;
     v_color =  NdotL * diffuse;
+//    v_color = vec4(1, 0, 0, 1);
+    v_color.a = 1.0;
 
     gl_Position = u_modelViewMatrix * u_projectionMatrix * a_position;
     }
