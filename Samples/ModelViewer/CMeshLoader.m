@@ -17,6 +17,7 @@
 #import "CVertexBufferReference.h"
 #import "OpenGLTypes.h"
 #import "CMaterial.h"
+#import "NSData_NumberExtensions.h"
 
 @implementation CMeshLoader
 
@@ -60,14 +61,16 @@
             theMesh.center = theCenter;
 			theMesh.material = [theMaterials objectForKey:theMaterialName];
 
-            CVertexBuffer *theVertexBuffer = [CVertexBuffer vertexBufferWithString:theVerticesString target:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW];
+            NSData *theData = [NSData dataWithNumbersInString:theVerticesString type:kCFNumberFloat32Type error:NULL];
+            CVertexBuffer *theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theData] autorelease];
 			size_t theRowCount = theVertexBuffer.data.length / sizeof(Vector3);
 			theMesh.positions = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer rowSize:sizeof(Vector3) rowCount:theRowCount size:3 type:GL_FLOAT normalized:NO stride:sizeof(Vector3) offset:0] autorelease];
 
             NSString *theVerticesString = [theMeshDictionary objectForKey:@"texCoords"];
             if (theVerticesString != NULL)
                 {
-                CVertexBuffer *theVertexBuffer = [CVertexBuffer vertexBufferWithString:theVerticesString target:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW];
+                NSData *theData = [NSData dataWithNumbersInString:theVerticesString type:kCFNumberFloat32Type error:NULL];
+                CVertexBuffer *theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theData] autorelease];
                 size_t theRowCount = theVertexBuffer.data.length / sizeof(Vector2);
                 theMesh.texCoords = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer rowSize:sizeof(Vector2) rowCount:theRowCount size:2 type:GL_FLOAT normalized:NO stride:sizeof(Vector2) offset:0] autorelease];
                 }
@@ -75,7 +78,8 @@
             theVerticesString = [theMeshDictionary objectForKey:@"normals"];
             if (theVerticesString != NULL)
                 {
-                CVertexBuffer *theVertexBuffer = [CVertexBuffer vertexBufferWithString:theVerticesString target:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW];
+                NSData *theData = [NSData dataWithNumbersInString:theVerticesString type:kCFNumberFloat32Type error:NULL];
+                CVertexBuffer *theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:GL_ARRAY_BUFFER usage:GL_STATIC_DRAW data:theData] autorelease];
                 size_t theRowCount = theVertexBuffer.data.length / sizeof(Vector3);
                 theMesh.normals = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer rowSize:sizeof(Vector3) rowCount:theRowCount size:2 type:GL_FLOAT normalized:NO stride:sizeof(Vector3) offset:0] autorelease];
                 }
