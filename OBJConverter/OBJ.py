@@ -261,8 +261,9 @@ class Tool(object):
 		####
 
 		d = {
+			'buffers': {},
+			'geometries': [],
 			'materials': {},
-			'meshes': [],
 			'center': theCenter,
 			'boundingbox': [theMin, theMax],
 			}
@@ -295,8 +296,6 @@ class Tool(object):
 
 			thePolygons = thePolygonsByMaterial[theMaterial]
 
-			theVBOs = []
-
 			for theSubpolygons in grouper(10000, thePolygons):
 				theBuffer = []
 
@@ -316,16 +315,44 @@ class Tool(object):
 				theBuffer = geometries.VBO(theBuffer)
 				theBuffer.write(os.path.split(self.options.output.name)[0])
 
-				theVBOs.append(theBuffer.signature.hexdigest())
+				d['buffers'][theBuffer.signature.hexdigest()] = dict(target = 'GL_ARRAY_BUFFER', usage = 'GL_STATIC_DRAW', href = '%s.vbo' % (theBuffer.signature.hexdigest()))
 
-			theMesh = dict()
-			theMesh['VBOs'] = theVBOs
+				thePositions = dict(
+					buffer = theBuffer.signature.hexdigest(),
+					size = 3,
+					type = 'GL_FLOAT',
+					normalized = False,
+					offset = 0,
+					stride = 8 * 4, # TODO hack
+					)
+				theTexCoords = dict(
+					buffer = theBuffer.signature.hexdigest(),
+					size = 3,
+					type = 'GL_FLOAT',
+					normalized = False,
+					offset = 3 * 4, # TODO hack
+					stride = 8 * 4, # TODO hack
+					)
+				theNormals = dict(
+					buffer = theBuffer.signature.hexdigest(),
+					size = 2,
+					type = 'GL_FLOAT',
+					normalized = False,
+					offset = 6 * 4, # TODO hack
+					stride = 8 * 4, # TODO hack
+					)
+
+				theGeometry = dict(
+					positions = thePositions,
+					texCoords = theTexCoords,
+					normals = theNormals,
+					)
+
+				d['geometries'].append(theGeometry)
 
 
-			if theMaterial:
-				theMesh['material'] = theMaterial.name
-
-			d['meshes'].append(theMesh)
+# 			if theMaterial:
+# 				theMesh['material'] = theMaterial.name
 
 		plistlib.writePlist(d, self.options.output)
 
@@ -337,4 +364,4 @@ if __name__ == '__main__':
 	os.chdir(theRootDir)
 
 #	Tool().main(shlex.split('tool --input Input/Skull.obj --output Output/Skull.model.plist'))
-	Tool().main(shlex.split('tool --input Input/Square.obj --output Output/Square.model.plist'))
+	Tool().main(shlex.split('tool --input Input/Skull2/Skull2.obj --output Output/Skull2.model.plist'))
