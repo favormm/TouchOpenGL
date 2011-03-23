@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class CNewMesh;
 
 @interface CNewModelLoader : NSObject {
     
 }
+
+- (CNewMesh *)loadMeshWithURL:(NSURL *)inURL error:(NSError **)outError;
 
 @end
