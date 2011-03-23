@@ -45,7 +45,7 @@
 
     if (theType == GL_FLOAT)
         {
-        theRowSize = sizeof(GLfloat) *theSize;
+        theRowSize = sizeof(GLfloat) * theSize;
         }
 
     if (theVertexBuffer.data.length % theRowSize != 0)
@@ -58,8 +58,6 @@
         }
 
     GLint theRowCount = theVertexBuffer.data.length / theRowSize;
-
-
 
 	if ((self = [self initWithVertexBuffer:theVertexBuffer rowSize:theRowSize rowCount:theRowCount size:theSize type:theType normalized:theNormalized stride:theStride offset:theOffset]) != NULL)
 		{

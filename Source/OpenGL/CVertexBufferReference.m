@@ -14,15 +14,14 @@
 @interface CVertexBufferReference ()
 @property (readwrite, nonatomic, retain) CVertexBuffer *vertexBuffer;
 
-@property (readwrite, nonatomic, retain) NSString *cellEncodingString;
-
-@property (readwrite, nonatomic, assign) GLint rowSize;
-@property (readwrite, nonatomic, assign) GLint rowCount;
 @property (readwrite, nonatomic, assign) GLint size;
 @property (readwrite, nonatomic, assign) GLenum type;
 @property (readwrite, nonatomic, assign) GLboolean normalized;
 @property (readwrite, nonatomic, assign) GLsizei stride;
 @property (readwrite, nonatomic, assign) GLsizei offset;
+
+@property (readwrite, nonatomic, assign) GLint rowSize;
+@property (readwrite, nonatomic, assign) GLint rowCount;
 
 + (BOOL)computeRowCount:(GLint *)outRowCount type:(GLenum *)outType size:(GLint *)outSize rowSize:(GLint *)outRowSize vertexBuffer:(CVertexBuffer *)inVertexBuffer fromEncoding:(const char *)inEncoding;
 @end
@@ -32,14 +31,14 @@
 @implementation CVertexBufferReference
 
 @synthesize vertexBuffer;
-@synthesize cellEncodingString;
-@synthesize rowSize;
-@synthesize rowCount;
 @synthesize size;
 @synthesize type;
 @synthesize normalized;
 @synthesize stride;
 @synthesize offset;
+
+@synthesize rowSize;
+@synthesize rowCount;
 
 - (id)initWithVertexBuffer:(CVertexBuffer *)inVertexBuffer rowSize:(GLint)inRowSize rowCount:(GLint)inRowCount size:(GLint)inSize type:(GLenum)inType normalized:(GLboolean)inNormalized stride:(GLsizei)inStride offset:(GLsizei)inOffset
     {
@@ -70,6 +69,34 @@
         }
     return(self);
     }
+    
+- (void)dealloc
+    {
+    [vertexBuffer release];
+    vertexBuffer = NULL;
+    
+    [super dealloc];
+    }
+
+- (NSString *)description
+    {
+    return([NSString stringWithFormat:@"%@ (VBO:%@, rowSize:%d, rowCount:%d, size:%d, type:%x, normalized:%d, stride:%d, offset:%d", [super description], self.vertexBuffer, self.rowSize, self.rowCount, self.size, self.type, self.normalized, self.stride, self.offset]);
+    }
+    
+- (void)use:(GLuint)inAttributeIndex
+    {
+    AssertOpenGLNoError_();
+
+    glBindBuffer(self.vertexBuffer.target, self.vertexBuffer.name);
+
+    AssertOpenGLNoError_();
+
+    glVertexAttribPointer(inAttributeIndex, self.size, self.type, self.normalized, self.stride, (const GLvoid *)self.offset);
+
+    AssertOpenGLNoError_();
+    }
+
+#pragma mark -
 
 - (id)initWithVertexBuffer:(CVertexBuffer *)inVertexBuffer cellEncoding:(char *)inEncoding normalized:(GLboolean)inNormalized stride:(GLsizei)inStride offset:(GLsizei)inOffset
     {
@@ -92,26 +119,6 @@
         {
         }
     return(self);
-    }
-    
-- (void)dealloc
-    {
-    vertexBuffer = NULL;
-    
-    [cellEncodingString release];
-    cellEncodingString = NULL;
-    //
-    [super dealloc];
-    }
-
-- (NSString *)description
-    {
-    return([NSString stringWithFormat:@"%@ (VBO:%@, encoding:%@, rowSize:%d, rowCount:%d, size:%d, type:%x, normalized:%d, stride:%d, offset:%d", [super description], self.vertexBuffer, self.cellEncodingString, self.rowSize, self.rowCount, self.size, self.type, self.normalized, self.stride, self.offset]);
-    }
-    
-- (const char *)cellEncoding
-    {
-    return([self.cellEncodingString UTF8String]);
     }
 
 + (BOOL)computeRowCount:(GLint *)outRowCount type:(GLenum *)outType size:(GLint *)outSize rowSize:(GLint *)outRowSize vertexBuffer:(CVertexBuffer *)inVertexBuffer fromEncoding:(const char *)inEncoding
@@ -203,19 +210,5 @@
     
     return(YES);
     }
-
-- (void)use:(GLuint)inAttributeIndex
-    {
-    AssertOpenGLNoError_();
-
-    glBindBuffer(self.vertexBuffer.target, self.vertexBuffer.name);
-
-    AssertOpenGLNoError_();
-
-    glVertexAttribPointer(inAttributeIndex, self.size, self.type, self.normalized, self.stride, (const GLvoid *)self.offset);
-
-    AssertOpenGLNoError_();
-    }
-
 
 @end
