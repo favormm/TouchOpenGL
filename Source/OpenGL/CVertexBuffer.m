@@ -20,6 +20,10 @@
 
 - (id)initWithTarget:(GLenum)inTarget usage:(GLenum)inUsage data:(NSData *)inData;
     {
+	NSAssert(inTarget != 0, @"Invalid target.");
+	NSAssert(inUsage != 0, @"Invalid usage.");
+	NSAssert(inData != NULL, @"Invalid data.");
+	
     if ((self = [super init]) != NULL)
         {
         target = inTarget;
