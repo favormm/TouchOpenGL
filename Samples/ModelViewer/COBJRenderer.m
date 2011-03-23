@@ -40,7 +40,7 @@
 	if ((self = [super init]) != NULL)
 		{
         CNewModelLoader *theLoader = [[[CNewModelLoader alloc] init] autorelease];
-		NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"Square_New" withExtension:@"model.plist"];
+		NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"Skull2" withExtension:@"model.plist"];
         self.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
         
         self.flatProgram = [[[CProgram alloc] initWithName:@"Flat2" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_color", NULL]] autorelease];
@@ -88,7 +88,7 @@
 //	Matrix4 theMeshTransform = Matrix4Concat(Matrix4MakeTranslation(-theCenter.x, -theCenter.y * 1.5, -theCenter.z), theTransform);
 
 
-	CProgram *theProgram = self.flatProgram;
+	CProgram *theProgram = self.lightingProgram;
 	
 //	if (theMesh.material.texture != NULL)
 //		{
@@ -119,8 +119,8 @@
 		GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
 		glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m00);
 
-//		if (theProgram == self.textureProgram)
-//			{
+		if (theProgram == self.textureProgram)
+			{
 //			CTexture *theTexture = theMesh.material.texture;
 //			
 //			glBindTexture(GL_TEXTURE_2D, theTexture.name);
@@ -128,21 +128,21 @@
 //			GLuint theTextureAttributeIndex = [theProgram attributeIndexForName:@"a_texCoord"];        
 //			[theMesh.texCoords use:theTextureAttributeIndex];
 //			glEnableVertexAttribArray(theTextureAttributeIndex);
-//			}
-//		else if (theProgram == self.flatProgram)
-//			{
+			}
+		else if (theProgram == self.flatProgram)
+			{
 			Color4f theColor = [UIColor redColor].color4f;
 			GLuint theColorUniformIndex = [theProgram uniformIndexForName:@"u_color"];
 			glUniform4fv(theColorUniformIndex, 1, &theColor.r);
-//			}
-//		else if (theProgram == self.lightingProgram)
-//			{
-//			AssertOpenGLNoError_();
-//			
-//	//            Color4f theColor = [UIColor redColor].color4f;
-//	//            GLuint theColorUniformIndex = [theProgram uniformIndexForName:@"u_color"];
-//	//            glUniform4fv(theColorUniformIndex, 1, &theColor.r);
-//			}
+			}
+		else if (theProgram == self.lightingProgram)
+			{
+			AssertOpenGLNoError_();
+			
+//            Color4f theColor = [UIColor redColor].color4f;
+//            GLuint theColorUniformIndex = [theProgram uniformIndexForName:@"u_color"];
+//            glUniform4fv(theColorUniformIndex, 1, &theColor.r);
+			}
 
 
 		// Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.
