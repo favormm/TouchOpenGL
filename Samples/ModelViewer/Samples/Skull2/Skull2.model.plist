@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>boundingbox</key>
@@ -10,7 +10,7 @@
 			<real>-3.130341</real>
 		</array>
 		<array>
-			<real>2.7414550000000002</real>
+			<real>2.741455</real>
 			<real>24.605743</real>
 			<real>3.130341</real>
 		</array>
@@ -146,9 +146,9 @@
 	</dict>
 	<key>center</key>
 	<array>
-		<real>-1.6294249999999999</real>
+		<real>-1.629425</real>
 		<real>12.3028715</real>
-		<real>0.0</real>
+		<real>0</real>
 	</array>
 	<key>geometries</key>
 	<array>
@@ -819,9 +819,9 @@
 			<integer>4</integer>
 			<key>ambientColor</key>
 			<array>
-				<real>0.0</real>
-				<real>0.0</real>
-				<real>0.0</real>
+				<real>0</real>
+				<real>0</real>
+				<real>0</real>
 			</array>
 			<key>diffuseColor</key>
 			<array>
@@ -831,5 +831,32 @@
 			</array>
 		</dict>
 	</dict>
+	<key>transform</key>
+	<array>
+		<array>
+			<integer>1</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+			<real>1.629425</real>
+		</array>
+		<array>
+			<integer>0</integer>
+			<integer>1</integer>
+			<integer>0</integer>
+			<real>-12.3028715</real>
+		</array>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>1</integer>
+			<real>0</real>
+		</array>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>1</integer>
+		</array>
+	</array>
 </dict>
 </plist>

@@ -75,7 +75,7 @@
     AssertOpenGLNoError_();
 
 
-    const Matrix4 theTransform = Matrix4Scale(inTransform, 0.05, 0.05, 0.05);
+    Matrix4 theTransform = Matrix4Scale(inTransform, 0.05, 0.05, 0.05);
 
     [self drawAxes:theTransform];
 
@@ -84,8 +84,8 @@
 //    glEnable(GL_CULL_FACE);
 
 
-//	Vector3 theCenter = theMesh.center;
-//	Matrix4 theMeshTransform = Matrix4Concat(Matrix4MakeTranslation(-theCenter.x, -theCenter.y * 1.5, -theCenter.z), theTransform);
+	Vector3 theCenter = self.mesh.center;
+	theTransform = Matrix4Concat(Matrix4MakeTranslation(theCenter.x, -20, theCenter.z), theTransform);
 
 
 	CProgram *theProgram = self.lightingProgram;

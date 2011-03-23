@@ -13,6 +13,7 @@
 
 @synthesize geometries;
 @synthesize center;
+@synthesize transform;
 
 - (void)dealloc
     {

@@ -44,6 +44,13 @@
 	self.modelDictioary = [NSDictionary dictionaryWithContentsOfURL:inURL];
 	self.mesh = [[[CNewMesh alloc] init] autorelease];
 
+	id theTransform = [self.modelDictioary objectForKey:@"transform"];
+	if (theTransform != NULL)
+		{
+		self.mesh.transform = Matrix4FromPropertyListRepresentation(theTransform);
+		}
+
+
 	// #### Buffers
 	self.buffers = [NSMutableDictionary dictionary];
 	NSDictionary *theBuffersDictionary = [self.modelDictioary objectForKey:@"buffers"];

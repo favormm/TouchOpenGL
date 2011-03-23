@@ -29,3 +29,5 @@ extern Matrix4 Matrix4Rotate(Matrix4 t, GLfloat angle, GLfloat x, GLfloat y, GLf
 extern Matrix4 Matrix4Concat(Matrix4 a, Matrix4 b);
 extern Matrix4 Matrix4Invert(Matrix4 t);
 extern NSString *NSStringFromMatrix4(Matrix4 t);
+
+extern Matrix4 Matrix4FromPropertyListRepresentation(id inPropertyListRepresentation);

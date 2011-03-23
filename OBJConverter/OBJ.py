@@ -21,6 +21,10 @@ logger = logging.getLogger()
 
 ########################################################################
 
+Vector3 = collections.namedtuple('Vector3', ['x', 'y', 'z'])
+
+########################################################################
+
 def grouper(n, iterable, padvalue=None):
     "grouper(3, 'abcdefg', 'x') --> ('a','b','c'), ('d','e','f'), ('g','x','x')"
     return izip_longest(*[iter(iterable)]*n, fillvalue=padvalue)
@@ -257,6 +261,13 @@ class Tool(object):
 					theMax[n] = max(theMax[n], v[n])
 		theCenter = [(theMin[N] + theMax[N]) * 0.5 for N in xrange(0, 3)]
 
+		theTransform = [
+			[1, 0, 0, theCenter[0]],
+			[0, 1, 0, theCenter[1]],
+			[0, 0, 1, theCenter[2]],
+			[0, 0, 0, 1],
+			]
+
 		####
 
 		d = {
@@ -264,6 +275,7 @@ class Tool(object):
 			'geometries': [],
 			'materials': {},
 			'center': theCenter,
+			'transform': theTransform,
 			'boundingbox': [theMin, theMax],
 			}
 
