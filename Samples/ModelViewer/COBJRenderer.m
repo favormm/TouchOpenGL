@@ -79,9 +79,6 @@
 
     [self drawAxes:theTransform];
 
-//    glFrontFace(GL_CCW);
-//    glCullFace(GL_BACK);
-//    glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);
 
