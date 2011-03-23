@@ -29,7 +29,6 @@ def grouper_nopad(n, iterable):
     "grouper(3, 'abcdefg', 'x') --> ('a','b','c'), ('d','e','f'), ('g','x','x')"
     return izip_longest(*[iter(iterable)]*n)
 
-
 def iter_flatten(iterable):
 	it = iter(iterable)
 	for e in it:
@@ -125,7 +124,7 @@ class OBJParser(object):
 		theCurrentGroups = None
 		theCurrentMaterial = None
 
-		self.vertices = []
+		self.positions = []
 		self.texCoords = []
 		self.normals = []
 
@@ -156,7 +155,7 @@ class OBJParser(object):
 				elif theVerb == 'usemtl':
 					theCurrentMaterial = theCurrentMaterialLibrary[theParameters]
 				elif theVerb == 'v':
-					self.vertices.append(tuple([float(x) for x in re.split(' +', theParameters)]))
+					self.positions.append(tuple([float(x) for x in re.split(' +', theParameters)]))
 				elif theVerb == 'vt':
 					self.texCoords.append(tuple([float(x) for x in re.split(' +', theParameters)]))
 				elif theVerb == 'vn':
@@ -181,7 +180,7 @@ class OBJParser(object):
 					thePolygon.texCoordIndices = [x[1] for x in theVertices]
 					thePolygon.normalIndices = [x[2] for x in theVertices]
 
-					thePolygon.vertices = [self.vertices[i] for i in thePolygon.vertexIndices]
+					thePolygon.positions = [self.positions[i] for i in thePolygon.vertexIndices]
 					thePolygon.texCoords = [self.texCoords[i] for i in thePolygon.texCoordIndices if i]
 					thePolygon.normals = [self.normals[i] for i in thePolygon.normalIndices if i]
 
@@ -252,7 +251,7 @@ class Tool(object):
 		theMax = [0, 0, 0]
 		theMin = [0, 0, 0]
 		for p in theParser.polygons:
-			for v in p.vertices:
+			for v in p.positions:
 				for n in xrange(0,3):
 					theMin[n] = min(theMin[n], v[n])
 					theMax[n] = max(theMax[n], v[n])
@@ -304,7 +303,7 @@ class Tool(object):
 						# TODO assumes triangles`
 						for N in xrange(0, 3):
 							theVertexBuffer = []
-							theVertexBuffer.append(list(thePolygon.vertices[N]))
+							theVertexBuffer.append(list(thePolygon.positions[N]))
 							theVertexBuffer.append(list(thePolygon.texCoords[N] if N < len(thePolygon.texCoords) else (0.0,0.0)))
 							theVertexBuffer.append(list(thePolygon.normals[N] if N < len(thePolygon.normals) else (0.0, 0.0, 0.0)))
 							theBuffer.append(theVertexBuffer)
@@ -361,7 +360,8 @@ class Tool(object):
 if __name__ == '__main__':
 
 	theRootDir = os.path.split(sys.argv[0])[0]
-	os.chdir(theRootDir)
+	if theRootDir:
+		os.chdir(theRootDir)
 
 #	Tool().main(shlex.split('tool --input Input/Skull.obj --output Output/Skull.model.plist'))
 	Tool().main(shlex.split('tool --input Input/Skull2/Skull2.obj --output Output/Skull2.model.plist'))
