@@ -112,7 +112,11 @@
 
     GLint theRowSize = 0;
 
-    if (theType == GL_FLOAT)
+    if (theStride != 0)
+        {
+        theRowSize = theStride;
+        }
+    else if (theType == GL_FLOAT)
         {
         theRowSize = sizeof(GLfloat) * theSize;
         }
