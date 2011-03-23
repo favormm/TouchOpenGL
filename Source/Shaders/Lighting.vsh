@@ -34,8 +34,13 @@ uniform mat4 u_projectionMatrix;
 
 void main()
     {
-    LightSourceParameters u_LightSource = LightSourceParameters(vec4(1, 1, 1, 1), vec4(1, 1, 1, 1));
-    LightModelParameters u_LightModel = LightModelParameters(vec4(1, 1, 1, 1));
+    LightSourceParameters u_LightSource = LightSourceParameters(
+        vec4(1, 1, 1, 1),
+        vec4(1, 1, 1, 1)
+        );
+    LightModelParameters u_LightModel = LightModelParameters(
+        vec4(1, 0, 0, 1)
+        );
     mat3 u_normalMatrix = mat3(1, 0, 0,
                                0, 1, 0,
                                0, 0, 1);
