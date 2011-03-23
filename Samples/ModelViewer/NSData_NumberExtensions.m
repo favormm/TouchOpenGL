@@ -44,31 +44,135 @@
                     }
                 }
                 break;
+			case kCFNumberSInt8Type:
+                {
+                NSInteger theInteger;
+                if ([theScanner scanInteger:&theInteger])
+                    {
+					SInt8 theValue = theInteger;
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberSInt16Type:
+                {
+                NSInteger theInteger;
+                if ([theScanner scanInteger:&theInteger])
+                    {
+					SInt16 theValue = theInteger;
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberSInt32Type:
+                {
+                NSInteger theInteger;
+                if ([theScanner scanInteger:&theInteger])
+                    {
+					SInt32 theValue = theInteger;
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberSInt64Type:
+                {
+                NSInteger theInteger;
+                if ([theScanner scanInteger:&theInteger])
+                    {
+					SInt64 theValue = theInteger;
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberCharType:
+                {
+                NSInteger theInteger;
+                if ([theScanner scanInteger:&theInteger])
+                    {
+					char theValue = theInteger;
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberShortType:
+                {
+                NSInteger theInteger;
+                if ([theScanner scanInteger:&theInteger])
+                    {
+					short theValue = theInteger;
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberIntType:
+                {
+                int theValue;
+                if ([theScanner scanInteger:&theValue])
+                    {
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberLongType:
+                {
+                NSInteger theInteger;
+                if ([theScanner scanInteger:&theInteger])
+                    {
+					long theValue = theInteger;
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberLongLongType:
+                {
+                long long theValue;
+                if ([theScanner scanLongLong:&theValue])
+                    {
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberCFIndexType:
+                {
+                NSInteger theInteger;
+                if ([theScanner scanInteger:&theInteger])
+                    {
+					CFIndex theValue = theInteger;
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberNSIntegerType:
+                {
+                NSInteger theValue;
+                if ([theScanner scanInteger:&theValue])
+                    {
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
+			case kCFNumberCGFloatType:
+                {
+                double theDouble;
+                if ([theScanner scanDouble:&theDouble])
+                    {
+					CGFloat theValue = theDouble;
+                    [theData appendBytes:&theValue length:sizeof(theValue)];
+                    }
+                }
+                break;
             default:
+				{
+				if (outError)
+					{
+					}
+				return(NULL);
+				}
                 break;
             }
 
         // TODO support more data types
 
-//    kCFNumberSInt8Type = 1,
-//    kCFNumberSInt16Type = 2,
-//    kCFNumberSInt32Type = 3,
-//    kCFNumberSInt64Type = 4,
-//     = 5,
-//    kCFNumberFloat64Type = 6,	/* 64-bit IEEE 754 */
-//    /* Basic C types */
-//    kCFNumberCharType = 7,
-//    kCFNumberShortType = 8,
-//    kCFNumberIntType = 9,
-//    kCFNumberLongType = 10,
-//    kCFNumberLongLongType = 11,
-//     = 13,
-//    /* Other */
-//
-//    kCFNumberCFIndexType = 14,
-//    kCFNumberNSIntegerType = 15,
-//
-//    kCFNumberCGFloatType = 16,
         }
 
     return([[theData copy] autorelease]);
