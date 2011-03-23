@@ -36,8 +36,6 @@
 		453A73F1133A820E0034B6DA /* Skull2.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453A73E2133A820E0034B6DA /* Skull2.model.plist */; };
 		453C0DEC13381ED400C4141A /* CVertexBuffer_PropertyListRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 453C0DEB13381ED300C4141A /* CVertexBuffer_PropertyListRepresentation.m */; };
 		453D9386133A6F970049D629 /* Square_New.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453D9385133A6F970049D629 /* Square_New.model.plist */; };
-		4568D838133AA97500275864 /* 3861af78dcdaa7e59f7f626091ea9af0.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 4568D836133AA97500275864 /* 3861af78dcdaa7e59f7f626091ea9af0.vbo */; };
-		4568D839133AA97500275864 /* Sphere.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4568D837133AA97500275864 /* Sphere.model.plist */; };
 		45781C59130AFE1E00B57285 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C58130AFE1E00B57285 /* UIKit.framework */; };
 		45781C5B130AFE1E00B57285 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5A130AFE1E00B57285 /* Foundation.framework */; };
 		45781C5D130AFE1E00B57285 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5C130AFE1E00B57285 /* CoreGraphics.framework */; };
@@ -65,6 +63,10 @@
 		459CFBAA1332E79000B16315 /* CRenderer_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 459CFBA91332E78F00B16315 /* CRenderer_Extensions.m */; };
 		459CFBAD1332E9AB00B16315 /* Flat2.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 459CFBAB1332E9AB00B16315 /* Flat2.fsh */; };
 		459CFBAE1332E9AB00B16315 /* Flat2.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 459CFBAC1332E9AB00B16315 /* Flat2.vsh */; };
+		45B4CD60133AB5B6003FA71B /* 615358a87912cd8e8c91d8b0443726db.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 45B4CD5B133AB5B6003FA71B /* 615358a87912cd8e8c91d8b0443726db.vbo */; };
+		45B4CD61133AB5B6003FA71B /* Cube.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45B4CD5C133AB5B6003FA71B /* Cube.model.plist */; };
+		45B4CD62133AB5B6003FA71B /* 50d481b64310fbf8547286a38af9f217.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 45B4CD5E133AB5B6003FA71B /* 50d481b64310fbf8547286a38af9f217.vbo */; };
+		45B4CD63133AB5B6003FA71B /* Sphere2.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45B4CD5F133AB5B6003FA71B /* Sphere2.model.plist */; };
 		45BF339813285FF80096D2D4 /* CInteractiveRendererView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BF339713285FF80096D2D4 /* CInteractiveRendererView.m */; };
 		45BF339F1328661C0096D2D4 /* CArcBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BF339E132866190096D2D4 /* CArcBall.m */; };
 		45BFEA60132957DB00B6C3D8 /* Quaternion.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA5F132957DB00B6C3D8 /* Quaternion.m */; };
@@ -116,8 +118,6 @@
 		453C0DEA13381ED300C4141A /* CVertexBuffer_PropertyListRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVertexBuffer_PropertyListRepresentation.h; sourceTree = "<group>"; };
 		453C0DEB13381ED300C4141A /* CVertexBuffer_PropertyListRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVertexBuffer_PropertyListRepresentation.m; sourceTree = "<group>"; };
 		453D9385133A6F970049D629 /* Square_New.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Square_New.model.plist; sourceTree = "<group>"; };
-		4568D836133AA97500275864 /* 3861af78dcdaa7e59f7f626091ea9af0.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3861af78dcdaa7e59f7f626091ea9af0.vbo; sourceTree = "<group>"; };
-		4568D837133AA97500275864 /* Sphere.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Sphere.model.plist; sourceTree = "<group>"; };
 		45781C54130AFE1E00B57285 /* ModelViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModelViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45781C58130AFE1E00B57285 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		45781C5A130AFE1E00B57285 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -168,6 +168,10 @@
 		459CFBA91332E78F00B16315 /* CRenderer_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRenderer_Extensions.m; sourceTree = "<group>"; };
 		459CFBAB1332E9AB00B16315 /* Flat2.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Flat2.fsh; sourceTree = "<group>"; };
 		459CFBAC1332E9AB00B16315 /* Flat2.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Flat2.vsh; sourceTree = "<group>"; };
+		45B4CD5B133AB5B6003FA71B /* 615358a87912cd8e8c91d8b0443726db.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 615358a87912cd8e8c91d8b0443726db.vbo; sourceTree = "<group>"; };
+		45B4CD5C133AB5B6003FA71B /* Cube.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Cube.model.plist; sourceTree = "<group>"; };
+		45B4CD5E133AB5B6003FA71B /* 50d481b64310fbf8547286a38af9f217.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 50d481b64310fbf8547286a38af9f217.vbo; sourceTree = "<group>"; };
+		45B4CD5F133AB5B6003FA71B /* Sphere2.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Sphere2.model.plist; sourceTree = "<group>"; };
 		45BF339613285FF80096D2D4 /* CInteractiveRendererView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CInteractiveRendererView.h; path = ../../Source/OpenGL/iOS/CInteractiveRendererView.h; sourceTree = "<group>"; };
 		45BF339713285FF80096D2D4 /* CInteractiveRendererView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CInteractiveRendererView.m; path = ../../Source/OpenGL/iOS/CInteractiveRendererView.m; sourceTree = "<group>"; };
 		45BF339D132866170096D2D4 /* CArcBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CArcBall.h; sourceTree = "<group>"; };
@@ -253,15 +257,6 @@
 				453A73E2133A820E0034B6DA /* Skull2.model.plist */,
 			);
 			path = Skull2;
-			sourceTree = "<group>";
-		};
-		4568D835133AA97500275864 /* Sphere */ = {
-			isa = PBXGroup;
-			children = (
-				4568D836133AA97500275864 /* 3861af78dcdaa7e59f7f626091ea9af0.vbo */,
-				4568D837133AA97500275864 /* Sphere.model.plist */,
-			);
-			path = Sphere;
 			sourceTree = "<group>";
 		};
 		45781C49130AFE1E00B57285 = {
@@ -381,6 +376,24 @@
 			path = Shaders;
 			sourceTree = "<group>";
 		};
+		45B4CD5A133AB5B6003FA71B /* Cube */ = {
+			isa = PBXGroup;
+			children = (
+				45B4CD5B133AB5B6003FA71B /* 615358a87912cd8e8c91d8b0443726db.vbo */,
+				45B4CD5C133AB5B6003FA71B /* Cube.model.plist */,
+			);
+			path = Cube;
+			sourceTree = "<group>";
+		};
+		45B4CD5D133AB5B6003FA71B /* Sphere2 */ = {
+			isa = PBXGroup;
+			children = (
+				45B4CD5E133AB5B6003FA71B /* 50d481b64310fbf8547286a38af9f217.vbo */,
+				45B4CD5F133AB5B6003FA71B /* Sphere2.model.plist */,
+			);
+			path = Sphere2;
+			sourceTree = "<group>";
+		};
 		45ED55E113342552003AB45E /* Square */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,7 +405,8 @@
 		45F9EA2A13301D37005DF7A8 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				4568D835133AA97500275864 /* Sphere */,
+				45B4CD5A133AB5B6003FA71B /* Cube */,
+				45B4CD5D133AB5B6003FA71B /* Sphere2 */,
 				453A73D3133A820E0034B6DA /* Skull2 */,
 				45ED55E113342552003AB45E /* Square */,
 			);
@@ -498,8 +512,10 @@
 				453A73EF133A820E0034B6DA /* e04f82c88f19e2da5d5951fdd742f3ed.vbo in Resources */,
 				453A73F0133A820E0034B6DA /* f6bead391a42ba9210bf799238f2182f.vbo in Resources */,
 				453A73F1133A820E0034B6DA /* Skull2.model.plist in Resources */,
-				4568D838133AA97500275864 /* 3861af78dcdaa7e59f7f626091ea9af0.vbo in Resources */,
-				4568D839133AA97500275864 /* Sphere.model.plist in Resources */,
+				45B4CD60133AB5B6003FA71B /* 615358a87912cd8e8c91d8b0443726db.vbo in Resources */,
+				45B4CD61133AB5B6003FA71B /* Cube.model.plist in Resources */,
+				45B4CD62133AB5B6003FA71B /* 50d481b64310fbf8547286a38af9f217.vbo in Resources */,
+				45B4CD63133AB5B6003FA71B /* Sphere2.model.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
