@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "OpenGLTypes.h"
 
 @interface CNewMesh : NSObject {
     
 }
+
+@property (readwrite, nonatomic, retain) NSArray *geometries;
+@property (readwrite, nonatomic, assign) Vector3 center; // in model space
 
 @end

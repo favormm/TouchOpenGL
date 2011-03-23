@@ -11,4 +11,15 @@
 
 @implementation CNewMesh
 
+@synthesize geometries;
+@synthesize center;
+
+- (void)dealloc
+    {
+    [geometries release];
+    geometries = NULL;
+    //
+    [super dealloc];
+    }
+
 @end
