@@ -82,6 +82,8 @@
 //    glFrontFace(GL_CCW);
 //    glCullFace(GL_BACK);
 //    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glEnable(GL_CULL_FACE);
 
 
 	Vector3 theCenter = self.mesh.center;
