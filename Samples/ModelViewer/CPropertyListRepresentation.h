@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @protocol CPropertyListRepresentation <NSObject>
 
 - (id)initWithPropertyListRepresentation:(id)inRepresentation error:(NSError **)outError;
