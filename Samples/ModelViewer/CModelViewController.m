@@ -29,9 +29,9 @@
     return(YES);
     }
     
-- (void)loadView
+- (void)viewDidLoad
     {
-    self.view = [[[CInteractiveRendererView alloc] initWithFrame:CGRectZero] autorelease];
+    [super viewDidLoad];
 
     CRenderer *theRenderer = NULL;
     if (0)

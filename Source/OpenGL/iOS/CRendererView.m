@@ -43,26 +43,29 @@
     return [CAEAGLLayer class];
     }
 
-- (id)initWithCoder:(NSCoder*)coder
-    {    
-    if ((self = [super initWithCoder:coder]))
-        {
-        [self setup];
-        }
-
-    return self;
-    }
-
 - (id)initWithFrame:(CGRect)inFrame;
     {    
     if ((self = [super initWithFrame:inFrame]))
         {
-        [self setup];
+        animationFrameInterval = 1.0;
+        transform = Matrix4Identity;
         }
 
     return self;
     }
     
+- (id)initWithCoder:(NSCoder *)inDecoder
+    {    
+    if ((self = [super initWithCoder:inDecoder]) != NULL)
+        {
+        animationFrameInterval = 1.0;
+        transform = Matrix4Identity;
+        }
+
+    return self;
+    }
+
+
 - (void)dealloc
     {
     if ([EAGLContext currentContext] == context)
@@ -99,39 +102,38 @@
         kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat,
         nil];
 
-    renderer = [[CRenderer alloc] init];
-
-    animating = FALSE;
-    animationFrameInterval = 2;
-    displayLink = NULL;
-
-    context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-
-    if (!context || ![EAGLContext setCurrentContext:context])
+    if (context == NULL)
         {
-        NSLog(@"ERROR");
-        return;
-        }
+        context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 
-    GLenum theError = glGetError();
-    if (theError != GL_NO_ERROR)
-        {
-        NSLog(@"Framebuffer Error?: %x", theError);
+        if (!context || ![EAGLContext setCurrentContext:context])
+            {
+            NSLog(@"ERROR");
+            return;
+            }
+        
+        AssertOpenGLNoError_();
         }
         
-    self.transform = Matrix4Identity;
-        
-    [self startAnimation];
     }
 
 #pragma mark -
 
-- (void)layoutSubviews
+- (void)setRenderer:(CRenderer *)inRenderer;
     {
-	[EAGLContext setCurrentContext:context];
-	[self setupFramebuffers];
+    if (renderer != inRenderer)
+        {
+        [renderer release];
+        renderer = [inRenderer retain];
+        //
+        if (renderer != NULL)
+            {
+//            [self setup];
+            [self startAnimation];
+            }
 
-    [self render];
+
+        }
     }
 
 - (CAEAGLLayer *)EAGLLayer
@@ -180,21 +182,32 @@
     {
     #pragma unused (inSender)
     
-    [self render];
+    if (self.animating)
+        {
+        [self render];
+        }
     }
 
 - (void)render
     {
-    if (self.animating)
+    if (self.context == NULL)
         {
-        // This application only creates a single context which is already set current at this point. This call is redundant, but needed if dealing with multiple contexts.
+        [self setup];
         [EAGLContext setCurrentContext:self.context];
+        [self setupFramebuffers];
+        }
 
-        const CGSize theSize = self.bounds.size;
-        const CGFloat theAspectRatio = theSize.width / theSize.height;
-        Matrix4 theTransform = Matrix4MakeScale(1, theAspectRatio, 1);
+    
+    NSAssert(self.renderer != NULL, @"No renderer");
+    
+    // This application only creates a single context which is already set current at this point. This call is redundant, but needed if dealing with multiple contexts.
+    [EAGLContext setCurrentContext:self.context];
 
-        glViewport(0, 0, theSize.width, theSize.height);
+    const CGSize theSize = self.bounds.size;
+    const CGFloat theAspectRatio = theSize.width / theSize.height;
+    Matrix4 theTransform = Matrix4MakeScale(1, theAspectRatio, 1);
+
+    glViewport(0, 0, theSize.width, theSize.height);
 //
 //        CGFloat theAspectRatio = theSize.width / theSize.height;
 //
@@ -207,13 +220,12 @@
 //        theTransform = Matrix4Translate(theTransform, -D, -D, 0);
 //        theTransform = Matrix4Scale(theTransform, 1 / D, 1 / D, 1);
 
-        theTransform = Matrix4Concat(theTransform, self.transform);
+    theTransform = Matrix4Concat(theTransform, self.transform);
 
-        [self.renderer renderIntoFrameBuffer:self.frameBuffer transform:theTransform];
+    [self.renderer renderIntoFrameBuffer:self.frameBuffer transform:theTransform];
 
-        [self.colorRenderBuffer bind];
-        [self.context presentRenderbuffer:GL_RENDERBUFFER];
-        }
+    [self.colorRenderBuffer bind];
+    [self.context presentRenderbuffer:GL_RENDERBUFFER];
     }
     
 #pragma mark -

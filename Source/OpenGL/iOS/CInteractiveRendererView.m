@@ -39,6 +39,7 @@
     {    
     if ((self = [super initWithFrame:inFrame]))
         {
+        
         arcBall = [[CArcBall alloc] init];
         
         scale = 1.0;
@@ -57,6 +58,32 @@
 
     return self;
     }
+    
+- (id)initWithCoder:(NSCoder *)inDecoder
+    {    
+    if ((self = [super initWithCoder:inDecoder]) != NULL)
+        {
+
+        arcBall = [[CArcBall alloc] init];
+        
+        scale = 1.0;
+        
+        UIPinchGestureRecognizer *thePinchGestureRecognizer = [[[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)] autorelease];
+        [self addGestureRecognizer:thePinchGestureRecognizer];
+
+        UIPanGestureRecognizer *thePanGestureRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)] autorelease];
+        [self addGestureRecognizer:thePanGestureRecognizer];
+        
+        motionManager = [[CMMotionManager alloc] init];
+        [motionManager startDeviceMotionUpdates];
+
+        savedRotation = QuaternionIdentity;
+        }
+
+    return self;
+    }
+    
+
     
 - (void)dealloc
     {
