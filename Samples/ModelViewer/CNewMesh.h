@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "OpenGLTypes.h"
+#import "Matrix.h"
 
 @interface CNewMesh : NSObject {
     
@@ -16,5 +17,6 @@
 
 @property (readwrite, nonatomic, retain) NSArray *geometries;
 @property (readwrite, nonatomic, assign) Vector3 center; // in model space
-
+@property (readwrite, nonatomic, assign) Vector3 p1, p2; // in model space
+@property (readwrite, nonatomic, assign) Matrix4 transform;
 @end

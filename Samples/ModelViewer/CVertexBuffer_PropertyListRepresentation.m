@@ -40,7 +40,7 @@
         {
         NSString *theHREF = [(NSDictionary *)inRepresentation objectForKey:@"href"];
         
-        NSURL *theURL = [[NSBundle mainBundle] URLForResource:theHREF withExtension:@"vbo"];
+        NSURL *theURL = [[NSBundle mainBundle] URLForResource:theHREF withExtension:NULL];
         theData = [NSData dataWithContentsOfURL:theURL];
         }
 

@@ -21,6 +21,10 @@ logger = logging.getLogger()
 
 ########################################################################
 
+Vector3 = collections.namedtuple('Vector3', ['x', 'y', 'z'])
+
+########################################################################
+
 def grouper(n, iterable, padvalue=None):
     "grouper(3, 'abcdefg', 'x') --> ('a','b','c'), ('d','e','f'), ('g','x','x')"
     return izip_longest(*[iter(iterable)]*n, fillvalue=padvalue)
@@ -28,7 +32,6 @@ def grouper(n, iterable, padvalue=None):
 def grouper_nopad(n, iterable):
     "grouper(3, 'abcdefg', 'x') --> ('a','b','c'), ('d','e','f'), ('g','x','x')"
     return izip_longest(*[iter(iterable)]*n)
-
 
 def iter_flatten(iterable):
 	it = iter(iterable)
@@ -125,7 +128,7 @@ class OBJParser(object):
 		theCurrentGroups = None
 		theCurrentMaterial = None
 
-		self.vertices = []
+		self.positions = []
 		self.texCoords = []
 		self.normals = []
 
@@ -156,7 +159,7 @@ class OBJParser(object):
 				elif theVerb == 'usemtl':
 					theCurrentMaterial = theCurrentMaterialLibrary[theParameters]
 				elif theVerb == 'v':
-					self.vertices.append(tuple([float(x) for x in re.split(' +', theParameters)]))
+					self.positions.append(tuple([float(x) for x in re.split(' +', theParameters)]))
 				elif theVerb == 'vt':
 					self.texCoords.append(tuple([float(x) for x in re.split(' +', theParameters)]))
 				elif theVerb == 'vn':
@@ -181,7 +184,7 @@ class OBJParser(object):
 					thePolygon.texCoordIndices = [x[1] for x in theVertices]
 					thePolygon.normalIndices = [x[2] for x in theVertices]
 
-					thePolygon.vertices = [self.vertices[i] for i in thePolygon.vertexIndices]
+					thePolygon.positions = [self.positions[i] for i in thePolygon.vertexIndices]
 					thePolygon.texCoords = [self.texCoords[i] for i in thePolygon.texCoordIndices if i]
 					thePolygon.normals = [self.normals[i] for i in thePolygon.normalIndices if i]
 
@@ -248,33 +251,61 @@ class Tool(object):
 		theParser = OBJParser(self.options.input)
 		theParser.main()
 
-		#### Produce min/max vertices and center vertex
-		theMax = [0, 0, 0]
-		theMin = [0, 0, 0]
-		for p in theParser.polygons:
-			for v in p.vertices:
-				for n in xrange(0,3):
-					theMin[n] = min(theMin[n], v[n])
-					theMax[n] = max(theMax[n], v[n])
-		theCenter = [(theMin[N] + theMax[N]) * 0.5 for N in xrange(0, 3)]
+
 
 		####
 
 		d = {
+			'buffers': {},
+			'geometries': [],
 			'materials': {},
-			'meshes': [],
-			'center': theCenter,
-			'boundingbox': [theMin, theMax],
+#			'center': ,
+#			'transform': theTransform,
+#			'boundingbox': [theMin, theMax],
 			}
 
 		theParser.polygons.sort(key = lambda X:X.material)
 
+		#### Group polygons by material ################################
 		thePolygonsByMaterial = collections.defaultdict(list)
-
 		for p in theParser.polygons:
 			thePolygonsByMaterial[p.material].append(p)
 
-		#### Process materials
+
+		#### Produce Bounding Box ######################################
+		theMin = [None, None, None]
+		theMax = [None, None, None]
+		for theMaterial in thePolygonsByMaterial:
+			thePolygons = thePolygonsByMaterial[theMaterial]
+			for p in thePolygons:
+				for v in p.positions:
+					for n in xrange(0,3):
+						if not theMin[n]:
+							theMin[n] = v[n]
+						else:
+							theMin[n] = min(theMin[n], v[n])
+
+						if not theMax[n]:
+							theMax[n] = v[n]
+						else:
+							theMax[n] = max(theMax[n], v[n])
+			theCenter = [(theMin[N] + theMax[N]) * 0.5 for N in xrange(0, 3)]
+
+		theTransform = [
+			[1, 0, 0, theCenter[0]],
+			[0, 1, 0, theCenter[1]],
+			[0, 0, 1, theCenter[2]],
+			[0, 0, 0, 1],
+			]
+
+		print theMin
+		print theMax
+
+		d['center'] = theCenter
+		d['boundingbox'] = [theMin, theMax]
+		d['transform'] = theTransform
+
+		#### Process materials #########################################
 		for theMaterial in thePolygonsByMaterial:
 			m = dict()
 			if theMaterial:
@@ -295,8 +326,6 @@ class Tool(object):
 
 			thePolygons = thePolygonsByMaterial[theMaterial]
 
-			theVBOs = []
-
 			for theSubpolygons in grouper(10000, thePolygons):
 				theBuffer = []
 
@@ -305,7 +334,7 @@ class Tool(object):
 						# TODO assumes triangles`
 						for N in xrange(0, 3):
 							theVertexBuffer = []
-							theVertexBuffer.append(list(thePolygon.vertices[N]))
+							theVertexBuffer.append(list(thePolygon.positions[N]))
 							theVertexBuffer.append(list(thePolygon.texCoords[N] if N < len(thePolygon.texCoords) else (0.0,0.0)))
 							theVertexBuffer.append(list(thePolygon.normals[N] if N < len(thePolygon.normals) else (0.0, 0.0, 0.0)))
 							theBuffer.append(theVertexBuffer)
@@ -316,16 +345,44 @@ class Tool(object):
 				theBuffer = geometries.VBO(theBuffer)
 				theBuffer.write(os.path.split(self.options.output.name)[0])
 
-				theVBOs.append(theBuffer.signature.hexdigest())
+				d['buffers'][theBuffer.signature.hexdigest()] = dict(target = 'GL_ARRAY_BUFFER', usage = 'GL_STATIC_DRAW', href = '%s.vbo' % (theBuffer.signature.hexdigest()))
 
-			theMesh = dict()
-			theMesh['VBOs'] = theVBOs
+				thePositions = dict(
+					buffer = theBuffer.signature.hexdigest(),
+					size = 3,
+					type = 'GL_FLOAT',
+					normalized = False,
+					offset = 0,
+					stride = 8 * 4, # TODO hack
+					)
+				theTexCoords = dict(
+					buffer = theBuffer.signature.hexdigest(),
+					size = 3,
+					type = 'GL_FLOAT',
+					normalized = False,
+					offset = 3 * 4, # TODO hack
+					stride = 8 * 4, # TODO hack
+					)
+				theNormals = dict(
+					buffer = theBuffer.signature.hexdigest(),
+					size = 2,
+					type = 'GL_FLOAT',
+					normalized = False,
+					offset = 6 * 4, # TODO hack
+					stride = 8 * 4, # TODO hack
+					)
+
+				theGeometry = dict(
+					positions = thePositions,
+					texCoords = theTexCoords,
+					normals = theNormals,
+					)
+
+				d['geometries'].append(theGeometry)
 
 
-			if theMaterial:
-				theMesh['material'] = theMaterial.name
-
-			d['meshes'].append(theMesh)
+# 			if theMaterial:
+# 				theMesh['material'] = theMaterial.name
 
 		plistlib.writePlist(d, self.options.output)
 
@@ -334,7 +391,8 @@ class Tool(object):
 if __name__ == '__main__':
 
 	theRootDir = os.path.split(sys.argv[0])[0]
-	os.chdir(theRootDir)
+	if theRootDir:
+		os.chdir(theRootDir)
 
 #	Tool().main(shlex.split('tool --input Input/Skull.obj --output Output/Skull.model.plist'))
-	Tool().main(shlex.split('tool --input Input/Square.obj --output Output/Square.model.plist'))
+	Tool().main(shlex.split('tool --input Input/Skull2/Skull2.obj --output Output/Skull2.model.plist'))

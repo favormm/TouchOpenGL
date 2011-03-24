@@ -44,6 +44,27 @@
 	self.modelDictioary = [NSDictionary dictionaryWithContentsOfURL:inURL];
 	self.mesh = [[[CNewMesh alloc] init] autorelease];
 
+    id theObject = [self.modelDictioary objectForKey:@"center"];
+    if (theObject)
+        {
+        self.mesh.center = Vector3FromPropertyListRepresentation(theObject);
+        }
+
+    theObject = [self.modelDictioary objectForKey:@"boundingbox"];
+    if (theObject)
+        {
+        self.mesh.p1 = Vector3FromPropertyListRepresentation([theObject objectAtIndex:0]);
+        self.mesh.p2 = Vector3FromPropertyListRepresentation([theObject objectAtIndex:1]);
+        }
+
+
+	theObject = [self.modelDictioary objectForKey:@"transform"];
+	if (theObject != NULL)
+		{
+		self.mesh.transform = Matrix4FromPropertyListRepresentation(theObject);
+		}
+
+
 	// #### Buffers
 	self.buffers = [NSMutableDictionary dictionary];
 	NSDictionary *theBuffersDictionary = [self.modelDictioary objectForKey:@"buffers"];
@@ -112,7 +133,11 @@
 
     GLint theRowSize = 0;
 
-    if (theType == GL_FLOAT)
+    if (theStride != 0)
+        {
+        theRowSize = theStride;
+        }
+    else if (theType == GL_FLOAT)
         {
         theRowSize = sizeof(GLfloat) * theSize;
         }

@@ -167,3 +167,47 @@ NSString *NSStringFromMatrix4(Matrix4 t)
         t.m20, t.m21, t.m22, t.m23, 
         t.m30, t.m31, t.m32, t.m33]);
     }
+
+extern Matrix4 Matrix4FromPropertyListRepresentation(id inPropertyListRepresentation)
+	{
+	Matrix4 theMatrix = Matrix4Identity;
+	NSArray *theArray = NULL;
+	
+	if ([inPropertyListRepresentation isKindOfClass:[NSString class]])
+		{
+		NSCAssert(NO, @"Can't build a matrix from a string.");
+		}
+	else if ([inPropertyListRepresentation isKindOfClass:[NSArray class]])
+		{
+		theMatrix.m00 = [[[inPropertyListRepresentation objectAtIndex:0] objectAtIndex:0] doubleValue];
+		theMatrix.m01 = [[[inPropertyListRepresentation objectAtIndex:0] objectAtIndex:1] doubleValue];
+		theMatrix.m02 = [[[inPropertyListRepresentation objectAtIndex:0] objectAtIndex:2] doubleValue];
+		theMatrix.m03 = [[[inPropertyListRepresentation objectAtIndex:0] objectAtIndex:3] doubleValue];
+
+		theMatrix.m10 = [[[inPropertyListRepresentation objectAtIndex:1] objectAtIndex:0] doubleValue];
+		theMatrix.m11 = [[[inPropertyListRepresentation objectAtIndex:1] objectAtIndex:1] doubleValue];
+		theMatrix.m12 = [[[inPropertyListRepresentation objectAtIndex:1] objectAtIndex:2] doubleValue];
+		theMatrix.m13 = [[[inPropertyListRepresentation objectAtIndex:1] objectAtIndex:3] doubleValue];
+
+		theMatrix.m20 = [[[inPropertyListRepresentation objectAtIndex:2] objectAtIndex:0] doubleValue];
+		theMatrix.m21 = [[[inPropertyListRepresentation objectAtIndex:2] objectAtIndex:1] doubleValue];
+		theMatrix.m22 = [[[inPropertyListRepresentation objectAtIndex:2] objectAtIndex:2] doubleValue];
+		theMatrix.m23 = [[[inPropertyListRepresentation objectAtIndex:2] objectAtIndex:3] doubleValue];
+
+		theMatrix.m30 = [[[inPropertyListRepresentation objectAtIndex:3] objectAtIndex:0] doubleValue];
+		theMatrix.m31 = [[[inPropertyListRepresentation objectAtIndex:3] objectAtIndex:1] doubleValue];
+		theMatrix.m32 = [[[inPropertyListRepresentation objectAtIndex:3] objectAtIndex:2] doubleValue];
+		theMatrix.m33 = [[[inPropertyListRepresentation objectAtIndex:3] objectAtIndex:3] doubleValue];
+		}
+
+
+
+
+	return(theMatrix);
+	}
+
+
+
+
+
+
