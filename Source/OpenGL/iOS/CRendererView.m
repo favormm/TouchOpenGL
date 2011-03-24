@@ -45,7 +45,6 @@
 
 - (id)initWithCoder:(NSCoder*)coder
     {    
-    NSLog(@"INIT WITH CODER");
     if ((self = [super initWithCoder:coder]))
         {
         [self setup];
@@ -56,7 +55,6 @@
 
 - (id)initWithFrame:(CGRect)inFrame;
     {    
-    NSLog(@"INIT WITH FRAME");
     if ((self = [super initWithFrame:inFrame]))
         {
         [self setup];
