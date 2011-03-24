@@ -93,6 +93,13 @@
 
 #pragma mark -
 
+- (void)layoutSubviews
+    {
+    [super layoutSubviews];
+    //
+    [self render];
+    }
+
 - (void)setup
     {
     // Get the layer
