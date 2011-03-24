@@ -17,6 +17,7 @@
 @interface CInteractiveRendererView ()
 @property (readwrite, nonatomic, assign) Quaternion motionRotation;
 @property (readwrite, nonatomic, assign) Quaternion gestureRotation;
+@property (readwrite, nonatomic, assign) Quaternion savedRotation;
 @property (readwrite, nonatomic, assign) CGFloat scale;
 @property (readwrite, nonatomic, retain) CArcBall *arcBall;
 @property (readwrite, nonatomic, retain) CMMotionManager *motionManager;
@@ -29,6 +30,7 @@
 
 @synthesize motionRotation;
 @synthesize gestureRotation;
+@synthesize savedRotation;
 @synthesize scale;
 @synthesize arcBall;
 @synthesize motionManager;
@@ -49,6 +51,8 @@
         
         motionManager = [[CMMotionManager alloc] init];
         [motionManager startDeviceMotionUpdates];
+
+        savedRotation = QuaternionIdentity;
         }
 
     return self;
@@ -75,8 +79,8 @@
 
     Matrix4 theTransform = Matrix4MakeScale(self.scale, self.scale, self.scale);
 
-    theTransform = Matrix4Concat(theTransform, Matrix4FromQuaternion(self.motionRotation));
-    theTransform = Matrix4Concat(theTransform, Matrix4FromQuaternion(self.gestureRotation));
+    theTransform = Matrix4Concat(Matrix4FromQuaternion(self.motionRotation), theTransform);
+    theTransform = Matrix4Concat(Matrix4FromQuaternion(self.gestureRotation), theTransform);
     self.transform = theTransform;
     
 //    NSLog(@"%@", NSStringFromMatrix4(self.transform));
@@ -102,8 +106,8 @@
     CGPoint theLocation = [inGestureRecognizer locationInView:self];
     
     CGPoint thePoint = {
-        .x = (theLocation.x / theSize.width - 0.5) * -1.0,
-        .y = theLocation.y / theSize.height - 0.5,
+        .x = theLocation.x / theSize.width - 0.5,
+        .y = (theLocation.y / theSize.height - 0.5) * -1.0,
         };
 
     if (inGestureRecognizer.state == UIGestureRecognizerStateBegan)
@@ -116,7 +120,11 @@
         {
         [self.arcBall dragTo:thePoint];
         
-        self.gestureRotation = self.arcBall.rotation;
+        self.gestureRotation = QuaternionMultiply(self.savedRotation, self.arcBall.rotation);
+        }
+    else if (inGestureRecognizer.state == UIGestureRecognizerStateEnded)
+        {
+        self.savedRotation = self.gestureRotation;
         }
     }
 
