@@ -42,6 +42,11 @@ GLfloat Vector3DotProduct(Vector3 inLHS, Vector3 inRHS)
     return(inLHS.x * inRHS.x + inLHS.y * inRHS.y + inLHS.z * inRHS.z);
     }
     
+NSString *NSStringFromVector3(Vector3 inVector)
+	{
+	return([NSString stringWithFormat:@"(%g, %g, %g)", inVector.x, inVector.y, inVector.z]);
+	}
+		
 Vector3 Vector3FromPropertyListRepresentation(id inPropertyListRepresentation)
     {
 	Vector3 theVector;
