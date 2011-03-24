@@ -9,11 +9,7 @@
 #import "CVertexBuffer_FactoryExtensions.h"
 
 #import "OpenGLTypes.h"
-#if TARGET_OS_IPHONE == 1
-#import "UIColor_OpenGLExtensions.h"
-#else
-#import "NSColor_OpenGLExtensions.h"
-#endif
+#import "Color_OpenGLExtensions.h"
 
 @implementation CVertexBuffer (CVertexBuffer_FactoryExtensions)
 

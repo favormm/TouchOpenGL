@@ -12,7 +12,7 @@
 #import "CVertexBufferReference.h"
 #import "COpenGLAssetLibrary.h"
 #import "CProgram.h"
-#import "UIColor_OpenGLExtensions.h"
+#import "Color_OpenGLExtensions.h"
 #import "CTexture.h"
 #import "CImageTextureLoader.h"
 #import "CMaterial.h"
@@ -135,7 +135,11 @@
 			}
 		else if (theProgram == self.flatProgram)
 			{
+#if TARGET_OS_IPHONE
 			Color4f theColor = [UIColor redColor].color4f;
+#elif TARGET_OS_MAC
+            Color4f theColor = [NSColor redColor].color4f;
+#endif
 			GLuint theColorUniformIndex = [theProgram uniformIndexForName:@"u_color"];
 			glUniform4fv(theColorUniformIndex, 1, &theColor.r);
 			}

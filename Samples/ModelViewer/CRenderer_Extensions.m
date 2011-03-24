@@ -9,7 +9,7 @@
 #import "CRenderer_Extensions.h"
 
 #import "CProgram.h"
-#import "UIColor_OpenGLExtensions.h"
+#import "Color_OpenGLExtensions.h"
 
 @implementation CRenderer (CRenderer_Extensions)
 

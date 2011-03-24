@@ -57,6 +57,11 @@
     #pragma unused (inTransform)
     }
 
+- (void)render
+{
+    [self render:Matrix4Identity];
+}
+
 - (void)postrender
     {
     }
