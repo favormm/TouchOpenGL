@@ -50,7 +50,7 @@
         self.mesh.center = Vector3FromPropertyListRepresentation(theObject);
         }
 
-    theObject = [self.modelDictioary objectForKey:@"boundingBox"];
+    theObject = [self.modelDictioary objectForKey:@"boundingbox"];
     if (theObject)
         {
         self.mesh.p1 = Vector3FromPropertyListRepresentation([theObject objectAtIndex:0]);
