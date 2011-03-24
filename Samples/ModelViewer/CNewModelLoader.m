@@ -44,10 +44,24 @@
 	self.modelDictioary = [NSDictionary dictionaryWithContentsOfURL:inURL];
 	self.mesh = [[[CNewMesh alloc] init] autorelease];
 
-	id theTransform = [self.modelDictioary objectForKey:@"transform"];
-	if (theTransform != NULL)
+    id theObject = [self.modelDictioary objectForKey:@"center"];
+    if (theObject)
+        {
+        self.mesh.center = Vector3FromPropertyListRepresentation(theObject);
+        }
+
+    theObject = [self.modelDictioary objectForKey:@"boundingBox"];
+    if (theObject)
+        {
+        self.mesh.p1 = Vector3FromPropertyListRepresentation([theObject objectAtIndex:0]);
+        self.mesh.p2 = Vector3FromPropertyListRepresentation([theObject objectAtIndex:1]);
+        }
+
+
+	theObject = [self.modelDictioary objectForKey:@"transform"];
+	if (theObject != NULL)
 		{
-		self.mesh.transform = Matrix4FromPropertyListRepresentation(theTransform);
+		self.mesh.transform = Matrix4FromPropertyListRepresentation(theObject);
 		}
 
 

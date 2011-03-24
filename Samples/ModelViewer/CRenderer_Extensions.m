@@ -58,7 +58,6 @@
     GLuint theColorsAttributeIndex = [theProgram attributeIndexForName:@"a_color"];        
     glEnableVertexAttribArray(theColorsAttributeIndex);
     glVertexAttribPointer(theColorsAttributeIndex, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, theColors);
-//    glVertexAttrib4f(theColorsAttributeIndex, 1.0, 0.0, 0.0, 1.0);
 
     AssertOpenGLNoError_();
 
@@ -90,5 +89,110 @@
 
     AssertOpenGLNoError_();
     }
+
+- (void)drawBoundingBox:(Matrix4)inTransform v1:(Vector3)v1 v2:(Vector3)v2;
+    {
+    AssertOpenGLNoError_();
+
+//    inTransform = Matrix4Identity;
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    CProgram *theProgram = [[[CProgram alloc] initWithName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL]] autorelease];
+
+    Vector3 theVertices[] = {
+        { .x = v1.x, .y = v1.y, .z = v1.z }, { .x = v2.x, .y = v1.y, .z = v1.z },
+        { .x = v1.x, .y = v2.y, .z = v1.z }, { .x = v2.x, .y = v2.y, .z = v1.z },
+        { .x = v1.x, .y = v1.y, .z = v1.z }, { .x = v1.x, .y = v2.y, .z = v1.z },
+        { .x = v2.x, .y = v1.y, .z = v1.z }, { .x = v2.x, .y = v2.y, .z = v1.z },
+
+        { .x = v1.x, .y = v1.y, .z = v2.z }, { .x = v2.x, .y = v1.y, .z = v2.z },
+        { .x = v1.x, .y = v2.y, .z = v2.z }, { .x = v2.x, .y = v2.y, .z = v2.z },
+        { .x = v1.x, .y = v1.y, .z = v2.z }, { .x = v1.x, .y = v2.y, .z = v2.z },
+        { .x = v2.x, .y = v1.y, .z = v2.z }, { .x = v2.x, .y = v2.y, .z = v2.z },
+
+        { .x = v1.x, .y = v1.y, .z = v1.z }, { .x = v1.x, .y = v1.y, .z = v2.z },
+        { .x = v2.x, .y = v1.y, .z = v1.z }, { .x = v2.x, .y = v1.y, .z = v2.z },
+
+        { .x = v1.x, .y = v2.y, .z = v1.z }, { .x = v1.x, .y = v2.y, .z = v2.z },
+        { .x = v2.x, .y = v2.y, .z = v1.z }, { .x = v2.x, .y = v2.y, .z = v2.z },
+
+        };
+
+    Color4ub theColors[] = { 
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        { 0xFF, 0xFF, 0xFF, 0xFF, },
+        };
+
+    // Use shader program
+
+    
+    // Update position attribute
+    GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"a_position"];        
+    glVertexAttribPointer(theVertexAttributeIndex, 3, GL_FLOAT, GL_FALSE, 0, theVertices);
+    glEnableVertexAttribArray(theVertexAttributeIndex);
+
+    AssertOpenGLNoError_();
+
+    // Update color attribute
+    GLuint theColorsAttributeIndex = [theProgram attributeIndexForName:@"a_color"];        
+    glEnableVertexAttribArray(theColorsAttributeIndex);
+    glVertexAttribPointer(theColorsAttributeIndex, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, theColors);
+//    glVertexAttrib4f(theColorsAttributeIndex, 0.0, 1.0, 0.0, 1.0);
+
+    AssertOpenGLNoError_();
+
+    glUseProgram(theProgram.name);
+
+    // Update transform uniform
+    GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
+    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &inTransform.m00);
+
+    GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
+    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m00);
+
+
+    // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.
+#if defined(DEBUG)
+    NSError *theError = NULL;
+    if ([theProgram validate:&theError] == NO)
+        {
+        NSLog(@"Failed to validate program: %@", theError);
+        return;
+        }
+#endif
+
+    AssertOpenGLNoError_();
+
+    glLineWidth(1);
+
+    glDrawArrays(GL_LINES, 0, sizeof(theVertices) / sizeof(theVertices[0]));
+
+    AssertOpenGLNoError_();
+    }
+
 
 @end

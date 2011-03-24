@@ -75,16 +75,20 @@
     AssertOpenGLNoError_();
 
 
-    Matrix4 theTransform = Matrix4Scale(inTransform, 0.05, 0.05, 0.05);
+    Matrix4 theTransform = Matrix4Scale(inTransform, 0.1, 0.1, 0.1);
 
     [self drawAxes:theTransform];
+    
+    [self drawBoundingBox:theTransform v1:(Vector3){ -5, -5, -5 } v2:(Vector3){ 5, 5, 5 }];
 
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);
 
 
 	Vector3 theCenter = self.mesh.center;
-	theTransform = Matrix4Concat(Matrix4MakeTranslation(theCenter.x, -20, theCenter.z), theTransform);
+	theTransform = Matrix4Concat(Matrix4MakeTranslation(0, -20.0, 0), theTransform);
+
+    [self drawBoundingBox:theTransform v1:self.mesh.p1 v2:self.mesh.p2];
 
 
 	CProgram *theProgram = self.lightingProgram;

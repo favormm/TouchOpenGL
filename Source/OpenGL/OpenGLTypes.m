@@ -42,6 +42,27 @@ GLfloat Vector3DotProduct(Vector3 inLHS, Vector3 inRHS)
     return(inLHS.x * inRHS.x + inLHS.y * inRHS.y + inLHS.z * inRHS.z);
     }
     
+Vector3 Vector3FromPropertyListRepresentation(id inPropertyListRepresentation)
+    {
+	Vector3 theVector;
+	NSArray *theArray = NULL;
+	
+	if ([inPropertyListRepresentation isKindOfClass:[NSString class]])
+		{
+        theArray = [inPropertyListRepresentation componentsSeparatedByString:@","];
+        }
+	else if ([inPropertyListRepresentation isKindOfClass:[NSArray class]])
+		{
+        theArray = inPropertyListRepresentation;
+		}
+
+    theVector.x = [[theArray objectAtIndex:0] doubleValue];
+    theVector.y = [[theArray objectAtIndex:1] doubleValue];
+    theVector.z = [[theArray objectAtIndex:2] doubleValue];
+    
+    return(theVector);
+    }
+    
 extern GLenum GLenumFromString(NSString *inString)
     {
     #warning TODO obviously this needs to be massively expanded.

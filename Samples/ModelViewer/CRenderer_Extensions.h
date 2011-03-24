@@ -13,5 +13,6 @@
 @interface CRenderer (CRenderer_Extensions)
 
 - (void)drawAxes:(Matrix4)inTransform;
+- (void)drawBoundingBox:(Matrix4)inTransform v1:(Vector3)inV1 v2:(Vector3)inV2;
 
 @end
