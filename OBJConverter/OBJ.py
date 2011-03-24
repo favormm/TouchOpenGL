@@ -251,15 +251,45 @@ class Tool(object):
 		theParser = OBJParser(self.options.input)
 		theParser.main()
 
-		#### Produce min/max vertices and center vertex
-		theMax = [0, 0, 0]
-		theMin = [0, 0, 0]
+
+
+		####
+
+		d = {
+			'buffers': {},
+			'geometries': [],
+			'materials': {},
+#			'center': ,
+#			'transform': theTransform,
+#			'boundingbox': [theMin, theMax],
+			}
+
+		theParser.polygons.sort(key = lambda X:X.material)
+
+		#### Group polygons by material ################################
+		thePolygonsByMaterial = collections.defaultdict(list)
 		for p in theParser.polygons:
-			for v in p.positions:
-				for n in xrange(0,3):
-					theMin[n] = min(theMin[n], v[n])
-					theMax[n] = max(theMax[n], v[n])
-		theCenter = [(theMin[N] + theMax[N]) * 0.5 for N in xrange(0, 3)]
+			thePolygonsByMaterial[p.material].append(p)
+
+
+		#### Produce Bounding Box ######################################
+		theMin = [None, None, None]
+		theMax = [None, None, None]
+		for theMaterial in thePolygonsByMaterial:
+			thePolygons = thePolygonsByMaterial[theMaterial]
+			for p in thePolygons:
+				for v in p.positions:
+					for n in xrange(0,3):
+						if not theMin[n]:
+							theMin[n] = v[n]
+						else:
+							theMin[n] = min(theMin[n], v[n])
+
+						if not theMax[n]:
+							theMax[n] = v[n]
+						else:
+							theMax[n] = max(theMax[n], v[n])
+			theCenter = [(theMin[N] + theMax[N]) * 0.5 for N in xrange(0, 3)]
 
 		theTransform = [
 			[1, 0, 0, theCenter[0]],
@@ -268,25 +298,14 @@ class Tool(object):
 			[0, 0, 0, 1],
 			]
 
-		####
+		print theMin
+		print theMax
 
-		d = {
-			'buffers': {},
-			'geometries': [],
-			'materials': {},
-			'center': theCenter,
-			'transform': theTransform,
-			'boundingbox': [theMin, theMax],
-			}
+		d['center'] = theCenter
+		d['boundingbox'] = [theMin, theMax]
+		d['transform'] = theTransform
 
-		theParser.polygons.sort(key = lambda X:X.material)
-
-		thePolygonsByMaterial = collections.defaultdict(list)
-
-		for p in theParser.polygons:
-			thePolygonsByMaterial[p.material].append(p)
-
-		#### Process materials
+		#### Process materials #########################################
 		for theMaterial in thePolygonsByMaterial:
 			m = dict()
 			if theMaterial:
