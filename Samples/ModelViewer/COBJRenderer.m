@@ -74,21 +74,22 @@
     {
     AssertOpenGLNoError_();
 
+	Vector3 P1 = self.mesh.p1;
+	Vector3 P2 = self.mesh.p2;
 
-    Matrix4 theTransform = Matrix4Scale(inTransform, 0.1, 0.1, 0.1);
+	GLfloat theScale = 1.0 / Vector3Length((Vector3){ fabs(P1.x - P2.x), fabs(P1.y - P2.y), fabs(P1.z - P2.z) }); 
+
+    Matrix4 theTransform = Matrix4Scale(inTransform, theScale, theScale, theScale);
 
     [self drawAxes:theTransform];
     
-    [self drawBoundingBox:theTransform v1:(Vector3){ -5, -5, -5 } v2:(Vector3){ 5, 5, 5 }];
-
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);
 
-
 	Vector3 theCenter = self.mesh.center;
-	theTransform = Matrix4Concat(Matrix4MakeTranslation(0, -20.0, 0), theTransform);
+	theTransform = Matrix4Concat(Matrix4MakeTranslation(-theCenter.x, -theCenter.y, -theCenter.z), theTransform);
 
-    [self drawBoundingBox:theTransform v1:self.mesh.p1 v2:self.mesh.p2];
+    [self drawBoundingBox:theTransform v1:P1 v2:P2];
 
 
 	CProgram *theProgram = self.lightingProgram;
