@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>boundingbox</key>
 	<array>
 		<array>
 			<real>-6.000305</real>
-			<real>14.975493999999999</real>
+			<real>14.975494</real>
 			<real>-3.130341</real>
 		</array>
 		<array>
-			<real>2.7414550000000002</real>
+			<real>2.741455</real>
 			<real>24.605743</real>
 			<real>3.130341</real>
 		</array>
@@ -71,6 +71,15 @@
 			<key>usage</key>
 			<string>GL_STATIC_DRAW</string>
 		</dict>
+		<key>4a81197c95ef514c8d20cb16e4b8d5c7</key>
+		<dict>
+			<key>href</key>
+			<string>4a81197c95ef514c8d20cb16e4b8d5c7.vbo</string>
+			<key>target</key>
+			<string>GL_ELEMENT_ARRAY_BUFFER</string>
+			<key>usage</key>
+			<string>GL_STATIC_DRAW</string>
+		</dict>
 		<key>65435d585a30d9815b36c761b1415f4e</key>
 		<dict>
 			<key>href</key>
@@ -95,6 +104,15 @@
 			<string>7e876531305c6d1efc7f2af0fbf2f861.vbo</string>
 			<key>target</key>
 			<string>GL_ARRAY_BUFFER</string>
+			<key>usage</key>
+			<string>GL_STATIC_DRAW</string>
+		</dict>
+		<key>89e2e041718e2027110ccf95c0a2f980</key>
+		<dict>
+			<key>href</key>
+			<string>89e2e041718e2027110ccf95c0a2f980.vbo</string>
+			<key>target</key>
+			<string>GL_ELEMENT_ARRAY_BUFFER</string>
 			<key>usage</key>
 			<string>GL_STATIC_DRAW</string>
 		</dict>
@@ -146,13 +164,24 @@
 	</dict>
 	<key>center</key>
 	<array>
-		<real>-1.6294249999999999</real>
-		<real>19.790618500000001</real>
-		<real>0.0</real>
+		<real>-1.629425</real>
+		<real>19.7906185</real>
+		<real>0</real>
 	</array>
 	<key>geometries</key>
 	<array>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -200,6 +229,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -247,6 +287,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -294,6 +345,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -341,6 +403,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -388,6 +461,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -435,6 +519,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -482,6 +577,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -529,6 +635,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -576,6 +693,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -623,6 +751,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -670,6 +809,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -717,6 +867,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>89e2e041718e2027110ccf95c0a2f980</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -764,6 +925,17 @@
 			</dict>
 		</dict>
 		<dict>
+			<key>indices</key>
+			<dict>
+				<key>buffer</key>
+				<string>4a81197c95ef514c8d20cb16e4b8d5c7</string>
+				<key>normalized</key>
+				<false/>
+				<key>size</key>
+				<integer>1</integer>
+				<key>type</key>
+				<string>GL_SHORT</string>
+			</dict>
 			<key>normals</key>
 			<dict>
 				<key>buffer</key>
@@ -819,9 +991,9 @@
 			<integer>4</integer>
 			<key>ambientColor</key>
 			<array>
-				<real>0.0</real>
-				<real>0.0</real>
-				<real>0.0</real>
+				<real>0</real>
+				<real>0</real>
+				<real>0</real>
 			</array>
 			<key>diffuseColor</key>
 			<array>
@@ -837,19 +1009,19 @@
 			<integer>1</integer>
 			<integer>0</integer>
 			<integer>0</integer>
-			<real>-1.6294249999999999</real>
+			<real>-1.629425</real>
 		</array>
 		<array>
 			<integer>0</integer>
 			<integer>1</integer>
 			<integer>0</integer>
-			<real>19.790618500000001</real>
+			<real>19.7906185</real>
 		</array>
 		<array>
 			<integer>0</integer>
 			<integer>0</integer>
 			<integer>1</integer>
-			<real>0.0</real>
+			<real>0</real>
 		</array>
 		<array>
 			<integer>0</integer>
