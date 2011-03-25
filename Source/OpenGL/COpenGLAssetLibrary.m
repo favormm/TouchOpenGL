@@ -105,7 +105,6 @@
     COpenGLAssetLibrary *theLibrary = objc_getAssociatedObject(self, theKey);
     if (theLibrary == NULL)
         {
-        NSLog(@"CREATING LIB");
         theLibrary = [[[COpenGLAssetLibrary alloc] init] autorelease];
         objc_setAssociatedObject(self, theKey, theLibrary, OBJC_ASSOCIATION_RETAIN);
         }
