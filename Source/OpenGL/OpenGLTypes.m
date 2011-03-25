@@ -47,6 +47,31 @@ NSString *NSStringFromVector3(Vector3 inVector)
 	return([NSString stringWithFormat:@"(%g, %g, %g)", inVector.x, inVector.y, inVector.z]);
 	}
 		
+Color4f Color4fFromPropertyListRepresentation(id inPropertyListRepresentation)
+    {
+	Color4f theColor = { .a = 1.0 };
+	NSArray *theArray = NULL;
+	
+	if ([inPropertyListRepresentation isKindOfClass:[NSString class]])
+		{
+        theArray = [inPropertyListRepresentation componentsSeparatedByString:@","];
+        }
+	else if ([inPropertyListRepresentation isKindOfClass:[NSArray class]])
+		{
+        theArray = inPropertyListRepresentation;
+		}
+
+    theColor.r = [[theArray objectAtIndex:0] doubleValue];
+    theColor.g = [[theArray objectAtIndex:1] doubleValue];
+    theColor.b = [[theArray objectAtIndex:2] doubleValue];
+    if ([theArray count] == 4)
+        {
+        theColor.a = [[theArray objectAtIndex:3] doubleValue];
+        }
+    
+    return(theColor);
+    }
+        
 Vector3 Vector3FromPropertyListRepresentation(id inPropertyListRepresentation)
     {
 	Vector3 theVector;

@@ -59,6 +59,8 @@ extern GLfloat Vector3DotProduct(Vector3 inLHS, Vector3 inRHS);
 
 extern NSString *NSStringFromVector3(Vector3 inVector);
 
+extern Color4f Color4fFromPropertyListRepresentation(id inPropertyListRepresentation);
+
 extern Vector3 Vector3FromPropertyListRepresentation(id inPropertyListRepresentation);
 
 extern GLenum GLenumFromString(NSString *inString);

@@ -8,8 +8,6 @@
 
 #import "CMaterial.h"
 
-#import "Color_OpenGLExtensions.h"
-#import "Color_PropertyListRepresentation.h"
 #import "COpenGLAssetLibrary.h"
 
 @implementation CMaterial
@@ -42,32 +40,23 @@
         name = [[(NSDictionary *)inRepresentation objectForKey:@"name"] retain];
         
         id theObject = NULL;
-#if TARGET_OS_IPHONE
-        UIColor *theColor = NULL;
-#elif TARGET_OS_MAC
-        NSColor *theColor = NULL;
-#endif
-        Class colorClass = [theColor class];
         
         theObject = [(NSDictionary *)inRepresentation objectForKey:@"ambientColor"];
         if (theObject != NULL)
             {
-            theColor = [[[colorClass alloc] initWithPropertyListRepresentation:theObject error:outError] autorelease];
-            ambientColor = theColor.color4f;
+            ambientColor = Color4fFromPropertyListRepresentation(theObject);
             }
         
         theObject = [(NSDictionary *)inRepresentation objectForKey:@"diffuseColor"];
         if (theObject != NULL)
             {
-            theColor = [[[colorClass alloc] initWithPropertyListRepresentation:theObject error:outError] autorelease];
-            diffuseColor = theColor.color4f;
+            diffuseColor = Color4fFromPropertyListRepresentation(theObject);
             }
         
         theObject = [(NSDictionary *)inRepresentation objectForKey:@"specularColor"];
         if (theObject != NULL)
             {
-            theColor = [[[colorClass alloc] initWithPropertyListRepresentation:theObject error:outError] autorelease];
-            specularColor = theColor.color4f;
+            specularColor = Color4fFromPropertyListRepresentation(theObject);
             }
             
         theObject = [(NSDictionary *)inRepresentation objectForKey:@"texture"];
