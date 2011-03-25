@@ -33,7 +33,6 @@
 		457C0290133D32F80001A967 /* e04f82c88f19e2da5d5951fdd742f3ed.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 457C027F133D32F80001A967 /* e04f82c88f19e2da5d5951fdd742f3ed.vbo */; };
 		457C0291133D32F80001A967 /* f6bead391a42ba9210bf799238f2182f.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 457C0280133D32F80001A967 /* f6bead391a42ba9210bf799238f2182f.vbo */; };
 		457C0292133D32F80001A967 /* Skull2.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 457C0281133D32F80001A967 /* Skull2.model.plist */; };
-		457C030C133D57A20001A967 /* CHeightMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02B0133D57A20001A967 /* CHeightMap.m */; };
 		457C030D133D57A20001A967 /* CGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02B3133D57A20001A967 /* CGeometry.m */; };
 		457C030E133D57A20001A967 /* CMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02B5133D57A20001A967 /* CMaterial.m */; };
 		457C030F133D57A20001A967 /* CMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02B7133D57A20001A967 /* CMesh.m */; };
@@ -52,7 +51,6 @@
 		457C031C133D57A20001A967 /* CRenderer_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02D3133D57A20001A967 /* CRenderer_Extensions.m */; };
 		457C031D133D57A20001A967 /* CShader.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02D5133D57A20001A967 /* CShader.m */; };
 		457C031E133D57A20001A967 /* CTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02D7133D57A20001A967 /* CTexture.m */; };
-		457C031F133D57A20001A967 /* CTexture_TilingExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02D9133D57A20001A967 /* CTexture_TilingExtension.m */; };
 		457C0320133D57A20001A967 /* CTextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02DB133D57A20001A967 /* CTextureLoader.m */; };
 		457C0321133D57A20001A967 /* CVertexArrayBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02DD133D57A20001A967 /* CVertexArrayBuffer.m */; };
 		457C0322133D57A20001A967 /* CVertexBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C02DF133D57A20001A967 /* CVertexBuffer.m */; };
@@ -120,8 +118,6 @@
 		457C027F133D32F80001A967 /* e04f82c88f19e2da5d5951fdd742f3ed.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = e04f82c88f19e2da5d5951fdd742f3ed.vbo; sourceTree = "<group>"; };
 		457C0280133D32F80001A967 /* f6bead391a42ba9210bf799238f2182f.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = f6bead391a42ba9210bf799238f2182f.vbo; sourceTree = "<group>"; };
 		457C0281133D32F80001A967 /* Skull2.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Skull2.model.plist; sourceTree = "<group>"; };
-		457C02AF133D57A20001A967 /* CHeightMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHeightMap.h; sourceTree = "<group>"; };
-		457C02B0133D57A20001A967 /* CHeightMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHeightMap.m; sourceTree = "<group>"; };
 		457C02B2133D57A20001A967 /* CGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGeometry.h; sourceTree = "<group>"; };
 		457C02B3133D57A20001A967 /* CGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGeometry.m; sourceTree = "<group>"; };
 		457C02B4133D57A20001A967 /* CMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMaterial.h; sourceTree = "<group>"; };
@@ -158,8 +154,6 @@
 		457C02D5133D57A20001A967 /* CShader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CShader.m; sourceTree = "<group>"; };
 		457C02D6133D57A20001A967 /* CTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTexture.h; sourceTree = "<group>"; };
 		457C02D7133D57A20001A967 /* CTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTexture.m; sourceTree = "<group>"; };
-		457C02D8133D57A20001A967 /* CTexture_TilingExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTexture_TilingExtension.h; sourceTree = "<group>"; };
-		457C02D9133D57A20001A967 /* CTexture_TilingExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTexture_TilingExtension.m; sourceTree = "<group>"; };
 		457C02DA133D57A20001A967 /* CTextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTextureLoader.h; sourceTree = "<group>"; };
 		457C02DB133D57A20001A967 /* CTextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTextureLoader.m; sourceTree = "<group>"; };
 		457C02DC133D57A20001A967 /* CVertexArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVertexArrayBuffer.h; sourceTree = "<group>"; };
@@ -313,7 +307,6 @@
 		457C02AD133D57A20001A967 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				457C02AE133D57A20001A967 /* Extras */,
 				457C02B1133D57A20001A967 /* Mesh */,
 				457C02BC133D57A20001A967 /* OpenGL */,
 				457C02FF133D57A20001A967 /* Shaders */,
@@ -321,15 +314,6 @@
 			);
 			name = Source;
 			path = ../../Source;
-			sourceTree = "<group>";
-		};
-		457C02AE133D57A20001A967 /* Extras */ = {
-			isa = PBXGroup;
-			children = (
-				457C02AF133D57A20001A967 /* CHeightMap.h */,
-				457C02B0133D57A20001A967 /* CHeightMap.m */,
-			);
-			path = Extras;
 			sourceTree = "<group>";
 		};
 		457C02B1133D57A20001A967 /* Mesh */ = {
@@ -375,8 +359,6 @@
 				457C02D5133D57A20001A967 /* CShader.m */,
 				457C02D6133D57A20001A967 /* CTexture.h */,
 				457C02D7133D57A20001A967 /* CTexture.m */,
-				457C02D8133D57A20001A967 /* CTexture_TilingExtension.h */,
-				457C02D9133D57A20001A967 /* CTexture_TilingExtension.m */,
 				457C02DA133D57A20001A967 /* CTextureLoader.h */,
 				457C02DB133D57A20001A967 /* CTextureLoader.m */,
 				457C02DC133D57A20001A967 /* CVertexArrayBuffer.h */,
@@ -646,7 +628,6 @@
 			files = (
 				4529966C130B8D6A009FD0A3 /* CModelViewController.m in Sources */,
 				4529966E130B8D6A009FD0A3 /* main.m in Sources */,
-				457C030C133D57A20001A967 /* CHeightMap.m in Sources */,
 				457C030D133D57A20001A967 /* CGeometry.m in Sources */,
 				457C030E133D57A20001A967 /* CMaterial.m in Sources */,
 				457C030F133D57A20001A967 /* CMesh.m in Sources */,
@@ -665,7 +646,6 @@
 				457C031C133D57A20001A967 /* CRenderer_Extensions.m in Sources */,
 				457C031D133D57A20001A967 /* CShader.m in Sources */,
 				457C031E133D57A20001A967 /* CTexture.m in Sources */,
-				457C031F133D57A20001A967 /* CTexture_TilingExtension.m in Sources */,
 				457C0320133D57A20001A967 /* CTextureLoader.m in Sources */,
 				457C0321133D57A20001A967 /* CVertexArrayBuffer.m in Sources */,
 				457C0322133D57A20001A967 /* CVertexBuffer.m in Sources */,
