@@ -20,6 +20,7 @@
 @property (readwrite, nonatomic, assign) Quaternion savedRotation;
 @property (readwrite, nonatomic, assign) CGFloat scale;
 @property (readwrite, nonatomic, retain) CArcBall *arcBall;
+@property (readwrite, nonatomic, assign) CGPoint arcBallCenter;
 @property (readwrite, nonatomic, retain) CMMotionManager *motionManager;
 
 - (void)pinch:(UIPinchGestureRecognizer *)inGestureRecognizer;
@@ -33,6 +34,7 @@
 @synthesize savedRotation;
 @synthesize scale;
 @synthesize arcBall;
+@synthesize arcBallCenter;
 @synthesize motionManager;
 
 - (id)initWithFrame:(CGRect)inFrame;
@@ -132,22 +134,23 @@
     CGSize theSize = self.bounds.size;
     CGPoint theLocation = [inGestureRecognizer locationInView:self];
 
-    const CGFloat kTrackBallRadius = 3.0f;
-    const CGFloat kMousePointScale = 1.0f / kTrackBallRadius;
     CGPoint thePoint = {
-        .x = 2.0f * kMousePointScale * theLocation.x / theSize.width - kMousePointScale,
-        .y = (2.0f * kMousePointScale * theLocation.y / theSize.height - kMousePointScale) * -1.0,
+        .x = theLocation.x / theSize.width - 0.5f,
+        .y = (theLocation.y / theSize.height - 0.5f) * -1.0,
         };
 
     if (inGestureRecognizer.state == UIGestureRecognizerStateBegan)
         {
-        [self.arcBall start:thePoint];
+        self.arcBallCenter = thePoint;
+        [self.arcBall start:CGPointZero];
         
 //        self,transgo
         }
     else if (inGestureRecognizer.state == UIGestureRecognizerStateChanged)
         {
-        [self.arcBall dragTo:thePoint];
+        CGPoint center = self.arcBallCenter;
+        CGPoint relativePoint = CGPointMake(thePoint.x - center.x, thePoint.y - center.y);
+        [self.arcBall dragTo:relativePoint];
         
         self.gestureRotation = QuaternionMultiply(self.savedRotation, self.arcBall.rotation);
         }
