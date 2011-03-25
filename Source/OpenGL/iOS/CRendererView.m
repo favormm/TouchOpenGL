@@ -232,6 +232,12 @@
 
     [self.colorRenderBuffer bind];
     [self.context presentRenderbuffer:GL_RENDERBUFFER];
+    
+    // Discard frame buffers for extra performance: see http://www.khronos.org/registry/gles/extensions/EXT/EXT_discard_framebuffer.txt
+    GLenum theAttachments[] = { GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT };
+    glDiscardFramebufferEXT(GL_READ_FRAMEBUFFER_APPLE, 2, theAttachments);
+    
+    AssertOpenGLNoError_();
     }
     
 #pragma mark -
