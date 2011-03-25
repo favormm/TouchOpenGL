@@ -12,4 +12,6 @@
     
 }
 
+- (IBAction)click:(id)inSender;
+
 @end

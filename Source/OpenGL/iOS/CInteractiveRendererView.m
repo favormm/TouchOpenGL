@@ -15,10 +15,6 @@
 #import "Quaternion.h"
 
 @interface CInteractiveRendererView ()
-@property (readwrite, nonatomic, assign) Quaternion motionRotation;
-@property (readwrite, nonatomic, assign) Quaternion gestureRotation;
-@property (readwrite, nonatomic, assign) Quaternion savedRotation;
-@property (readwrite, nonatomic, assign) CGFloat scale;
 @property (readwrite, nonatomic, retain) CArcBall *arcBall;
 @property (readwrite, nonatomic, assign) CGPoint arcBallCenter;
 @property (readwrite, nonatomic, retain) CMMotionManager *motionManager;

@@ -8,8 +8,15 @@
 
 #import "CRendererView.h"
 
+#import "Quaternion.h"
+
 @interface CInteractiveRendererView : CRendererView {
     
 }
+
+@property (readwrite, nonatomic, assign) Quaternion motionRotation;
+@property (readwrite, nonatomic, assign) Quaternion gestureRotation;
+@property (readwrite, nonatomic, assign) Quaternion savedRotation;
+@property (readwrite, nonatomic, assign) CGFloat scale;
 
 @end

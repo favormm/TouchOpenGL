@@ -12,15 +12,15 @@
 //#import "CModelLoader.h"
 #import "COBJRenderer.h"
 
-@interface CModelViewController ()
+@interface CModelViewController () <UIActionSheetDelegate>
 
 @end
 
 @implementation CModelViewController
 
-- (CRendererView *)rendererView
+- (CInteractiveRendererView *)rendererView
     {
-    return((CRendererView *)self.view);
+    return((CInteractiveRendererView *)self.view);
     }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -33,27 +33,32 @@
     {
     [super viewDidLoad];
 
-    CRenderer *theRenderer = NULL;
-    if (0)
-        {
-//        CModelLoader *theLoader = [[[CModelLoader alloc] init] autorelease];
-//        NSURL *theModelURL = [[NSBundle mainBundle] URLForResource:@"Cube" withExtension:@"plist"];
-//        NSError *theError = NULL;
-//        CScene *theScene = [theLoader load:theModelURL error:&theError];
-//        CSceneGraphRenderer *theSceneRenderer = [[[CSceneGraphRenderer alloc] init] autorelease];
-//        theSceneRenderer.sceneGraph = theScene;
-//        theRenderer = theSceneRenderer;
-        }
-    else if (1)
-        {
-        theRenderer = [[[COBJRenderer alloc] init] autorelease];
-        }
-//    else if (1)
-//        {
-//        theRenderer = [[[CTestSceneRenderer alloc] init] autorelease];
-//        }
+    COBJRenderer *theRenderer = [[[COBJRenderer alloc] init] autorelease];
     
     self.rendererView.renderer = theRenderer;
+    }
+
+- (IBAction)click:(id)inSender;
+    {
+    
+    UIActionSheet *theActionSheet = [[[UIActionSheet alloc] initWithTitle:NULL delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:NULL otherButtonTitles:@"Front", @"Back", @"Left", @"Right", @"Top", @"Bottom", NULL] autorelease];
+    [theActionSheet showFromRect:[self.view convertRect:[inSender frame] toView:self.view] inView:self.view animated:YES];
+    }
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+    {
+    NSLog(@"TEST: %d", buttonIndex);
+    if (buttonIndex == 0)
+        {
+        self.rendererView.transform = Matrix4Identity;
+        
+        self.rendererView.motionRotation = QuaternionIdentity;
+        self.rendererView.gestureRotation = QuaternionIdentity;
+        self.rendererView.savedRotation = QuaternionIdentity;
+        }
+    
+    
+    
     }
 
 @end
