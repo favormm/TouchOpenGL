@@ -314,22 +314,20 @@ class Tool(object):
 		for theMaterial, thePolygons in thePolygonsByMaterial.items():
 
 			for theSubpolygons in grouper(10000, thePolygons):
-				theBuffer = []
+				theVertices = []
+
+				theSubpolygons = [thePolygon for thePolygon in theSubpolygons if thePolygon]
 
 				for thePolygon in theSubpolygons:
-					if thePolygon:
-						# TODO assumes triangles`
-						for N in xrange(0, 3):
-							theVertexBuffer = []
-							theVertexBuffer.append(list(thePolygon.positions[N]))
-							theVertexBuffer.append(list(thePolygon.texCoords[N] if N < len(thePolygon.texCoords) else (0.0,0.0)))
-							theVertexBuffer.append(list(thePolygon.normals[N] if N < len(thePolygon.normals) else (0.0, 0.0, 0.0)))
-							theBuffer.append(theVertexBuffer)
+					# TODO assumes triangles`
+					for N in xrange(0, 3):
+						theVertexBuffer = []
+						theVertexBuffer.append(list(thePolygon.positions[N]))
+						theVertexBuffer.append(list(thePolygon.texCoords[N] if N < len(thePolygon.texCoords) else (0.0,0.0)))
+						theVertexBuffer.append(list(thePolygon.normals[N] if N < len(thePolygon.normals) else (0.0, 0.0, 0.0)))
+						theVertices.append(theVertexBuffer)
 
-# 				theBufferSet = set(str(x) for x in theBuffer)
-# 				print len(theBuffer), len(theBufferSet)
-
-				theBuffer = list(iter_flatten(theBuffer))
+				theBuffer = list(iter_flatten(theVertices))
 				theBuffer = numpy.array(theBuffer, dtype=numpy.float32)
 				theBuffer = geometries.VBO(theBuffer)
 				theBuffer.write(os.path.split(self.options.output.name)[0])
@@ -344,6 +342,7 @@ class Tool(object):
 					offset = 0,
 					stride = 8 * 4, # TODO hack
 					)
+
 				theTexCoords = dict(
 					buffer = theBuffer.signature.hexdigest(),
 					size = 3,
@@ -352,6 +351,7 @@ class Tool(object):
 					offset = 3 * 4, # TODO hack
 					stride = 8 * 4, # TODO hack
 					)
+
 				theNormals = dict(
 					buffer = theBuffer.signature.hexdigest(),
 					size = 2,
@@ -361,7 +361,25 @@ class Tool(object):
 					stride = 8 * 4, # TODO hack
 					)
 
+				#### Produce Indices buffer ############################
+
+				theBuffer = numpy.array(xrange(0,len(theVertices)), dtype=numpy.uint16)
+				theBuffer = geometries.VBO(theBuffer)
+				theBuffer.write(os.path.split(self.options.output.name)[0])
+
+				d['buffers'][theBuffer.signature.hexdigest()] = dict(target = 'GL_ELEMENT_ARRAY_BUFFER', usage = 'GL_STATIC_DRAW', href = '%s.vbo' % (theBuffer.signature.hexdigest()))
+
+				theIndices = dict(
+					buffer = theBuffer.signature.hexdigest(),
+					size = 1,
+					type = 'GL_SHORT',
+					normalized = False,
+					)
+
+				########################################################
+
 				theGeometry = dict(
+					indices = theIndices,
 					positions = thePositions,
 					texCoords = theTexCoords,
 					normals = theNormals,
