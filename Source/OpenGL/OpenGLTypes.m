@@ -95,7 +95,7 @@ Vector3 Vector3FromPropertyListRepresentation(id inPropertyListRepresentation)
     
 extern GLenum GLenumFromString(NSString *inString)
     {
-    #warning TODO obviously this needs to be massively expanded.
+    // TODO obviously this needs to be massively expanded.
     if ([inString isEqualToString:@"GL_ARRAY_BUFFER"])
         {
         return(GL_ARRAY_BUFFER);
@@ -107,6 +107,10 @@ extern GLenum GLenumFromString(NSString *inString)
     else if ([inString isEqualToString:@"GL_FLOAT"])
         {
         return(GL_FLOAT);
+        }
+    else if ([inString isEqualToString:@"GL_SHORT"])
+        {
+        return(GL_SHORT);
         }
     return(0);   
     }
