@@ -57,7 +57,7 @@
     
 - (NSString *)description
     {
-    return([NSString stringWithFormat:@"%@ (target: %@, usage: %@, data: %d bytes @ %p, name: %d)", [super description], NSStringFromGLenum(self.target), NSStringFromGLenum(self.usage), self.data.length, self.data.bytes, self.name]);
+    return([NSString stringWithFormat:@"%@ (target: %@, usage: %@, data: %d bytes @ %p, name: %d)", [super description], NSStringFromGLenum(self.target), NSStringFromGLenum(self.usage), self.data.length, self.data.bytes, name]);
     }
 
 - (GLuint)name
@@ -68,6 +68,8 @@
         
         GLuint theName;
         glGenBuffers(1, &theName);
+        AssertOpenGLNoError_();
+
         glBindBuffer(self.target, theName);
         glBufferData(self.target, [self.data length], NULL, self.usage);
         glBufferSubData(self.target, 0, [self.data length], [self.data bytes]);
