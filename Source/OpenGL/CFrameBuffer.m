@@ -43,6 +43,7 @@
 
 - (void)bind
     {
+    NSAssert(self.name != 0, @"No name to bind");
     glBindFramebuffer(GL_FRAMEBUFFER, self.name);
     }
 
