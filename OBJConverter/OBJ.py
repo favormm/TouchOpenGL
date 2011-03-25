@@ -339,7 +339,13 @@ class Tool(object):
 							theVertexBuffer.append(list(thePolygon.normals[N] if N < len(thePolygon.normals) else (0.0, 0.0, 0.0)))
 							theBuffer.append(theVertexBuffer)
 
+				theBufferSet = set(str(x) for x in theBuffer)
+				print len(theBuffer), len(theBufferSet)
+
 				theBuffer = list(iter_flatten(theBuffer))
+
+
+
 
 				theBuffer = numpy.array(theBuffer, dtype=numpy.float32)
 				theBuffer = geometries.VBO(theBuffer)
