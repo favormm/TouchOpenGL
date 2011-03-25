@@ -8,8 +8,11 @@
 
 #import "CGeometry.h"
 
+#import "CVertexArrayBuffer.h"
+
 @implementation CGeometry
 
+@synthesize vertexArrayBuffer;
 @synthesize indices;
 @synthesize positions;
 @synthesize texCoords;
@@ -17,6 +20,9 @@
 
 - (void)dealloc
     {
+    [vertexArrayBuffer release];
+    vertexArrayBuffer = NULL;
+    
     [indices release];
 	indices = NULL;
 	//
@@ -31,5 +37,15 @@
     //
     [super dealloc];
     }
+
+- (CVertexArrayBuffer *)vertexArrayBuffer
+    {
+    if (vertexArrayBuffer == NULL)
+        {
+        vertexArrayBuffer = [[CVertexArrayBuffer alloc] init];
+        }
+    return(vertexArrayBuffer);
+    }
+
 
 @end

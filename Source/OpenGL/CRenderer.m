@@ -36,7 +36,7 @@
 
 #pragma mark -
 
-- (void)prerender
+- (void)setup
     {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -49,7 +49,16 @@
     #else
     glClearDepth(1.0f);
     #endif
+    }
+
+- (void)clear
+    {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    }
+
+- (void)prerender
+    {
+    [self clear];
     }
 
 - (void)render:(Matrix4)inTransform

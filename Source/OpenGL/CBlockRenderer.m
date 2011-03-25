@@ -19,20 +19,6 @@
 	{
 	if ((self = [super init]) != NULL)
 		{
-        self.prerenderBlock = ^(void) {
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-            glEnable(GL_DEPTH_TEST);
-
-            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-            #if TARGET_OS_IPHONE == 1
-            glClearDepthf(1.0f);
-            #else
-            glClearDepth(1.0f);
-            #endif
-            glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-            };
 		}
 	return(self);
 	}
@@ -53,6 +39,7 @@
 
 - (void)prerender
     {
+    [super prerender];
     if (self.prerenderBlock)
         {
         self.prerenderBlock();
@@ -61,6 +48,7 @@
 
 - (void)render:(Matrix4)inTransform
     {
+    [super render:inTransform];
     if (self.renderBlock)
         {
         self.renderBlock(inTransform);
@@ -69,6 +57,7 @@
 
 - (void)postrender
     {
+    [super postrender];
     if (self.postrenderBlock)
         {
         self.postrenderBlock();

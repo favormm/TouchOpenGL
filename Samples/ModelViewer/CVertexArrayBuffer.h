@@ -8,9 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import "OpenGLTypes.h"
 
 @interface CVertexArrayBuffer : NSObject {
     
 }
+
+@property (readonly, nonatomic, assign) GLuint name;
+@property (readwrite, nonatomic, assign) BOOL populated;
+
+- (void)bind;
+- (void)unbind;
 
 @end

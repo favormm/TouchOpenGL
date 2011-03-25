@@ -9,6 +9,7 @@
  
 #if TARGET_OS_IPHONE == 1
 #import <OpenGLES/ES2/gl.h>
+#import <OpenGLES/ES2/glext.h>
 #else
 #import <OpenGL/OpenGL.h>
 #endif

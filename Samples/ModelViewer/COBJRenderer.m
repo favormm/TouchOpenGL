@@ -20,6 +20,7 @@
 #import "CNewMesh.h"
 #import "CNewModelLoader.h"
 #import "CGeometry.h"
+#import "CVertexArrayBuffer.h"
 
 @interface COBJRenderer ()
 @property (readwrite, nonatomic, retain) CNewMesh *mesh;
@@ -102,29 +103,15 @@
 	// Use shader program
 	glUseProgram(theProgram.name);
 
-	for (CGeometry *theGeometry in self.mesh.geometries)
-		{
-		// Update position attribute
-		NSAssert(theGeometry.positions != NULL, @"No positions.");
-		GLuint thePositionsAttributeIndex = [theProgram attributeIndexForName:@"a_position"];        
-		[theGeometry.positions use:thePositionsAttributeIndex];
-		glEnableVertexAttribArray(thePositionsAttributeIndex);
+    // Update transform uniform
+    GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
+    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &theTransform.m00);
 
+    GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
+    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m00);
 
-		NSAssert(theGeometry.normals != NULL, @"No normals.");
-		GLuint theNormalsAttributeIndex = [theProgram attributeIndexForName:@"a_normal"];        
-		[theGeometry.normals use:theNormalsAttributeIndex];
-		glEnableVertexAttribArray(theNormalsAttributeIndex);
-
-		// Update transform uniform
-		GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
-		glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &theTransform.m00);
-
-		GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
-		glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m00);
-
-		if (theProgram == self.textureProgram)
-			{
+    if (theProgram == self.textureProgram)
+        {
 //			CTexture *theTexture = theMesh.material.texture;
 //			
 //			glBindTexture(GL_TEXTURE_2D, theTexture.name);
@@ -132,41 +119,66 @@
 //			GLuint theTextureAttributeIndex = [theProgram attributeIndexForName:@"a_texCoord"];        
 //			[theMesh.texCoords use:theTextureAttributeIndex];
 //			glEnableVertexAttribArray(theTextureAttributeIndex);
-			}
-		else if (theProgram == self.flatProgram)
-			{
+        }
+    else if (theProgram == self.flatProgram)
+        {
 #if TARGET_OS_IPHONE
-			Color4f theColor = [UIColor redColor].color4f;
+        Color4f theColor = [UIColor redColor].color4f;
 #elif TARGET_OS_MAC
-            Color4f theColor = [NSColor redColor].color4f;
+        Color4f theColor = [NSColor redColor].color4f;
 #endif
-			GLuint theColorUniformIndex = [theProgram uniformIndexForName:@"u_color"];
-			glUniform4fv(theColorUniformIndex, 1, &theColor.r);
-			}
-		else if (theProgram == self.lightingProgram)
-			{
-			AssertOpenGLNoError_();
-			
+        GLuint theColorUniformIndex = [theProgram uniformIndexForName:@"u_color"];
+        glUniform4fv(theColorUniformIndex, 1, &theColor.r);
+        }
+    else if (theProgram == self.lightingProgram)
+        {
+        AssertOpenGLNoError_();
+        
 //            Color4f theColor = [UIColor redColor].color4f;
 //            GLuint theColorUniformIndex = [theProgram uniformIndexForName:@"u_color"];
 //            glUniform4fv(theColorUniformIndex, 1, &theColor.r);
-			}
+        }
 
 
-		// Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.
-	#if defined(DEBUG)
-		NSError *theError = NULL;
-		if ([theProgram validate:&theError] == NO)
-			{
-			NSLog(@"Failed to validate program: %@", theError);
-			return;
-			}
-	#endif
+    // #### Now render each geometry in mesh.
+	for (CGeometry *theGeometry in self.mesh.geometries)
+		{
+        [theGeometry.vertexArrayBuffer bind];
+        
+        if (theGeometry.vertexArrayBuffer.populated == NO)
+            {
+            // Update position attribute
+            NSAssert(theGeometry.positions != NULL, @"No positions.");
+            GLuint thePositionsAttributeIndex = [theProgram attributeIndexForName:@"a_position"];        
+            [theGeometry.positions use:thePositionsAttributeIndex];
+            glEnableVertexAttribArray(thePositionsAttributeIndex);
+
+
+            NSAssert(theGeometry.normals != NULL, @"No normals.");
+            GLuint theNormalsAttributeIndex = [theProgram attributeIndexForName:@"a_normal"];        
+            [theGeometry.normals use:theNormalsAttributeIndex];
+            glEnableVertexAttribArray(theNormalsAttributeIndex);
+            
+            theGeometry.vertexArrayBuffer.populated = YES;
+            }
+
 
 		AssertOpenGLNoError_();
 
+        // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.
+        #if defined(DEBUG)
+            NSError *theError = NULL;
+            if ([theProgram validate:&theError] == NO)
+                {
+                NSLog(@"Failed to validate program: %@", theError);
+                return;
+                }
+        #endif
+
 		glDrawArrays(GL_TRIANGLES, 0, theGeometry.positions.rowCount);
 		}
+
+    glBindVertexArrayOES(0);
     }
 
 

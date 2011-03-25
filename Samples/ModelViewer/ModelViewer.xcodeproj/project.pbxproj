@@ -39,6 +39,7 @@
 		453A73F1133A820E0034B6DA /* Skull2.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453A73E2133A820E0034B6DA /* Skull2.model.plist */; };
 		453C0DEC13381ED400C4141A /* CVertexBuffer_PropertyListRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 453C0DEB13381ED300C4141A /* CVertexBuffer_PropertyListRepresentation.m */; };
 		453D9386133A6F970049D629 /* Square_New.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453D9385133A6F970049D629 /* Square_New.model.plist */; };
+		45417ACC133C1F21003D340E /* CVertexArrayBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45417ACB133C1F21003D340E /* CVertexArrayBuffer.m */; };
 		45781C59130AFE1E00B57285 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C58130AFE1E00B57285 /* UIKit.framework */; };
 		45781C5B130AFE1E00B57285 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5A130AFE1E00B57285 /* Foundation.framework */; };
 		45781C5D130AFE1E00B57285 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5C130AFE1E00B57285 /* CoreGraphics.framework */; };
@@ -125,6 +126,8 @@
 		453C0DEA13381ED300C4141A /* CVertexBuffer_PropertyListRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVertexBuffer_PropertyListRepresentation.h; sourceTree = "<group>"; };
 		453C0DEB13381ED300C4141A /* CVertexBuffer_PropertyListRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVertexBuffer_PropertyListRepresentation.m; sourceTree = "<group>"; };
 		453D9385133A6F970049D629 /* Square_New.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Square_New.model.plist; sourceTree = "<group>"; };
+		45417ACA133C1F21003D340E /* CVertexArrayBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVertexArrayBuffer.h; sourceTree = "<group>"; };
+		45417ACB133C1F21003D340E /* CVertexArrayBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVertexArrayBuffer.m; sourceTree = "<group>"; };
 		45781C54130AFE1E00B57285 /* ModelViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModelViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45781C58130AFE1E00B57285 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		45781C5A130AFE1E00B57285 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -431,6 +434,8 @@
 		45FA02241333C3DC0097ED7C /* To Be Moved */ = {
 			isa = PBXGroup;
 			children = (
+				45417ACA133C1F21003D340E /* CVertexArrayBuffer.h */,
+				45417ACB133C1F21003D340E /* CVertexArrayBuffer.m */,
 				45E1712013318E2000ECA02A /* COBJRenderer.h */,
 				45E1712113318E2000ECA02A /* COBJRenderer.m */,
 				4537C2411332CCD900DE1A0A /* CMaterial.h */,
@@ -574,6 +579,7 @@
 				06F46F92133BEAF8004B3B6F /* Color_OpenGLExtensions.m in Sources */,
 				06F46F93133BEAF8004B3B6F /* Color_PropertyListRepresentation.m in Sources */,
 				06F46F94133BEAF8004B3B6F /* Color_OpenGLExtensions.m in Sources */,
+				45417ACC133C1F21003D340E /* CVertexArrayBuffer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

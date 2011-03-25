@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class CVertexArrayBuffer;
 @class CVertexBufferReference;
 
 @interface CGeometry : NSObject {
     
 }
 
+@property (readwrite, nonatomic, retain) CVertexArrayBuffer *vertexArrayBuffer;
 
 @property (readwrite, nonatomic, retain) CVertexBufferReference *indices;
 @property (readwrite, nonatomic, retain) CVertexBufferReference *positions;

@@ -18,6 +18,8 @@
     }
     
 
+- (void)setup;
+- (void)clear;
 - (void)prerender;
 - (void)render:(Matrix4)inTransform;
 - (void)postrender;

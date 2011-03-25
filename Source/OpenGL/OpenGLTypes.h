@@ -63,5 +63,8 @@ extern Vector3 Vector3FromPropertyListRepresentation(id inPropertyListRepresenta
 
 extern GLenum GLenumFromString(NSString *inString);
 
+#if DEBUG == 1
 #define AssertOpenGLNoError_() do { GLint theError = glGetError(); NSAssert1(theError == GL_NO_ERROR, @"Code entered with existing OGL error 0x%X", theError); } while(0)
-
+#else
+#define AssertOpenGLNoError_()
+#endif
