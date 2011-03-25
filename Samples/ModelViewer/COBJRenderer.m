@@ -163,7 +163,7 @@
 
             if (theGeometry.indices != NULL)
                 {
-                [theGeometry.positions bind];
+                [theGeometry.indices bind];
                 }
             }
 
@@ -181,7 +181,7 @@
         #endif
 
         // TODO -- currently indexed drawing is broken.
-        if (theGeometry.indices == NULL || YES)
+        if (theGeometry.indices == NULL)
             {
             glDrawArrays(GL_TRIANGLES, 0, theGeometry.positions.rowCount);
             }
