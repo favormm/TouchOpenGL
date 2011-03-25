@@ -17,13 +17,13 @@
 #import "CImageTextureLoader.h"
 #import "CMaterial.h"
 #import "CRenderer_Extensions.h"
-#import "CNewMesh.h"
-#import "CNewModelLoader.h"
+#import "CMesh.h"
+#import "CMeshLoader.h"
 #import "CGeometry.h"
 #import "CVertexArrayBuffer.h"
 
 @interface COBJRenderer ()
-@property (readwrite, nonatomic, retain) CNewMesh *mesh;
+@property (readwrite, nonatomic, retain) CMesh *mesh;
 @property (readwrite, nonatomic, retain) CProgram *flatProgram;
 @property (readwrite, nonatomic, retain) CProgram *textureProgram;
 @property (readwrite, nonatomic, retain) CProgram *lightingProgram;
@@ -40,7 +40,7 @@
 	{
 	if ((self = [super init]) != NULL)
 		{
-        CNewModelLoader *theLoader = [[[CNewModelLoader alloc] init] autorelease];
+        CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
 		NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"Skull2" withExtension:@"model.plist"];
         self.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
         

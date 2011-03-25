@@ -213,6 +213,19 @@
         glViewport(0, 0, theSize.width, theSize.height);
         }
     
+//        CGFloat theAspectRatio = theSize.width / theSize.height;
+//
+//        Matrix4 theTransform = Matrix4MakeScale(1, theAspectRatio, 1);
+//
+//        CGFloat D = MIN(theSize.width, theSize.height) * 0.5;
+//        NSLog(@"%g", D);
+//        
+//
+//        theTransform = Matrix4Translate(theTransform, -D, -D, 0);
+//        theTransform = Matrix4Scale(theTransform, 1 / D, 1 / D, 1);
+
+        const CGFloat theAspectRatio = theSize.width / theSize.height;
+    Matrix4 theTransform = Matrix4MakeScale(1, theAspectRatio, 1);
     theTransform = Matrix4Concat(theTransform, self.transform);
 
     [self.renderer renderIntoFrameBuffer:self.frameBuffer transform:theTransform];

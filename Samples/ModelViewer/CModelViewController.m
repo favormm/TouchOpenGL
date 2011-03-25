@@ -47,6 +47,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
     {
+    #pragma unused (actionSheet)
     NSLog(@"TEST: %d", buttonIndex);
     if (buttonIndex == 0)
         {

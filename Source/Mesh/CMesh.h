@@ -11,7 +11,7 @@
 #import "OpenGLTypes.h"
 #import "Matrix.h"
 
-@interface CNewMesh : NSObject {
+@interface CMesh : NSObject {
     
 }
 

@@ -6,10 +6,10 @@
 //  Copyright 2011 toxicsoftware.com. All rights reserved.
 //
 
-#import "CNewMesh.h"
+#import "CMesh.h"
 
 
-@implementation CNewMesh
+@implementation CMesh
 
 @synthesize geometries;
 @synthesize center;

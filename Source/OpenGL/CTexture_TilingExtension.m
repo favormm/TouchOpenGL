@@ -28,7 +28,7 @@
 
 - (void)getVertices:(GLfloat *)outVertices tileSize:(CGSize)inTileSize forSubtextureAtIndex:(NSUInteger)inIndex
     {
-    
+    #pragma unused (outVertices, inTileSize, inIndex)
     
     }
     

@@ -6,9 +6,9 @@
 //  Copyright 2011 toxicsoftware.com. All rights reserved.
 //
 
-#import "CNewModelLoader.h"
+#import "CMeshLoader.h"
 
-#import "CNewMesh.h"
+#import "CMesh.h"
 #import "CGeometry.h"
 #import "CVertexBufferReference.h"
 #import "CVertexBuffer_PropertyListRepresentation.h"
@@ -16,9 +16,9 @@
 
 #define NO_DEFAULTS 1
 
-@interface CNewModelLoader ()
+@interface CMeshLoader ()
 @property (readwrite, nonatomic, retain) NSDictionary *modelDictioary;
-@property (readwrite, nonatomic, retain) CNewMesh *mesh;
+@property (readwrite, nonatomic, retain) CMesh *mesh;
 @property (readwrite, nonatomic, retain) NSMutableDictionary *buffers;
 
 - (CVertexBufferReference *)vertexBufferReferenceWithDictionary:(NSDictionary *)inRepresentation error:(NSError **)outError;
@@ -27,7 +27,7 @@
 
 #pragma mark -
 
-@implementation CNewModelLoader
+@implementation CMeshLoader
 
 @synthesize modelDictioary;
 @synthesize mesh;
@@ -39,10 +39,10 @@
     [super dealloc];
     }
 
-- (CNewMesh *)loadMeshWithURL:(NSURL *)inURL error:(NSError **)outError
+- (CMesh *)loadMeshWithURL:(NSURL *)inURL error:(NSError **)outError
 	{
 	self.modelDictioary = [NSDictionary dictionaryWithContentsOfURL:inURL];
-	self.mesh = [[[CNewMesh alloc] init] autorelease];
+	self.mesh = [[[CMesh alloc] init] autorelease];
 
     id theObject = [self.modelDictioary objectForKey:@"center"];
     if (theObject)
