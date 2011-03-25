@@ -238,30 +238,23 @@ class Tool(object):
 		for theHandler in logger.handlers:
 			logger.removeHandler(theHandler)
 
-	#	logger.setLevel(self.options.loglevel)
 		logger.setLevel(logging.DEBUG)
 
 		theHandler = logging.StreamHandler(self.options.logstream)
 		logger.addHandler(theHandler)
 
-		# TODO this is to get around a strange argparse issue if we have no args.
-# 		if self.options.args == list('transmogrifier'):
-# 			self.options.args = []
-
 		theParser = OBJParser(self.options.input)
 		theParser.main()
 
-
-
-		####
+		################################################################
 
 		d = {
 			'buffers': {},
 			'geometries': [],
 			'materials': {},
-#			'center': ,
-#			'transform': theTransform,
-#			'boundingbox': [theMin, theMax],
+			'center': None,
+			'transform': None,
+			'boundingbox': None,
 			}
 
 		theParser.polygons.sort(key = lambda X:X.material)
@@ -270,7 +263,6 @@ class Tool(object):
 		thePolygonsByMaterial = collections.defaultdict(list)
 		for p in theParser.polygons:
 			thePolygonsByMaterial[p.material].append(p)
-
 
 		#### Produce Bounding Box ######################################
 		theMin = [None, None, None]
@@ -297,9 +289,6 @@ class Tool(object):
 			[0, 0, 1, theCenter[2]],
 			[0, 0, 0, 1],
 			]
-
-		print theMin
-		print theMax
 
 		d['center'] = theCenter
 		d['boundingbox'] = [theMin, theMax]
@@ -339,14 +328,10 @@ class Tool(object):
 							theVertexBuffer.append(list(thePolygon.normals[N] if N < len(thePolygon.normals) else (0.0, 0.0, 0.0)))
 							theBuffer.append(theVertexBuffer)
 
-				theBufferSet = set(str(x) for x in theBuffer)
-				print len(theBuffer), len(theBufferSet)
+# 				theBufferSet = set(str(x) for x in theBuffer)
+# 				print len(theBuffer), len(theBufferSet)
 
 				theBuffer = list(iter_flatten(theBuffer))
-
-
-
-
 				theBuffer = numpy.array(theBuffer, dtype=numpy.float32)
 				theBuffer = geometries.VBO(theBuffer)
 				theBuffer.write(os.path.split(self.options.output.name)[0])
