@@ -310,10 +310,8 @@ class Tool(object):
 					m['texture'] = os.path.split(theMaterial.map_Kd)[1]
 				d['materials'][theMaterial.name] = m
 
-		#### Process meshes
-		for theMaterial in thePolygonsByMaterial:
-
-			thePolygons = thePolygonsByMaterial[theMaterial]
+		#### Process meshes ############################################
+		for theMaterial, thePolygons in thePolygonsByMaterial.items():
 
 			for theSubpolygons in grouper(10000, thePolygons):
 				theBuffer = []
@@ -370,10 +368,6 @@ class Tool(object):
 					)
 
 				d['geometries'].append(theGeometry)
-
-
-# 			if theMaterial:
-# 				theMesh['material'] = theMaterial.name
 
 		plistlib.writePlist(d, self.options.output)
 
