@@ -64,6 +64,7 @@ extern Color4f Color4fFromPropertyListRepresentation(id inPropertyListRepresenta
 extern Vector3 Vector3FromPropertyListRepresentation(id inPropertyListRepresentation);
 
 extern GLenum GLenumFromString(NSString *inString);
+extern NSString *NSStringFromGLenum(GLenum inEnum);
 
 #if DEBUG == 1
 #define AssertOpenGLNoError_() do { GLint theError = glGetError(); NSAssert1(theError == GL_NO_ERROR, @"Code entered with existing OGL error 0x%X", theError); } while(0)

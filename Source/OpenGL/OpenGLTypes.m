@@ -22,7 +22,7 @@ GLfloat RadiansToDegrees(GLfloat inDegrees)
 	}
 
 
-extern GLfloat Vector3Length(Vector3 inVector)
+GLfloat Vector3Length(Vector3 inVector)
     {
     return(sqrt(inVector.x * inVector.x + inVector.y * inVector.y + inVector.z * inVector.z));
     }
@@ -93,12 +93,16 @@ Vector3 Vector3FromPropertyListRepresentation(id inPropertyListRepresentation)
     return(theVector);
     }
     
-extern GLenum GLenumFromString(NSString *inString)
+GLenum GLenumFromString(NSString *inString)
     {
     // TODO obviously this needs to be massively expanded.
     if ([inString isEqualToString:@"GL_ARRAY_BUFFER"])
         {
         return(GL_ARRAY_BUFFER);
+        }
+    if ([inString isEqualToString:@"GL_ELEMENT_ARRAY_BUFFER"])
+        {
+        return(GL_ELEMENT_ARRAY_BUFFER);
         }
     else if ([inString isEqualToString:@"GL_STATIC_DRAW"])
         {
@@ -112,5 +116,34 @@ extern GLenum GLenumFromString(NSString *inString)
         {
         return(GL_SHORT);
         }
+    else
+        {
+        NSCAssert(NO, @"Unknown enum");
+        }
+        
     return(0);   
     }
+    
+NSString *NSStringFromGLenum(GLenum inEnum)
+    {
+    switch (inEnum)
+        {
+        case GL_ARRAY_BUFFER:
+            return(@"GL_ARRAY_BUFFER");
+        case GL_ELEMENT_ARRAY_BUFFER:
+            return(@"GL_ELEMENT_ARRAY_BUFFER");
+        case GL_STATIC_DRAW:
+            return(@"GL_STATIC_DRAW");
+        case GL_FLOAT:
+            return(@"GL_FLOAT");
+        case GL_SHORT:
+            return(@"GL_SHORT");
+        default:
+            {
+            NSCAssert(NO, @"Unknown enum");
+            }
+            break;
+        }
+    return(NULL);
+    }
+    
