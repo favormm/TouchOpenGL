@@ -8,8 +8,11 @@
 
 #import "CRenderer_Extensions.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "CProgram.h"
 #import "Color_OpenGLExtensions.h"
+#import "COpenGLAssetLibrary.h"
 
 @implementation CRenderer (CRenderer_Extensions)
 
@@ -22,7 +25,7 @@
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-    CProgram *theProgram = [[[CProgram alloc] initWithName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL]] autorelease];
+    CProgram *theProgram = [[EAGLContext currentContext].library programForName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL] error:NULL];
 
     const GLfloat kLength = 10000.0;
 
@@ -99,7 +102,7 @@
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-    CProgram *theProgram = [[[CProgram alloc] initWithName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL]] autorelease];
+    CProgram *theProgram = [[EAGLContext currentContext].library programForName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL] error:NULL];
 
     Vector3 theVertices[] = {
         { .x = v1.x, .y = v1.y, .z = v1.z }, { .x = v2.x, .y = v1.y, .z = v1.z },
