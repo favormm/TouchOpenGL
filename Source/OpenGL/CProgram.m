@@ -29,6 +29,9 @@
 
 - (id)initWithFiles:(NSArray *)inShaders attributeNames:(NSArray *)inAttributeNames uniformNames:(NSArray *)inUniformNames
     {
+    #pragma unused (inUniformNames)
+    // TODO: Clean this inUniformNames
+    
     if ((self = [self init]) != NULL)
         {
         shaders = [inShaders copy];

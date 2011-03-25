@@ -81,7 +81,6 @@
 		45BFEA60132957DB00B6C3D8 /* Quaternion.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA5F132957DB00B6C3D8 /* Quaternion.m */; };
 		45BFEA64132965ED00B6C3D8 /* Matrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 45BFEA63132965ED00B6C3D8 /* Matrix.m */; };
 		45E1712213318E2000ECA02A /* COBJRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E1712113318E2000ECA02A /* COBJRenderer.m */; };
-		45E5AFE613381CA1000A528B /* CVertexBufferReference_PropertyListRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E5AFE513381CA0000A528B /* CVertexBufferReference_PropertyListRepresentation.m */; };
 		45ED55B41333F62D003AB45E /* Lighting.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 45ED55B31333F62D003AB45E /* Lighting.fsh */; };
 		45ED55EF1334314C003AB45E /* Lighting.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 45ED55EE1334314C003AB45E /* Lighting.vsh */; };
 /* End PBXBuildFile section */
@@ -203,8 +202,6 @@
 		45D750881337FD0200C26591 /* CPropertyListRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPropertyListRepresentation.h; sourceTree = "<group>"; };
 		45E1712013318E2000ECA02A /* COBJRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COBJRenderer.h; sourceTree = "<group>"; };
 		45E1712113318E2000ECA02A /* COBJRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBJRenderer.m; sourceTree = "<group>"; };
-		45E5AFE413381C9F000A528B /* CVertexBufferReference_PropertyListRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVertexBufferReference_PropertyListRepresentation.h; sourceTree = "<group>"; };
-		45E5AFE513381CA0000A528B /* CVertexBufferReference_PropertyListRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVertexBufferReference_PropertyListRepresentation.m; sourceTree = "<group>"; };
 		45ED55B31333F62D003AB45E /* Lighting.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Lighting.fsh; sourceTree = "<group>"; };
 		45ED55EE1334314C003AB45E /* Lighting.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Lighting.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -491,8 +488,6 @@
 				450BF93F1335227300C41187 /* NSData_NumberExtensions.h */,
 				450BF9401335227300C41187 /* NSData_NumberExtensions.m */,
 				45D750881337FD0200C26591 /* CPropertyListRepresentation.h */,
-				45E5AFE413381C9F000A528B /* CVertexBufferReference_PropertyListRepresentation.h */,
-				45E5AFE513381CA0000A528B /* CVertexBufferReference_PropertyListRepresentation.m */,
 				453C0DEA13381ED300C4141A /* CVertexBuffer_PropertyListRepresentation.h */,
 				453C0DEB13381ED300C4141A /* CVertexBuffer_PropertyListRepresentation.m */,
 			);
@@ -659,7 +654,6 @@
 				4537C2431332CCE100DE1A0A /* CMaterial.m in Sources */,
 				459CFBAA1332E79000B16315 /* CRenderer_Extensions.m in Sources */,
 				450BF9411335227300C41187 /* NSData_NumberExtensions.m in Sources */,
-				45E5AFE613381CA1000A528B /* CVertexBufferReference_PropertyListRepresentation.m in Sources */,
 				453C0DEC13381ED400C4141A /* CVertexBuffer_PropertyListRepresentation.m in Sources */,
 				4500867813397F00006FC3A8 /* CNewModelLoader.m in Sources */,
 				4500867B133980F8006FC3A8 /* CGeometry.m in Sources */,
@@ -860,6 +854,7 @@
 				457D9C99133D23DB00F576A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -171,7 +171,6 @@ NSString *NSStringFromMatrix4(Matrix4 t)
 extern Matrix4 Matrix4FromPropertyListRepresentation(id inPropertyListRepresentation)
 	{
 	Matrix4 theMatrix = Matrix4Identity;
-	NSArray *theArray = NULL;
 	
 	if ([inPropertyListRepresentation isKindOfClass:[NSString class]])
 		{
@@ -199,9 +198,6 @@ extern Matrix4 Matrix4FromPropertyListRepresentation(id inPropertyListRepresenta
 		theMatrix.m32 = [[[inPropertyListRepresentation objectAtIndex:3] objectAtIndex:2] doubleValue];
 		theMatrix.m33 = [[[inPropertyListRepresentation objectAtIndex:3] objectAtIndex:3] doubleValue];
 		}
-
-
-
 
 	return(theMatrix);
 	}

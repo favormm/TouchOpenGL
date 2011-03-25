@@ -82,7 +82,7 @@
 
 - (CProgram *)programForName:(NSString *)inName attributeNames:(NSArray *)inAttributeNames uniformNames:(NSArray *)inUniformNames error:(NSError **)outError;
     {
-    #pragma ignored (outError)
+    #pragma unused (outError)
     
     CProgram *theProgram = [self.programCache objectForKey:inName];
     if (theProgram == NULL)
