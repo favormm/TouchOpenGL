@@ -26,6 +26,7 @@
 - (id)initWithVertexBuffer:(CVertexBuffer *)inVertexBuffer rowSize:(GLint)inRowSize rowCount:(GLint)inRowCount size:(GLint)inSize type:(GLenum)inType normalized:(GLboolean)inNormalized stride:(GLsizei)inStride offset:(GLsizei)inOffset;
 - (id)initWithVertexBuffer:(CVertexBuffer *)inVertexBuffer rowSize:(GLint)inRowSize rowCount:(GLint)inRowCount size:(GLint)inSize type:(GLenum)inType normalized:(GLboolean)inNormalized;
 
+- (void)bind;
 - (void)use:(GLuint)inAttributeIndex;
 
 @end

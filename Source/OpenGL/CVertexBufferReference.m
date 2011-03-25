@@ -83,14 +83,19 @@
     {
     return([NSString stringWithFormat:@"%@ (VBO:%@, rowSize:%d, rowCount:%d, size:%d, type:%@, normalized:%d, stride:%d, offset:%d", [super description], self.vertexBuffer, self.rowSize, self.rowCount, self.size, NSStringFromGLenum(self.type), self.normalized, self.stride, self.offset]);
     }
-    
-- (void)use:(GLuint)inAttributeIndex
+
+- (void)bind
     {
     AssertOpenGLNoError_();
 
     glBindBuffer(self.vertexBuffer.target, self.vertexBuffer.name);
 
     AssertOpenGLNoError_();
+    }
+    
+- (void)use:(GLuint)inAttributeIndex
+    {
+    [self bind];
 
     glVertexAttribPointer(inAttributeIndex, self.size, self.type, self.normalized, self.stride, (const GLvoid *)self.offset);
 
