@@ -141,6 +141,10 @@
         {
         theRowSize = sizeof(GLfloat) * theSize;
         }
+    else if (theType == GL_SHORT)
+        {
+        theRowSize = sizeof(GLshort) * theSize;
+        }
 
     if (theVertexBuffer.data.length % theRowSize != 0)
         {
