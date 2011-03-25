@@ -153,13 +153,18 @@
             [theGeometry.positions use:thePositionsAttributeIndex];
             glEnableVertexAttribArray(thePositionsAttributeIndex);
 
-
+            // Update normal attribute
             NSAssert(theGeometry.normals != NULL, @"No normals.");
             GLuint theNormalsAttributeIndex = [theProgram attributeIndexForName:@"a_normal"];        
             [theGeometry.normals use:theNormalsAttributeIndex];
             glEnableVertexAttribArray(theNormalsAttributeIndex);
             
             theGeometry.vertexArrayBuffer.populated = YES;
+
+            if (theGeometry.indices != NULL)
+                {
+                [theGeometry.positions bind];
+                }
             }
 
 
@@ -175,7 +180,15 @@
                 }
         #endif
 
-		glDrawArrays(GL_TRIANGLES, 0, theGeometry.positions.rowCount);
+        // TODO -- currently indexed drawing is broken.
+        if (theGeometry.indices == NULL || YES)
+            {
+            glDrawArrays(GL_TRIANGLES, 0, theGeometry.positions.rowCount);
+            }
+        else
+            {
+            glDrawElements(GL_TRIANGLES, theGeometry.indices.rowCount, GL_UNSIGNED_SHORT, 0);
+            }
 		}
 
     glBindVertexArrayOES(0);
