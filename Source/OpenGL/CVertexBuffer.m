@@ -57,7 +57,7 @@
     
 - (NSString *)description
     {
-    return([NSString stringWithFormat:@"%@ (target: 0x%X, usage: 0x%X, data: %d bytes @ %p, name: %d)", [super description], self.target, self.usage, self.data.length, self.data.bytes, self.name]);
+    return([NSString stringWithFormat:@"%@ (target: %@, usage: %@, data: %d bytes @ %p, name: %d)", [super description], NSStringFromGLenum(self.target), NSStringFromGLenum(self.usage), self.data.length, self.data.bytes, self.name]);
     }
 
 - (GLuint)name
