@@ -131,10 +131,12 @@
     
     CGSize theSize = self.bounds.size;
     CGPoint theLocation = [inGestureRecognizer locationInView:self];
-    
+
+    const CGFloat kTrackBallRadius = 3.0f;
+    const CGFloat kMousePointScale = 1.0f / kTrackBallRadius;
     CGPoint thePoint = {
-        .x = theLocation.x / theSize.width - 0.5,
-        .y = (theLocation.y / theSize.height - 0.5) * -1.0,
+        .x = 2.0f * kMousePointScale * theLocation.x / theSize.width - kMousePointScale,
+        .y = (2.0f * kMousePointScale * theLocation.y / theSize.height - kMousePointScale) * -1.0,
         };
 
     if (inGestureRecognizer.state == UIGestureRecognizerStateBegan)
