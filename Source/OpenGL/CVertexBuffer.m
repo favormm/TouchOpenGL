@@ -82,7 +82,7 @@
             }
 
         // TODO: either skip this - or save/restore previous value
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(self.target, 0);
         
         name = theName;
 //        
