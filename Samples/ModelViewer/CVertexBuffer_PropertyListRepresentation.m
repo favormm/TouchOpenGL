@@ -27,10 +27,17 @@
     
     NSData *theData = NULL;
 
-    theString = [(NSDictionary *)inRepresentation objectForKey:@"floats"];
-    if (theString.length > 0)
+    if ((theString = [(NSDictionary *)inRepresentation objectForKey:@"floats"]) != NULL && theString.length > 0)
         {
         theData = [NSData dataWithNumbersInString:theString type:kCFNumberFloat32Type error:outError];
+        if (theData == NULL)
+            {
+            return(NULL);
+            }
+        }
+    else if ((theString = [(NSDictionary *)inRepresentation objectForKey:@"shorts"]) != NULL && theString.length > 0)
+        {
+        theData = [NSData dataWithNumbersInString:theString type:kCFNumberShortType error:outError];
         if (theData == NULL)
             {
             return(NULL);
