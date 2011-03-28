@@ -1,9 +1,9 @@
 struct LightSourceParameters {
     vec4 ambient;
     vec4 diffuse;
-//    vec4 specular;
+    vec4 specular;
     vec4 position;
-//    vec4 halfVector;
+    vec4 halfVector;
 //    vec3 spotDirection;
 //    float spotExponent;
 //    float spotCutoff; // (range: [0.0,90.0], 180.0)
@@ -21,8 +21,8 @@ struct MaterialParameters {
 //    vec4 emission;
     vec4 ambient;
     vec4 diffuse;
-//    vec4 specular;
-//    float shininess;
+    vec4 specular;
+    float shininess;
 	};
 
 // ######################################################################
@@ -42,14 +42,18 @@ void main()
     LightSourceParameters u_LightSource = LightSourceParameters(
         vec4(1, 1, 1, 1), // ambient
         vec4(1, 1, 1, 1), // diffuse
-        vec4(1, 1, 1, 1) // position
+        vec4(1, 1, 1, 1), // specular
+        vec4(0, 1, 1, 0), // position
+        vec4(0, 0.5, 0.5, 0) // halfVector
         );
 	LightModelParameters u_LightModel = LightModelParameters(
         vec4(0.2, 0.2, 0.2, 1) // ambient
         );
     MaterialParameters u_FrontMaterial = MaterialParameters(
         vec4(0.2, 0.25, 0.2, 1), //ambient 
-        vec4(1, 0, 0, 1) // diffuse
+        vec4(1, 0, 0, 1), // diffuse
+        vec4(0, 0, 0, 1), // specular
+        1.0 // shiness
         );
         
     
@@ -74,9 +78,18 @@ void main()
 	vec4 ambient = u_FrontMaterial.ambient * u_LightSource.ambient;
 	vec4 globalAmbient = u_LightModel.ambient * u_FrontMaterial.ambient;
 
+    vec4 specular = vec4(0.0);
+    if (NdotL > 0.0)
+        {
+        float NdotHV = max(dot(theNormal, u_LightSource.halfVector.xyz), 0.0);
+		specular = u_FrontMaterial.specular * u_LightSource.specular * pow(NdotHV,u_FrontMaterial.shininess);
+        }
 
-    v_color = NdotL * theDiffuseTerm + globalAmbient + ambient;
-//    v_color =  NdotL * theDiffuseTerm;
+
+    v_color = NdotL * theDiffuseTerm + globalAmbient + ambient + specular;
+
+
+
 //    v_color = vec4(1, 0, 0, 1);
     v_color.a = 1.0;
 
