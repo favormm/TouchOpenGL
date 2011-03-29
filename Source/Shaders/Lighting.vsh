@@ -4,13 +4,6 @@ struct LightSourceParameters {
     vec4 specular;
     vec4 position;
     vec4 halfVector;
-//    vec3 spotDirection;
-//    float spotExponent;
-//    float spotCutoff; // (range: [0.0,90.0], 180.0)
-//    float spotCosCutoff; // (range: [1.0,0.0],-1.0)
-//    float constantAttenuation;
-//    float linearAttenuation;
-//    float quadraticAttenuation;
     };
 
 struct LightModelParameters {
@@ -18,7 +11,6 @@ struct LightModelParameters {
 	};
 
 struct MaterialParameters {
-//    vec4 emission;
     vec4 ambient;
     vec4 diffuse;
     vec4 specular;
@@ -36,25 +28,29 @@ uniform mat4 u_modelViewMatrix;
 uniform mat4 u_projectionMatrix;
 //uniform mat3 u_normalMatrix; // gl_NormalMatrix
 
+uniform LightSourceParameters u_LightSource;
+uniform LightModelParameters u_LightModel;
+uniform MaterialParameters u_FrontMaterial;
+
 void main()
     {
     // These hard code variables will become uniforms in the real app
-    LightSourceParameters u_LightSource = LightSourceParameters(
-        vec4(1, 1, 1, 1), // ambient
-        vec4(1, 1, 1, 1), // diffuse
-        vec4(1, 1, 1, 1), // specular
-        vec4(0, 1, 1, 0), // position
-        vec4(0, 0.5, 0.5, 0) // halfVector
-        );
-	LightModelParameters u_LightModel = LightModelParameters(
-        vec4(0.2, 0.2, 0.2, 1) // ambient
-        );
-    MaterialParameters u_FrontMaterial = MaterialParameters(
-        vec4(0.2, 0.25, 0.2, 1), //ambient 
-        vec4(1, 0, 0, 1), // diffuse
-        vec4(0, 0, 0, 1), // specular
-        1.0 // shiness
-        );
+//    LightSourceParameters u_LightSource = LightSourceParameters(
+//        vec4(1, 1, 1, 1), // ambient
+//        vec4(1, 1, 1, 1), // diffuse
+//        vec4(1, 1, 1, 1), // specular
+//        vec4(0, 1, 1, 0), // position
+//        vec4(0, 0.5, 0.5, 0) // halfVector
+//        );
+//	LightModelParameters u_LightModel = LightModelParameters(
+//        vec4(0.2, 0.2, 0.2, 1) // ambient
+//        );
+//    MaterialParameters u_FrontMaterial = MaterialParameters(
+//        vec4(0.2, 0.25, 0.2, 1), //ambient 
+//        vec4(1, 0, 0, 1), // diffuse
+//        vec4(0, 0, 0, 1), // specular
+//        1.0 // shiness
+//        );
         
     
     // this matrix is the transpose of the inverse of the 3×3 upper left sub matrix from the modelview matrix.
@@ -87,11 +83,6 @@ void main()
 
 
     v_color = NdotL * theDiffuseTerm + globalAmbient + ambient + specular;
-
-
-
-//    v_color = vec4(1, 0, 0, 1);
-    v_color.a = 1.0;
 
     gl_Position = u_modelViewMatrix * u_projectionMatrix * a_position;
     }

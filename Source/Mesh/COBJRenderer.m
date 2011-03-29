@@ -31,6 +31,7 @@
 @implementation COBJRenderer
 
 @synthesize light;
+@synthesize defaultMaterial;
 
 @synthesize mesh;
 @synthesize lightingProgram;
@@ -40,13 +41,15 @@
 	if ((self = [super init]) != NULL)
 		{
         light = [[CLight alloc] init];
+        light.position = (Vector4){ 1, 1, 1, 0 };
+        defaultMaterial = [[CMaterial alloc] init];
         
         CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
 		NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"Skull2" withExtension:@"model.plist"];
         self.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
         NSLog(@"MESH: %@", self.mesh);
         
-        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix"/*, @"u_material", @"u_light"*/, NULL]] autorelease];
+        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_LightSource", @"u_LightModel", NULL]] autorelease];
 		}
 	return(self);
 	}
@@ -55,6 +58,9 @@
     {
     [light release];
     light = NULL;
+    
+    [defaultMaterial release];
+    defaultMaterial = NULL;
     
     [mesh release];
     mesh = NULL;
@@ -78,28 +84,67 @@
 
     [self drawAxes:theTransform];
     
-    glCullFace(GL_BACK);
-    glEnable(GL_CULL_FACE);
-
 	Vector3 theCenter = self.mesh.center;
 	theTransform = Matrix4Concat(Matrix4MakeTranslation(-theCenter.x, -theCenter.y, -theCenter.z), theTransform);
 
     [self drawBoundingBox:theTransform v1:P1 v2:P2];
 
+	// #### Use shader program
 	CProgram *theProgram = self.lightingProgram;
-
-	// Use shader program
 	glUseProgram(theProgram.name);
 
-    // Update transform uniform
-    GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
-    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &theTransform.m00);
+    GLuint theUniform = 0;
 
-    GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
-    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m00);
+    // #### Update transform uniform
+    theUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
+    glUniformMatrix4fv(theUniform, 1, NO, &theTransform.m00);
+
+    theUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
+    glUniformMatrix4fv(theUniform, 1, NO, &Matrix4Identity.m00);
 
     AssertOpenGLNoError_();
 
+    // #### Light sources
+    theUniform = [theProgram uniformIndexForName:@"u_LightSource.ambient"];
+    Color4f theColor = self.light.ambientColor;
+    glUniform4fv(theUniform, 4, &theColor.r);
+
+    theUniform = [theProgram uniformIndexForName:@"u_LightSource.diffuse"];
+    theColor = self.light.diffuseColor;
+    glUniform4fv(theUniform, 4, &theColor.r);
+
+    theUniform = [theProgram uniformIndexForName:@"u_LightSource.specular"];
+    theColor = self.light.specularColor;
+    glUniform4fv(theUniform, 4, &theColor.r);
+
+    theUniform = [theProgram uniformIndexForName:@"u_LightSource.position"];
+    Vector4 theVector = self.light.position;
+    glUniform4fv(theUniform, 4, &theVector.x);
+
+    theUniform = [theProgram uniformIndexForName:@"u_LightSource.halfVector"];
+    glUniform4f(theUniform, 0, 0.5, 0.5, 0);
+
+    // #### Light model
+    theUniform = [theProgram uniformIndexForName:@"u_LightModel.ambient"];
+    glUniform4f(theUniform, 0.2, 0.2, 0.2, 1.0);
+    
+    // #### Material
+    CMaterial *theMaterial = self.defaultMaterial;
+    
+    theUniform = [theProgram uniformIndexForName:@"u_FrontMaterial.ambient"];
+    theColor = theMaterial.ambientColor;
+    glUniform4fv(theUniform, 4, &theColor.r);
+
+    theUniform = [theProgram uniformIndexForName:@"u_FrontMaterial.diffuse"];
+    theColor = theMaterial.diffuseColor;
+    glUniform4fv(theUniform, 4, &theColor.r);
+
+    theUniform = [theProgram uniformIndexForName:@"u_FrontMaterial.specular"];
+    theColor = theMaterial.specularColor;
+    glUniform4fv(theUniform, 4, &theColor.r);
+
+    theUniform = [theProgram uniformIndexForName:@"u_FrontMaterial.shininess"];
+    glUniform1f(theUniform, theMaterial.shininess);    
 
     // #### Now render each geometry in mesh.
 	for (CGeometry *theGeometry in self.mesh.geometries)
@@ -128,7 +173,6 @@
                 }
             }
 
-
 		AssertOpenGLNoError_();
 
         // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.
@@ -141,7 +185,9 @@
                 }
         #endif
 
-        // TODO -- currently indexed drawing is broken.
+        glCullFace(GL_BACK);
+        glEnable(GL_CULL_FACE);
+
         if (theGeometry.indices == NULL)
             {
             glDrawArrays(GL_TRIANGLES, 0, theGeometry.positions.rowCount);

@@ -10,6 +10,9 @@
 		0625B3E71337F377003641E3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0625B3E61337F377003641E3 /* Cocoa.framework */; };
 		0625B4571337FAAD003641E3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0625B4561337FAAD003641E3 /* OpenGL.framework */; };
 		0625B45F1337FC20003641E3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0625B45E1337FC20003641E3 /* QuartzCore.framework */; };
+		453F9AB113425BF5000EF0F5 /* CLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 453F9AB013425BF5000EF0F5 /* CLight.m */; };
+		453F9AB513425C99000EF0F5 /* CCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 453F9AB413425C99000EF0F5 /* CCamera.m */; };
+		453F9AB813426889000EF0F5 /* Color4fValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 453F9AB713426889000EF0F5 /* Color4fValueTransformer.m */; };
 		45991F3913414E9B00604591 /* CGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 45991EE213414E9B00604591 /* CGeometry.m */; };
 		45991F3A13414E9B00604591 /* CMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 45991EE413414E9B00604591 /* CMaterial.m */; };
 		45991F3B13414E9B00604591 /* CMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 45991EE613414E9B00604591 /* CMesh.m */; };
@@ -73,7 +76,7 @@
 		45991FB713424B3900604591 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 45991FAE13424B3900604591 /* Credits.rtf */; };
 		45991FB813424B3900604591 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45991FB013424B3900604591 /* InfoPlist.strings */; };
 		45991FB913424B3900604591 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45991FB213424B3900604591 /* MainMenu.xib */; };
-		45991FBA13424B3900604591 /* PopTipDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45991FB413424B3900604591 /* PopTipDocument.xib */; };
+		45991FBA13424B3900604591 /* CModelDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45991FB413424B3900604591 /* CModelDocument.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +87,12 @@
 		0625B3EB1337F377003641E3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0625B4561337FAAD003641E3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		0625B45E1337FC20003641E3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		453F9AAF13425BF5000EF0F5 /* CLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLight.h; sourceTree = "<group>"; };
+		453F9AB013425BF5000EF0F5 /* CLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLight.m; sourceTree = "<group>"; };
+		453F9AB313425C99000EF0F5 /* CCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCamera.h; sourceTree = "<group>"; };
+		453F9AB413425C99000EF0F5 /* CCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCamera.m; sourceTree = "<group>"; };
+		453F9AB613426889000EF0F5 /* Color4fValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color4fValueTransformer.h; sourceTree = "<group>"; };
+		453F9AB713426889000EF0F5 /* Color4fValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Color4fValueTransformer.m; sourceTree = "<group>"; };
 		45991EE113414E9B00604591 /* CGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGeometry.h; sourceTree = "<group>"; };
 		45991EE213414E9B00604591 /* CGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGeometry.m; sourceTree = "<group>"; };
 		45991EE313414E9B00604591 /* CMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMaterial.h; sourceTree = "<group>"; };
@@ -184,7 +193,7 @@
 		45991FAF13424B3900604591 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		45991FB113424B3900604591 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		45991FB313424B3900604591 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		45991FB513424B3900604591 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PopTipDocument.xib; sourceTree = "<group>"; };
+		45991FB513424B3900604591 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CModelDocument.xib; sourceTree = "<group>"; };
 		45991FB613424B3900604591 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -252,7 +261,7 @@
 				45991F3513414E9B00604591 /* Support */,
 			);
 			name = Source;
-			path = ../../Dropbox/Projects/OpenGL/Source;
+			path = ../../Source;
 			sourceTree = "<group>";
 		};
 		45991EE013414E9B00604591 /* Mesh */ = {
@@ -318,6 +327,10 @@
 				45991F2113414E9B00604591 /* OSX */,
 				45991F2A13414E9B00604591 /* Quaternion.h */,
 				45991F2B13414E9B00604591 /* Quaternion.m */,
+				453F9AAF13425BF5000EF0F5 /* CLight.h */,
+				453F9AB013425BF5000EF0F5 /* CLight.m */,
+				453F9AB313425C99000EF0F5 /* CCamera.h */,
+				453F9AB413425C99000EF0F5 /* CCamera.m */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -395,7 +408,7 @@
 				45991F7613415D1200604591 /* Skull2.model.plist */,
 			);
 			name = Skull2;
-			path = ../../Dropbox/Projects/OpenGL/Samples/ModelViewer/Samples/Skull2;
+			path = ../ModelViewer_iOS/Samples/Skull2;
 			sourceTree = "<group>";
 		};
 		45991FA213424B3300604591 /* Source */ = {
@@ -407,6 +420,8 @@
 				45991FA613424B3300604591 /* Color_OpenGLExtensions.m */,
 				45991FA713424B3300604591 /* main.m */,
 				45991FA813424B3300604591 /* ModelViewer-Prefix.pch */,
+				453F9AB613426889000EF0F5 /* Color4fValueTransformer.h */,
+				453F9AB713426889000EF0F5 /* Color4fValueTransformer.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -417,7 +432,7 @@
 				45991FAE13424B3900604591 /* Credits.rtf */,
 				45991FB013424B3900604591 /* InfoPlist.strings */,
 				45991FB213424B3900604591 /* MainMenu.xib */,
-				45991FB413424B3900604591 /* PopTipDocument.xib */,
+				45991FB413424B3900604591 /* CModelDocument.xib */,
 				45991FB613424B3900604591 /* Info.plist */,
 			);
 			path = Resources;
@@ -451,7 +466,7 @@
 			attributes = {
 				ORGANIZATIONNAME = Inkling;
 			};
-			buildConfigurationList = 0625B3DC1337F377003641E3 /* Build configuration list for PBXProject "ModelViewer" */;
+			buildConfigurationList = 0625B3DC1337F377003641E3 /* Build configuration list for PBXProject "ModelViewer_OSX" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -501,7 +516,7 @@
 				45991FB713424B3900604591 /* Credits.rtf in Resources */,
 				45991FB813424B3900604591 /* InfoPlist.strings in Resources */,
 				45991FB913424B3900604591 /* MainMenu.xib in Resources */,
-				45991FBA13424B3900604591 /* PopTipDocument.xib in Resources */,
+				45991FBA13424B3900604591 /* CModelDocument.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +562,9 @@
 				45991FA913424B3300604591 /* CModelDocument.m in Sources */,
 				45991FAA13424B3300604591 /* Color_OpenGLExtensions.m in Sources */,
 				45991FAB13424B3300604591 /* main.m in Sources */,
+				453F9AB113425BF5000EF0F5 /* CLight.m in Sources */,
+				453F9AB513425C99000EF0F5 /* CCamera.m in Sources */,
+				453F9AB813426889000EF0F5 /* Color4fValueTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,12 +595,12 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
-		45991FB413424B3900604591 /* PopTipDocument.xib */ = {
+		45991FB413424B3900604591 /* CModelDocument.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				45991FB513424B3900604591 /* en */,
 			);
-			name = PopTipDocument.xib;
+			name = CModelDocument.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -653,7 +671,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0625B3DC1337F377003641E3 /* Build configuration list for PBXProject "ModelViewer" */ = {
+		0625B3DC1337F377003641E3 /* Build configuration list for PBXProject "ModelViewer_OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0625B4011337F377003641E3 /* Debug */,

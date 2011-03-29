@@ -224,11 +224,11 @@
 //        theTransform = Matrix4Translate(theTransform, -D, -D, 0);
 //        theTransform = Matrix4Scale(theTransform, 1 / D, 1 / D, 1);
 
-        const CGFloat theAspectRatio = theSize.width / theSize.height;
-    Matrix4 theTransform = Matrix4MakeScale(1, theAspectRatio, 1);
-    theTransform = Matrix4Concat(theTransform, self.transform);
+//        const CGFloat theAspectRatio = theSize.width / theSize.height;
+//    Matrix4 theTransform = Matrix4MakeScale(1, theAspectRatio, 1);
+//    theTransform = Matrix4Concat(theTransform, self.transform);
 
-    [self.renderer renderIntoFrameBuffer:self.frameBuffer transform:theTransform];
+    [self.renderer renderIntoFrameBuffer:self.frameBuffer];
 
     [self.colorRenderBuffer bind];
     [self.context presentRenderbuffer:GL_RENDERBUFFER];

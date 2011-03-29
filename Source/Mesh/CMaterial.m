@@ -16,7 +16,28 @@
 @synthesize ambientColor;
 @synthesize diffuseColor;
 @synthesize specularColor;
+@synthesize shininess;
 @synthesize texture;
+
+//    MaterialParameters u_FrontMaterial = MaterialParameters(
+//        vec4(0.2, 0.25, 0.2, 1), //ambient 
+//        vec4(1, 0, 0, 1), // diffuse
+//        vec4(0, 0, 0, 1), // specular
+//        1.0 // shiness
+
+
+- (id)init
+	{
+	if ((self = [super init]) != NULL)
+		{
+        ambientColor = (Color4f){ 0.2, 0.25, 0.2, 1.0 };
+        diffuseColor = (Color4f){ 1.0, 0.0, 0.0, 1.0 };
+        specularColor = (Color4f){ 0.0, 0.0, 0.0, 1.0 };
+        shininess = 1.0;
+		}
+	return(self);
+	}
+
 
 - (void)dealloc
     {

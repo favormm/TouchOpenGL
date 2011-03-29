@@ -11,6 +11,7 @@
 #import "CRenderer.h"
 
 @interface CRendererOpenGLLayer ()
+@property (readwrite, nonatomic, assign) BOOL setup;
 @end
 
 #pragma mark -
@@ -18,6 +19,8 @@
 @implementation CRendererOpenGLLayer
 
 @synthesize renderer;
+
+@synthesize setup;
 
 - (id)init
     {
@@ -36,29 +39,54 @@
     [super dealloc];
     }
 
+- (CGLPixelFormatObj)copyCGLPixelFormatForDisplayMask:(uint32_t)mask
+    {
+    CGLPixelFormatAttribute thePixelFormatAttributes[] = {
+        kCGLPFADisplayMask, mask,
+        kCGLPFAAccelerated,
+        kCGLPFAColorSize, 8,
+        kCGLPFAAlphaSize, 8,
+        kCGLPFADepthSize, 16,
+        kCGLPFANoRecovery,
+        kCGLPFAMultisample,
+        kCGLPFASupersample,
+        kCGLPFASampleAlpha,
+        0
+        };
+    CGLPixelFormatObj thePixelFormatObject = NULL;
+    GLint theNumberOfPixelFormats = 0;
+    CGLChoosePixelFormat(thePixelFormatAttributes, &thePixelFormatObject, &theNumberOfPixelFormats);
+    if (thePixelFormatObject == NULL)
+        {
+        NSLog(@"Error: Could not choose pixel format!");
+        }
+    return(thePixelFormatObject);
+    }
+
+//- (CGLContextObj)copyCGLContextForPixelFormat:(CGLPixelFormatObj)pixelFormat
+//    {
+//    GLint depth = -14;
+//    CGLDescribePixelFormat(pixelFormat, 0, kCGLPFADepthSize, &depth);
+//    NSLog(@"> %d", depth);
+//	return([super copyCGLContextForPixelFormat:pixelFormat]);
+//    }
 
 - (void)drawInCGLContext:(CGLContextObj)ctx pixelFormat:(CGLPixelFormatObj)pf forLayerTime:(CFTimeInterval)t displayTime:(const CVTimeStamp *)ts
     {
     CGLSetCurrentContext(ctx);
     
-//    CGRect theBounds = self.bounds;
-//    glViewport(0, 0, theBounds.size.width, theBounds.size.height);
-
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    glEnable(GL_DEPTH_TEST);
+    if (self.setup == NO)
+        {
+        [self.renderer setup];
+        self.setup = YES;
+        }
     
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClearDepth(1.0f);
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    [self.renderer clear];
 
     [self.renderer prerender];
     [self.renderer render];
     [self.renderer postrender];
 
-//    glFlush();
-    
     [super drawInCGLContext:ctx pixelFormat:pf forLayerTime:t displayTime:ts];
     }
 

@@ -13,10 +13,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0625B3E11337F377003641E3"
+               BlueprintIdentifier = "45781C53130AFE1E00B57285"
                BuildableName = "ModelViewer.app"
                BlueprintName = "ModelViewer"
-               ReferencedContainer = "container:ModelViewer.xcodeproj">
+               ReferencedContainer = "container:ModelViewer_iOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -40,10 +40,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0625B3E11337F377003641E3"
+            BlueprintIdentifier = "45781C53130AFE1E00B57285"
             BuildableName = "ModelViewer.app"
             BlueprintName = "ModelViewer"
-            ReferencedContainer = "container:ModelViewer.xcodeproj">
+            ReferencedContainer = "container:ModelViewer_iOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -59,10 +59,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0625B3E11337F377003641E3"
+            BlueprintIdentifier = "45781C53130AFE1E00B57285"
             BuildableName = "ModelViewer.app"
             BlueprintName = "ModelViewer"
-            ReferencedContainer = "container:ModelViewer.xcodeproj">
+            ReferencedContainer = "container:ModelViewer_iOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -18,5 +18,8 @@
 @property (nonatomic, retain) IBOutlet CRendererView *mainView;
 
 @property (nonatomic, assign) GLfloat roll;
+@property (nonatomic, assign) GLfloat pitch;
+@property (nonatomic, assign) GLfloat yaw;
+@property (nonatomic, assign) GLfloat scale;
 
 @end

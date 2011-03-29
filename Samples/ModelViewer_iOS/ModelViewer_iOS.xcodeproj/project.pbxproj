@@ -12,6 +12,7 @@
 		4529966C130B8D6A009FD0A3 /* CModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45299664130B8D6A009FD0A3 /* CModelViewController.m */; };
 		4529966E130B8D6A009FD0A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45299666130B8D6A009FD0A3 /* main.m */; };
 		4529966F130B8D6A009FD0A3 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45299667130B8D6A009FD0A3 /* MainWindow.xib */; };
+		452C2C61134278AC0078B2BA /* CLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 452C2C60134278AC0078B2BA /* CLight.m */; };
 		453D9386133A6F970049D629 /* Square_New.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453D9385133A6F970049D629 /* Square_New.model.plist */; };
 		45781C59130AFE1E00B57285 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C58130AFE1E00B57285 /* UIKit.framework */; };
 		45781C5B130AFE1E00B57285 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5A130AFE1E00B57285 /* Foundation.framework */; };
@@ -96,6 +97,8 @@
 		45299666130B8D6A009FD0A3 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		45299667130B8D6A009FD0A3 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		45299668130B8D6A009FD0A3 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		452C2C5F134278AC0078B2BA /* CLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLight.h; sourceTree = "<group>"; };
+		452C2C60134278AC0078B2BA /* CLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLight.m; sourceTree = "<group>"; };
 		453D9385133A6F970049D629 /* Square_New.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Square_New.model.plist; sourceTree = "<group>"; };
 		45781C54130AFE1E00B57285 /* ModelViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModelViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45781C58130AFE1E00B57285 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -342,6 +345,8 @@
 				457C02C0133D57A20001A967 /* CBlockRenderer.m */,
 				457C02C1133D57A20001A967 /* CFrameBuffer.h */,
 				457C02C2133D57A20001A967 /* CFrameBuffer.m */,
+				452C2C5F134278AC0078B2BA /* CLight.h */,
+				452C2C60134278AC0078B2BA /* CLight.m */,
 				457C02C3133D57A20001A967 /* CMutableVertexBuffer.h */,
 				457C02C4133D57A20001A967 /* CMutableVertexBuffer.m */,
 				457C02C5133D57A20001A967 /* Common */,
@@ -660,6 +665,7 @@
 				457C032B133D57A20001A967 /* OpenGLTypes.m in Sources */,
 				457C0330133D57A20001A967 /* Quaternion.m in Sources */,
 				457C0339133D57A20001A967 /* NSData_NumberExtensions.m in Sources */,
+				452C2C61134278AC0078B2BA /* CLight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

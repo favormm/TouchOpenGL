@@ -45,13 +45,15 @@
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glEnable(GL_DEPTH_TEST);
-
-    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     #if TARGET_OS_IPHONE == 1
     glClearDepthf(1.0f);
     #else
     glClearDepth(1.0f);
     #endif
+    
+    glDepthFunc(GL_LEQUAL);
+
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     }
 
 - (void)clear
@@ -72,7 +74,7 @@
     {
     }
 
-- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer transform:(Matrix4)inTransform
+- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer
     {
     [inFramebuffer bind];
     

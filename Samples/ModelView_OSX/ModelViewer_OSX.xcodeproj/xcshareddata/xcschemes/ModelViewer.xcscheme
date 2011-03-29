@@ -13,10 +13,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "45781C53130AFE1E00B57285"
+               BlueprintIdentifier = "0625B3E11337F377003641E3"
                BuildableName = "ModelViewer.app"
                BlueprintName = "ModelViewer"
-               ReferencedContainer = "container:ModelViewer.xcodeproj">
+               ReferencedContainer = "container:ModelViewer_OSX.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -27,16 +27,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "457D9C88133D23DB00F576A3"
-               BuildableName = "Unit Tests.octest"
-               BlueprintName = "Unit Tests"
-               ReferencedContainer = "container:ModelViewer.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -50,10 +40,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45781C53130AFE1E00B57285"
+            BlueprintIdentifier = "0625B3E11337F377003641E3"
             BuildableName = "ModelViewer.app"
             BlueprintName = "ModelViewer"
-            ReferencedContainer = "container:ModelViewer.xcodeproj">
+            ReferencedContainer = "container:ModelViewer_OSX.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,10 +59,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45781C53130AFE1E00B57285"
+            BlueprintIdentifier = "0625B3E11337F377003641E3"
             BuildableName = "ModelViewer.app"
             BlueprintName = "ModelViewer"
-            ReferencedContainer = "container:ModelViewer.xcodeproj">
+            ReferencedContainer = "container:ModelViewer_OSX.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

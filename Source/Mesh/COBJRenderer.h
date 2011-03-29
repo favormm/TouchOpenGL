@@ -9,11 +9,13 @@
 #import "CRenderer.h"
 
 @class CLight;
+@class CMaterial;
 
 @interface COBJRenderer : CRenderer {
     
 }
 
 @property (readwrite, nonatomic, retain) CLight *light;
+@property (readwrite, nonatomic, retain) CMaterial *defaultMaterial;
 
 @end

@@ -19,14 +19,13 @@
 
 @property (readwrite, nonatomic, assign) Matrix4 projectionTransform;
 
-
 - (void)setup;
 - (void)clear;
 - (void)prerender;
 - (void)render;
 - (void)postrender;
 
-- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer transform:(Matrix4)inTransform;
+- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer;
 
 @end
 

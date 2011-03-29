@@ -16,4 +16,17 @@
 @synthesize specularColor;
 @synthesize position;
 
+- (id)init
+	{
+	if ((self = [super init]) != NULL)
+		{
+        ambientColor = (Color4f){ 1.0, 1.0, 1.0, 1.0 };
+        diffuseColor = (Color4f){ 1.0, 1.0, 1.0, 1.0 };
+        specularColor = (Color4f){ 1.0, 1.0, 1.0, 1.0 };
+        position = (Vector4){ 0.0, 0.0, 0.0, 0.0 };
+		}
+	return(self);
+	}
+
+
 @end

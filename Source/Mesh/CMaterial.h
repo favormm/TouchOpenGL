@@ -21,6 +21,8 @@
 @property (readwrite, nonatomic, assign) Color4f ambientColor;
 @property (readwrite, nonatomic, assign) Color4f diffuseColor;
 @property (readwrite, nonatomic, assign) Color4f specularColor;
+@property (readwrite, nonatomic, assign) GLfloat shininess;
+
 @property (readwrite, nonatomic, retain) CTexture *texture;
 
 @end
