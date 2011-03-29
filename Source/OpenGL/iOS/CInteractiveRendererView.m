@@ -106,7 +106,8 @@
 
     theTransform = Matrix4Concat(Matrix4FromQuaternion(self.motionRotation), theTransform);
     theTransform = Matrix4Concat(Matrix4FromQuaternion(self.gestureRotation), theTransform);
-    self.transform = theTransform;
+    
+    self.renderer.projectionTransform = theTransform;
     
 //    NSLog(@"%@", NSStringFromMatrix4(self.transform));
 //    NSLog(@"%@", NSStringFromQuaternion(self.motionRotation));

@@ -31,8 +31,6 @@
 @property (readwrite, nonatomic, retain) CRenderBuffer *colorRenderBuffer;
 @property (readwrite, nonatomic, retain) CRenderBuffer *depthRenderBuffer;
 
-@property (readwrite, nonatomic, assign) Matrix4 transform;
-
 - (void)startAnimation;
 - (void)stopAnimation;
 

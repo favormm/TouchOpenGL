@@ -36,7 +36,6 @@
 @synthesize frameBuffer;
 @synthesize colorRenderBuffer;
 @synthesize depthRenderBuffer;
-@synthesize transform;
 
 + (Class)layerClass
     {
@@ -48,7 +47,6 @@
     if ((self = [super initWithFrame:inFrame]))
         {
         animationFrameInterval = 1.0;
-        transform = Matrix4Identity;
         }
 
     return self;
@@ -59,7 +57,6 @@
     if ((self = [super initWithCoder:inDecoder]) != NULL)
         {
         animationFrameInterval = 1.0;
-        transform = Matrix4Identity;
         }
 
     return self;

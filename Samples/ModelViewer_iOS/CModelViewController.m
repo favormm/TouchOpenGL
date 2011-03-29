@@ -51,11 +51,11 @@
     NSLog(@"TEST: %d", buttonIndex);
     if (buttonIndex == 0)
         {
-        self.rendererView.transform = Matrix4Identity;
-        
-        self.rendererView.motionRotation = QuaternionIdentity;
-        self.rendererView.gestureRotation = QuaternionIdentity;
-        self.rendererView.savedRotation = QuaternionIdentity;
+//        self.rendererView.transform = Matrix4Identity;
+//        
+//        self.rendererView.motionRotation = QuaternionIdentity;
+//        self.rendererView.gestureRotation = QuaternionIdentity;
+//        self.rendererView.savedRotation = QuaternionIdentity;
         }
     
     
