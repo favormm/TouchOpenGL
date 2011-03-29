@@ -42,6 +42,12 @@
 - (CMesh *)loadMeshWithURL:(NSURL *)inURL error:(NSError **)outError
 	{
 	self.modelDictioary = [NSDictionary dictionaryWithContentsOfURL:inURL];
+    if (self.modelDictioary == NULL)
+        {
+        return(NULL);
+        }
+    
+    
 	self.mesh = [[[CMesh alloc] init] autorelease];
 
     id theObject = [self.modelDictioary objectForKey:@"center"];

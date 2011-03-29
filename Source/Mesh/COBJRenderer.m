@@ -43,6 +43,7 @@
         CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
 		NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"Skull2" withExtension:@"model.plist"];
         self.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
+        NSLog(@"MESH: %@", self.mesh);
         
         self.flatProgram = [[[CProgram alloc] initWithName:@"Flat2" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_color", NULL]] autorelease];
 
@@ -145,7 +146,7 @@
 		{
         [theGeometry.vertexArrayBuffer bind];
         
-        if (theGeometry.vertexArrayBuffer.populated == NO)
+        if (theGeometry.vertexArrayBuffer == NULL || theGeometry.vertexArrayBuffer.populated == NO)
             {
             // Update position attribute
             NSAssert(theGeometry.positions != NULL, @"No positions.");

@@ -40,11 +40,15 @@
 
 - (CVertexArrayBuffer *)vertexArrayBuffer
     {
+    #if TARGET_OS_IPHONE
     if (vertexArrayBuffer == NULL)
         {
         vertexArrayBuffer = [[CVertexArrayBuffer alloc] init];
         }
     return(vertexArrayBuffer);
+    #else
+    return(NULL);
+    #endif /* TARGET_OS_IPHONE */
     }
 
 
