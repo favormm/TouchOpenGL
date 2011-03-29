@@ -73,7 +73,7 @@
         glGenTextures(1, &theName);
         glBindTexture(GL_TEXTURE_2D, theName);
 
-        glTexImage2D(GL_TEXTURE_2D, 0, theFormat, CGImageGetWidth(theImageRef), CGImageGetHeight(theImageRef), 0, theFormat, theType, theData.bytes);
+        glTexImage2D(GL_TEXTURE_2D, 0, theFormat, (GLsizei)CGImageGetWidth(theImageRef), (GLsizei)CGImageGetHeight(theImageRef), 0, theFormat, theType, theData.bytes);
 
 //        glGenerateMipmap(GL_TEXTURE_2D);
 

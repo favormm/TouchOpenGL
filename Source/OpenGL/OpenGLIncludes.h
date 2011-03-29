@@ -12,4 +12,5 @@
 #import <OpenGLES/ES2/glext.h>
 #else
 #import <OpenGL/OpenGL.h>
+#include <OpenGL/glext.h>
 #endif

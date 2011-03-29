@@ -69,7 +69,7 @@
                 NSInteger theInteger;
                 if ([theScanner scanInteger:&theInteger])
                     {
-					SInt32 theValue = theInteger;
+					SInt32 theValue = (SInt32)theInteger;
                     [theData appendBytes:&theValue length:sizeof(theValue)];
                     }
                 }
@@ -107,7 +107,7 @@
 			case kCFNumberIntType:
                 {
                 int theValue;
-                if ([theScanner scanInteger:&theValue])
+                if ([theScanner scanInt:&theValue])
                     {
                     [theData appendBytes:&theValue length:sizeof(theValue)];
                     }

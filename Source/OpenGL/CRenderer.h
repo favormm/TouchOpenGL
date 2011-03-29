@@ -16,7 +16,6 @@
 
 @interface CRenderer : NSObject {
     }
-    
 
 - (void)setup;
 - (void)clear;

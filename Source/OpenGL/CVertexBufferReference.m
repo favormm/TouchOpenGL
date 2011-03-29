@@ -131,9 +131,9 @@
     {
     NSUInteger theRowSize = 0;
     NSGetSizeAndAlignment(inEncoding, &theRowSize, NULL);
-    *outRowSize = theRowSize;
+    *outRowSize = (GLint)theRowSize;
     
-    *outRowCount = [inVertexBuffer.data length] / theRowSize;
+    *outRowCount = (GLint)([inVertexBuffer.data length] / theRowSize);
 
     NSString *theCellEncodingString = [NSString stringWithUTF8String:inEncoding];
 
@@ -159,7 +159,7 @@
         theResult = [theScanner scanString:@"}" intoString:NULL];
         NSAssert(theResult == YES, @"Scan failed");
 
-        *outSize = [theMemberTypes length];
+        *outSize = (GLint)[theMemberTypes length];
         }
     else
         {

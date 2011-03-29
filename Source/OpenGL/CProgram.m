@@ -228,7 +228,7 @@
     NSNumber *theNumber = [self.attributesByName objectForKey:inName];
     if (theNumber == NULL)
         {
-        GLuint theIndex = self.attributesByName.count;
+        GLuint theIndex = (GLuint)self.attributesByName.count;
         theNumber = [NSNumber numberWithUnsignedInt:theIndex];
         [self.attributesByName setObject:theNumber forKey:inName];
         return(theIndex);

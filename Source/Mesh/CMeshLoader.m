@@ -155,7 +155,7 @@
         return(NULL);
         }
 
-    GLint theRowCount = theVertexBuffer.data.length / theRowSize;
+    GLint theRowCount = (GLint)(theVertexBuffer.data.length / theRowSize);
 
 
 	CVertexBufferReference *theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer rowSize:theRowSize rowCount:theRowCount size:theSize type:theType normalized:theNormalized stride:theStride offset:theOffset] autorelease];

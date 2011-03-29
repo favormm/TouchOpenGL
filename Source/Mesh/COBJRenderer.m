@@ -191,7 +191,9 @@
             }
 		}
 
+    #if TARGET_OS_IPHONE
     glBindVertexArrayOES(0);
+    #endif /* TARGET_OS_IPHONE */
     }
 
 

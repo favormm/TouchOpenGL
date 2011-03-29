@@ -97,6 +97,8 @@
 
 #pragma mark -
 
+#if TARGET_OS_IPHONE
+
 @implementation EAGLContext (EAGLContext_LibraryExtensions)
 
 - (COpenGLAssetLibrary *)library   
@@ -113,4 +115,4 @@
 
 @end
 
-
+#endif /* #if TARGET_OS_IPHONE */

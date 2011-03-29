@@ -31,8 +31,12 @@
 
 #pragma mark -
 
+#if TARGET_OS_IPHONE
+
 @interface EAGLContext (EAGLContext_LibraryExtensions)
 
 @property (readonly, nonatomic, retain) COpenGLAssetLibrary *library;
 
 @end
+
+#endif /* #if TARGET_OS_IPHONE */
