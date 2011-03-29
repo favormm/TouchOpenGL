@@ -17,10 +17,13 @@
 @interface CRenderer : NSObject {
     }
 
+@property (readwrite, nonatomic, assign) Matrix4 projectionTransform;
+
+
 - (void)setup;
 - (void)clear;
 - (void)prerender;
-- (void)render:(Matrix4)inTransform;
+- (void)render;
 - (void)postrender;
 
 - (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer transform:(Matrix4)inTransform;

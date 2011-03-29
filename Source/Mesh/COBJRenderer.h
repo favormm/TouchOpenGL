@@ -8,9 +8,12 @@
 
 #import "CRenderer.h"
 
+@class CLight;
 
 @interface COBJRenderer : CRenderer {
     
 }
+
+@property (readwrite, nonatomic, retain) CLight *light;
 
 @end

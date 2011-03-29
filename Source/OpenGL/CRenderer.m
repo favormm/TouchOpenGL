@@ -19,10 +19,13 @@
 
 @implementation CRenderer
 
+@synthesize projectionTransform;
+
 - (id)init
     {
     if ((self = [super init]))
         {
+        projectionTransform = Matrix4Identity;
         }
 
     return self;
@@ -61,15 +64,9 @@
     [self clear];
     }
 
-- (void)render:(Matrix4)inTransform
-    {
-    #pragma unused (inTransform)
-    }
-
 - (void)render
-{
-    [self render:Matrix4Identity];
-}
+    {
+    }
 
 - (void)postrender
     {
@@ -80,7 +77,7 @@
     [inFramebuffer bind];
     
     [self prerender];
-    [self render:inTransform];
+    [self render];
     [self postrender];
     }
 

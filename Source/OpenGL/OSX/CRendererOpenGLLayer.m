@@ -53,10 +53,8 @@
     glClearDepth(1.0f);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-    Matrix4 theTransform = Matrix4Identity;
-
     [self.renderer prerender];
-    [self.renderer render:theTransform];
+    [self.renderer render];
     [self.renderer postrender];
 
 //    glFlush();

@@ -40,24 +40,27 @@
 - (void)prerender
     {
     [super prerender];
+    //
     if (self.prerenderBlock)
         {
         self.prerenderBlock();
         }
     }
 
-- (void)render:(Matrix4)inTransform
+- (void)render
     {
-    [super render:inTransform];
+    [super render];
+    //
     if (self.renderBlock)
         {
-        self.renderBlock(inTransform);
+        self.renderBlock();
         }
     }
 
 - (void)postrender
     {
     [super postrender];
+    //
     if (self.postrenderBlock)
         {
         self.postrenderBlock();
