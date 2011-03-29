@@ -13,6 +13,7 @@
 #import "OpenGLTypes.h"
 #import "CArcBall.h"
 #import "Quaternion.h"
+#import "COBJRenderer.h"
 
 @interface CInteractiveRendererView ()
 @property (readwrite, nonatomic, retain) CArcBall *arcBall;
@@ -107,7 +108,7 @@
     theTransform = Matrix4Concat(Matrix4FromQuaternion(self.motionRotation), theTransform);
     theTransform = Matrix4Concat(Matrix4FromQuaternion(self.gestureRotation), theTransform);
     
-    self.renderer.projectionTransform = theTransform;
+    ((COBJRenderer *)self.renderer).modelTransform = theTransform;
     
 //    NSLog(@"%@", NSStringFromMatrix4(self.transform));
 //    NSLog(@"%@", NSStringFromQuaternion(self.motionRotation));

@@ -32,6 +32,7 @@
 
 @synthesize light;
 @synthesize defaultMaterial;
+@synthesize modelTransform;
 
 @synthesize mesh;
 @synthesize lightingProgram;
@@ -43,6 +44,7 @@
         light = [[CLight alloc] init];
         light.position = (Vector4){ 1, 1, 1, 0 };
         defaultMaterial = [[CMaterial alloc] init];
+        modelTransform = Matrix4Identity;
         
         CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
 		NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"Skull2" withExtension:@"model.plist"];
@@ -80,14 +82,15 @@
 
 	GLfloat theScale = 1.0 / Vector3Length((Vector3){ fabs(P1.x - P2.x), fabs(P1.y - P2.y), fabs(P1.z - P2.z) }); 
 
-    Matrix4 theTransform = Matrix4Scale(self.projectionTransform, theScale, theScale, theScale);
+    Matrix4 theModelTransform = Matrix4Scale(self.modelTransform, theScale, theScale, theScale);
+    Matrix4 theProjectionTransform = self.projectionTransform;
 
-    [self drawAxes:theTransform];
+    [self drawAxes:theModelTransform];
     
 	Vector3 theCenter = self.mesh.center;
-	theTransform = Matrix4Concat(Matrix4MakeTranslation(-theCenter.x, -theCenter.y, -theCenter.z), theTransform);
+	theModelTransform = Matrix4Concat(Matrix4MakeTranslation(-theCenter.x, -theCenter.y, -theCenter.z), theModelTransform);
 
-    [self drawBoundingBox:theTransform v1:P1 v2:P2];
+    [self drawBoundingBox:theModelTransform v1:P1 v2:P2];
 
 	// #### Use shader program
 	CProgram *theProgram = self.lightingProgram;
@@ -97,10 +100,10 @@
 
     // #### Update transform uniform
     theUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
-    glUniformMatrix4fv(theUniform, 1, NO, &theTransform.m00);
+    glUniformMatrix4fv(theUniform, 1, NO, &theModelTransform.m00);
 
     theUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
-    glUniformMatrix4fv(theUniform, 1, NO, &Matrix4Identity.m00);
+    glUniformMatrix4fv(theUniform, 1, NO, &theProjectionTransform.m00);
 
     AssertOpenGLNoError_();
 

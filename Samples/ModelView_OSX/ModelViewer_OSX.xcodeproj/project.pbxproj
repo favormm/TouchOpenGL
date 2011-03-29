@@ -77,6 +77,7 @@
 		45991FB813424B3900604591 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 45991FB013424B3900604591 /* InfoPlist.strings */; };
 		45991FB913424B3900604591 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45991FB213424B3900604591 /* MainMenu.xib */; };
 		45991FBA13424B3900604591 /* CModelDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45991FB413424B3900604591 /* CModelDocument.xib */; };
+		45D736A21342989200F70A45 /* CDictionaryToVectorValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D736A11342989200F70A45 /* CDictionaryToVectorValueTransformer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -195,6 +196,8 @@
 		45991FB313424B3900604591 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		45991FB513424B3900604591 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CModelDocument.xib; sourceTree = "<group>"; };
 		45991FB613424B3900604591 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45D736A01342989200F70A45 /* CDictionaryToVectorValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDictionaryToVectorValueTransformer.h; sourceTree = "<group>"; };
+		45D736A11342989200F70A45 /* CDictionaryToVectorValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDictionaryToVectorValueTransformer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,6 +425,8 @@
 				45991FA813424B3300604591 /* ModelViewer-Prefix.pch */,
 				453F9AB613426889000EF0F5 /* Color4fValueTransformer.h */,
 				453F9AB713426889000EF0F5 /* Color4fValueTransformer.m */,
+				45D736A01342989200F70A45 /* CDictionaryToVectorValueTransformer.h */,
+				45D736A11342989200F70A45 /* CDictionaryToVectorValueTransformer.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -565,6 +570,7 @@
 				453F9AB113425BF5000EF0F5 /* CLight.m in Sources */,
 				453F9AB513425C99000EF0F5 /* CCamera.m in Sources */,
 				453F9AB813426889000EF0F5 /* Color4fValueTransformer.m in Sources */,
+				45D736A21342989200F70A45 /* CDictionaryToVectorValueTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

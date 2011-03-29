@@ -119,7 +119,7 @@
 
 - (void)updateMatrix
     {
-    self.renderer.projectionTransform = Matrix4Concat(
+    self.renderer.modelTransform = Matrix4Concat(
         Matrix4MakeScale(self.scale, self.scale, self.scale),
         Matrix4FromQuaternion(QuaternionSetEuler(DegreesToRadians(self.yaw), DegreesToRadians(self.pitch), DegreesToRadians(self.roll)))
         );
