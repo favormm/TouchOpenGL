@@ -51,7 +51,7 @@
         self.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
         NSLog(@"MESH: %@", self.mesh);
         
-        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_LightSource", @"u_LightModel", NULL]] autorelease];
+        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_lightSource", @"u_lightModel", NULL]] autorelease];
 		}
 	return(self);
 	}
@@ -108,45 +108,45 @@
     AssertOpenGLNoError_();
 
     // #### Light sources
-    theUniform = [theProgram uniformIndexForName:@"u_LightSource.ambient"];
+    theUniform = [theProgram uniformIndexForName:@"u_lightSource.ambient"];
     Color4f theColor = self.light.ambientColor;
     glUniform4fv(theUniform, 4, &theColor.r);
 
-    theUniform = [theProgram uniformIndexForName:@"u_LightSource.diffuse"];
+    theUniform = [theProgram uniformIndexForName:@"u_lightSource.diffuse"];
     theColor = self.light.diffuseColor;
     glUniform4fv(theUniform, 4, &theColor.r);
 
-    theUniform = [theProgram uniformIndexForName:@"u_LightSource.specular"];
+    theUniform = [theProgram uniformIndexForName:@"u_lightSource.specular"];
     theColor = self.light.specularColor;
     glUniform4fv(theUniform, 4, &theColor.r);
 
-    theUniform = [theProgram uniformIndexForName:@"u_LightSource.position"];
+    theUniform = [theProgram uniformIndexForName:@"u_lightSource.position"];
     Vector4 theVector = self.light.position;
     glUniform4fv(theUniform, 4, &theVector.x);
 
-    theUniform = [theProgram uniformIndexForName:@"u_LightSource.halfVector"];
+    theUniform = [theProgram uniformIndexForName:@"u_lightSource.halfVector"];
     glUniform4f(theUniform, 0, 0.5, 0.5, 0);
 
     // #### Light model
-    theUniform = [theProgram uniformIndexForName:@"u_LightModel.ambient"];
+    theUniform = [theProgram uniformIndexForName:@"u_lightModel.ambient"];
     glUniform4f(theUniform, 0.2, 0.2, 0.2, 1.0);
     
     // #### Material
     CMaterial *theMaterial = self.defaultMaterial;
     
-    theUniform = [theProgram uniformIndexForName:@"u_FrontMaterial.ambient"];
+    theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.ambient"];
     theColor = theMaterial.ambientColor;
     glUniform4fv(theUniform, 4, &theColor.r);
 
-    theUniform = [theProgram uniformIndexForName:@"u_FrontMaterial.diffuse"];
+    theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.diffuse"];
     theColor = theMaterial.diffuseColor;
     glUniform4fv(theUniform, 4, &theColor.r);
 
-    theUniform = [theProgram uniformIndexForName:@"u_FrontMaterial.specular"];
+    theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.specular"];
     theColor = theMaterial.specularColor;
     glUniform4fv(theUniform, 4, &theColor.r);
 
-    theUniform = [theProgram uniformIndexForName:@"u_FrontMaterial.shininess"];
+    theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.shininess"];
     glUniform1f(theUniform, theMaterial.shininess);    
 
     // #### Now render each geometry in mesh.
