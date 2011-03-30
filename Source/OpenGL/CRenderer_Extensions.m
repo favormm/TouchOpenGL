@@ -89,10 +89,10 @@
 
     // Update transform uniform
     GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
-    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &inTransform.m00);
+    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &inTransform.m[0][0]);
 
     GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
-    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m00);
+    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m[0][0]);
 
 
     // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.
@@ -193,10 +193,10 @@
 
     // Update transform uniform
     GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
-    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &inTransform.m00);
+    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &inTransform.m[0][0]);
 
     GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
-    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m00);
+    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m[0][0]);
 
 
     // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.

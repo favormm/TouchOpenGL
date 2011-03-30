@@ -10,10 +10,7 @@
 #import "OpenGLIncludes.h"
 
 typedef struct Matrix4 {
-    GLfloat m00, m01, m02, m03;
-    GLfloat m10, m11, m12, m13;
-    GLfloat m20, m21, m22, m23;
-    GLfloat m30, m31, m32, m33;
+    GLfloat m[4][4];
 } Matrix4;
 
 extern const Matrix4 Matrix4Identity;

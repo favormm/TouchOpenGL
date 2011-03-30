@@ -100,10 +100,10 @@
 
     // #### Update transform uniform
     theUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
-    glUniformMatrix4fv(theUniform, 1, NO, &theModelTransform.m00);
+    glUniformMatrix4fv(theUniform, 1, NO, &theModelTransform.m[0][0]);
 
     theUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
-    glUniformMatrix4fv(theUniform, 1, NO, &theProjectionTransform.m00);
+    glUniformMatrix4fv(theUniform, 1, NO, &theProjectionTransform.m[0][0]);
 
     AssertOpenGLNoError_();
 

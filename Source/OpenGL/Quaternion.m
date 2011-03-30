@@ -35,7 +35,7 @@ GLfloat QuaternionLength2(Quaternion inQuat)
     {
     return(inQuat.x * inQuat.x + inQuat.y * inQuat.y + inQuat.z * inQuat.z + inQuat.w * inQuat.w);
     }
-        
+
 Quaternion QuaternionNormalize(Quaternion inQuat)
     {
     GLfloat len = QuaternionLength2(inQuat);
@@ -49,7 +49,7 @@ Quaternion QuaternionNormalize(Quaternion inQuat)
         }
     return(inQuat);
     }
-    
+
 Quaternion QuaternionSetEuler(GLfloat inYaw, GLfloat inPitch, GLfloat inRoll)
     {
     const GLfloat num9 = inRoll * 0.5f;
@@ -69,7 +69,7 @@ Quaternion QuaternionSetEuler(GLfloat inYaw, GLfloat inPitch, GLfloat inRoll)
         };
     return(q);
     }
-    
+
 Quaternion QuaternionConjugate(Quaternion q)
     {
     q.x *= -1;
@@ -77,7 +77,7 @@ Quaternion QuaternionConjugate(Quaternion q)
     q.z *= -1;
     return(q);
     }
-        
+
 Quaternion QuaternionMultiply(Quaternion inLHS, Quaternion inRHS)
     {
     Quaternion theResult = {
@@ -87,8 +87,8 @@ Quaternion QuaternionMultiply(Quaternion inLHS, Quaternion inRHS)
         .w = inLHS.w * inRHS.w - inLHS.x * inRHS.x - inLHS.y * inRHS.y - inLHS.z * inRHS.z,
         };
     return(theResult);
-    }    
-    
+    }
+
 Matrix4 Matrix4FromQuaternion(Quaternion q)
     {
     const GLfloat xx = q.x * q.x;
@@ -100,24 +100,24 @@ Matrix4 Matrix4FromQuaternion(Quaternion q)
     const GLfloat yw = q.y * q.w;
     const GLfloat zz = q.z * q.z;
     const GLfloat zw = q.z * q.w;
-    
+
     Matrix4 theMatrix = {
-        .m00 = 1.0 - 2.0 * (yy + zz),
-        .m01 = 2.0 * (xy - zw),
-        .m02 = 2.0 * (xz + yw),
-        .m03 = 0.0,
-        .m10 = 2.0 * (xy + zw),
-        .m11 = 1.0 - 2.0 * (xx + zz),
-        .m12 = 2.0 * (yz - xw),
-        .m13 = 0.0,
-        .m20 = 2.0 * (xz - yw),
-        .m21 = 2.0 * (yz + xw),
-        .m22 = 1.0 - 2.0 * (xx + yy),
-        .m23 = 0.0,
-        .m30 = 0.0,
-        .m31 = 0.0,
-        .m32 = 0.0,
-        .m33 = 1.0,
+        .m[0][0] = 1.0 - 2.0 * (yy + zz),
+        .m[0][1] = 2.0 * (xy - zw),
+        .m[0][2] = 2.0 * (xz + yw),
+        .m[0][3] = 0.0,
+        .m[1][0] = 2.0 * (xy + zw),
+        .m[1][1] = 1.0 - 2.0 * (xx + zz),
+        .m[1][2] = 2.0 * (yz - xw),
+        .m[1][3] = 0.0,
+        .m[2][0] = 2.0 * (xz - yw),
+        .m[2][1] = 2.0 * (yz + xw),
+        .m[2][2] = 1.0 - 2.0 * (xx + yy),
+        .m[2][3] = 0.0,
+        .m[3][0] = 0.0,
+        .m[3][1] = 0.0,
+        .m[3][2] = 0.0,
+        .m[3][3] = 1.0,
         };
     return(theMatrix);
     }
