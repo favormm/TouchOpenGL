@@ -56,6 +56,9 @@ extern GLfloat RadiansToDegrees(GLfloat inDegrees);
 extern GLfloat Vector3Length(Vector3 inVector);
 extern Vector3 Vector3CrossProduct(Vector3 inLHS, Vector3 inRHS);
 extern GLfloat Vector3DotProduct(Vector3 inLHS, Vector3 inRHS);
+extern Vector3 Vector3Normalize(Vector3 inVector);
+extern Vector3 Vector3Add(Vector3 inLHS, Vector3 inRHS);
+extern Vector3 Vector3FromVector4(Vector4 inVector);
 
 extern NSString *NSStringFromVector3(Vector3 inVector);
 

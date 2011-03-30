@@ -37,11 +37,9 @@
     #endif
     }
 
-- (void)drawAxes:(Matrix4)inTransform
+- (void)drawAxes:(Matrix4)inModelTransform
     {
     AssertOpenGLNoError_();
-
-//    inTransform = Matrix4Identity;
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -89,10 +87,11 @@
 
     // Update transform uniform
     GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
-    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &inTransform.m[0][0]);
+    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &inModelTransform.m[0][0]);
 
     GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
-    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m[0][0]);
+    Matrix4 theProjectionMatrix = self.projectionTransform;
+    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &theProjectionMatrix.m[0][0]);
 
 
     // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.
@@ -114,11 +113,11 @@
     AssertOpenGLNoError_();
     }
 
-- (void)drawBoundingBox:(Matrix4)inTransform v1:(Vector3)v1 v2:(Vector3)v2;
+- (void)drawBoundingBox:(Matrix4)inModelTransform v1:(Vector3)v1 v2:(Vector3)v2;
     {
     AssertOpenGLNoError_();
 
-//    inTransform = Matrix4Identity;
+//    inModelTransform = Matrix4Identity;
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -193,10 +192,11 @@
 
     // Update transform uniform
     GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
-    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &inTransform.m[0][0]);
+    glUniformMatrix4fv(theModelViewMatrixUniform, 1, NO, &inModelTransform.m[0][0]);
 
     GLuint theProjectionMatrixUniform = [theProgram uniformIndexForName:@"u_projectionMatrix"];
-    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &Matrix4Identity.m[0][0]);
+    Matrix4 theProjectionMatrix = self.projectionTransform;
+    glUniformMatrix4fv(theProjectionMatrixUniform, 1, NO, &theProjectionMatrix.m[0][0]);
 
 
     // Validate program before drawing. This is a good check, but only really necessary in a debug build. DEBUG macro must be defined in your debug configurations if that's not already the case.

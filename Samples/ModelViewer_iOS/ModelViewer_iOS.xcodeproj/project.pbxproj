@@ -14,6 +14,7 @@
 		4529966F130B8D6A009FD0A3 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45299667130B8D6A009FD0A3 /* MainWindow.xib */; };
 		452C2C61134278AC0078B2BA /* CLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 452C2C60134278AC0078B2BA /* CLight.m */; };
 		453D9386133A6F970049D629 /* Square_New.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453D9385133A6F970049D629 /* Square_New.model.plist */; };
+		4578017B1342B95600ACEEE4 /* CCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 4578017A1342B95600ACEEE4 /* CCamera.m */; };
 		45781C59130AFE1E00B57285 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C58130AFE1E00B57285 /* UIKit.framework */; };
 		45781C5B130AFE1E00B57285 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5A130AFE1E00B57285 /* Foundation.framework */; };
 		45781C5D130AFE1E00B57285 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45781C5C130AFE1E00B57285 /* CoreGraphics.framework */; };
@@ -100,6 +101,8 @@
 		452C2C5F134278AC0078B2BA /* CLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLight.h; sourceTree = "<group>"; };
 		452C2C60134278AC0078B2BA /* CLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLight.m; sourceTree = "<group>"; };
 		453D9385133A6F970049D629 /* Square_New.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Square_New.model.plist; sourceTree = "<group>"; };
+		457801791342B95600ACEEE4 /* CCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCamera.h; sourceTree = "<group>"; };
+		4578017A1342B95600ACEEE4 /* CCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCamera.m; sourceTree = "<group>"; };
 		45781C54130AFE1E00B57285 /* ModelViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ModelViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45781C58130AFE1E00B57285 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		45781C5A130AFE1E00B57285 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -376,6 +379,8 @@
 				457C02E3133D57A20001A967 /* CVertexBuffer_PropertyListRepresentation.m */,
 				457C02E4133D57A20001A967 /* CVertexBufferReference.h */,
 				457C02E5133D57A20001A967 /* CVertexBufferReference.m */,
+				457801791342B95600ACEEE4 /* CCamera.h */,
+				4578017A1342B95600ACEEE4 /* CCamera.m */,
 				457C02E6133D57A20001A967 /* iOS */,
 				457C02EF133D57A20001A967 /* Matrix.h */,
 				457C02F0133D57A20001A967 /* Matrix.m */,
@@ -542,7 +547,7 @@
 			attributes = {
 				ORGANIZATIONNAME = toxicsoftware.com;
 			};
-			buildConfigurationList = 45781C4E130AFE1E00B57285 /* Build configuration list for PBXProject "ModelViewer" */;
+			buildConfigurationList = 45781C4E130AFE1E00B57285 /* Build configuration list for PBXProject "ModelViewer_iOS" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -666,6 +671,7 @@
 				457C0330133D57A20001A967 /* Quaternion.m in Sources */,
 				457C0339133D57A20001A967 /* NSData_NumberExtensions.m in Sources */,
 				452C2C61134278AC0078B2BA /* CLight.m in Sources */,
+				4578017B1342B95600ACEEE4 /* CCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,10 +740,10 @@
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = NO;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
@@ -764,10 +770,10 @@
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = NO;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = NO;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
@@ -833,7 +839,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		45781C4E130AFE1E00B57285 /* Build configuration list for PBXProject "ModelViewer" */ = {
+		45781C4E130AFE1E00B57285 /* Build configuration list for PBXProject "ModelViewer_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45781C73130AFE1E00B57285 /* Debug */,

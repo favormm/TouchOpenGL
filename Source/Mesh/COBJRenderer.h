@@ -10,6 +10,7 @@
 
 #import "OpenGLTypes.h"
 
+@class CCamera;
 @class CLight;
 @class CMaterial;
 
@@ -17,6 +18,7 @@
     
 }
 
+@property (readwrite, nonatomic, retain) CCamera *camera;
 @property (readwrite, nonatomic, retain) CLight *light;
 @property (readwrite, nonatomic, retain) CMaterial *defaultMaterial;
 @property (readwrite, nonatomic, assign) Matrix4 modelTransform;

@@ -36,10 +36,40 @@ Vector3 Vector3CrossProduct(Vector3 inLHS, Vector3 inRHS)
         };
     return(theCrossProduct);
     }
+
+Vector3 Vector3Add(Vector3 inLHS, Vector3 inRHS)
+    {
+    Vector3 theVector = {
+        .x = inLHS.x + inRHS.x,
+        .y = inLHS.y + inRHS.y,
+        .z = inLHS.z + inRHS.z,
+        };
+    return(theVector);
+    }
+    
+Vector3 Vector3FromVector4(Vector4 inVector)
+    {
+    Vector3 theVector = {
+        .x = inVector.x,
+        .y = inVector.y,
+        .z = inVector.z
+        };
+    return(theVector);
+    }
     
 GLfloat Vector3DotProduct(Vector3 inLHS, Vector3 inRHS)
     {
     return(inLHS.x * inRHS.x + inLHS.y * inRHS.y + inLHS.z * inRHS.z);
+    }
+
+Vector3 Vector3Normalize(Vector3 inVector)
+    {
+    const GLfloat theLength = Vector3Length(inVector);
+    return((Vector3){
+        .x = inVector.x / theLength, 
+        .y = inVector.y / theLength, 
+        .z = inVector.z / theLength, 
+        });
     }
     
 NSString *NSStringFromVector3(Vector3 inVector)

@@ -22,4 +22,9 @@
 @property (nonatomic, assign) GLfloat yaw;
 @property (nonatomic, assign) GLfloat scale;
 
+@property (nonatomic, assign) GLfloat cameraX;
+@property (nonatomic, assign) GLfloat cameraY;
+@property (nonatomic, assign) GLfloat cameraZ;
+
+
 @end

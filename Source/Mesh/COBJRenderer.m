@@ -22,6 +22,7 @@
 #import "CGeometry.h"
 #import "CVertexArrayBuffer.h"
 #import "CLight.h"
+#import "CCamera.h"
 
 @interface COBJRenderer ()
 @property (readwrite, nonatomic, retain) CMesh *mesh;
@@ -30,6 +31,7 @@
 
 @implementation COBJRenderer
 
+@synthesize camera;
 @synthesize light;
 @synthesize defaultMaterial;
 @synthesize modelTransform;
@@ -41,6 +43,10 @@
 	{
 	if ((self = [super init]) != NULL)
 		{
+        camera = [[CCamera alloc] init];
+        camera.position = (Vector4){ .x = 0, .y = 0, .z = 0 };
+        
+        
         light = [[CLight alloc] init];
         light.position = (Vector4){ 1, 1, 1, 0 };
         defaultMaterial = [[CMaterial alloc] init];
@@ -73,22 +79,40 @@
     [super dealloc];
     }
 
+- (void)prerender
+    {
+    [super prerender];
+
+//    Matrix4 theModelTransform = self.modelTransform;
+
+//    self.modelTransform = Matrix4Identity;
+    self.projectionTransform = Matrix4Identity;
+
+    Matrix4 theProjectionTransform = Matrix4MakeTranslation(0, 0, -100);
+//    theProjectionTransform = Matrix4Concat(theProjectionTransform, Matrix4Perspective(90, 1, 0.01, 10000));
+
+    theProjectionTransform = Matrix4Ortho(-100, 100, -100, 100, -100, 100);
+
+
+    self.projectionTransform = theProjectionTransform;
+    }
+
 - (void)render
     {
     AssertOpenGLNoError_();
 
-	Vector3 P1 = self.mesh.p1;
-	Vector3 P2 = self.mesh.p2;
-
-	GLfloat theScale = 1.0 / Vector3Length((Vector3){ fabs(P1.x - P2.x), fabs(P1.y - P2.y), fabs(P1.z - P2.z) }); 
-
-    Matrix4 theModelTransform = Matrix4Scale(self.modelTransform, theScale, theScale, theScale);
+    Matrix4 theModelTransform = modelTransform;
     Matrix4 theProjectionTransform = self.projectionTransform;
 
     [self drawAxes:theModelTransform];
     
+	Vector3 P1 = self.mesh.p1;
+	Vector3 P2 = self.mesh.p2;
+
+
 	Vector3 theCenter = self.mesh.center;
 	theModelTransform = Matrix4Concat(Matrix4MakeTranslation(-theCenter.x, -theCenter.y, -theCenter.z), theModelTransform);
+
 
     [self drawBoundingBox:theModelTransform v1:P1 v2:P2];
 
@@ -125,7 +149,10 @@
     glUniform4fv(theUniform, 4, &theVector.x);
 
     theUniform = [theProgram uniformIndexForName:@"u_lightSource.halfVector"];
-    glUniform4f(theUniform, 0, 0.5, 0.5, 0);
+    Vector3 theHalfVector = Vector3Add(Vector3Normalize(Vector3FromVector4(self.camera.position)), Vector3Normalize(Vector3FromVector4(self.light.position)));
+    glUniform4f(theUniform, theHalfVector.x, theHalfVector.y, theHalfVector.z, 0);
+
+
 
     // #### Light model
     theUniform = [theProgram uniformIndexForName:@"u_lightModel.ambient"];

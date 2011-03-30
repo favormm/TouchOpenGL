@@ -34,13 +34,17 @@ uniform MaterialParameters u_frontMaterial;
 
 void main()
     {
+#if 0
     // this matrix is the transpose of the inverse of the 3×3 upper left sub matrix from the modelview matrix.
     mat3 u_normalMatrix = mat3(1, 0, 0, 0, 1, 0, 0, 0, 1);
-
-    ////////////////////////////////////////////////////////////////////////////
-
     // First transform the normal into eye space and normalize the result.
     vec3 theNormal = normalize(u_normalMatrix * a_normal);
+#else
+    // Work around for no gl_NormalMatrix from http://glosx.blogspot.com/2008/03/glnormalmatrix.html
+    vec3 theNormal = (u_modelViewMatrix * vec4(a_normal, 0.0)).xyz;
+#endif
+
+
 
     // Mow normalize the light's direction. Note that according to the OpenGL specification, the light is stored in eye space. Also since we're talking about a directional light, the position field is actually direction
     vec3 theLightDirection = normalize(vec3(u_lightSource.position));
@@ -53,7 +57,7 @@ void main()
 
 	// Compute the ambient and globalAmbient terms.
 	vec4 ambient = u_frontMaterial.ambient * u_lightSource.ambient;
-	vec4 globalAmbient = u_lightModel.ambient * u_frontMaterial.ambient;
+	vec4 globalAmbient = u_frontMaterial.ambient * u_lightModel.ambient;
 
     vec4 specular = vec4(0.0);
     if (NdotL > 0.0)
@@ -65,7 +69,10 @@ void main()
 
     v_color = NdotL * theDiffuseTerm + globalAmbient + ambient + specular;
 
-    gl_Position = u_modelViewMatrix * u_projectionMatrix * a_position;
+
+    mat4 theModelViewProjectionMatrix = u_projectionMatrix * u_modelViewMatrix;
+
+    gl_Position = theModelViewProjectionMatrix * a_position;
     }
     
 ////////////////////////////////////////////////////////////////////////////////

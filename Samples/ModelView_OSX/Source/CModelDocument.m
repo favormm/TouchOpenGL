@@ -15,6 +15,7 @@
 #import "Quaternion.h"
 #import "CLight.h"
 #import "Color_OpenGLExtensions.h"
+#import "CCamera.h"
 
 @interface CModelDocument ()
 
@@ -32,6 +33,9 @@
 @synthesize pitch;
 @synthesize yaw;
 @synthesize scale;
+@synthesize cameraX;
+@synthesize cameraY;
+@synthesize cameraZ;
 
 - (id)init
     {
@@ -94,6 +98,34 @@
 
     [self updateMatrix];
     }
+
+- (void)setCameraX:(GLfloat)inCameraX
+    {
+    cameraX = inCameraX;
+    
+    Vector4 theCameraPosition = self.renderer.camera.position;
+    theCameraPosition.x = inCameraX;
+    self.renderer.camera.position = theCameraPosition;
+    }
+
+- (void)setCameraY:(GLfloat)inCameraY
+    {
+    cameraY = inCameraY;
+    
+    Vector4 theCameraPosition = self.renderer.camera.position;
+    theCameraPosition.y = inCameraY;
+    self.renderer.camera.position = theCameraPosition;
+    }
+
+- (void)setCameraZ:(GLfloat)inCameraZ
+    {
+    cameraZ = inCameraZ;
+    
+    Vector4 theCameraPosition = self.renderer.camera.position;
+    theCameraPosition.z = inCameraZ;
+    self.renderer.camera.position = theCameraPosition;
+    }
+
     
 #pragma mark -
 
