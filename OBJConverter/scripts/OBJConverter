@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+
+import OBJConverter
+
+import sys
+
+OBJConverter.main(sys.argv)

@@ -391,6 +391,11 @@ class Tool(object):
 
 		########################################################################
 
+def main(args):
+	print args
+	Tool().main(args)
+
+
 if __name__ == '__main__':
 
 	theRootDir = os.path.split(sys.argv[0])[0]
