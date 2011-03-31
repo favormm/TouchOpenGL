@@ -1,2 +1,4 @@
 ColladaConverter/Output/*
 OBJConverter/Output/*
+OBJConverter/build
+OBJConverter/dist
