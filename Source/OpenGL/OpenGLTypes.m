@@ -76,6 +76,12 @@ NSString *NSStringFromVector3(Vector3 inVector)
 	{
 	return([NSString stringWithFormat:@"(%g, %g, %g)", inVector.x, inVector.y, inVector.z]);
 	}
+    
+NSString *NSStringFromVector4(Vector4 inVector)
+	{
+	return([NSString stringWithFormat:@"(%g, %g, %g, %g)", inVector.x, inVector.y, inVector.z, inVector.w]);
+	}
+
 		
 Color4f Color4fFromPropertyListRepresentation(id inPropertyListRepresentation)
     {

@@ -45,6 +45,14 @@
         renderer = [[COBJRenderer alloc] init];
         
         scale = 1.0;
+        
+        CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
+		NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"teapot" withExtension:@"model.plist"];
+        self.renderer.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
+        
+        self.cameraX = self.renderer.camera.position.x;
+        self.cameraY = self.renderer.camera.position.y;
+        self.cameraZ = self.renderer.camera.position.z;
         }
     return self;
     }
@@ -126,7 +134,6 @@
     theCameraPosition.z = inCameraZ;
     self.renderer.camera.position = theCameraPosition;
     }
-
     
 #pragma mark -
 

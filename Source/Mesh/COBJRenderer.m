@@ -43,7 +43,7 @@
 	if ((self = [super init]) != NULL)
 		{
         camera = [[CCamera alloc] init];
-        camera.position = (Vector4){ .x = 0, .y = 0, .z = 0 };
+        camera.position = (Vector4){ .x = 0, .y = 0, .z = -10 };
         
         
         light = [[CLight alloc] init];
@@ -53,10 +53,6 @@
                 
         self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_lightSource", @"u_lightModel", NULL]] autorelease];
 
-//        CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
-//		NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"Skull2" withExtension:@"model.plist"];
-//        self.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
-//        NSLog(@"MESH: %@", self.mesh);
 		}
 	return(self);
 	}
@@ -82,23 +78,32 @@
     {
     [super prerender];
 
+    self.light.position = self.camera.position;    
+
+
 //    Matrix4 theModelTransform = self.modelTransform;
 
 //    self.modelTransform = Matrix4Identity;
     self.projectionTransform = Matrix4Identity;
-
-    Matrix4 theProjectionTransform = Matrix4MakeTranslation(0, 0, -100);
-//    theProjectionTransform = Matrix4Concat(theProjectionTransform, Matrix4Perspective(90, 1, 0.01, 10000));
-
-    theProjectionTransform = Matrix4Ortho(-100, 100, -100, 100, -100, 100);
+    Vector4 theCameraVector = self.camera.position;
+    
+    NSLog(@"%@", NSStringFromVector4(theCameraVector));
 
 
-    self.projectionTransform = theProjectionTransform;
+
+    Matrix4 theCameraTransform = Matrix4MakeTranslation(theCameraVector.x, theCameraVector.y, theCameraVector.z);
+    Matrix4 theOrthoTransform = Matrix4Perspective(90, 1.0, 0.1, 100);
+    self.projectionTransform = Matrix4Concat(theCameraTransform, theOrthoTransform);
+
+    
+
     }
 
 - (void)render
     {
     AssertOpenGLNoError_();
+    
+    
 
     Matrix4 theModelTransform = modelTransform;
     Matrix4 theProjectionTransform = self.projectionTransform;
