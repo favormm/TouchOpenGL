@@ -28,9 +28,9 @@ uniform mat4 u_modelViewMatrix;
 uniform mat4 u_projectionMatrix;
 //uniform mat3 u_normalMatrix; // gl_NormalMatrix
 
-uniform LightSourceParameters u_lightSource;
-uniform LightModelParameters u_lightModel;
-uniform MaterialParameters u_frontMaterial;
+uniform LightSourceParameters u_lightSource; // gl_LightSource
+uniform LightModelParameters u_lightModel; // gl_LightModel
+uniform MaterialParameters u_frontMaterial; // gl_FrontMaterial
 
 void main()
     {
@@ -68,6 +68,8 @@ void main()
 
 
     v_color = NdotL * theDiffuseTerm + globalAmbient + ambient + specular;
+//    v_color = NdotL * theDiffuseTerm;
+//    v_color.a = 1.0;
 
 
     mat4 theModelViewProjectionMatrix = u_projectionMatrix * u_modelViewMatrix;

@@ -17,11 +17,13 @@
 #define NO_DEFAULTS 1
 
 @interface CMeshLoader ()
+@property (readwrite, nonatomic, retain) NSURL *URL;
 @property (readwrite, nonatomic, retain) NSDictionary *modelDictioary;
 @property (readwrite, nonatomic, retain) CMesh *mesh;
 @property (readwrite, nonatomic, retain) NSMutableDictionary *buffers;
 
 - (CVertexBufferReference *)vertexBufferReferenceWithDictionary:(NSDictionary *)inRepresentation error:(NSError **)outError;
+- (CVertexBuffer *)vertexBufferWithPropertyListRepresentation:(id)inRepresentation error:(NSError **)outError;
 
 @end
 
@@ -29,6 +31,7 @@
 
 @implementation CMeshLoader
 
+@synthesize URL;
 @synthesize modelDictioary;
 @synthesize mesh;
 @synthesize buffers;
@@ -41,6 +44,8 @@
 
 - (CMesh *)loadMeshWithURL:(NSURL *)inURL error:(NSError **)outError
 	{
+    self.URL = inURL;
+    
 	self.modelDictioary = [NSDictionary dictionaryWithContentsOfURL:inURL];
     if (self.modelDictioary == NULL)
         {
@@ -78,7 +83,7 @@
 		{
 		NSDictionary *theBufferDictionary = [theBuffersDictionary objectForKey:theBufferName];
 		
-		CVertexBuffer *theVertexBuffer = [[[CVertexBuffer alloc] initWithPropertyListRepresentation:theBufferDictionary error:NULL] autorelease];
+		CVertexBuffer *theVertexBuffer = [self vertexBufferWithPropertyListRepresentation:theBufferDictionary error:NULL];
 		
 		[self.buffers setObject:theVertexBuffer forKey:theBufferName];
 		}
@@ -166,6 +171,49 @@
 
 	CVertexBufferReference *theVertexBufferReference = [[[CVertexBufferReference alloc] initWithVertexBuffer:theVertexBuffer rowSize:theRowSize rowCount:theRowCount size:theSize type:theType normalized:theNormalized stride:theStride offset:theOffset] autorelease];
 	return(theVertexBufferReference);
+	}
+
+- (CVertexBuffer *)vertexBufferWithPropertyListRepresentation:(id)inRepresentation error:(NSError **)outError;
+    {
+    
+    NSURL *theDirectoryURL = [self.URL URLByDeletingLastPathComponent];
+    
+    NSString *theString = [(NSDictionary *)inRepresentation objectForKey:@"target"];
+    NSAssert(NO_DEFAULTS && theString.length > 0, @"No target specified.");
+    GLenum theTarget = GLenumFromString(theString) ?: GL_ARRAY_BUFFER;
+    
+    theString = [(NSDictionary *)inRepresentation objectForKey:@"usage"];
+    NSAssert(NO_DEFAULTS && theString.length > 0, @"No usage specified.");
+    GLenum theUsage = GLenumFromString(theString) ?: GL_STATIC_DRAW;
+    
+    NSData *theData = NULL;
+
+    if ((theString = [(NSDictionary *)inRepresentation objectForKey:@"floats"]) != NULL && theString.length > 0)
+        {
+        theData = [NSData dataWithNumbersInString:theString type:kCFNumberFloat32Type error:outError];
+        if (theData == NULL)
+            {
+            return(NULL);
+            }
+        }
+    else if ((theString = [(NSDictionary *)inRepresentation objectForKey:@"shorts"]) != NULL && theString.length > 0)
+        {
+        theData = [NSData dataWithNumbersInString:theString type:kCFNumberShortType error:outError];
+        if (theData == NULL)
+            {
+            return(NULL);
+            }
+        }
+    else
+        {
+        NSString *theHREF = [(NSDictionary *)inRepresentation objectForKey:@"href"];
+        
+        NSURL *theURL = [theDirectoryURL URLByAppendingPathComponent:theHREF];
+        theData = [NSData dataWithContentsOfURL:theURL];
+        }
+
+    CVertexBuffer *theVertexBuffer = [[[CVertexBuffer alloc] initWithTarget:theTarget usage:theUsage data:theData] autorelease];
+	return(theVertexBuffer);
 	}
 
 

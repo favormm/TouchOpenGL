@@ -16,6 +16,7 @@
 #import "CLight.h"
 #import "Color_OpenGLExtensions.h"
 #import "CCamera.h"
+#import "CMeshLoader.h"
 
 @interface CModelDocument ()
 
@@ -138,12 +139,34 @@
     return nil;
     }
 
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
+- (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
     {
-    if (outError)
-        {
-        *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
-        }
+
+//    NSString *theInputFile = [NSString stringWithFormat:@"'%@'", absoluteURL.path];
+    
+    char thePath[] = "/tmp/XXXXXXXX";
+    
+    NSString *theOutputPath = [NSString stringWithFormat:@"%s/Test.model.plist", mkdtemp(thePath)];
+    
+    
+    NSString *theScript = [NSString stringWithFormat:@"OBJConverter --input '%@' --output '%@'", absoluteURL.path, theOutputPath];
+    
+    NSTask *theTask = [[[NSTask alloc] init] autorelease];
+    [theTask setLaunchPath:@"/bin/bash"];
+    [theTask setArguments:[NSArray arrayWithObjects:@"--login", @"-c", theScript, NULL]];
+    [theTask launch];
+    [theTask waitUntilExit];
+    NSLog(@"%d", [theTask terminationStatus]);
+    
+    
+    CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
+    NSURL *theURL = [NSURL fileURLWithPath:theOutputPath];
+    self.renderer.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
+    
+//    if (outError)
+//        {
+//        *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
+//        }
     return(YES);
     }
 

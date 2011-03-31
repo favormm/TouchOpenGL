@@ -25,7 +25,6 @@
 #import "CCamera.h"
 
 @interface COBJRenderer ()
-@property (readwrite, nonatomic, retain) CMesh *mesh;
 @property (readwrite, nonatomic, retain) CProgram *lightingProgram;
 @end
 
@@ -51,13 +50,13 @@
         light.position = (Vector4){ 1, 1, 1, 0 };
         defaultMaterial = [[CMaterial alloc] init];
         modelTransform = Matrix4Identity;
-        
-        CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
-		NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"Skull2" withExtension:@"model.plist"];
-        self.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
-        NSLog(@"MESH: %@", self.mesh);
-        
+                
         self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_lightSource", @"u_lightModel", NULL]] autorelease];
+
+//        CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
+//		NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"Skull2" withExtension:@"model.plist"];
+//        self.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
+//        NSLog(@"MESH: %@", self.mesh);
 		}
 	return(self);
 	}
@@ -149,7 +148,8 @@
     glUniform4fv(theUniform, 4, &theVector.x);
 
     theUniform = [theProgram uniformIndexForName:@"u_lightSource.halfVector"];
-    Vector3 theHalfVector = Vector3Add(Vector3Normalize(Vector3FromVector4(self.camera.position)), Vector3Normalize(Vector3FromVector4(self.light.position)));
+//    Vector3 theHalfVector = Vector3Add(Vector3Normalize(Vector3FromVector4(self.camera.position)), Vector3Normalize(Vector3FromVector4(self.light.position)));
+    Vector3 theHalfVector = Vector3Normalize(Vector3Add(Vector3FromVector4(self.camera.position), Vector3FromVector4(self.light.position)));
     glUniform4f(theUniform, theHalfVector.x, theHalfVector.y, theHalfVector.z, 0);
 
 

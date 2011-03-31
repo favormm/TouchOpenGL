@@ -13,11 +13,13 @@
 @class CCamera;
 @class CLight;
 @class CMaterial;
+@class CMesh;
 
 @interface COBJRenderer : CRenderer {
     
 }
 
+@property (readwrite, nonatomic, retain) CMesh *mesh;
 @property (readwrite, nonatomic, retain) CCamera *camera;
 @property (readwrite, nonatomic, retain) CLight *light;
 @property (readwrite, nonatomic, retain) CMaterial *defaultMaterial;
