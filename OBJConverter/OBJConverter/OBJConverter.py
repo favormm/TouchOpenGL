@@ -345,7 +345,7 @@ class Tool(object):
 
 				theTexCoords = dict(
 					buffer = theBuffer.signature.hexdigest(),
-					size = 3,
+					size = 2,
 					type = 'GL_FLOAT',
 					normalized = False,
 					offset = 3 * 4, # TODO hack
@@ -354,7 +354,7 @@ class Tool(object):
 
 				theNormals = dict(
 					buffer = theBuffer.signature.hexdigest(),
-					size = 2,
+					size = 3,
 					type = 'GL_FLOAT',
 					normalized = False,
 					offset = 6 * 4, # TODO hack
