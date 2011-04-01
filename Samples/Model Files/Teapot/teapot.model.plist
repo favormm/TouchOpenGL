@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>boundingbox</key>
 	<array>
 		<array>
-			<real>-3.0</real>
-			<real>0.0021749999999999999</real>
-			<real>-2.0</real>
+			<real>-3</real>
+			<real>0.002175</real>
+			<real>-2</real>
 		</array>
 		<array>
-			<real>3.4340000000000002</real>
-			<real>3.1499999999999999</real>
-			<real>2.0</real>
+			<real>3.434</real>
+			<real>3.15</real>
+			<real>2</real>
 		</array>
 	</array>
 	<key>buffers</key>
@@ -38,13 +38,15 @@
 	</dict>
 	<key>center</key>
 	<array>
-		<real>0.21700000000000008</real>
-		<real>1.5760874999999999</real>
-		<real>0.0</real>
+		<real>0.2170000000000001</real>
+		<real>1.5760875</real>
+		<real>0</real>
 	</array>
 	<key>geometries</key>
 	<array>
 		<dict>
+			<key>material</key>
+			<string>initialShadingGroup</string>
 			<key>indices</key>
 			<dict>
 				<key>buffer</key>
@@ -96,9 +98,9 @@
 			<integer>4</integer>
 			<key>ambientColor</key>
 			<array>
-				<real>0.0</real>
-				<real>0.0</real>
-				<real>0.0</real>
+				<real>0</real>
+				<real>0</real>
+				<real>0</real>
 			</array>
 			<key>diffuseColor</key>
 			<array>
@@ -114,19 +116,19 @@
 			<integer>1</integer>
 			<integer>0</integer>
 			<integer>0</integer>
-			<real>0.21700000000000008</real>
+			<real>0.2170000000000001</real>
 		</array>
 		<array>
 			<integer>0</integer>
 			<integer>1</integer>
 			<integer>0</integer>
-			<real>1.5760874999999999</real>
+			<real>1.5760875</real>
 		</array>
 		<array>
 			<integer>0</integer>
 			<integer>0</integer>
 			<integer>1</integer>
-			<real>0.0</real>
+			<real>0</real>
 		</array>
 		<array>
 			<integer>0</integer>
