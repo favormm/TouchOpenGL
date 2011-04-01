@@ -384,6 +384,7 @@ class Tool(object):
 					positions = thePositions,
 # 					texCoords = theTexCoords,
 					normals = theNormals,
+					material = theMaterial.name
 					)
 
 				d['geometries'].append(theGeometry)
