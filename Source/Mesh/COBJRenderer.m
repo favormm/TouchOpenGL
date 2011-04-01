@@ -78,12 +78,40 @@
     {
     [super prerender];
 
-    self.light.position = self.camera.position;    
+    const float kSinMinus60Degrees = -0.866025404f;
+    const float kCosMinus60Degrees = 0.5f;
+    Vector3 cameraPosition = Vector3FromVector4(self.camera.position);
+    GLfloat cameraDistance = Vector3Length(cameraPosition);
+    GLfloat r = cameraDistance / kCosMinus60Degrees;
+    if (r > 0.0f) {
+        // Get an axis, A, that isn't parallel to the camera position, Cam.
+        // Then Y = Cam x A is perpendicular to Cam.
+        // Put the light in a position such that it makes a 60 degree
+        // angle with Cam in the plane defined by (Cam, Y).
+        Vector3 A;
+        if (cameraPosition.y != 0.0f || cameraPosition.z != 0.0f) {
+            // Camera position does not lie along the x-axis.  Put A on the x-axis.
+            A.x = 1.0f;
+            A.y = 0.0f;
+            A.z = 0.0f;
+        } else {
+            // Camera position lies along the x-axis.  Put A on the (minus) z-axis.
+            A.x = 0.0f;
+            A.y = 0.0f;
+            A.z = -1.0f;
+        }
+        Vector3 Y = Vector3Normalize(Vector3CrossProduct(cameraPosition, A));
+        Vector3 X = Vector3Normalize(cameraPosition);
+        Vector3 lightPosition;
+        lightPosition.x = r * (X.x * kCosMinus60Degrees + Y.x * kSinMinus60Degrees);
+        lightPosition.y = r * (X.y * kCosMinus60Degrees + Y.y * kSinMinus60Degrees);
+        lightPosition.z = r * (X.z * kCosMinus60Degrees + Y.z * kSinMinus60Degrees);
+        self.light.position = (Vector4) { lightPosition.x, lightPosition.y, lightPosition.z, 0.0f };
+    } else {
+        // Camera is at the origin, just put the light any old place.
+        self.light.position = (Vector4) { 0.0f, 0.0f, -10.0f, 0.0f };
+    }
 
-
-//    Matrix4 theModelTransform = self.modelTransform;
-
-//    self.modelTransform = Matrix4Identity;
     self.projectionTransform = Matrix4Identity;
     Vector4 theCameraVector = self.camera.position;
     
@@ -160,15 +188,6 @@
         glUniform4fv(theUniform, 4, &theVector.x);
         }
 
-    theUniform = [theProgram uniformIndexForName:@"u_lightSource.halfVector"];
-    if (theUniform != 0)
-        {
-//    Vector3 theHalfVector = Vector3Add(Vector3Normalize(Vector3FromVector4(self.camera.position)), Vector3Normalize(Vector3FromVector4(self.light.position)));
-        Vector3 theHalfVector = Vector3Normalize(Vector3Add(Vector3FromVector4(self.camera.position), Vector3FromVector4(self.light.position)));
-        glUniform4f(theUniform, theHalfVector.x, theHalfVector.y, theHalfVector.z, 0);
-        }
-
-
     // #### Light model
     if (theUniform != 0)
         {
@@ -204,6 +223,14 @@
         {
         theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.shininess"];
         glUniform1f(theUniform, theMaterial.shininess);    
+        }
+
+    // #### Camera
+    if (theUniform != 0)
+        {
+        theUniform = [theProgram uniformIndexForName:@"u_cameraPosition"];
+        Vector4 theVector = self.camera.position;
+        glUniform4fv(theUniform, 4, &theVector.x);
         }
 
     // #### Now render each geometry in mesh.
