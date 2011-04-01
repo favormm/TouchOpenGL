@@ -30,9 +30,9 @@
 	{
 	if ((self = [super init]) != NULL)
 		{
-        ambientColor = (Color4f){ 0.2, 0.25, 0.2, 1.0 };
-        diffuseColor = (Color4f){ 1.0, 0.0, 0.0, 1.0 };
-        specularColor = (Color4f){ 0.0, 0.0, 0.0, 1.0 };
+        ambientColor = (Color4f){ 0.5, 0.5, 0.5, 1.0 };
+        diffuseColor = (Color4f){ 0.5, 0.5, 0.5, 1.0 };
+        specularColor = (Color4f){ 0.5, 0.5, 0.5, 1.0 };
         shininess = 1.0;
 		}
 	return(self);
@@ -49,6 +49,12 @@
     //
     [super dealloc];
     }
+
+- (NSString *)description
+    {
+    return([NSString stringWithFormat:@"%@ (%@)", [super description], self.name]);
+    }
+
 
 #pragma mark -
 
