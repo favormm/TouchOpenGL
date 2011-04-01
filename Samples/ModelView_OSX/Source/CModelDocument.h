@@ -26,5 +26,10 @@
 @property (nonatomic, assign) GLfloat cameraY;
 @property (nonatomic, assign) GLfloat cameraZ;
 
+@property (nonatomic, assign) GLfloat lightX;
+@property (nonatomic, assign) GLfloat lightY;
+@property (nonatomic, assign) GLfloat lightZ;
+
+
 
 @end

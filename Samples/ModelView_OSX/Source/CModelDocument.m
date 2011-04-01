@@ -37,6 +37,9 @@
 @synthesize cameraX;
 @synthesize cameraY;
 @synthesize cameraZ;
+@synthesize lightX;
+@synthesize lightY;
+@synthesize lightZ;
 
 - (id)init
     {
@@ -53,6 +56,10 @@
         self.cameraX = self.renderer.camera.position.x;
         self.cameraY = self.renderer.camera.position.y;
         self.cameraZ = self.renderer.camera.position.z;
+
+        self.lightX = self.renderer.light.position.x;
+        self.lightY = self.renderer.light.position.y;
+        self.lightZ = self.renderer.camera.position.z;
         }
     return self;
     }
@@ -134,6 +141,34 @@
     theCameraPosition.z = inCameraZ;
     self.renderer.camera.position = theCameraPosition;
     }
+
+- (void)setLightX:(GLfloat)inLightX
+    {
+    lightX = inLightX;
+    
+    Vector4 theLightPosition = self.renderer.light.position;
+    theLightPosition.x = inLightX;
+    self.renderer.light.position = theLightPosition;
+    }
+
+- (void)setLightY:(GLfloat)inLightY
+    {
+    lightY = inLightY;
+    
+    Vector4 theLightPosition = self.renderer.light.position;
+    theLightPosition.y = inLightY;
+    self.renderer.light.position = theLightPosition;
+    }
+
+- (void)setLightZ:(GLfloat)inLightZ
+    {
+    lightZ = inLightZ;
+    
+    Vector4 theLightPosition = self.renderer.light.position;
+    theLightPosition.z = inLightZ;
+    self.renderer.light.position = theLightPosition;
+    }
+
     
 #pragma mark -
 
