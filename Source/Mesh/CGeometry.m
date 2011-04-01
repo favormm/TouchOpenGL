@@ -17,6 +17,7 @@
 @synthesize positions;
 @synthesize texCoords;
 @synthesize normals;
+@synthesize material;
 
 - (void)dealloc
     {
@@ -33,7 +34,10 @@
 	texCoords = NULL;
 	//
 	[normals release];
-	normals = NULL;	
+	normals = NULL;
+    //
+    [material release];
+    material = NULL;
     //
     [super dealloc];
     }

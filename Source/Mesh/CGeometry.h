@@ -10,6 +10,7 @@
 
 @class CVertexArrayBuffer;
 @class CVertexBufferReference;
+@class CMaterial;
 
 @interface CGeometry : NSObject {
     
@@ -21,5 +22,7 @@
 @property (readwrite, nonatomic, retain) CVertexBufferReference *positions;
 @property (readwrite, nonatomic, retain) CVertexBufferReference *texCoords;
 @property (readwrite, nonatomic, retain) CVertexBufferReference *normals;
+
+@property (readwrite, nonatomic, retain) CMaterial *material;
 
 @end
