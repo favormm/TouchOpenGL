@@ -247,7 +247,8 @@
         GLint theLocation = glGetUniformLocation(self.name, [inName UTF8String]);
         if (theLocation == -1)
             {
-            NSAssert1(NO, @"Could not get uniform location for: %@", inName);
+            NSLog(@"Could not get uniform location for: %@", inName);
+            return(0);
             }
         
         AssertOpenGLNoError_();

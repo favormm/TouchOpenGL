@@ -87,10 +87,6 @@
     self.projectionTransform = Matrix4Identity;
     Vector4 theCameraVector = self.camera.position;
     
-    NSLog(@"%@", NSStringFromVector4(theCameraVector));
-
-
-
     Matrix4 theCameraTransform = Matrix4MakeTranslation(theCameraVector.x, theCameraVector.y, theCameraVector.z);
     Matrix4 theOrthoTransform = Matrix4Perspective(90, 1.0, 0.1, 100);
     self.projectionTransform = Matrix4Concat(theCameraTransform, theOrthoTransform);
@@ -137,49 +133,78 @@
 
     // #### Light sources
     theUniform = [theProgram uniformIndexForName:@"u_lightSource.ambient"];
-    Color4f theColor = self.light.ambientColor;
-    glUniform4fv(theUniform, 4, &theColor.r);
+    if (theUniform != 0)
+        {
+        Color4f theColor = self.light.ambientColor;
+        glUniform4fv(theUniform, 4, &theColor.r);
+        }
 
     theUniform = [theProgram uniformIndexForName:@"u_lightSource.diffuse"];
-    theColor = self.light.diffuseColor;
-    glUniform4fv(theUniform, 4, &theColor.r);
+    if (theUniform != 0)
+        {
+        Color4f theColor = self.light.diffuseColor;
+        glUniform4fv(theUniform, 4, &theColor.r);
+        }
 
     theUniform = [theProgram uniformIndexForName:@"u_lightSource.specular"];
-    theColor = self.light.specularColor;
-    glUniform4fv(theUniform, 4, &theColor.r);
+    if (theUniform != 0)
+        {
+        Color4f theColor = self.light.specularColor;
+        glUniform4fv(theUniform, 4, &theColor.r);
+        }
 
     theUniform = [theProgram uniformIndexForName:@"u_lightSource.position"];
-    Vector4 theVector = self.light.position;
-    glUniform4fv(theUniform, 4, &theVector.x);
+    if (theUniform != 0)
+        {
+        Vector4 theVector = self.light.position;
+        glUniform4fv(theUniform, 4, &theVector.x);
+        }
 
     theUniform = [theProgram uniformIndexForName:@"u_lightSource.halfVector"];
+    if (theUniform != 0)
+        {
 //    Vector3 theHalfVector = Vector3Add(Vector3Normalize(Vector3FromVector4(self.camera.position)), Vector3Normalize(Vector3FromVector4(self.light.position)));
-    Vector3 theHalfVector = Vector3Normalize(Vector3Add(Vector3FromVector4(self.camera.position), Vector3FromVector4(self.light.position)));
-    glUniform4f(theUniform, theHalfVector.x, theHalfVector.y, theHalfVector.z, 0);
-
+        Vector3 theHalfVector = Vector3Normalize(Vector3Add(Vector3FromVector4(self.camera.position), Vector3FromVector4(self.light.position)));
+        glUniform4f(theUniform, theHalfVector.x, theHalfVector.y, theHalfVector.z, 0);
+        }
 
 
     // #### Light model
-    theUniform = [theProgram uniformIndexForName:@"u_lightModel.ambient"];
-    glUniform4f(theUniform, 0.2, 0.2, 0.2, 1.0);
+    if (theUniform != 0)
+        {
+        theUniform = [theProgram uniformIndexForName:@"u_lightModel.ambient"];
+        glUniform4f(theUniform, 0.2, 0.2, 0.2, 1.0);
+        }
     
     // #### Material
     CMaterial *theMaterial = self.defaultMaterial;
     
     theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.ambient"];
-    theColor = theMaterial.ambientColor;
-    glUniform4fv(theUniform, 4, &theColor.r);
+    if (theUniform != 0)
+        {
+        Color4f theColor = theMaterial.ambientColor;
+        glUniform4fv(theUniform, 4, &theColor.r);
+        }
 
-    theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.diffuse"];
-    theColor = theMaterial.diffuseColor;
-    glUniform4fv(theUniform, 4, &theColor.r);
+    if (theUniform != 0)
+        {
+        theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.diffuse"];
+        Color4f theColor = theMaterial.diffuseColor;
+        glUniform4fv(theUniform, 4, &theColor.r);
+        }
 
-    theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.specular"];
-    theColor = theMaterial.specularColor;
-    glUniform4fv(theUniform, 4, &theColor.r);
+    if (theUniform != 0)
+        {
+        theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.specular"];
+        Color4f theColor = theMaterial.specularColor;
+        glUniform4fv(theUniform, 4, &theColor.r);
+        }
 
-    theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.shininess"];
-    glUniform1f(theUniform, theMaterial.shininess);    
+    if (theUniform != 0)
+        {
+        theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.shininess"];
+        glUniform1f(theUniform, theMaterial.shininess);    
+        }
 
     // #### Now render each geometry in mesh.
 	for (CGeometry *theGeometry in self.mesh.geometries)

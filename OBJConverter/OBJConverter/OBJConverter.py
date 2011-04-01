@@ -323,8 +323,8 @@ class Tool(object):
 					for N in xrange(0, 3):
 						theVertexBuffer = []
 						theVertexBuffer.append(list(thePolygon.positions[N]))
-						theVertexBuffer.append(list(thePolygon.texCoords[N] if N < len(thePolygon.texCoords) else (0.0,0.0)))
 						theVertexBuffer.append(list(thePolygon.normals[N] if N < len(thePolygon.normals) else (0.0, 0.0, 0.0)))
+#						theVertexBuffer.append(list(thePolygon.texCoords[N] if N < len(thePolygon.texCoords) else (0.0,0.0)))
 						theVertices.append(theVertexBuffer)
 
 				theBuffer = list(iter_flatten(theVertices))
@@ -340,16 +340,7 @@ class Tool(object):
 					type = 'GL_FLOAT',
 					normalized = False,
 					offset = 0,
-					stride = 8 * 4, # TODO hack
-					)
-
-				theTexCoords = dict(
-					buffer = theBuffer.signature.hexdigest(),
-					size = 2,
-					type = 'GL_FLOAT',
-					normalized = False,
-					offset = 3 * 4, # TODO hack
-					stride = 8 * 4, # TODO hack
+					stride = 6 * 4, # TODO hack
 					)
 
 				theNormals = dict(
@@ -357,9 +348,19 @@ class Tool(object):
 					size = 3,
 					type = 'GL_FLOAT',
 					normalized = False,
-					offset = 6 * 4, # TODO hack
-					stride = 8 * 4, # TODO hack
+					offset = 3 * 4, # TODO hack
+					stride = 6 * 4, # TODO hack
 					)
+
+# 				theTexCoords = dict(
+# 					buffer = theBuffer.signature.hexdigest(),
+# 					size = 2,
+# 					type = 'GL_FLOAT',
+# 					normalized = False,
+# 					offset = 3 * 4, # TODO hack
+# 					stride = 8 * 4, # TODO hack
+# 					)
+
 
 				#### Produce Indices buffer ############################
 
@@ -381,7 +382,7 @@ class Tool(object):
 				theGeometry = dict(
 					indices = theIndices,
 					positions = thePositions,
-					texCoords = theTexCoords,
+# 					texCoords = theTexCoords,
 					normals = theNormals,
 					)
 

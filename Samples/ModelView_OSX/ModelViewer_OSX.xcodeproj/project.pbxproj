@@ -13,9 +13,9 @@
 		453F9AB113425BF5000EF0F5 /* CLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 453F9AB013425BF5000EF0F5 /* CLight.m */; };
 		453F9AB513425C99000EF0F5 /* CCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 453F9AB413425C99000EF0F5 /* CCamera.m */; };
 		453F9AB813426889000EF0F5 /* Color4fValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 453F9AB713426889000EF0F5 /* Color4fValueTransformer.m */; };
-		457862A71345440D0014A20D /* 49421e4eb216cc74cb602d2225501a50.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 457862A41345440D0014A20D /* 49421e4eb216cc74cb602d2225501a50.vbo */; };
-		457862A81345440D0014A20D /* 85e7e43146bc76295d4a9b25ccef50d7.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 457862A51345440D0014A20D /* 85e7e43146bc76295d4a9b25ccef50d7.vbo */; };
-		457862A91345440D0014A20D /* teapot.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 457862A61345440D0014A20D /* teapot.model.plist */; };
+		457862AE134558340014A20D /* 02edc2837b569ac33d0709b313061e04.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 457862AB134558340014A20D /* 02edc2837b569ac33d0709b313061e04.vbo */; };
+		457862AF134558340014A20D /* 85e7e43146bc76295d4a9b25ccef50d7.vbo in Resources */ = {isa = PBXBuildFile; fileRef = 457862AC134558340014A20D /* 85e7e43146bc76295d4a9b25ccef50d7.vbo */; };
+		457862B0134558340014A20D /* teapot.model.plist in Resources */ = {isa = PBXBuildFile; fileRef = 457862AD134558340014A20D /* teapot.model.plist */; };
 		45991F3913414E9B00604591 /* CGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 45991EE213414E9B00604591 /* CGeometry.m */; };
 		45991F3A13414E9B00604591 /* CMaterial.m in Sources */ = {isa = PBXBuildFile; fileRef = 45991EE413414E9B00604591 /* CMaterial.m */; };
 		45991F3B13414E9B00604591 /* CMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 45991EE613414E9B00604591 /* CMesh.m */; };
@@ -80,9 +80,9 @@
 		453F9AB413425C99000EF0F5 /* CCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCamera.m; sourceTree = "<group>"; };
 		453F9AB613426889000EF0F5 /* Color4fValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color4fValueTransformer.h; sourceTree = "<group>"; };
 		453F9AB713426889000EF0F5 /* Color4fValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Color4fValueTransformer.m; sourceTree = "<group>"; };
-		457862A41345440D0014A20D /* 49421e4eb216cc74cb602d2225501a50.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 49421e4eb216cc74cb602d2225501a50.vbo; sourceTree = "<group>"; };
-		457862A51345440D0014A20D /* 85e7e43146bc76295d4a9b25ccef50d7.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 85e7e43146bc76295d4a9b25ccef50d7.vbo; sourceTree = "<group>"; };
-		457862A61345440D0014A20D /* teapot.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = teapot.model.plist; sourceTree = "<group>"; };
+		457862AB134558340014A20D /* 02edc2837b569ac33d0709b313061e04.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 02edc2837b569ac33d0709b313061e04.vbo; sourceTree = "<group>"; };
+		457862AC134558340014A20D /* 85e7e43146bc76295d4a9b25ccef50d7.vbo */ = {isa = PBXFileReference; lastKnownFileType = file; path = 85e7e43146bc76295d4a9b25ccef50d7.vbo; sourceTree = "<group>"; };
+		457862AD134558340014A20D /* teapot.model.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = teapot.model.plist; sourceTree = "<group>"; };
 		45991EE113414E9B00604591 /* CGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGeometry.h; sourceTree = "<group>"; };
 		45991EE213414E9B00604591 /* CGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGeometry.m; sourceTree = "<group>"; };
 		45991EE313414E9B00604591 /* CMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMaterial.h; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 		0625B3D71337F377003641E3 = {
 			isa = PBXGroup;
 			children = (
-				457862A31345440D0014A20D /* Teapot */,
+				457862AA134558340014A20D /* Teapot */,
 				45991FA213424B3300604591 /* Source */,
 				45991FAD13424B3900604591 /* Resources */,
 				45991EDF13414E9B00604591 /* Source */,
@@ -227,12 +227,12 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		457862A31345440D0014A20D /* Teapot */ = {
+		457862AA134558340014A20D /* Teapot */ = {
 			isa = PBXGroup;
 			children = (
-				457862A41345440D0014A20D /* 49421e4eb216cc74cb602d2225501a50.vbo */,
-				457862A51345440D0014A20D /* 85e7e43146bc76295d4a9b25ccef50d7.vbo */,
-				457862A61345440D0014A20D /* teapot.model.plist */,
+				457862AB134558340014A20D /* 02edc2837b569ac33d0709b313061e04.vbo */,
+				457862AC134558340014A20D /* 85e7e43146bc76295d4a9b25ccef50d7.vbo */,
+				457862AD134558340014A20D /* teapot.model.plist */,
 			);
 			name = Teapot;
 			path = "../Model Files/Teapot";
@@ -463,9 +463,9 @@
 				45991FB813424B3900604591 /* InfoPlist.strings in Resources */,
 				45991FB913424B3900604591 /* MainMenu.xib in Resources */,
 				45991FBA13424B3900604591 /* CModelDocument.xib in Resources */,
-				457862A71345440D0014A20D /* 49421e4eb216cc74cb602d2225501a50.vbo in Resources */,
-				457862A81345440D0014A20D /* 85e7e43146bc76295d4a9b25ccef50d7.vbo in Resources */,
-				457862A91345440D0014A20D /* teapot.model.plist in Resources */,
+				457862AE134558340014A20D /* 02edc2837b569ac33d0709b313061e04.vbo in Resources */,
+				457862AF134558340014A20D /* 85e7e43146bc76295d4a9b25ccef50d7.vbo in Resources */,
+				457862B0134558340014A20D /* teapot.model.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
