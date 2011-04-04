@@ -237,36 +237,38 @@
 	return(theVertexBuffer);
 	}
 
-- (CMaterial *)materialWithPropertyListRepresentation:(id)inRepresentation error:(NSError **)outError;
+- (CMaterial *)materialWithPropertyListRepresentation:(id)inRepresentation error:(NSError **)outError
     {
+    #pragma unused (outError)
+    
     CMaterial *theMaterial = [[[CMaterial alloc] init] autorelease];
 
 //    theMaterial.name = [inRepresentation objectForKey:@"name"];
-    id theObject = [inRepresentation objectForKey:@"ambientColor"];
+    id theObject = [(NSDictionary *)inRepresentation objectForKey:@"ambientColor"];
     if (theObject != NULL)
         {
         theMaterial.ambientColor = Color4fFromPropertyListRepresentation(theObject);
         }
 
-    theObject = [inRepresentation objectForKey:@"diffuseColor"];
+    theObject = [(NSDictionary *)inRepresentation objectForKey:@"diffuseColor"];
     if (theObject != NULL)
         {
         theMaterial.diffuseColor = Color4fFromPropertyListRepresentation(theObject);
         }
 
-    theObject = [inRepresentation objectForKey:@"specularColor"];
+    theObject = [(NSDictionary *)inRepresentation objectForKey:@"specularColor"];
     if (theObject != NULL)
         {
         theMaterial.specularColor = Color4fFromPropertyListRepresentation(theObject);
         }
 
-    theObject = [inRepresentation objectForKey:@"alpha"];
+    theObject = [(NSDictionary *)inRepresentation objectForKey:@"alpha"];
     if (theObject != NULL)
         {
         theMaterial.alpha = [theObject doubleValue];
         }
 
-    theObject = [inRepresentation objectForKey:@"texture"];
+    theObject = [(NSDictionary *)inRepresentation objectForKey:@"texture"];
     if (theObject != NULL)
         {
         NSString *thePath = [[self.URL URLByDeletingLastPathComponent] URLByAppendingPathComponent:theObject].path;

@@ -9,7 +9,7 @@
 #import "CModelViewController.h"
 
 #import "CInteractiveRendererView.h"
-//#import "CModelLoader.h"
+#import "CMeshLoader.h"
 #import "COBJRenderer.h"
 
 @interface CModelViewController () <UIActionSheetDelegate>
@@ -33,7 +33,18 @@
     {
     [super viewDidLoad];
 
+    CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
+    
+    
+    NSURL *theURL = [[NSBundle mainBundle] URLForResource:@"Liberty" withExtension:@"model.plist"];
+    
+    CMesh *theMesh = [theLoader loadMeshWithURL:theURL error:NULL];
+    
+
+
     COBJRenderer *theRenderer = [[[COBJRenderer alloc] init] autorelease];
+    theRenderer.mesh = theMesh;
+    
     
     self.rendererView.renderer = theRenderer;
     }
