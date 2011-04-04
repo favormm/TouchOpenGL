@@ -50,7 +50,7 @@
         defaultMaterial = [[CMaterial alloc] init];
         modelTransform = Matrix4Identity;
                 
-        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_lightSource", @"u_lightModel", @"s_texture0", NULL]] autorelease];
+        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_lightSource", @"u_lightModel", @"u_cameraPosition", @"s_texture0", NULL]] autorelease];
 		}
 	return(self);
 	}
@@ -159,28 +159,28 @@
     if (theUniform != 0)
         {
         Color4f theColor = self.light.ambientColor;
-        glUniform4fv(theUniform, 4, &theColor.r);
+        glUniform4fv(theUniform, 1, &theColor.r);
         }
 
     theUniform = [theProgram uniformIndexForName:@"u_lightSource.diffuse"];
     if (theUniform != 0)
         {
         Color4f theColor = self.light.diffuseColor;
-        glUniform4fv(theUniform, 4, &theColor.r);
+        glUniform4fv(theUniform, 1, &theColor.r);
         }
 
     theUniform = [theProgram uniformIndexForName:@"u_lightSource.specular"];
     if (theUniform != 0)
         {
         Color4f theColor = self.light.specularColor;
-        glUniform4fv(theUniform, 4, &theColor.r);
+        glUniform4fv(theUniform, 1, &theColor.r);
         }
 
     theUniform = [theProgram uniformIndexForName:@"u_lightSource.position"];
     if (theUniform != 0)
         {
         Vector4 theVector = self.light.position;
-        glUniform4fv(theUniform, 4, &theVector.x);
+        glUniform4fv(theUniform, 1, &theVector.x);
         }
 
     // #### Light model
@@ -205,27 +205,35 @@
         if (theUniform != 0)
             {
             Color4f theColor = theMaterial.ambientColor;
-            glUniform4fv(theUniform, 4, &theColor.r);
+            glUniform4fv(theUniform, 1, &theColor.r);
             }
 
         theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.diffuse"];
         if (theUniform != 0)
             {
             Color4f theColor = theMaterial.diffuseColor;
-            glUniform4fv(theUniform, 4, &theColor.r);
+            glUniform4fv(theUniform, 1, &theColor.r);
             }
 
         theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.specular"];
         if (theUniform != 0)
             {
             Color4f theColor = theMaterial.specularColor;
-            glUniform4fv(theUniform, 4, &theColor.r);
+            glUniform4fv(theUniform, 1, &theColor.r);
             }
 
         theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.shininess"];
         if (theUniform != 0)
             {
             glUniform1f(theUniform, theMaterial.shininess);    
+            }
+
+        theUniform = [theProgram uniformIndexForName:@"u_cameraPosition"];
+        if (theUniform != 0)
+            {
+            Vector4 theCameraPosition = self.camera.position;
+            
+            glUniform4fv(theUniform, 1, &theCameraPosition.x);
             }
 
 
