@@ -13,6 +13,7 @@ import re
 import shlex
 import sys
 import types
+import shutil
 
 from itertools import izip_longest
 
@@ -246,6 +247,9 @@ class Tool(object):
 		theParser = OBJParser(self.options.input)
 		theParser.main()
 
+		self.inputRoot = os.path.split(self.options.input.name)[0]
+		self.outputRoot = os.path.split(self.options.output.name)[0]
+
 		################################################################
 
 		d = {
@@ -307,11 +311,22 @@ class Tool(object):
 				if theMaterial.d or theMaterial.Tr:
 					m['alpha'] = theMaterial.d if theMaterial.d else theMaterial.Tr
 				if theMaterial.map_Kd:
+
+					theInputPath = os.path.join(self.inputRoot, theMaterial.map_Kd)
+					theOutputPath = os.path.join(self.outputRoot, os.path.split(theMaterial.map_Kd)[1])
+
+					shutil.copyfile(theInputPath, theOutputPath)
+
 					m['texture'] = os.path.split(theMaterial.map_Kd)[1]
+
+
 				d['materials'][theMaterial.name] = m
 
 		#### Process meshes ############################################
 		for theMaterial, thePolygons in thePolygonsByMaterial.items():
+
+			theHasTextureFlag = True if theMaterial.map_Kd else False
+
 
 			for theSubpolygons in grouper(10000, thePolygons):
 				theVertices = []
@@ -324,7 +339,8 @@ class Tool(object):
 						theVertexBuffer = []
 						theVertexBuffer.append(list(thePolygon.positions[N]))
 						theVertexBuffer.append(list(thePolygon.normals[N] if N < len(thePolygon.normals) else (0.0, 0.0, 0.0)))
-#						theVertexBuffer.append(list(thePolygon.texCoords[N] if N < len(thePolygon.texCoords) else (0.0,0.0)))
+						if theHasTextureFlag:
+							theVertexBuffer.append(list(thePolygon.texCoords[N] if N < len(thePolygon.texCoords) else (0.0,0.0)))
 						theVertices.append(theVertexBuffer)
 
 				theBuffer = list(iter_flatten(theVertices))
@@ -334,13 +350,19 @@ class Tool(object):
 
 				d['buffers'][theBuffer.signature.hexdigest()] = dict(target = 'GL_ARRAY_BUFFER', usage = 'GL_STATIC_DRAW', href = '%s.vbo' % (theBuffer.signature.hexdigest()))
 
+				theStride = 3 + 3
+				if theHasTextureFlag:
+					theStride += 2
+
+				theStride *= 4
+
 				thePositions = dict(
 					buffer = theBuffer.signature.hexdigest(),
 					size = 3,
 					type = 'GL_FLOAT',
 					normalized = False,
 					offset = 0,
-					stride = 6 * 4, # TODO hack
+					stride = theStride,
 					)
 
 				theNormals = dict(
@@ -349,18 +371,18 @@ class Tool(object):
 					type = 'GL_FLOAT',
 					normalized = False,
 					offset = 3 * 4, # TODO hack
-					stride = 6 * 4, # TODO hack
+					stride = theStride
 					)
 
-# 				theTexCoords = dict(
-# 					buffer = theBuffer.signature.hexdigest(),
-# 					size = 2,
-# 					type = 'GL_FLOAT',
-# 					normalized = False,
-# 					offset = 3 * 4, # TODO hack
-# 					stride = 8 * 4, # TODO hack
-# 					)
-
+				if theHasTextureFlag:
+					theTexCoords = dict(
+						buffer = theBuffer.signature.hexdigest(),
+						size = 2,
+						type = 'GL_FLOAT',
+						normalized = False,
+						offset = 6 * 4, # TODO hack
+						stride = theStride
+						)
 
 				#### Produce Indices buffer ############################
 
@@ -382,10 +404,12 @@ class Tool(object):
 				theGeometry = dict(
 					indices = theIndices,
 					positions = thePositions,
-# 					texCoords = theTexCoords,
 					normals = theNormals,
 					material = theMaterial.name
 					)
+
+				if theHasTextureFlag:
+					theGeometry['texCoords'] = theTexCoords
 
 				d['geometries'].append(theGeometry)
 
@@ -405,4 +429,4 @@ if __name__ == '__main__':
 		os.chdir(theRootDir)
 
 #	Tool().main(shlex.split('tool --input Input/Skull.obj --output Output/Skull.model.plist'))
-	Tool().main(shlex.split('tool --input Input/Skull2/Skull2.obj --output Output/Skull2.model.plist'))
+	Tool().main(shlex.split('tool --input /Users/schwa/Dropbox/Projects/OpenGL/Samples/OBJ\\ Files/Untested/Liberty/Liberty.obj --output /Users/schwa/Desktop/Test/Test.model.plist'))
