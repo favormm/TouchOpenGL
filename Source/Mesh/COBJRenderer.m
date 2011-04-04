@@ -260,7 +260,7 @@
                 {
                 NSAssert(theGeometry.texCoords != NULL, @"No tex coords.");
                 theAttributesIndex = [theProgram attributeIndexForName:@"a_texCoord"];        
-                [theGeometry.normals use:theAttributesIndex];
+                [theGeometry.texCoords use:theAttributesIndex];
                 glEnableVertexAttribArray(theAttributesIndex);
                 
         
