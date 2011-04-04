@@ -183,33 +183,51 @@
 
 - (BOOL)readFromURL:(NSURL *)absoluteURL ofType:(NSString *)typeName error:(NSError **)outError AVAILABLE_MAC_OS_X_VERSION_10_4_AND_LATER;
     {
+    NSLog(@"%@", typeName);
+    if ([typeName isEqualToString:@"obj"])
+        {
+    //    NSString *theInputFile = [NSString stringWithFormat:@"'%@'", absoluteURL.path];
+        char thePath[] = "/tmp/XXXXXXXX";
+        NSString *theOutputPath = [NSString stringWithFormat:@"%s/Test.model.plist", mkdtemp(thePath)];
+        NSString *theScript = [NSString stringWithFormat:@"OBJConverter --input '%@' --output '%@'", absoluteURL.path, theOutputPath];
 
-//    NSString *theInputFile = [NSString stringWithFormat:@"'%@'", absoluteURL.path];
-    
-    char thePath[] = "/tmp/XXXXXXXX";
-    
-    NSString *theOutputPath = [NSString stringWithFormat:@"%s/Test.model.plist", mkdtemp(thePath)];
-    
-    
-    NSString *theScript = [NSString stringWithFormat:@"OBJConverter --input '%@' --output '%@'", absoluteURL.path, theOutputPath];
-    
-    NSTask *theTask = [[[NSTask alloc] init] autorelease];
-    [theTask setLaunchPath:@"/bin/bash"];
-    [theTask setArguments:[NSArray arrayWithObjects:@"--login", @"-c", theScript, NULL]];
-    [theTask launch];
-    [theTask waitUntilExit];
-    NSLog(@"%d", [theTask terminationStatus]);
-    
-    
-    CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
-    NSURL *theURL = [NSURL fileURLWithPath:theOutputPath];
-    self.renderer.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
-    
-//    if (outError)
-//        {
-//        *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
-//        }
-    return(YES);
+        NSLog(@"Running script");
+        NSTask *theTask = [[NSTask alloc] init];
+        [theTask setLaunchPath:@"/bin/bash"];
+        [theTask setArguments:[NSArray arrayWithObjects:@"--login", @"-c", theScript, NULL]];
+        [theTask setStandardOutput:[NSFileHandle fileHandleWithNullDevice]];
+        [theTask setStandardError:[NSFileHandle fileHandleWithNullDevice]];
+        [theTask launch];
+        [theTask waitUntilExit];
+        NSLog(@"Script Returned: %d", [theTask terminationStatus]);
+        
+        [theTask release];
+        
+        CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
+        NSURL *theURL = [NSURL fileURLWithPath:theOutputPath];
+        self.renderer.mesh = [theLoader loadMeshWithURL:theURL error:NULL];
+        
+    //    if (outError)
+    //        {
+    //        *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
+    //        }
+        return(YES);
+        }
+    else if ([typeName isEqualToString:@"plist"])
+        {
+        CMeshLoader *theLoader = [[[CMeshLoader alloc] init] autorelease];
+        self.renderer.mesh = [theLoader loadMeshWithURL:absoluteURL error:NULL];
+        
+    //    if (outError)
+    //        {
+    //        *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
+    //        }
+        return(YES);
+        }
+    else
+        {
+        return(NO);
+        }
     }
 
 #pragma mark -

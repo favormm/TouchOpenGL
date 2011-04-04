@@ -14,13 +14,31 @@
 			<key>CFBundleTypeIconFile</key>
 			<string></string>
 			<key>CFBundleTypeName</key>
-			<string>DocumentType</string>
+			<string>obj</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>????</string>
 			</array>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>CModelDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>plist</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string></string>
+			<key>CFBundleTypeName</key>
+			<string>plist</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>????</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>NSDocumentClass</key>
 			<string>CModelDocument</string>
 		</dict>
