@@ -3,13 +3,6 @@ struct LightSourceParameters {
     vec4 diffuse;
     vec4 specular;
     vec4 position;
-//    vec3 spotDirection;
-//    float spotExponent;
-//    float spotCutoff; // (range: [0.0,90.0], 180.0)
-//    float spotCosCutoff; // (range: [1.0,0.0],-1.0)
-//    float constantAttenuation;
-//    float linearAttenuation;
-//    float quadraticAttenuation;
     };
 
 struct LightModelParameters {
@@ -17,7 +10,6 @@ struct LightModelParameters {
 	};
 
 struct MaterialParameters {
-//    vec4 emission;
     vec4 ambient;
     vec4 diffuse;
     vec4 specular;
@@ -26,9 +18,8 @@ struct MaterialParameters {
 
 // ######################################################################
 
-varying vec2 v_texture0;
-
 varying vec4 v_color;
+varying vec2 v_texture0;
 
 attribute vec4 a_position;
 attribute vec3 a_normal; // gl_Normal
