@@ -30,23 +30,36 @@
 
 - (CTexture *)textureWithImage:(NSImage *)inImage error:(NSError **)outError;
     {
+    NSAssert(inImage != NULL, @"Seriously, we need an image!");
+    
     CGImageRef theImageRef = [inImage CGImageForProposedRect:NULL context:NULL hints:NULL];
     
     CGColorSpaceRef theColorSpace = CGImageGetColorSpace(theImageRef);
     CGColorSpaceModel theModel = CGColorSpaceGetModel(theColorSpace);
-//        NSLog(@"Model: %d", theModel);
     CGImageAlphaInfo theAlphaInfo = CGImageGetAlphaInfo(theImageRef);
-//        NSLog(@"Alpha Info: %d", theAlphaInfo);
     size_t theBitsPerComponent = CGImageGetBitsPerComponent(theImageRef);
-//        NSLog(@"%d", theBitsPerComponent);
 
+    CGSize theSize = (CGSize){ floor(inImage.size.width), floor(inImage.size.width) };
 
     GLint theFormat = 0;
     GLint theType = 0;
 
     NSData *theData = NULL;
 
-    if (theModel == kCGColorSpaceModelRGB && theAlphaInfo == kCGImageAlphaLast && theBitsPerComponent == 8)
+    // Convert to power of 10
+    
+    CGSize theDesiredSize = (CGSize){
+        .width = exp2(ceil(log2(theSize.width))),
+        .height = exp2(ceil(log2(theSize.height))),
+        };
+    
+    theDesiredSize.width = theDesiredSize.height = MAX(theDesiredSize.width, theDesiredSize.height);
+    
+    NSLog(@"%g %g", theSize.width, theSize.height);
+    NSLog(@"%g %g", theDesiredSize.width, theDesiredSize.height);
+
+
+    if (theModel == kCGColorSpaceModelRGB && theAlphaInfo == kCGImageAlphaLast && theBitsPerComponent == 8 && CGSizeEqualToSize(theSize, theDesiredSize))
         {
         theFormat = GL_RGBA;
         theType = GL_UNSIGNED_BYTE;
@@ -56,15 +69,23 @@
         {
         theFormat = GL_RGBA;
         theType = GL_UNSIGNED_BYTE;
-
-        NSLog(@"Unknown model (%d), alpha (%d) or bits per component (%ld)", theModel, theAlphaInfo, theBitsPerComponent);
         
-        NSMutableData *theMutableData = [NSMutableData dataWithLength:inImage.size.width * 4 * inImage.size.height];
-        theData = theMutableData;
-        CGContextRef theImageContext = CGBitmapContextCreate([theMutableData mutableBytes], inImage.size.width, inImage.size.height, 8, inImage.size.width * 4, CGImageGetColorSpace(theImageRef), kCGImageAlphaPremultipliedLast);
+        theSize = theDesiredSize;
 
-        CGContextDrawImage(theImageContext, (CGRect){ .size = inImage.size }, theImageRef);
+        NSLog(@"Warning, converting image. Unknown model (%d), alpha (%d) or bits per component (%ld)", theModel, theAlphaInfo, theBitsPerComponent);
+        
+        NSMutableData *theMutableData = [NSMutableData dataWithLength:theSize.width * 4 * theSize.height];
+        theData = theMutableData;
+        
+        CGColorSpaceRef theColorspace = CGColorSpaceCreateDeviceRGB();
+        
+        CGContextRef theImageContext = CGBitmapContextCreate([theMutableData mutableBytes], theSize.width, theSize.height, 8, theSize.width * 4, theColorSpace, kCGImageAlphaPremultipliedLast);
+        NSAssert(theImageContext != NULL, @"Should not have null context");
+
+        CGContextDrawImage(theImageContext, (CGRect){ .size = theSize }, theImageRef);
         CGContextRelease(theImageContext);
+        
+        CGColorSpaceRelease(theColorspace);
         }
 
     if (theFormat != 0 && theType != 0)
@@ -88,7 +109,7 @@
 
         glBindTexture(GL_TEXTURE_2D, 0);
         
-        CTexture *theTexture = [[[CTexture alloc] initWithName:theName width:inImage.size.width height:inImage.size.height] autorelease];
+        CTexture *theTexture = [[[CTexture alloc] initWithName:theName width:theSize.width height:theSize.height] autorelease];
         return(theTexture);
         } 
 
