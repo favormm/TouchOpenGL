@@ -26,10 +26,13 @@ struct MaterialParameters {
 
 // ######################################################################
 
+varying vec2 v_texture0;
+
 varying vec4 v_color;
 
 attribute vec4 a_position;
 attribute vec3 a_normal; // gl_Normal
+attribute vec2 a_texCoord; // gl_Normal
 
 uniform mat4 u_modelViewMatrix;
 uniform mat4 u_projectionMatrix;
@@ -39,6 +42,8 @@ uniform LightSourceParameters u_lightSource; // gl_LightSource
 uniform LightModelParameters u_lightModel; // gl_LightModel
 uniform MaterialParameters u_frontMaterial; // gl_FrontMaterial
 uniform vec4 u_cameraPosition;
+
+uniform sampler2D s_texture0;
 
 void main()
 {
@@ -68,20 +73,9 @@ void main()
 
     mat4 theModelViewProjectionMatrix = u_projectionMatrix * u_modelViewMatrix;
     gl_Position = theModelViewProjectionMatrix * a_position;
+
+    v_texture0 = a_texCoord;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 
-//attribute vec4 a_position;
-//attribute vec2 a_texCoord;
-//
-//uniform mat4 u_modelViewMatrix;
-//uniform mat4 u_projectionMatrix;
-//
-//varying vec2 v_texture0;
-//
-//void main()
-//    {
-//    v_texture0 = a_texCoord;
-//    gl_Position = u_modelViewMatrix * u_projectionMatrix * a_position;
-//    }
+

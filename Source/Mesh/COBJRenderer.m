@@ -50,7 +50,7 @@
         defaultMaterial = [[CMaterial alloc] init];
         modelTransform = Matrix4Identity;
                 
-        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_lightSource", @"u_lightModel", NULL]] autorelease];
+        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_lightSource", @"u_lightModel", @"s_texture0", NULL]] autorelease];
 		}
 	return(self);
 	}
@@ -190,7 +190,6 @@
         glUniform4f(theUniform, 0.2, 0.2, 0.2, 1.0);
         }
     
-
     // #### Now render each geometry in mesh.
 	for (CGeometry *theGeometry in self.mesh.geometries)
 		{
@@ -200,6 +199,7 @@
             {
             theMaterial = self.defaultMaterial;
             }
+
         
         theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.ambient"];
         if (theUniform != 0)
@@ -208,23 +208,23 @@
             glUniform4fv(theUniform, 4, &theColor.r);
             }
 
+        theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.diffuse"];
         if (theUniform != 0)
             {
-            theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.diffuse"];
             Color4f theColor = theMaterial.diffuseColor;
             glUniform4fv(theUniform, 4, &theColor.r);
             }
 
+        theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.specular"];
         if (theUniform != 0)
             {
-            theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.specular"];
             Color4f theColor = theMaterial.specularColor;
             glUniform4fv(theUniform, 4, &theColor.r);
             }
 
+        theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.shininess"];
         if (theUniform != 0)
             {
-            theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.shininess"];
             glUniform1f(theUniform, theMaterial.shininess);    
             }
 
@@ -236,15 +236,35 @@
             {
             // Update position attribute
             NSAssert(theGeometry.positions != NULL, @"No positions.");
-            GLuint thePositionsAttributeIndex = [theProgram attributeIndexForName:@"a_position"];        
-            [theGeometry.positions use:thePositionsAttributeIndex];
-            glEnableVertexAttribArray(thePositionsAttributeIndex);
+            GLuint theAttributesIndex = [theProgram attributeIndexForName:@"a_position"];        
+            [theGeometry.positions use:theAttributesIndex];
+            glEnableVertexAttribArray(theAttributesIndex);
 
             // Update normal attribute
             NSAssert(theGeometry.normals != NULL, @"No normals.");
-            GLuint theNormalsAttributeIndex = [theProgram attributeIndexForName:@"a_normal"];        
-            [theGeometry.normals use:theNormalsAttributeIndex];
-            glEnableVertexAttribArray(theNormalsAttributeIndex);
+            theAttributesIndex = [theProgram attributeIndexForName:@"a_normal"];        
+            [theGeometry.normals use:theAttributesIndex];
+            glEnableVertexAttribArray(theAttributesIndex);
+
+
+            // Update texcoord attribute
+            if (theMaterial.texture != NULL)
+                {
+                NSAssert(theGeometry.texCoords != NULL, @"No tex coords.");
+                theAttributesIndex = [theProgram attributeIndexForName:@"a_texCoord"];        
+                [theGeometry.normals use:theAttributesIndex];
+                glEnableVertexAttribArray(theAttributesIndex);
+                
+        
+                theUniform = [theProgram uniformIndexForName:@"s_texture0"];
+                if (theUniform != 0)
+                    {
+                    // ... // Bind the texture
+                    glActiveTexture(GL_TEXTURE0);
+                    glBindTexture(GL_TEXTURE_2D, theMaterial.texture.name);
+                    glUniform1i(theUniform, 0);
+                    }
+                }
             
             theGeometry.vertexArrayBuffer.populated = YES;
 
