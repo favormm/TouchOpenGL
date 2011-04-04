@@ -14,7 +14,7 @@
 #import "CVertexBuffer_PropertyListRepresentation.h"
 #import "NSData_NumberExtensions.h"
 #import "CMaterial.h"
-
+#import "CImageTextureLoader.h"
 
 #define NO_DEFAULTS 1
 
@@ -258,6 +258,20 @@
     if (theObject != NULL)
         {
         theMaterial.specularColor = Color4fFromPropertyListRepresentation(theObject);
+        }
+
+    theObject = [inRepresentation objectForKey:@"alpha"];
+    if (theObject != NULL)
+        {
+        theMaterial.alpha = [theObject doubleValue];
+        }
+
+    theObject = [inRepresentation objectForKey:@"texture"];
+    if (theObject != NULL)
+        {
+        NSString *thePath = [[self.URL URLByDeletingLastPathComponent] URLByAppendingPathComponent:theObject].path;
+        theMaterial.texture = [[CImageTextureLoader textureLoader] textureWithPath:thePath error:NULL];
+        NSLog(@"%@", theMaterial.texture);
         }
 
 
