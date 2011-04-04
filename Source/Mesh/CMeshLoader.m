@@ -13,6 +13,8 @@
 #import "CVertexBufferReference.h"
 #import "CVertexBuffer_PropertyListRepresentation.h"
 #import "NSData_NumberExtensions.h"
+#import "CMaterial.h"
+
 
 #define NO_DEFAULTS 1
 
@@ -21,9 +23,11 @@
 @property (readwrite, nonatomic, retain) NSDictionary *modelDictioary;
 @property (readwrite, nonatomic, retain) CMesh *mesh;
 @property (readwrite, nonatomic, retain) NSMutableDictionary *buffers;
+@property (readwrite, nonatomic, retain) NSMutableDictionary *materials;
 
 - (CVertexBufferReference *)vertexBufferReferenceWithDictionary:(NSDictionary *)inRepresentation error:(NSError **)outError;
 - (CVertexBuffer *)vertexBufferWithPropertyListRepresentation:(id)inRepresentation error:(NSError **)outError;
+- (CMaterial *)materialWithPropertyListRepresentation:(id)inRepresentation error:(NSError **)outError;
 
 @end
 
@@ -35,6 +39,7 @@
 @synthesize modelDictioary;
 @synthesize mesh;
 @synthesize buffers;
+@synthesize materials;
 
 - (void)dealloc
     {
@@ -51,7 +56,6 @@
         {
         return(NULL);
         }
-    
     
 	self.mesh = [[[CMesh alloc] init] autorelease];
 
@@ -76,6 +80,20 @@
 		}
 
 
+    // #### Materials
+    self.materials = [NSMutableDictionary dictionary];
+	NSDictionary *theMaterialsDictionary = [self.modelDictioary objectForKey:@"materials"];
+	for (NSString *theName in theMaterialsDictionary)
+		{
+		NSDictionary *theMaterialDictionary = [theMaterialsDictionary objectForKey:theName];
+		
+		CMaterial *theMaterial = [self materialWithPropertyListRepresentation:theMaterialDictionary error:NULL];
+        theMaterial.name = theName;
+		
+		[self.materials setObject:theMaterial forKey:theName];
+		}
+
+
 	// #### Buffers
 	self.buffers = [NSMutableDictionary dictionary];
 	NSDictionary *theBuffersDictionary = [self.modelDictioary objectForKey:@"buffers"];
@@ -94,6 +112,10 @@
 		{
 		CGeometry *theGeometry = [[[CGeometry alloc] init] autorelease];
 		
+        NSString *theMaterialName = [theGeometryDictionary objectForKey:@"material"];
+        CMaterial *theMaterial = [self.materials objectForKey:theMaterialName];
+        theGeometry.material = theMaterial;
+        
 		for (NSString *theKey in [NSArray arrayWithObjects:@"indices", @"positions", @"normals", @"texCoords", NULL])
 			{
 			NSDictionary *theVerticesDictionary = [theGeometryDictionary objectForKey:theKey];
@@ -175,7 +197,6 @@
 
 - (CVertexBuffer *)vertexBufferWithPropertyListRepresentation:(id)inRepresentation error:(NSError **)outError;
     {
-    
     NSURL *theDirectoryURL = [self.URL URLByDeletingLastPathComponent];
     
     NSString *theString = [(NSDictionary *)inRepresentation objectForKey:@"target"];
@@ -216,6 +237,31 @@
 	return(theVertexBuffer);
 	}
 
+- (CMaterial *)materialWithPropertyListRepresentation:(id)inRepresentation error:(NSError **)outError;
+    {
+    CMaterial *theMaterial = [[[CMaterial alloc] init] autorelease];
 
+//    theMaterial.name = [inRepresentation objectForKey:@"name"];
+    id theObject = [inRepresentation objectForKey:@"ambientColor"];
+    if (theObject != NULL)
+        {
+        theMaterial.ambientColor = Color4fFromPropertyListRepresentation(theObject);
+        }
+
+    theObject = [inRepresentation objectForKey:@"diffuseColor"];
+    if (theObject != NULL)
+        {
+        theMaterial.diffuseColor = Color4fFromPropertyListRepresentation(theObject);
+        }
+
+    theObject = [inRepresentation objectForKey:@"specularColor"];
+    if (theObject != NULL)
+        {
+        theMaterial.specularColor = Color4fFromPropertyListRepresentation(theObject);
+        }
+
+
+    return(theMaterial);
+    }
 
 @end
