@@ -49,7 +49,6 @@
         defaultMaterial = [[CMaterial alloc] init];
         modelTransform = Matrix4Identity;
                 
-        self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_lightSource", @"u_lightModel", @"u_cameraPosition", @"s_texture0", NULL]] autorelease];
 		}
 	return(self);
 	}
@@ -71,9 +70,60 @@
     [super dealloc];
     }
 
+- (void)setup
+    {
+    [super setup];
+    //
+    self.lightingProgram = [[[CProgram alloc] initWithName:@"Lighting" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_normal", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", @"u_lightSource", @"u_lightModel", @"u_cameraPosition", @"s_texture0", NULL]] autorelease];
+
+    // #### Set up lighting
+	CProgram *theProgram = self.lightingProgram;
+	glUseProgram(theProgram.name);
+
+    GLuint theUniform = 0;
+
+    // #### Light sources
+    theUniform = [theProgram uniformIndexForName:@"u_lightSource.ambient"];
+    if (theUniform != 0)
+        {
+        Color4f theColor = self.light.ambientColor;
+        glUniform4fv(theUniform, 1, &theColor.r);
+        }
+
+    theUniform = [theProgram uniformIndexForName:@"u_lightSource.diffuse"];
+    if (theUniform != 0)
+        {
+        Color4f theColor = self.light.diffuseColor;
+        glUniform4fv(theUniform, 1, &theColor.r);
+        }
+
+    theUniform = [theProgram uniformIndexForName:@"u_lightSource.specular"];
+    if (theUniform != 0)
+        {
+        Color4f theColor = self.light.specularColor;
+        glUniform4fv(theUniform, 1, &theColor.r);
+        }
+
+    theUniform = [theProgram uniformIndexForName:@"u_lightSource.position"];
+    if (theUniform != 0)
+        {
+        Vector4 theVector = self.light.position;
+        glUniform4fv(theUniform, 1, &theVector.x);
+        }
+
+    // #### Light model
+    if (theUniform != 0)
+        {
+        theUniform = [theProgram uniformIndexForName:@"u_lightModel.ambient"];
+        glUniform4f(theUniform, 0.2, 0.2, 0.2, 1.0);
+        }
+
+    }
+
 - (void)prerender
     {
     [super prerender];
+
 
     const float kSinMinus60Degrees = -0.866025404f;
     const float kCosMinus60Degrees = 0.5f;
@@ -148,42 +198,6 @@
     glUniformMatrix4fv(theUniform, 1, NO, &theProjectionTransform.m[0][0]);
 
     AssertOpenGLNoError_();
-
-    // #### Light sources
-    theUniform = [theProgram uniformIndexForName:@"u_lightSource.ambient"];
-    if (theUniform != 0)
-        {
-        Color4f theColor = self.light.ambientColor;
-        glUniform4fv(theUniform, 1, &theColor.r);
-        }
-
-    theUniform = [theProgram uniformIndexForName:@"u_lightSource.diffuse"];
-    if (theUniform != 0)
-        {
-        Color4f theColor = self.light.diffuseColor;
-        glUniform4fv(theUniform, 1, &theColor.r);
-        }
-
-    theUniform = [theProgram uniformIndexForName:@"u_lightSource.specular"];
-    if (theUniform != 0)
-        {
-        Color4f theColor = self.light.specularColor;
-        glUniform4fv(theUniform, 1, &theColor.r);
-        }
-
-    theUniform = [theProgram uniformIndexForName:@"u_lightSource.position"];
-    if (theUniform != 0)
-        {
-        Vector4 theVector = self.light.position;
-        glUniform4fv(theUniform, 1, &theVector.x);
-        }
-
-    // #### Light model
-    if (theUniform != 0)
-        {
-        theUniform = [theProgram uniformIndexForName:@"u_lightModel.ambient"];
-        glUniform4f(theUniform, 0.2, 0.2, 0.2, 1.0);
-        }
     
     // #### Now render each geometry in mesh.
 	for (CGeometry *theGeometry in self.mesh.geometries)
@@ -230,7 +244,6 @@
             glUniform4fv(theUniform, 1, &theCameraPosition.x);
             }
 
-
         if (theMaterial.texture != NULL)
             {
             theUniform = [theProgram uniformIndexForName:@"s_texture0"];
@@ -259,7 +272,6 @@
             theAttributesIndex = [theProgram attributeIndexForName:@"a_normal"];        
             [theGeometry.normals use:theAttributesIndex];
             glEnableVertexAttribArray(theAttributesIndex);
-
 
             // Update texcoord attribute
             if (theMaterial.texture != NULL)
