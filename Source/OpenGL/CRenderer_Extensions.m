@@ -120,6 +120,7 @@
 
     CProgram *theProgram = [self.library programForName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL] error:NULL];
 
+    // TODO should just have a static unit cube and then scale it with a matrix...
     Vector3 theVertices[] = {
         { .x = v1.x, .y = v1.y, .z = v1.z }, { .x = v2.x, .y = v1.y, .z = v1.z },
         { .x = v1.x, .y = v2.y, .z = v1.z }, { .x = v2.x, .y = v2.y, .z = v1.z },
@@ -139,6 +140,7 @@
 
         };
 
+    // TODO - can't get glVertexAttrib4f to work.
     Color4ub theColors[] = { 
         { 0xFF, 0xFF, 0xFF, 0xFF, },
         { 0xFF, 0xFF, 0xFF, 0xFF, },
