@@ -76,7 +76,7 @@ extern NSString *NSStringFromGLenum(GLenum inEnum);
 
 #if TARGET_OS_IPHONE == 1
 
-#define AssertOpenGLValidContext_() NSAssert(CGLGetCurrentContext() != NULL, @"No current context")
+#define AssertOpenGLValidContext_() NSAssert([EAGLContext currentContext] != NULL, @"No current context")
 
 #else
 

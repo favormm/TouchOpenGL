@@ -273,8 +273,13 @@
         {
         NSURL *theURL = [[self.URL URLByDeletingLastPathComponent] URLByAppendingPathComponent:theObject];
         
+        #if TARGET_OS_IPHONE
+        UIImage *theImage = [UIImage imageWithContentsOfFile:theURL.path];
+        CGImageRef theImageRef = [theImage CGImage];
+        #else
         NSImage *theImage = [[[NSImage alloc] initWithContentsOfURL:theURL] autorelease];
         CGImageRef theImageRef = [theImage CGImageForProposedRect:NULL context:NULL hints:NULL];
+        #endif
 
         CLazyTexture *theTexture = [[[CLazyTexture alloc] initWIthImage:theImageRef] autorelease];
         theMaterial.texture = theTexture;
