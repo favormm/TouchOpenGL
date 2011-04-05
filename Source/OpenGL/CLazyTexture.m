@@ -26,6 +26,9 @@
 @implementation CLazyTexture
 
 @synthesize image;
+@synthesize flip;
+@synthesize generateMipMap;
+
 @synthesize loaded;
 
 //@synthesize name;
@@ -39,6 +42,9 @@
 		{
         CFRetain(inImage);
         image = inImage;
+        
+        flip = YES;
+        generateMipMap = NO;
 		}
 	return(self);
 	}
@@ -129,6 +135,12 @@
         CGContextRef theImageContext = CGBitmapContextCreate([theMutableData mutableBytes], theDesiredSize.width, theDesiredSize.height, 8, theDesiredSize.width * 4, theColorSpace, kCGImageAlphaPremultipliedLast);
         NSAssert(theImageContext != NULL, @"Should not have null context");
 
+        if (self.flip)
+            {
+            CGContextTranslateCTM(theImageContext, 0, theDesiredSize.height);
+            CGContextScaleCTM(theImageContext, 1, -1);
+            }
+        
         CGContextDrawImage(theImageContext, (CGRect){ .size = { .width = theDesiredSize.width, .height = theDesiredSize.height } }, inImage);
         CGContextRelease(theImageContext);
         
@@ -149,7 +161,10 @@
 
         glTexImage2D(GL_TEXTURE_2D, 0, theFormat, (GLsizei)theDesiredSize.width, (GLsizei)theDesiredSize.height, 0, theFormat, theType, theData.bytes);
 
-        glGenerateMipmap(GL_TEXTURE_2D);
+        if (self.generateMipMap == YES)
+            {
+            glGenerateMipmap(GL_TEXTURE_2D);
+            }
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

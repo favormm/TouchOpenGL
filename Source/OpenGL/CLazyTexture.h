@@ -13,7 +13,10 @@
     
 }
 
+
 @property (readonly, nonatomic, assign) CGImageRef image;
+@property (readonly, nonatomic, assign) BOOL flip;
+@property (readonly, nonatomic, assign) BOOL generateMipMap;
 
 - (id)initWIthImage:(CGImageRef)inImage;
 
