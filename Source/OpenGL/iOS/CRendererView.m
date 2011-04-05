@@ -19,7 +19,6 @@
 @property (readonly, nonatomic, retain) CAEAGLLayer *EAGLLayer;
 
 - (void)setup;
-- (void)setupFramebuffers;
 - (void)tick:(id)inSender;
 @end
 
@@ -97,30 +96,6 @@
     [self render];
     }
 
-- (void)setup
-    {
-    // Get the layer
-    self.EAGLLayer.opaque = TRUE;
-    self.EAGLLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
-        [NSNumber numberWithBool:FALSE], kEAGLDrawablePropertyRetainedBacking,
-        kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat,
-        nil];
-
-    if (context == NULL)
-        {
-        context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-
-        if (!context || ![EAGLContext setCurrentContext:context])
-            {
-            NSLog(@"ERROR");
-            return;
-            }
-        
-        AssertOpenGLNoError_();
-        }
-        
-    }
-
 #pragma mark -
 
 - (void)setRenderer:(CRenderer *)inRenderer;
@@ -132,11 +107,8 @@
         //
         if (renderer != NULL)
             {
-//            [self setup];
             [self startAnimation];
             }
-
-
         }
     }
 
@@ -182,16 +154,6 @@
         }
     }
 
-- (void)tick:(id)inSender
-    {
-    #pragma unused (inSender)
-    
-    if (self.animating)
-        {
-        [self render];
-        }
-    }
-
 - (void)render
     {
     NSAssert(self.renderer != NULL, @"No renderer");
@@ -201,8 +163,6 @@
     if (self.context == NULL)
         {
         [self setup];
-        [EAGLContext setCurrentContext:self.context];
-        [self setupFramebuffers];
         
         [self.renderer setup];
 
@@ -239,8 +199,24 @@
     
 #pragma mark -
 
-- (void)setupFramebuffers
+- (void)setup
     {
+    // Get the layer
+    self.EAGLLayer.opaque = TRUE;
+    self.EAGLLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithBool:FALSE], kEAGLDrawablePropertyRetainedBacking,
+        kEAGLColorFormatRGBA8, kEAGLDrawablePropertyColorFormat,
+        nil];
+
+    if (context == NULL)
+        {
+        self.context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
+        }
+
+    [EAGLContext setCurrentContext:self.context];
+
+    AssertOpenGLValidContext_();
+
     // Create frame buffer
     self.frameBuffer = [[[CFrameBuffer alloc] init] autorelease];
     
@@ -268,5 +244,14 @@
         }
     }
 
+- (void)tick:(id)inSender
+    {
+    #pragma unused (inSender)
+    
+    if (self.animating)
+        {
+        [self render];
+        }
+    }
 
 @end
