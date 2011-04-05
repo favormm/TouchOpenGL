@@ -34,8 +34,6 @@ uniform LightModelParameters u_lightModel; // gl_LightModel
 uniform MaterialParameters u_frontMaterial; // gl_FrontMaterial
 uniform vec4 u_cameraPosition;
 
-uniform sampler2D s_texture0;
-
 void main()
 {
     // Work around for no gl_NormalMatrix from http://glosx.blogspot.com/2008/03/glnormalmatrix.html
@@ -57,7 +55,6 @@ void main()
     vec3 h = normalize(theLightDirection + theViewDirection);
     float NdotHV = max(dot(theNormal, h), 0.0);
     vec4 specular = u_frontMaterial.specular * u_lightSource.specular * pow(NdotHV,u_frontMaterial.shininess);
-
 
     v_color = NdotL * theDiffuseTerm + globalAmbient + ambient + specular;
     v_color.a = 1.0;

@@ -14,7 +14,6 @@
 #import "CProgram.h"
 #import "Color_OpenGLExtensions.h"
 #import "CTexture.h"
-#import "CImageTextureLoader.h"
 #import "CMaterial.h"
 #import "CRenderer_Extensions.h"
 #import "CMesh.h"
@@ -258,6 +257,8 @@
             // Update texcoord attribute
             if (theMaterial.texture != NULL)
                 {
+                NSAssert(theMaterial.texture.isValid == YES, @"Invalid texture");
+                
                 NSAssert(theGeometry.texCoords != NULL, @"No tex coords.");
                 theAttributesIndex = [theProgram attributeIndexForName:@"a_texCoord"];        
                 [theGeometry.texCoords use:theAttributesIndex];
@@ -267,11 +268,13 @@
                 theUniform = [theProgram uniformIndexForName:@"s_texture0"];
                 if (theUniform != 0)
                     {
-                    // ... // Bind the texture
                     glActiveTexture(GL_TEXTURE0);
+//                    NSAssert(theMaterial.texture.name != 0, @"No texture to bind");
                     glBindTexture(GL_TEXTURE_2D, theMaterial.texture.name);
                     glUniform1i(theUniform, 0);
                     }
+                    
+                AssertOpenGLNoError_();
                 }
             
             theGeometry.vertexArrayBuffer.populated = YES;

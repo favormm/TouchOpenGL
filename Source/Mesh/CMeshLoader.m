@@ -14,7 +14,7 @@
 #import "CVertexBuffer_PropertyListRepresentation.h"
 #import "NSData_NumberExtensions.h"
 #import "CMaterial.h"
-#import "CImageTextureLoader.h"
+#import "CLazyTexture.h"
 
 #define NO_DEFAULTS 1
 
@@ -271,9 +271,13 @@
     theObject = [(NSDictionary *)inRepresentation objectForKey:@"texture"];
     if (theObject != NULL)
         {
-        NSString *thePath = [[self.URL URLByDeletingLastPathComponent] URLByAppendingPathComponent:theObject].path;
-        theMaterial.texture = [[CImageTextureLoader textureLoader] textureWithPath:thePath error:NULL];
-        NSLog(@"%@", theMaterial.texture);
+        NSURL *theURL = [[self.URL URLByDeletingLastPathComponent] URLByAppendingPathComponent:theObject];
+        
+        NSImage *theImage = [[[NSImage alloc] initWithContentsOfURL:theURL] autorelease];
+        CGImageRef theImageRef = [theImage CGImageForProposedRect:NULL context:NULL hints:NULL];
+
+        CLazyTexture *theTexture = [[[CLazyTexture alloc] initWIthImage:theImageRef] autorelease];
+        theMaterial.texture = theTexture;
         }
 
 
