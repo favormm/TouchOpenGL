@@ -32,8 +32,6 @@
         objc_setAssociatedObject(self, &kKey, theLibrary, OBJC_ASSOCIATION_RETAIN);
         }
     return(theLibrary);
-    
-    
     #endif
     }
 
@@ -44,7 +42,7 @@
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-    CProgram *theProgram = [self.library programForName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL] error:NULL];
+    CProgram *theProgram = [self.library programForName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL] error:NULL];
 
     const GLfloat kLength = 10000.0;
 
@@ -67,7 +65,7 @@
         };
 
     // Use shader program
-
+    [theProgram use];
     
     // Update position attribute
     GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"a_position"];        
@@ -82,8 +80,6 @@
     glVertexAttribPointer(theColorsAttributeIndex, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, theColors);
 
     AssertOpenGLNoError_();
-
-    glUseProgram(theProgram.name);
 
     // Update transform uniform
     GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
@@ -122,7 +118,7 @@
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-    CProgram *theProgram = [self.library programForName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL] error:NULL];
+    CProgram *theProgram = [self.library programForName:@"Flat" attributeNames:[NSArray arrayWithObjects:@"a_position", @"a_color", NULL] uniformNames:[NSArray arrayWithObjects:@"u_modelViewMatrix", @"u_projectionMatrix", NULL] error:NULL];
 
     Vector3 theVertices[] = {
         { .x = v1.x, .y = v1.y, .z = v1.z }, { .x = v2.x, .y = v1.y, .z = v1.z },
@@ -171,7 +167,7 @@
         };
 
     // Use shader program
-
+    [theProgram use];
     
     // Update position attribute
     GLuint theVertexAttributeIndex = [theProgram attributeIndexForName:@"a_position"];        
@@ -184,11 +180,10 @@
     GLuint theColorsAttributeIndex = [theProgram attributeIndexForName:@"a_color"];        
     glEnableVertexAttribArray(theColorsAttributeIndex);
     glVertexAttribPointer(theColorsAttributeIndex, 4, GL_UNSIGNED_BYTE, GL_TRUE, 0, theColors);
-//    glVertexAttrib4f(theColorsAttributeIndex, 0.0, 1.0, 0.0, 1.0);
+//    glVertexAttrib4f(theColorsAttributeIndex, 1.0, 1.0, 1.0, 1.0);
 
     AssertOpenGLNoError_();
 
-    glUseProgram(theProgram.name);
 
     // Update transform uniform
     GLuint theModelViewMatrixUniform = [theProgram uniformIndexForName:@"u_modelViewMatrix"];
