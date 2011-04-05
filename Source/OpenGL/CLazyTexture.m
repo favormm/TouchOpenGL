@@ -66,9 +66,14 @@
     return([super name]);
     }
 
-//- (SIntSize)size
-//    {
-//    }
+- (SIntSize)size
+    {
+    if (self.loaded == NO)
+        {
+        [self loadWithImage:self.image];
+        }
+    return([super size]);
+    }
 
 - (GLenum)internalFormat
     {
@@ -93,11 +98,9 @@
     NSAssert(inImage != NULL, @"Seriously, we need an image!");
     
     CGColorSpaceRef theColorSpace = CGImageGetColorSpace(inImage);
-    CGColorSpaceModel theModel = CGColorSpaceGetModel(theColorSpace);
-    CGImageAlphaInfo theAlphaInfo = CGImageGetAlphaInfo(inImage);
-    size_t theBitsPerComponent = CGImageGetBitsPerComponent(inImage);
-
-
+    const CGColorSpaceModel theModel = CGColorSpaceGetModel(theColorSpace);
+    const CGImageAlphaInfo theAlphaInfo = CGImageGetAlphaInfo(inImage);
+    const size_t theBitsPerComponent = CGImageGetBitsPerComponent(inImage);
 
     const CGSize theSize = (CGSize){ floor(CGImageGetWidth(inImage)), floor(CGImageGetHeight(inImage)) };
 
@@ -106,12 +109,14 @@
 
     NSData *theData = NULL;
 
-    // Convert to power of 2    
+    // Convert to power of 2
+    // TODO conditionalize
     SIntSize theDesiredSize = {
         .width = exp2(ceil(log2(theSize.width))),
         .height = exp2(ceil(log2(theSize.height))),
         };
     
+    // TODO conditionalize
     theDesiredSize.width = theDesiredSize.height = MAX(theDesiredSize.width, theDesiredSize.height);
     
     if (theModel == kCGColorSpaceModelRGB && theAlphaInfo == kCGImageAlphaLast && theBitsPerComponent == 8 && theSize.width == theDesiredSize.width && theSize.height == theDesiredSize.height)
@@ -183,7 +188,5 @@
         
     self.loaded = YES;
     }
-
-
 
 @end
