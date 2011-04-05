@@ -123,6 +123,7 @@
 //    NSLog(@"PINCH");
     
     self.scale += inGestureRecognizer.velocity / 10;
+    self.scale = MAX(self.scale, 0.01);
     }
 
 - (void)pan:(UIPanGestureRecognizer *)inGestureRecognizer
