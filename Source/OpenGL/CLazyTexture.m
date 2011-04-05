@@ -164,6 +164,11 @@
         
         glBindTexture(GL_TEXTURE_2D, theName);
 
+        // Configure texture...
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+        // Update texture data...
         glTexImage2D(GL_TEXTURE_2D, 0, theFormat, (GLsizei)theDesiredSize.width, (GLsizei)theDesiredSize.height, 0, theFormat, theType, theData.bytes);
 
         if (self.generateMipMap == YES)
@@ -171,8 +176,6 @@
             glGenerateMipmap(GL_TEXTURE_2D);
             }
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
         AssertOpenGLNoError_();
 
