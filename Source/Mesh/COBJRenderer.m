@@ -120,8 +120,6 @@
 - (void)render
     {
     AssertOpenGLNoError_();
-    
-    
 
     Matrix4 theModelTransform = modelTransform;
     Matrix4 theProjectionTransform = self.projectionTransform;
@@ -131,10 +129,8 @@
 	Vector3 P1 = self.mesh.p1;
 	Vector3 P2 = self.mesh.p2;
 
-
 	Vector3 theCenter = self.mesh.center;
 	theModelTransform = Matrix4Concat(Matrix4MakeTranslation(-theCenter.x, -theCenter.y, -theCenter.z), theModelTransform);
-
 
     [self drawBoundingBox:theModelTransform v1:P1 v2:P2];
 
@@ -198,7 +194,6 @@
             {
             theMaterial = self.defaultMaterial;
             }
-
         
         theUniform = [theProgram uniformIndexForName:@"u_frontMaterial.ambient"];
         if (theUniform != 0)
@@ -236,6 +231,18 @@
             }
 
 
+        if (theMaterial.texture != NULL)
+            {
+            theUniform = [theProgram uniformIndexForName:@"s_texture0"];
+            if (theUniform != 0)
+                {
+                glActiveTexture(GL_TEXTURE0);
+                //                    NSAssert(theMaterial.texture.name != 0, @"No texture to bind");
+                glBindTexture(GL_TEXTURE_2D, theMaterial.texture.name);
+                glUniform1i(theUniform, 0);
+                }
+            }
+
         // #### Vertices
         [theGeometry.vertexArrayBuffer bind];
         
@@ -264,16 +271,7 @@
                 [theGeometry.texCoords use:theAttributesIndex];
                 glEnableVertexAttribArray(theAttributesIndex);
                 
-        
-                theUniform = [theProgram uniformIndexForName:@"s_texture0"];
-                if (theUniform != 0)
-                    {
-                    glActiveTexture(GL_TEXTURE0);
-//                    NSAssert(theMaterial.texture.name != 0, @"No texture to bind");
-                    glBindTexture(GL_TEXTURE_2D, theMaterial.texture.name);
-                    glUniform1i(theUniform, 0);
-                    }
-                    
+                            
                 AssertOpenGLNoError_();
                 }
             
