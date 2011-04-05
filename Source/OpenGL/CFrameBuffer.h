@@ -18,9 +18,9 @@
 }
 
 @property (readonly, nonatomic, assign) GLuint name;
-@property (readonly, nonatomic, assign) BOOL complete;
 
-- (void)bind;
+- (BOOL)isComplete:(GLenum)inTarget;
+- (void)bind:(GLenum)inTarget;
 
 - (void)attachRenderBuffer:(CRenderBuffer *)inRenderBuffer attachment:(GLenum)inAttachment;
 - (void)attachTexture:(CTexture *)inTexture attachment:(GLenum)inAttachment;

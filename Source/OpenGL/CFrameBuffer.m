@@ -34,29 +34,26 @@
     [super dealloc];
     }
 
-- (BOOL)complete
+- (BOOL)isComplete:(GLenum)inTarget
     {
-    [self bind];
-    GLenum theStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+    GLenum theStatus = glCheckFramebufferStatus(inTarget);
     return(theStatus == GL_FRAMEBUFFER_COMPLETE);
     }
 
-- (void)bind
+- (void)bind:(GLenum)inTarget
     {
     NSAssert(self.name != 0, @"No name to bind");
-    glBindFramebuffer(GL_FRAMEBUFFER, self.name);
+    glBindFramebuffer(inTarget, self.name);
     }
 
 - (void)attachRenderBuffer:(CRenderBuffer *)inRenderBuffer attachment:(GLenum)inAttachment
     {
-    [self bind];
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, inAttachment, GL_RENDERBUFFER, inRenderBuffer.name);
     AssertOpenGLNoError_();
     }
     
 - (void)attachTexture:(CTexture *)inTexture attachment:(GLenum)inAttachment
     {
-    [self bind];
     glFramebufferTexture2D(GL_FRAMEBUFFER, inAttachment, GL_TEXTURE_2D, inTexture.name, 0);
     AssertOpenGLNoError_();
     }

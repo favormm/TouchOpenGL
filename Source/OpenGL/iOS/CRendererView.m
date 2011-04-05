@@ -169,7 +169,7 @@
         glViewport(0, 0, theSize.width, theSize.height);
         }
     
-    [self.frameBuffer bind];
+    [self.frameBuffer bind:GL_FRAMEBUFFER];
     
     [self.renderer prerender];
     [self.renderer render];
@@ -207,6 +207,7 @@
 
     // Create frame buffer
     self.frameBuffer = [[[CFrameBuffer alloc] init] autorelease];
+    [self.frameBuffer bind:GL_FRAMEBUFFER];
     
     // Create a color render buffer - and configure it with current context & drawable
     self.colorRenderBuffer = [[[CRenderBuffer alloc] init] autorelease];
@@ -226,7 +227,7 @@
     [self.frameBuffer attachRenderBuffer:self.depthRenderBuffer attachment:GL_DEPTH_ATTACHMENT];
 
     // Make sure the frame buffer has a complete set of render buffers.
-	if (self.frameBuffer.complete == NO)
+	if ([self.frameBuffer isComplete:GL_FRAMEBUFFER] == NO)
         {
 		NSLog(@"createFramebuffer failed %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
         }
