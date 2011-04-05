@@ -10,8 +10,6 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#import "CFrameBuffer.h"
-
 @interface CRenderer ()
 @end
 
@@ -72,15 +70,6 @@
 
 - (void)postrender
     {
-    }
-
-- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer
-    {
-    [inFramebuffer bind];
-    
-    [self prerender];
-    [self render];
-    [self postrender];
     }
 
 @end

@@ -25,7 +25,5 @@
 - (void)render;
 - (void)postrender;
 
-- (void)renderIntoFrameBuffer:(CFrameBuffer *)inFramebuffer;
-
 @end
 

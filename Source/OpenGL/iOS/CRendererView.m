@@ -41,6 +41,8 @@
     return [CAEAGLLayer class];
     }
 
+#pragma mark -
+
 - (id)initWithFrame:(CGRect)inFrame;
     {    
     if ((self = [super initWithFrame:inFrame]))
@@ -153,7 +155,7 @@
         displayLink = nil;
         }
     }
-
+    
 - (void)render
     {
     NSAssert(self.renderer != NULL, @"No renderer");
@@ -163,29 +165,15 @@
     if (self.context == NULL)
         {
         [self setup];
-        
         [self.renderer setup];
-
-
         glViewport(0, 0, theSize.width, theSize.height);
         }
     
-//        CGFloat theAspectRatio = theSize.width / theSize.height;
-//
-//        Matrix4 theTransform = Matrix4MakeScale(1, theAspectRatio, 1);
-//
-//        CGFloat D = MIN(theSize.width, theSize.height) * 0.5;
-//        NSLog(@"%g", D);
-//        
-//
-//        theTransform = Matrix4Translate(theTransform, -D, -D, 0);
-//        theTransform = Matrix4Scale(theTransform, 1 / D, 1 / D, 1);
-
-//        const CGFloat theAspectRatio = theSize.width / theSize.height;
-//    Matrix4 theTransform = Matrix4MakeScale(1, theAspectRatio, 1);
-//    theTransform = Matrix4Concat(theTransform, self.transform);
-
-    [self.renderer renderIntoFrameBuffer:self.frameBuffer];
+    [self.frameBuffer bind];
+    
+    [self.renderer prerender];
+    [self.renderer render];
+    [self.renderer postrender];
 
     [self.colorRenderBuffer bind];
     [self.context presentRenderbuffer:GL_RENDERBUFFER];
