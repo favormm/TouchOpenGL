@@ -15,6 +15,21 @@
 @synthesize name;
 @synthesize populated;
 
+- (id)init
+	{
+#if TARGET_OS_IPHONE == 1
+	if ((self = [super init]) != NULL)
+		{
+		}
+	return(self);
+#else
+    [self dealloc];
+    self = NULL;
+    return(self);
+#endif
+	}
+
+
 - (void)dealloc
     {
     if (name != 0)
@@ -50,7 +65,6 @@
     AssertOpenGLNoError_();
     #endif /* TARGET_OS_IPHONE */
     }
-
 
 - (void)unbind
     {
