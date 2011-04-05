@@ -223,6 +223,15 @@
         }
     }
     
+
+- (void)use
+    {
+    AssertOpenGLNoError_();
+    glUseProgram(self.name);
+    AssertOpenGLNoError_();
+    }
+
+    
 - (GLuint)attributeIndexForName:(NSString *)inName
     {
     NSNumber *theNumber = [self.attributesByName objectForKey:inName];

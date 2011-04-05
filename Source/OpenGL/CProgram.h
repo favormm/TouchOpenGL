@@ -24,6 +24,8 @@
 - (BOOL)linkProgram:(NSError **)outError;
 - (BOOL)validate:(NSError **)outError;
 
+- (void)use;
+
 - (GLuint)attributeIndexForName:(NSString *)inName;
 - (GLuint)uniformIndexForName:(NSString *)inName;
 
