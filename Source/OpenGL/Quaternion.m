@@ -70,6 +70,28 @@ Quaternion QuaternionSetEuler(GLfloat inYaw, GLfloat inPitch, GLfloat inRoll)
     return(q);
     }
 
+void QuaternionGetEuler(Quaternion q, GLfloat *outYaw, GLfloat *outPitch, GLfloat *outRoll)
+{
+    const GLfloat qx = q.x;
+    const GLfloat qy = q.y;
+    const GLfloat qz = q.z;
+    const GLfloat qw = q.w;
+    const GLfloat qxqyPLUSqzqw = qx*qy + qz*qw;
+    const GLfloat epsilon = 0.001f;
+    if (qxqyPLUSqzqw > 0.5f - epsilon) {
+        *outYaw = 2.0f * atan2(qx,qw);
+        *outRoll = M_PI_2;
+        *outPitch = 0.0f;
+    } else if (qxqyPLUSqzqw < -0.5f + epsilon) {
+        *outYaw = 2.0f * atan2(qx,qw);
+        *outRoll = -M_PI_2;
+        *outPitch = 0.0f;
+    }
+    *outYaw = atan2(2.0f*qy*qw - 2.0f*qx*qz, 1.0f - 2.0f*qy*qy - 2*qz*qz);
+    *outRoll = asin(2.0f*qxqyPLUSqzqw);
+    *outPitch = atan2(2.0f*qx*qw-2.0f*qy*qz , 1.0f - 2.0f*qx*qx - 2.0f*qz*qz);
+}
+
 Quaternion QuaternionConjugate(Quaternion q)
     {
     q.x *= -1;

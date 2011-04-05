@@ -23,6 +23,8 @@ extern GLfloat QuaternionLength2(Quaternion inQuat);
 extern Quaternion QuaternionNormalize(Quaternion inQuat);
     
 extern Quaternion QuaternionSetEuler(GLfloat inYaw, GLfloat inPitch, GLfloat inRoll);
+
+extern void QuaternionGetEuler(Quaternion q, GLfloat *outYaw, GLfloat *outPitch, GLfloat *outRoll);
     
 extern Quaternion QuaternionConjugate(Quaternion q);
         
