@@ -71,7 +71,22 @@ extern GLenum GLenumFromString(NSString *inString);
 extern NSString *NSStringFromGLenum(GLenum inEnum);
 
 #if DEBUG == 1
+
 #define AssertOpenGLNoError_() do { GLint theError = glGetError(); NSAssert1(theError == GL_NO_ERROR, @"Code entered with existing OGL error 0x%X", theError); } while(0)
+
+#if TARGET_OS_IPHONE == 1
+
+#define AssertOpenGLValidContext_() NSAssert([EAGLContext currentContext] != NULL, @"No current context")
+
 #else
+
+#define AssertOpenGLValidContext_() NSAssert(CGLGetCurrentContext() != NULL, @"No current context")
+
+#endif /* TARGET_OS_IPHONE == 1 */
+
+#else
+
 #define AssertOpenGLNoError_()
-#endif
+#define AssertOpenGLValidContext_()
+
+#endif /* DEBUG == 1 */

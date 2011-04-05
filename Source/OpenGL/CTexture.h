@@ -9,21 +9,18 @@
 #import <Foundation/Foundation.h>
 
 #import "OpenGLIncludes.h"
+#import "OpenGLTypes.h"
 
 @interface CTexture : NSObject {
-    GLuint name;
-	GLuint width;
-    GLuint height;
-	GLenum internalFormat;
-	GLboolean hasAlpha;
 }
 
-@property (readonly, nonatomic, assign) GLuint name;
-@property (readonly, nonatomic, assign) GLuint width;
-@property (readonly, nonatomic, assign) GLuint height;
-@property (readonly, nonatomic, assign) GLenum internalFormat;
-@property (readonly, nonatomic, assign) GLboolean hasAlpha;
+@property (readwrite, nonatomic, assign) GLuint name;
+@property (readwrite, nonatomic, assign) SIntSize size;
+@property (readwrite, nonatomic, assign) GLenum internalFormat;
+@property (readwrite, nonatomic, assign) GLboolean hasAlpha;
 
-- (id)initWithName:(GLuint)inName width:(GLuint)inWidth height:(GLuint)inHeight;
+- (id)initWithName:(GLuint)inName size:(SIntSize)inSize;
+
+- (BOOL)isValid;
 
 @end

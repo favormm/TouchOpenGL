@@ -23,8 +23,6 @@
 
 - (CVertexBuffer *)vertexBufferForName:(NSString *)inName target:(GLenum)inTarget usage:(GLenum)inUsage;
 
-- (CTexture *)textureForName:(NSString *)inName error:(NSError **)outError;
-
 - (CProgram *)programForName:(NSString *)inName attributeNames:(NSArray *)inAttributeNames uniformNames:(NSArray *)inUniformNames error:(NSError **)outError;
 
 @end

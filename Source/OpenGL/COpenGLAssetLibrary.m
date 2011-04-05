@@ -11,7 +11,6 @@
 #import <objc/runtime.h>
 
 #import "CVertexBuffer.h"
-#import "CImageTextureLoader.h"
 #import "CProgram.h"
 
 @interface COpenGLAssetLibrary ()
@@ -71,13 +70,6 @@
         }
     
     return(theObject);
-    }
-
-- (CTexture *)textureForName:(NSString *)inName error:(NSError **)outError
-    {
-    // TODO roll CImageTextureLoader code into this class perhaps?
-    CImageTextureLoader *theLoader = [[[CImageTextureLoader alloc] init] autorelease];
-    return([theLoader textureWithImageNamed:inName error:outError]);
     }
 
 - (CProgram *)programForName:(NSString *)inName attributeNames:(NSArray *)inAttributeNames uniformNames:(NSArray *)inUniformNames error:(NSError **)outError;

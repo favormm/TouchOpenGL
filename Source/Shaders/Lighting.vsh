@@ -3,13 +3,6 @@ struct LightSourceParameters {
     vec4 diffuse;
     vec4 specular;
     vec4 position;
-//    vec3 spotDirection;
-//    float spotExponent;
-//    float spotCutoff; // (range: [0.0,90.0], 180.0)
-//    float spotCosCutoff; // (range: [1.0,0.0],-1.0)
-//    float constantAttenuation;
-//    float linearAttenuation;
-//    float quadraticAttenuation;
     };
 
 struct LightModelParameters {
@@ -17,7 +10,6 @@ struct LightModelParameters {
 	};
 
 struct MaterialParameters {
-//    vec4 emission;
     vec4 ambient;
     vec4 diffuse;
     vec4 specular;
@@ -27,9 +19,11 @@ struct MaterialParameters {
 // ######################################################################
 
 varying vec4 v_color;
+varying vec2 v_texture0;
 
 attribute vec4 a_position;
 attribute vec3 a_normal; // gl_Normal
+attribute vec2 a_texCoord; // gl_Normal
 
 uniform mat4 u_modelViewMatrix;
 uniform mat4 u_projectionMatrix;
@@ -62,26 +56,14 @@ void main()
     float NdotHV = max(dot(theNormal, h), 0.0);
     vec4 specular = u_frontMaterial.specular * u_lightSource.specular * pow(NdotHV,u_frontMaterial.shininess);
 
-
     v_color = NdotL * theDiffuseTerm + globalAmbient + ambient + specular;
     v_color.a = 1.0;
 
     mat4 theModelViewProjectionMatrix = u_projectionMatrix * u_modelViewMatrix;
     gl_Position = theModelViewProjectionMatrix * a_position;
+
+    v_texture0 = a_texCoord;
 }
 
-////////////////////////////////////////////////////////////////////////////////
 
-//attribute vec4 a_position;
-//attribute vec2 a_texCoord;
-//
-//uniform mat4 u_modelViewMatrix;
-//uniform mat4 u_projectionMatrix;
-//
-//varying vec2 v_texture0;
-//
-//void main()
-//    {
-//    v_texture0 = a_texCoord;
-//    gl_Position = u_modelViewMatrix * u_projectionMatrix * a_position;
-//    }
+

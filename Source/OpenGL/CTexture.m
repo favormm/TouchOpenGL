@@ -11,18 +11,16 @@
 @implementation CTexture
 
 @synthesize name;
-@synthesize width;
-@synthesize height;
+@synthesize size;
 @synthesize internalFormat;
 @synthesize hasAlpha;
 
-- (id)initWithName:(GLuint)inName width:(GLuint)inWidth height:(GLuint)inHeight;
+- (id)initWithName:(GLuint)inName size:(SIntSize)inSize
     {
     if ((self = [super init]) != NULL)
         {
         name = inName;
-        width = inWidth;
-        height = inHeight;
+        size = inSize;
         }
     return(self);
     }
@@ -38,4 +36,9 @@
     [super dealloc];
     }
 
+- (BOOL)isValid
+    {
+    return(glIsTexture(self.name));
+    }
+    
 @end
