@@ -25,11 +25,20 @@
 @property (readwrite, nonatomic, retain) EAGLContext *context;
 @property (readwrite, nonatomic, assign) NSInteger animationFrameInterval;
 @property (readwrite, nonatomic, retain) CRenderer *renderer;
+@property (readwrite, nonatomic, assign) BOOL multisampleAntialiasing;
+
 @property (readonly, nonatomic, assign) BOOL animating;
 
 @property (readwrite, nonatomic, retain) CFrameBuffer *frameBuffer;
 @property (readwrite, nonatomic, retain) CRenderBuffer *colorRenderBuffer;
 @property (readwrite, nonatomic, retain) CRenderBuffer *depthRenderBuffer;
+
+@property (readwrite, nonatomic, retain) CFrameBuffer *sampleFrameBuffer;
+@property (readwrite, nonatomic, retain) CRenderBuffer *sampleColorRenderBuffer;
+@property (readwrite, nonatomic, retain) CRenderBuffer *sampleDepthRenderBuffer;
+
+
+
 
 - (void)startAnimation;
 - (void)stopAnimation;
