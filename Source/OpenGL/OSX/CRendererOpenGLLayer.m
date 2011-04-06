@@ -81,6 +81,8 @@
         self.setup = YES;
         }
     
+    self.renderer.size = (SIntSize){ .width = self.bounds.size.width, .height = self.bounds.size.height };
+    
     [self.renderer clear];
 
     [self.renderer prerender];

@@ -165,8 +165,6 @@
     Matrix4 theCameraTransform = Matrix4MakeTranslation(theCameraVector.x, theCameraVector.y, theCameraVector.z);
     
     GLfloat theAspectRatio = (GLfloat)self.size.width / (GLfloat)self.size.height;
-//    if (theAspectRatio == 0.0)
-        theAspectRatio = 1.0;
     
     Matrix4 theOrthoTransform = Matrix4Perspective(90, theAspectRatio, 0.1, 100);
     self.projectionTransform = Matrix4Concat(theCameraTransform, theOrthoTransform);
