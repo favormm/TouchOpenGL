@@ -52,7 +52,7 @@
     if ((self = [super initWithFrame:inFrame]))
         {
         animationFrameInterval = 1.0;
-        multisampleAntialiasing = NO;
+        multisampleAntialiasing = YES;
         }
 
     return self;
@@ -63,7 +63,7 @@
     if ((self = [super initWithCoder:inDecoder]) != NULL)
         {
         animationFrameInterval = 1.0;
-        multisampleAntialiasing = NO;
+        multisampleAntialiasing = YES;
         }
 
     return self;
@@ -90,6 +90,15 @@
     
     [context release];
     context = NULL;
+
+    [sampleFrameBuffer release];
+    sampleFrameBuffer = NULL;
+
+    [sampleColorRenderBuffer release];
+    sampleColorRenderBuffer = NULL;
+
+    [sampleDepthRenderBuffer release];
+    sampleDepthRenderBuffer = NULL;
 
     [super dealloc];
     }
@@ -273,30 +282,34 @@
     [self.frameBuffer attachRenderBuffer:self.depthRenderBuffer attachment:GL_DEPTH_ATTACHMENT];
 
     // Make sure the frame buffer has a complete set of render buffers.
-#warning TODO
-//	if (self.frameBuffer.complete == NO)
-//        {
-//		NSLog(@"createFramebuffer failed %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
-//        }
+
+	if ([self.frameBuffer isComplete:GL_FRAMEBUFFER] == NO)
+        {
+		NSLog(@"createFramebuffer failed %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+        }
 
     // #########################################################################
 
-    self.sampleFrameBuffer = [[[CFrameBuffer alloc] init] autorelease];
-    [self.sampleFrameBuffer bind:GL_FRAMEBUFFER];
-    
-    self.sampleColorRenderBuffer = [[[CRenderBuffer alloc] init] autorelease];
-    [self.sampleColorRenderBuffer bind];
-    glRenderbufferStorageMultisampleAPPLE(GL_RENDERBUFFER, 4, GL_RGBA8_OES, self.backingSize.width, self.backingSize.height);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, self.sampleColorRenderBuffer.name);
-
-    self.sampleDepthRenderBuffer = [[[CRenderBuffer alloc] init] autorelease];
-    [self.sampleDepthRenderBuffer bind];
-    glRenderbufferStorageMultisampleAPPLE(GL_RENDERBUFFER, 4, GL_DEPTH_COMPONENT16, self.backingSize.width, self.backingSize.height);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, self.sampleDepthRenderBuffer.name);
-     
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+    if (self.multipleTouchEnabled == YES)
         {
-        NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+        self.sampleFrameBuffer = [[[CFrameBuffer alloc] init] autorelease];
+        [self.sampleFrameBuffer bind:GL_FRAMEBUFFER];
+        
+        self.sampleColorRenderBuffer = [[[CRenderBuffer alloc] init] autorelease];
+        [self.sampleColorRenderBuffer bind];
+        glRenderbufferStorageMultisampleAPPLE(GL_RENDERBUFFER, 4, GL_RGBA8_OES, self.backingSize.width, self.backingSize.height);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, self.sampleColorRenderBuffer.name);
+
+        self.sampleDepthRenderBuffer = [[[CRenderBuffer alloc] init] autorelease];
+        [self.sampleDepthRenderBuffer bind];
+        glRenderbufferStorageMultisampleAPPLE(GL_RENDERBUFFER, 4, GL_DEPTH_COMPONENT16, self.backingSize.width, self.backingSize.height);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, self.sampleDepthRenderBuffer.name);
+
+
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+            {
+            NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+            }
         }
     }
 
