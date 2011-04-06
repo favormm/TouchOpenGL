@@ -89,7 +89,7 @@ class MTLParser(object):
 		for theLine in theLines:
 			theMatch = re.match('^([A-Za-z_]+)( +(.*))? *$', theLine)
 			if not theMatch:
-				print theLine
+				print 'Error line: \"%s\"' % theLine
 				raise Exception('Parse error')
 			theVerb, theParameters = theMatch.groups()[0], theMatch.groups()[2]
 			if theVerb == 'newmtl':
@@ -127,7 +127,7 @@ class OBJParser(object):
 
 		theCurrentMaterialLibrary = None
 		theCurrentGroups = None
-		theCurrentMaterial = None
+		theCurrentMaterial = Material('default')
 
 		self.positions = []
 		self.texCoords = []
@@ -144,21 +144,34 @@ class OBJParser(object):
 			if theMatch:
 				continue
 
-			theMatch = re.match('^([a-z_]+) +(.*)$', theLine)
+			theMatch = re.match('^([A-Za-z_]+)( +(.*))? *$', theLine)
 			if not theMatch:
-				print theLine
+				print 'Error line: \"%s\"' % theLine
 				raise Exception('Parse error')
-			theVerb, theParameters = theMatch.groups()
+			theVerb, theParameters = theMatch.groups()[0], theMatch.groups()[2]
+
+
+# 			theMatch = re.match('^([a-z_]+) +(.*)$', theLine)
+# 			if not theMatch:
+# 				print theLine
+# 				raise Exception('Parse error')
+# 			theVerb, theParameters = theMatch.groups()
 
 			try:
 				if theVerb == 'mtllib':
-					theMaterialFile = file(os.path.join(os.path.split(self.inputFile.name)[0], theParameters))
-					theParser = MTLParser(theMaterialFile)
-					theCurrentMaterialLibrary = theParser.materials
+					thePath = os.path.join(os.path.split(self.inputFile.name)[0], theParameters)
+					if not os.path.exists(thePath):
+						print 'Warning: no MTL file'
+					else:
+						theMaterialFile = file(thePath)
+						theParser = MTLParser(theMaterialFile)
+						theCurrentMaterialLibrary = theParser.materials
 				elif theVerb == 'g':
-					theCurrentGroups = theParameters.split(' ')
+# 					theCurrentGroups = theParameters.split(' ')
+					pass
 				elif theVerb == 'usemtl':
-					theCurrentMaterial = theCurrentMaterialLibrary[theParameters]
+					if theCurrentMaterialLibrary:
+						theCurrentMaterial = theCurrentMaterialLibrary[theParameters]
 				elif theVerb == 'v':
 					self.positions.append(tuple([float(x) for x in re.split(' +', theParameters)]))
 				elif theVerb == 'vt':
@@ -167,17 +180,18 @@ class OBJParser(object):
 					self.normals.append(tuple([float(x) for x in re.split(' +', theParameters)]))
 				elif theVerb == 'f':
 					theVertices = []
-					for theVertex in re.split(' +', theParameters):
-						theIndices = theVertex.split('/')
-						theIndices = [int(theIndex) - 1 for theIndex in theIndices]
-						if len(theIndices) == 1:
-							theIndices += [None, None]
-						elif len(theIndices) == 2:
-							theIndices += [None]
+					theVertexIndices = re.split(' +', theParameters)
+					assert len(theVertexIndices) == 3
+					for theVertex in theVertexIndices:
+						thePositionsIndex, theTexCoordIndex, theNormalsIndex = tuple(theVertex.split('/'))
+
+						thePositionsIndex = (int(thePositionsIndex) - 1) if thePositionsIndex else None
+						theTexCoordIndex = (int(theTexCoordIndex) - 1) if theTexCoordIndex else None
+						theNormalsIndex = (int(theNormalsIndex) - 1) if theNormalsIndex else None
+
+						theIndices = (thePositionsIndex, theTexCoordIndex, theNormalsIndex)
 
 						theVertices.append(theIndices)
-
-#					assert(len(theVertices) == 3)
 
 					thePolygon = Polygon()
 					thePolygon.material = theCurrentMaterial
@@ -327,8 +341,7 @@ class Tool(object):
 
 			theHasTextureFlag = True if theMaterial.map_Kd else False
 
-
-			for theSubpolygons in grouper(10000, thePolygons):
+			for theSubpolygons in grouper(10920, thePolygons):
 				theVertices = []
 
 				theSubpolygons = [thePolygon for thePolygon in theSubpolygons if thePolygon]
@@ -405,7 +418,8 @@ class Tool(object):
 					indices = theIndices,
 					positions = thePositions,
 					normals = theNormals,
-					material = theMaterial.name
+					material = theMaterial.name,
+					triangle_count = len(theSubpolygons) / 3,
 					)
 
 				if theHasTextureFlag:
