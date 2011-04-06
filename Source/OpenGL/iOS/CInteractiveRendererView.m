@@ -81,9 +81,7 @@
 
     return self;
     }
-    
 
-    
 - (void)dealloc
     {
     [arcBall release];

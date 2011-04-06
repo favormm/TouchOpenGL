@@ -17,6 +17,7 @@
 @interface CRenderer : NSObject {
     }
 
+@property (readwrite, nonatomic, assign) SIntSize size;
 @property (readwrite, nonatomic, assign) Matrix4 projectionTransform;
 
 - (void)setup;

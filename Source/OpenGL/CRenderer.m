@@ -17,6 +17,7 @@
 
 @implementation CRenderer
 
+@synthesize size;
 @synthesize projectionTransform;
 
 - (id)init

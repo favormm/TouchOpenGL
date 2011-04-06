@@ -105,6 +105,14 @@
 
 #pragma mark -
 
+- (void)setBounds:(CGRect)inBounds
+    {
+    [super setBounds:inBounds];
+    //
+    
+    const SIntSize theSize = { .width = self.bounds.size.width, .height = self.bounds.size.height };
+    self.renderer.size = theSize;
+    }
 - (void)layoutSubviews
     {
     [super layoutSubviews];
